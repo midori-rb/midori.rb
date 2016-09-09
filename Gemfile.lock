@@ -45,11 +45,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler
+  bundler (~> 1.12)
   coveralls
   em-midori!
-  rake
-  rspec
+  rake (~> 11.2)
+  rspec (~> 3.0)
   simplecov
 
 BUNDLED WITH
