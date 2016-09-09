@@ -1,10 +1,13 @@
 sudo: false
 language: ruby
+cache: bundler
 rvm:
   - 2.2.5
   - 2.3.1
+  -jruby
 
 before_install: gem install bundler -v 1.12.5
 script:
   - bundle install
+  - rake
   - gem build ./em-midori.gemspec
