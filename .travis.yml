@@ -6,4 +6,5 @@ rvm:
 
 before_install: gem install bundler -v 1.12.5
 script:
+  - bundle install
   - gem build ./em-midori.gemspec
