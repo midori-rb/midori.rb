@@ -29,10 +29,4 @@ class Midori::API
   end
 end
 
-class Hello < Midori::API
-  post '/' do
-    puts 'Hello World'
-  end
-end
-
 # Midori.run(Midori::API, '0.0.0.0', 8080)
