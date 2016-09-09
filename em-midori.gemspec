@@ -10,4 +10,6 @@ Gem::Specification.new do |s|
   s.files                 = ['lib/em-midori.rb']
   s.homepage              = 'https://github.com/heckpsi-lab/em-midori'
   s.license               = 'MIT'
+  s.add_runtime_dependency  'eventmachine',
+                            ['>1.2.0.0']
 end
