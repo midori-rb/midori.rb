@@ -12,5 +12,5 @@ os:
 before_install: gem install bundler
 script:
   - bundle install
-  - rake spec -e test
+  - rake spec
   - gem build ./em-midori.gemspec
