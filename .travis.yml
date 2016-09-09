@@ -4,7 +4,7 @@ cache: bundler
 rvm:
   - 2.2.5
   - 2.3.1
-  -jruby
+  - jruby
 
 before_install: gem install bundler -v 1.12.5
 script:
