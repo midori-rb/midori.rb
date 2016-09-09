@@ -1,5 +1,5 @@
-sudo: false
 language: ruby
+sudo: false
 cache: bundler
 rvm:
   - 2.2.5
@@ -9,8 +9,14 @@ rvm:
 os:
   - linux
 
-before_install: gem install bundler
+before_install:
+  - gem install bundler
+
 script:
-  - bundle install
   - rake spec
   - gem build ./em-midori.gemspec
+
+bundler_args: --jobs 1 --retry 3
+
+notifications:
+  email: false
