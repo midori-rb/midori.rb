@@ -49,7 +49,7 @@ DEPENDENCIES
   coveralls
   em-midori!
   rake (~> 11.2)
-  rspec (~> 3.5)
+  rspec
   simplecov
 
 BUNDLED WITH
