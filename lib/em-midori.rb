@@ -35,4 +35,4 @@ class Hello < Midori::API
   end
 end
 
-Midori.run(Midori::API, '0.0.0.0', 8080)
+# Midori.run(Midori::API, '0.0.0.0', 8080)
