@@ -6,6 +6,10 @@ rvm:
   - 2.3.1
   - jruby
 
+os:
+  - linux
+  - osx
+
 before_install: gem install bundler -v 1.12.5
 script:
   - bundle install
