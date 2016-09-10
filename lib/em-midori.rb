@@ -29,9 +29,9 @@ class Midori::API
   #   yield
   # end
   #
-  # def self.post(route)
-  #   yield
-  # end
+  def self.post(route)
+    yield
+  end
   #
   # def self.put(route)
   #   yield
