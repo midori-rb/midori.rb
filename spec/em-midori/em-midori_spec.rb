@@ -4,7 +4,7 @@ require 'net/http'
 
 
 RSpec.describe Midori do
-  describe 'Start Server' do
+  describe 'Server' do
     it 'should not stop before started' do
       expect(Midori.stop).to eq(false)
     end
@@ -16,7 +16,7 @@ RSpec.describe Midori do
       end.to_not raise_error(RuntimeError)
     end
 
-    it 'should return \'Hello World\' on any response' do
+    it 'should return \'Hello World\' on any request' do
       expect(Net::HTTP.get(URI('http://127.0.0.1:8080/'))).to eq('Hello World')
     end
 
