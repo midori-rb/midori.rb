@@ -1,5 +1,3 @@
-require 'eventmachine'
-require 'fiber'
 require 'em-midori/em-midori'
 require 'em-midori/api'
 require 'em-midori/server'

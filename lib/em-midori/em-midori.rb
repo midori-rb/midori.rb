@@ -1,3 +1,5 @@
+require 'eventmachine'
+
 module Midori
   def self.run(api=(Midori::API), ip=nil, port=nil)
     ip ||= '127.0.0.1'
