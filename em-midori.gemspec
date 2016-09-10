@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name                     = 'em-midori'
-  s.version                  = '0.0.1'
+  s.version                  = '0.0.2'
   s.required_ruby_version    = '>=2.0.0'
   s.date                     = '2016-09-09'
   s.summary                  = 'An EventMachine Based Web Framework on Ruby'

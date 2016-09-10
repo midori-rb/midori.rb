@@ -5,6 +5,10 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, which pro
 
 [![Build Status](https://travis-ci.org/heckpsi-lab/em-midori.svg?branch=master)](https://travis-ci.org/heckpsi-lab/em-midori) [![Coverage Status](https://coveralls.io/repos/github/heckpsi-lab/em-midori/badge.svg?branch=master)](https://coveralls.io/github/heckpsi-lab/em-midori?branch=master)
 
+[![Code Climate](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori) [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori/coverage) [![Issue Count](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/issue_count.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori)
+
+[![Gem Version](https://img.shields.io/gem/v/em-midori.svg?maxAge=2592000)](https://rubygems.org/gems/em-midori) [![Gem](https://img.shields.io/gem/dt/em-midori.svg?maxAge=2592000)](https://rubygems.org/gems/em-midori)
+
 ## Installation
 
 ```bash

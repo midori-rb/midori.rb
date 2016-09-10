@@ -1,9 +1,11 @@
-require 'bundler/setup'
-Bundler.setup
 require 'simplecov'
 SimpleCov.start
 require 'coveralls'
 Coveralls.wear!
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
+require 'bundler/setup'
+Bundler.setup
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

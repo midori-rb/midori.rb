@@ -1,12 +1,14 @@
 PATH
   remote: .
   specs:
-    em-midori (0.0.1)
+    em-midori (0.0.2)
       eventmachine (~> 1.2, > 1.2.0.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    codeclimate-test-reporter (0.6.0)
+      simplecov (>= 0.7.1, < 1.0.0)
     coveralls (0.8.13)
       json (~> 1.8)
       simplecov (~> 0.11.0)
@@ -46,6 +48,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.12)
+  codeclimate-test-reporter
   coveralls
   em-midori!
   rake (~> 11.2)

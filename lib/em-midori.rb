@@ -24,9 +24,34 @@ module Midori::Server
 end
 
 class Midori::API
-  def self.post(route)
-    yield
-  end
+  #TODO: Move to API part
+  # def self.get(route)
+  #   yield
+  # end
+  #
+  # def self.post(route)
+  #   yield
+  # end
+  #
+  # def self.put(route)
+  #   yield
+  # end
+  #
+  # def self.delete(route)
+  #   yield
+  # end
+  #
+  # def self.options(route)
+  #   yield
+  # end
+  #
+  # def self.link(route)
+  #   yield
+  # end
+  #
+  # def self.unlink(route)
+  #   yield
+  # end
 end
 
 # Midori.run(Midori::API, '0.0.0.0', 8080)
