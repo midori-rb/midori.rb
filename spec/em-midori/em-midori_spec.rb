@@ -12,6 +12,7 @@ RSpec.describe Midori do
     it 'should start properly' do
       expect do
         Thread.new { Midori.run(Midori::API, '127.0.0.1', 8080) }
+        sleep(1)
       end.to_not raise_error(RuntimeError)
     end
 
