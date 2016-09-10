@@ -3,7 +3,7 @@ module Midori::Server
     port, ip = Socket.unpack_sockaddr_in(get_peername)
     puts "from #{ip}:#{port} comes a message:"
     #puts data
-    send_data 'Hello World'
+    send_data "HTTP/1.1 200 OK\r\n\r\nHello World"
     close_connection_after_writing
   end
 end

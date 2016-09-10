@@ -3,11 +3,12 @@ SimpleCov.start
 require 'codeclimate-test-reporter'
 CodeClimate::TestReporter.start
 require 'bundler/setup'
-Bundler.setup
+Bundler.require
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    expectations.on_potential_false_positives = :nothing
   end
 
   config.mock_with :rspec do |mocks|
