@@ -4,10 +4,22 @@ module Midori
   def self.run(api=(Midori::API), ip=nil, port=nil)
     ip ||= '127.0.0.1'
     port ||= 8081
-    EventMachine.run {
+    EventMachine.run do
       route = api.new
       puts "Midori Server Running on #{ip} at #{port}"
-      EventMachine.start_server ip, port, Midori::Server
-    }
+      @midori_server = EventMachine.start_server ip, port, Midori::Server
+    end
+  end
+
+  def self.stop
+    if @midori_server.nil?
+      puts 'Midori Server has NOT been started'
+      return false
+    else
+      EventMachine.stop_server(@midori_server)
+      @midori_server = nil
+      puts 'Goodbye Midori'
+      return true
+    end
   end
 end
