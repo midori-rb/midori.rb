@@ -2,7 +2,6 @@ require 'em-midori'
 require './spec/spec_helper'
 require 'net/http'
 
-
 RSpec.describe Midori do
   describe 'Server' do
     it 'should not stop before started' do
