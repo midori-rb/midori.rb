@@ -122,19 +122,18 @@ class Midori::API
 
   METHODS = %w'get post put delete options link unlink' # :nodoc:
 
-  # Magics to fill DSL methods through dynamically eval
+  # Magics to fill DSL methods through dynamically class method definition
   METHODS.each do |method|
-    eval <<-end_eval
-     def self.#{method}(path, &block)
-        self.add_route('#{method.upcase}', path, block)
-      end
-     end_eval
+    define_singleton_method(method) do |*args|
+      add_route(method.upcase, args[0], args[1]) # args[0]: route, # args[1]: block
+    end
   end
 
   private
-  def self.add_route(method, route, block)
+  def self.add_route(method, path, block)
     @route = Array.new if @route.nil?
-    @route << Midori::Route.new(method, route, block)
+    @route << Midori::Route.new(method, path, block)
+    nil
   end
 
   # def self.match(method, route)
@@ -143,11 +142,11 @@ class Midori::API
 end
 
 class Midori::Route
-  attr_accessor :method, :route, :function
+  attr_accessor :method, :path, :function
 
   def initialize(method, route, function)
     @method = method
-    @route = route
+    path = path
     @function = function
   end
 end
