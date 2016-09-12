@@ -3,7 +3,7 @@
 class Midori::API
   # Add GET method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
@@ -20,7 +20,7 @@ class Midori::API
 
   # Add POST method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
@@ -37,7 +37,7 @@ class Midori::API
 
   # Add PUT method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
@@ -54,7 +54,7 @@ class Midori::API
 
   # Add DELETE method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
@@ -71,7 +71,7 @@ class Midori::API
 
   # Add OPTIONS method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
@@ -88,7 +88,7 @@ class Midori::API
 
   # Add LINK method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
@@ -105,7 +105,7 @@ class Midori::API
 
   # Add UNLINK method as a DSL for route definition
   # === Attributes
-  # * +path+ [+String+, +Regex+] Accepts as part of path in route definition.
+  # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
   # === Returns
   # nil
   # === Examples
