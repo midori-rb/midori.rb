@@ -121,15 +121,6 @@ class Midori::API
     #   end
     def unlink(path, &unlink) end
 
-    METHODS = %w'get post put delete options link unlink' # :nodoc:
-
-    # Magics to fill DSL methods through dynamically class method definition
-    METHODS.each do |method|
-      define_singleton_method(method) do |*args|
-        add_route(method.upcase, args[0], args[1]) # args[0]: route, # args[1]: block
-      end
-    end
-
     def add_route(method, path, block)
       @route = Array.new if @route.nil?
       @route << Midori::Route.new(method, path, block)
@@ -140,6 +131,15 @@ class Midori::API
     #
     # end
 
+  end
+
+  METHODS = %w'get post put delete options link unlink' # :nodoc:
+
+  # Magics to fill DSL methods through dynamically class method definition
+  METHODS.each do |method|
+    define_singleton_method(method) do |*args|
+      add_route(method.upcase, args[0], args[1]) # args[0]: route, # args[1]: block
+    end
   end
 
   private_class_method :add_route
