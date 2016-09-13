@@ -29,13 +29,15 @@ bundle install
 
 ### EventMachine Based
 
+
+
 ### DSL and MVC
 
 ### Why not ... ?
 
 ## About Name
 
-
+**Midori** is none of the business 
 
 ## Goals
 
