@@ -26,6 +26,7 @@ RSpec.describe Midori do
 
     it 'should not receive anything after stopped' do
       expect do
+        puts Net::HTTP.get(URI('http://127.0.0.1:8080/'))
         Net::HTTP.get(URI('http://127.0.0.1:8080/'))
       end.to raise_error(Errno::ECONNREFUSED)
     end

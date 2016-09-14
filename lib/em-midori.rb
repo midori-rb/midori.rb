@@ -1,4 +1,5 @@
-require 'em-midori/em-midori'
+require 'em-midori/define_class'
+require 'em-midori/em_midori'
 require 'em-midori/api'
 require 'em-midori/server'
 
