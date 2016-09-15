@@ -119,7 +119,11 @@ class Midori::API
     #   unlink /\/hello\/(.*?)/ do
     #      puts 'Hello World'
     #   end
-    def unlink(path, &unlink) end
+    def unlink(path, &block) end
+
+    def websocket(path, &block) end
+
+    def eventsource(path, &block) end
 
     def add_route(method, path, block)
       @route = Array.new if @route.nil?
@@ -133,7 +137,7 @@ class Midori::API
 
   end
 
-  METHODS = %w'get post put delete options link unlink' # :nodoc:
+  METHODS = %w'get post put delete options link unlink websocket eventsource' # :nodoc:
 
   # Magics to fill DSL methods through dynamically class method definition
   METHODS.each do |method|
