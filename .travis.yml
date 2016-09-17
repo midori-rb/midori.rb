@@ -5,6 +5,7 @@ rvm:
   - 2.3.1
   - jruby-head
   - jruby-9.0.4.0
+  - rbx-2
 
 jdk:
   - openjdk7
@@ -13,10 +14,14 @@ jdk:
 matrix:
   exclude:
     - rvm: 2.2.5
-      jdk: openjdk7
+      jdk: oraclejdk7
+    - rvm: 2.3.1
+      jdk: oraclejdk7
+    - rvm: rbx-2
+      jdk: oraclejdk7
   allow_failures:
     - rvm: jruby-head
-    - rvm: jruby-9.0.4.0
+    - rvm: rbx-2
 
 os:
   - linux
