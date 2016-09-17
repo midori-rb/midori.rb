@@ -13,7 +13,8 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, which pro
 
 - Ruby >= 2.0.0
 - JRuby >= 9.0.4.0 (With Oracle JDK 7 or Open JDK 7)
-- Rubinius (Not tested)
+- Rubinius (Probably support Rubinius 3.0+ on intuition, but not tested nor supported)
+- JRuby Truffle (Probably support on intuition, but not tested nor supported)
 
 ## Installation
 
