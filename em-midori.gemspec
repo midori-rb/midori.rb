@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
   s.license                  = 'MIT'
   s.add_runtime_dependency     'eventmachine', '~> 1.2', '> 1.2.0.0'
-  s.add_development_dependency 'bundler', '~> 1.12'
+  s.add_development_dependency 'bundler', '~> 1.0'
   s.add_development_dependency 'rake', '~> 11.2'
   s.add_development_dependency 'rspec', '~> 3.0'
 end
