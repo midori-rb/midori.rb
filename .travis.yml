@@ -21,7 +21,6 @@ matrix:
       jdk: oraclejdk7
   allow_failures:
     - rvm: jruby-head
-    - rvm: rbx-3.20
 
 os:
   - linux

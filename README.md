@@ -13,8 +13,8 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, which pro
 
 - Ruby >= 2.0.0
 - JRuby >= 9.0.4.0 (With Oracle JDK 7 or Open JDK 7)
-- Rubinius (Probably support Rubinius 3.0+ on intuition, but not tested nor supported)
-- JRuby Truffle (Probably support on intuition, but not tested nor supported)
+- Rubinius >= 3.20
+- JRuby Truffle (Probably support on intuition, but still not tested)
 
 ## Installation
 
@@ -87,8 +87,8 @@ Version code includes four codes
 |    0.0.1     |   2016-09-09    |  2016-09-09  | Init the gem project                     |
 |    0.0.2     |   2016-09-09    |  2016-09-09  | Init basic EventMachine server           |
 |    0.0.3     |   2016-09-13    |  2016-09-13  | Init Midori::API design                  |
-|    0.0.4     |   2016-09-20    |   Not Yet    | Implement API match                      |
-|    0.0.5     |   2016-09-27    |              | Implement basic request and response parse. |
+|    0.0.4     |   2016-09-20    |  2016-09-19  | Implement API match                      |
+|    0.0.5     |   2016-09-27    |   Not Yet    | Implement basic request and response parse. |
 |    0.0.6     |   2016-10-04    |              | Implement middleware injection           |
 |    0.0.7     |   2016-10-11    |              | Stabilize API design                     |
 |    0.0.8     |   2016-10-18    |              | Enrich Implementation with API design    |
