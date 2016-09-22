@@ -11,10 +11,7 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, which pro
 
 ## Requirements
 
-- Ruby >= 2.0.0
-- JRuby >= 9.0.4.0 (With Oracle JDK 7 or Open JDK 7)
-- Rubinius >= 3.20
-- JRuby Truffle (Probably support on intuition, but still not tested)
+- **Ruby** >= 2.0.0 or **JRuby** >= 9.0.4.0 (With Oracle JDK 7 or Open JDK 7) or **Rubinius** >= 3.20
 
 ## Installation
 
@@ -46,6 +43,8 @@ bundle install
 
 #### Why not [sinatra-synchrony](https://github.com/kyledrake/sinatra-synchrony) ?
 
+
+
 #### Why not Angelo
 
 
@@ -54,7 +53,15 @@ bundle install
 
 ### Name
 
-**Midori** is none of the business
+**Midori** is none of the business of this guy
+
+![Kawashima Safaia](http://7xiq0x.com1.z0.glb.clouddn.com/kawashima_safaia.gif)
+
+and this guy.
+
+![tokiwa midori](http://7xiq0x.com1.z0.glb.clouddn.com/tokiwa_midori.gif)
+
+Actually the name **Midori** comes from **Midori machi**, which was the place I stay on my first travel to Tokyo.
 
 ### Version Notes
 
@@ -67,16 +74,25 @@ Version code includes four codes
 
 ## Contribution
 
+### Found a bug or any suggestion
 
+1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
+2. Comment with your details if any ticket is common to your idea.
+3. Raise a ticket if no open ticket meets your idea.
+4. If you are not sure whether you should raise a ticket or not, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
-## Goals
+### Code Improvement
 
-- Sinatra-like DSL
-- MVC Abstraction
-- 100% Code Coverage
-- Test Driven Framework
-- Event Machine I/O
-- Event Machine Database I/O
+1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
+2. Check Roadmap.
+3. Pick a ticket and leaves a comment saying you are working on it.
+4. If it's on roadmap but not ticket raised, raise a ticket.
+5. Fork it.
+6. Code it.
+7. Pass the tests.
+8. Document it.
+9. Raise pull requests.
+10. If any problem, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
 ## Roadmap
 
