@@ -1,7 +1,7 @@
 # EM Midori
 ## Description
 
-EM Midori is an EventMachine-based Web Framework written in pure Ruby, which provides high performance while proper abstraction.
+EM Midori is an EventMachine-based Web Framework written in pure Ruby, which provides high performance and proper abstraction.
 
 [![Join the chat at https://gitter.im/em-midori/Lobby](https://badges.gitter.im/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
