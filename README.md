@@ -61,11 +61,11 @@ Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not wor
 
 **Midori** is none of the business of this guy
 
-![Kawashima Safaia](http://7xiq0x.com1.z0.glb.clouddn.com/kawashima_safaia.gif)
+![Sapphire Kawashima](http://cdn.heckpsi.com/Sapphire%20Kawashima.gif)
 
 and this guy.
 
-![Tokiwa Midori](http://7xiq0x.com1.z0.glb.clouddn.com/tokiwa_midori.gif)
+![Tokiwa Midori](http://cdn.heckpsi.com/Midori%20Tokiwa.gif)
 
 Actually the name **Midori** comes from **Midori machi**, which was the place I stay on my first travel to Tokyo.
 
