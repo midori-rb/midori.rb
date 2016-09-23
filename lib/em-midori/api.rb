@@ -165,18 +165,19 @@ class Midori::API
       # GET / HTTP/1.1
       request = request.lines.first.split
       if request[0] == method
-        if path.class == Regexp
-          return true if path.match(request[1])
-          false
-        else # path.class == String
+        if path.class == String
           path = '^' + path
                            .gsub(/\/(:[_a-z][_a-z0-9]+?)\//, '/([^/]+?)/')
                            .gsub(/\/(:[_a-z][_a-z0-9]+?)$/, '/([^/]+?)$')
           path += '$' if path[-1] != '$'
           path = Regexp.new path
-          return true if path.match(request[1])
-          false
         end
+
+        result = request[1].match(path)
+
+        return result.to_a[1..-1] if result
+        false
+
       else
         false
       end

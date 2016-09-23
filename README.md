@@ -31,9 +31,9 @@ bundle install
 
 ## Inspiration
 
-### EventMachine Based
+### Why EventMachine Based
 
-
+With the growing popularity of attempts of decoupling the front-end and back-end code has made more and more people turns to high performance API-based framework from full-stack web framework like Rails. Since we've got lots of choices in API-based framework like Sinatra or Grape. But most of those are still working with multiple-threading model, which could hardly reach I/O like Node.js or Go does.
 
 ### DSL and MVC
 
@@ -41,11 +41,15 @@ bundle install
 
 ### Why not ... ?
 
+#### Why not [cramp](https://github.com/lifo/cramp) ?
+
+
+
 #### Why not [sinatra-synchrony](https://github.com/kyledrake/sinatra-synchrony) ?
 
 
 
-#### Why not Angelo
+#### Why not [angelo](https://github.com/kenichi/angelo) ?
 
 
 
@@ -59,7 +63,7 @@ bundle install
 
 and this guy.
 
-![tokiwa midori](http://7xiq0x.com1.z0.glb.clouddn.com/tokiwa_midori.gif)
+![Tokiwa Midori](http://7xiq0x.com1.z0.glb.clouddn.com/tokiwa_midori.gif)
 
 Actually the name **Midori** comes from **Midori machi**, which was the place I stay on my first travel to Tokyo.
 
@@ -72,16 +76,16 @@ Version code includes four codes
 | **Example**     |               1.               |          2.           |               1.                |              5              |
 | **Explanation** | First Production Ready Version | Two Milestones Passed | One New Feature has been Staged | Five Releases for Bug Fixes |
 
-## Contribution
+### Contribution
 
-### Found a bug or any suggestion
+#### Found a bug or any suggestion
 
 1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
 2. Comment with your details if any ticket is common to your idea.
 3. Raise a ticket if no open ticket meets your idea.
 4. If you are not sure whether you should raise a ticket or not, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
-### Code Improvement
+#### Code Improvement
 
 1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
 2. Check Roadmap.
