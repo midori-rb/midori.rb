@@ -33,25 +33,27 @@ bundle install
 
 ### Why EventMachine Based
 
-With the growing popularity of attempts of decoupling the front-end and back-end code has made more and more people turns to high performance API-based framework from full-stack web framework like Rails. Since we've got lots of choices in API-based framework like Sinatra or Grape. But most of those are still working with multiple-threading model, which could hardly reach I/O like Node.js or Go does.
+With the growing popularity of attempts of decoupling the front-end and back-end code has made more and more people turns to high performance API-based framework from full-stack web framework like Rails. Since we've got lots of choices in API-based frameworks like Sinatra or Grape. But most of those are still working with multiple-threading model, which could hardly reach I/O performance like Node.js or Go does.
 
 ### DSL and MVC
 
-
+DSL is awesome. With the magics of Ruby meta-programming feature, we could make web development much easier. As lots of people saying, EventMachine is fast but not that easy to use. But what if we build a DSL on it, you could then no longer deal anything with EventMachine directly. Midori is a project that would build DSL on EventMachine. The API would also provide an MVC project structure, for middle or large scale projects.
 
 ### Why not ... ?
 
 #### Why not [cramp](https://github.com/lifo/cramp) ?
 
-
+Cramp provides sinatra-like DSL and runs very fast on EventMachine for hello world benchmarks. But still it just packages the Network I/O part with EventMachine. It doesn't correctly deal with other I/O parts like database. So in practice, Cramp does not runs as fast as it could be. What's more, it's no longer maintained.
 
 #### Why not [sinatra-synchrony](https://github.com/kyledrake/sinatra-synchrony) ?
 
-
+Sinatra-synchrony perfectly combined Sinatra and EventMachine, but unfortunately, it also doesn't correctly deal with other I/O parts. With too many stacks combined, sinatra-synchrony has only about one-third performance of other EventMachine web servers. Not a good choice for production. What's more, it's also no longer maintained.
 
 #### Why not [angelo](https://github.com/kenichi/angelo) ?
 
+Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not working with EventMachine, but [Celluloid::IO](https://github.com/celluloid/celluloid-io), which works similar to EventMachine. Angelo is not production ready, nor Reel or Celluloid::IO. There's also no clear roadmap showing when would they be ready, though none of them has declared out of maintaining.
 
+### When Nothing Meet The Needs, Create One of Your Own.
 
 ## FAQ
 
