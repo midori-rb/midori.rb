@@ -172,12 +172,9 @@ class Midori::API
           path += '$' if path[-1] != '$'
           path = Regexp.new path
         end
-
         result = request[1].match(path)
-
         return result.to_a[1..-1] if result
         false
-
       else
         false
       end
