@@ -164,30 +164,38 @@ class Midori::API
     # Match route with given definition
     # === Attributes
     # * +method+ [+String+] - Accepts an HTTP/1.1 method like GET POST PUT ...
-    # * +path+ [+String+, +Regexp+] - Route definition.
+    # * +path+ [+Regexp+] - Precompiled route definition.
     # * +request+ [+String+] - HTTP Request String
     # === Returns
     # if not matched returns false
     #
     # else returns an array of parameter string matched
     # === Examples
-    #   match('GET', '/user/:id/order/:order_id', '/user/foo/order/bar') # => ['foo', 'bar']
+    #   match('GET', /^\/user\/(.*?)\/order\/(.*?)$/, '/user/foo/order/bar') # => ['foo', 'bar']
     def match(method, path, request)
       request = request.lines.first.split
       if request[0] == method
-        if path.class == String
-          path = '^' + path
-                           .gsub(/\/(:[_a-z][_a-z0-9]+?)\//, '/([^/]+?)/')
-                           .gsub(/\/(:[_a-z][_a-z0-9]+?)$/, '/([^/]+?)$')
-          path += '$' if path[-1] != '$'
-          path = Regexp.new path
-        end
         result = request[1].match(path)
         return result.to_a[1..-1] if result
         false
       else
         false
       end
+    end
+
+    # Convert String path to its Regexp equivalent
+    # === Attributes
+    # * +path+ [+String+] - String route definition
+    # === Returns
+    # Regexp equivalent
+    # === Examples
+    #   convert_route('/user/:id/order/:order_id') # => Regexp
+    def convert_route(path)
+      path = '^' + path
+                       .gsub(/\/(:[_a-z][_a-z0-9]+?)\//, '/([^/]+?)/')
+                       .gsub(/\/(:[_a-z][_a-z0-9]+?)$/, '/([^/]+?)$')
+      path += '$' if path[-1] != '$'
+      Regexp.new path
     end
   end
 
@@ -196,7 +204,11 @@ class Midori::API
   # Magics to fill DSL methods through dynamically class method definition
   METHODS.each do |method|
     define_singleton_method(method) do |*args|
-      add_route(method.upcase, args[0], args[1]) # args[0]: route, # args[1]: block
+      if args[0].class == String
+        # Convert String to Regexp to provide performance boost (Precompiled Regexp)
+        args[0] = convert_route args[0]
+      end
+      add_route(method.upcase, args[0], args[1]) # args[0]: path, # args[1]: block
     end
   end
 
