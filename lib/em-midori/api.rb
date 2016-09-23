@@ -4,7 +4,7 @@ class Midori::API
   class << self
     # Add GET method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -21,7 +21,7 @@ class Midori::API
 
     # Add POST method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -38,7 +38,7 @@ class Midori::API
 
     # Add PUT method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -55,7 +55,7 @@ class Midori::API
 
     # Add DELETE method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -72,7 +72,7 @@ class Midori::API
 
     # Add OPTIONS method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -89,7 +89,7 @@ class Midori::API
 
     # Add LINK method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -106,7 +106,7 @@ class Midori::API
 
     # Add UNLINK method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -123,7 +123,7 @@ class Midori::API
 
     # Add WEBSOCKET method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -140,7 +140,7 @@ class Midori::API
 
     # Add EVENTSOURCE method as a DSL for route definition
     # === Attributes
-    # * +path+ [+String+, +Regex+] - Accepts as part of path in route definition.
+    # * +path+ [+String+, +Regexp+] - Accepts as part of path in route definition.
     # === Returns
     # nil
     # === Examples
@@ -161,8 +161,18 @@ class Midori::API
       nil
     end
 
+    # Match route with given definition
+    # === Attributes
+    # * +method+ [+String+] - Accepts an HTTP/1.1 method like GET POST PUT ...
+    # * +path+ [+String+, +Regexp+] - Route definition.
+    # * +request+ [+String+] - HTTP Request String
+    # === Returns
+    # if not matched returns false
+    #
+    # else returns an array of parameter string matched
+    # === Examples
+    #   match('GET', '/user/:id/order/:order_id', '/user/foo/order/bar') # => ['foo', 'bar']
     def match(method, path, request)
-      # GET / HTTP/1.1
       request = request.lines.first.split
       if request[0] == method
         if path.class == String
