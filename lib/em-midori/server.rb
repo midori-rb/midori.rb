@@ -1,4 +1,9 @@
 module Midori::Server
+  def self.load_api(api)
+    @api = api
+    self
+  end
+
   def receive_data(data)
     port, ip = Socket.unpack_sockaddr_in(get_peername)
     puts "from #{ip}:#{port} comes a message:"

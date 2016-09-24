@@ -5,9 +5,8 @@ module Midori
     ip ||= '127.0.0.1'
     port ||= 8081
     EventMachine.run do
-      route = api.new
       puts "Midori Server Running on #{ip} at #{port}"
-      @midori_server = EventMachine.start_server ip, port, Midori::Server
+      @midori_server = EventMachine.start_server ip, port, Midori::Server.load_api(api)
     end
   end
 
