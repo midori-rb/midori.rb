@@ -1,8 +1,8 @@
 Gem::Specification.new do |s|
   s.name                     = 'em-midori'
-  s.version                  = '0.0.4'
+  s.version                  = '0.0.4.1'
   s.required_ruby_version    = '>=2.0.0'
-  s.date                     = '2016-09-19'
+  s.date                     = Time.now.strftime('%Y-%m-%d')
   s.summary                  = 'An EventMachine Based Web Framework on Ruby'
   s.description              = 'An EventMachine Based Web Framework on Ruby'
   s.authors                  = ['HeckPsi Lab']
