@@ -159,7 +159,7 @@ class Midori::API
       @route = Array.new if @route.nil?
       if path.class == String
         # Convert String to Regexp to provide performance boost (Precompiled Regexp)
-        path = convert_route args[0]
+        path = convert_route path
       end
       @route << Midori::Route.new(method, path, block)
       nil
