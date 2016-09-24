@@ -1,6 +1,8 @@
+require './lib/em-midori/version'
+
 Gem::Specification.new do |s|
   s.name                     = 'em-midori'
-  s.version                  = '0.0.4.2'
+  s.version                  = Midori::VERSION
   s.required_ruby_version    = '>=2.0.0'
   s.date                     = Time.now.strftime('%Y-%m-%d')
   s.summary                  = 'An EventMachine Based Web Framework on Ruby'

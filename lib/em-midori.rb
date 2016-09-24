@@ -1,3 +1,4 @@
+require 'em-midori/version'
 require 'em-midori/define_class'
 require 'em-midori/em_midori'
 require 'em-midori/api'
