@@ -157,6 +157,10 @@ class Midori::API
 
     def add_route(method, path, block)
       @route = Array.new if @route.nil?
+      if path.class == String
+        # Convert String to Regexp to provide performance boost (Precompiled Regexp)
+        path = convert_route args[0]
+      end
       @route << Midori::Route.new(method, path, block)
       nil
     end
@@ -204,10 +208,6 @@ class Midori::API
   # Magics to fill DSL methods through dynamically class method definition
   METHODS.each do |method|
     define_singleton_method(method) do |*args|
-      if args[0].class == String
-        # Convert String to Regexp to provide performance boost (Precompiled Regexp)
-        args[0] = convert_route args[0]
-      end
       add_route(method.upcase, args[0], args[1]) # args[0]: path, # args[1]: block
     end
   end
