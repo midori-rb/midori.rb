@@ -1,0 +1,3 @@
+class Midori::Request
+
+end

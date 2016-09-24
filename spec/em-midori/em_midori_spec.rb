@@ -2,6 +2,14 @@ require 'em-midori'
 require './spec/spec_helper'
 require 'net/http'
 
+include Midori
+class Example < API
+  get '/' do
+    puts 'Hello World'
+  end
+end
+
+
 RSpec.describe Midori do
   describe 'Server' do
     it 'should not stop before started' do
@@ -10,12 +18,12 @@ RSpec.describe Midori do
 
     it 'should start properly' do
       expect do
-        Thread.new { Midori.run(Midori::API, '127.0.0.1', 8080) }
+        Thread.new { Midori.run(Example, '127.0.0.1', 8080) }
         sleep(1)
       end.to_not raise_error(RuntimeError)
     end
 
-    it 'should return \'Hello World\' on any request' do
+    it 'should return \'Hello World\' on GET / request' do
       expect(Net::HTTP.get(URI('http://127.0.0.1:8080/'))).to eq('Hello World')
     end
 
