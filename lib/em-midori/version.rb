@@ -1,3 +1,3 @@
 module Midori
-  VERSION = '0.0.4.2'.freeze
+  VERSION = '0.0.5'.freeze
 end

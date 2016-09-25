@@ -11,3 +11,7 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include('lib/*')
   rdoc.options << '--all'
 end
+
+task :build do
+  puts `gem build em-midori.gemspec`
+end
