@@ -26,7 +26,7 @@ task :run do
     end
 
     get '/error' do
-      @code, @body = 500, 'Internal Error'
+      bare words
     end
   end
 

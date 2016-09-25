@@ -171,9 +171,13 @@ class Midori::API
         if matched
           # puts "route matched: #{route.method} #{route.path}"
           clean_room = CleanRoom.new
-          result = clean_room.instance_exec(*matched, &route.function)
-          clean_room.body = result if result.class == String
-          return clean_room.response
+          begin
+            result = clean_room.instance_exec(*matched, &route.function)
+            clean_room.body = result if result.class == String
+            return clean_room.response
+          rescue
+            return Midori::Response.new(500, {}, 'Internal Server Error')
+          end
         end
       end
       # 404

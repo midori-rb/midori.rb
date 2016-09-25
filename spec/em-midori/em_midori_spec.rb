@@ -7,6 +7,10 @@ class Example < API
   get '/' do
     'Hello World'
   end
+
+  get '/error' do
+    raise StandardError
+  end
 end
 
 
@@ -29,6 +33,10 @@ RSpec.describe Midori do
 
     it 'should return 404 Not Found on GET /not_found_error' do
       expect(Net::HTTP.get(URI('http://127.0.0.1:8080/not_found_error'))).to eq('404 Not Found')
+    end
+
+    it 'should return 500 Internal Server Error on GET /error' do
+      expect(Net::HTTP.get(URI('http://127.0.0.1:8080/error'))).to eq('Internal Server Error')
     end
 
     it 'should stop properly' do
