@@ -11,24 +11,3 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include('lib/*')
   rdoc.options << '--all'
 end
-
-task :run do
-  require './lib/em-midori'
-
-  include Midori
-  class Example < API
-    get '/' do
-      'Hello World'
-    end
-
-    get '/user/:id' do |id|
-      id
-    end
-
-    get '/error' do
-      bare words
-    end
-  end
-
-  Midori.run(Example, '127.0.0.1', 8080)
-end
