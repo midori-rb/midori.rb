@@ -14,10 +14,19 @@ end
 
 task :run do
   require './lib/em-midori'
+
   include Midori
   class Example < API
     get '/' do
       'Hello World'
+    end
+
+    get '/user/:id' do |id|
+      id
+    end
+
+    get '/error' do
+      @code, @body = 500, 'Internal Error'
     end
   end
 

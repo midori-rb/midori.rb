@@ -169,17 +169,11 @@ class Midori::API
       @route.each do |route|
         matched = match(route.method, route.path, request)
         if matched
-          response = lambda {
-            code = 200
-            header = {}
-            body = 'Hello World'
-            result = nil
-            #result = route.function.call(*matched)
-            body = result if result.class == String
-            Midori::Response.new(code, header, body)
-          }.call
-          return response if response.class == Midori::Response
-          return Midori::Response.new(200, {}, response)
+          # puts "route matched: #{route.method} #{route.path}"
+          clean_room = CleanRoom.new
+          result = clean_room.instance_exec(*matched, &route.function)
+          clean_room.body = result if result.class == String
+          return clean_room.response
         end
       end
       # 404
@@ -230,8 +224,8 @@ class Midori::API
 
   # Magics to fill DSL methods through dynamically class method definition
   METHODS.each do |method|
-    define_singleton_method(method) do |*args|
-      add_route(method.upcase, args[0], args[1]) # args[0]: path, # args[1]: block
+    define_singleton_method(method) do |*args, &block|
+      add_route(method.upcase, args[0], block) #args[0]: path
     end
   end
 

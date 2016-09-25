@@ -1,5 +1,6 @@
 require 'em-midori/version'
 require 'em-midori/define_class'
+require 'em-midori/clean_room'
 require 'em-midori/em_midori'
 require 'em-midori/request'
 require 'em-midori/response'
