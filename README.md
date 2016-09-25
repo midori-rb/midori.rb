@@ -110,7 +110,7 @@ Version code includes four codes
 |    0.0.2     |   2016-09-09    |    2016-09-09    | Init basic EventMachine server           |
 |    0.0.3     |   2016-09-13    |    2016-09-13    | Init Midori::API design                  |
 |    0.0.4     |   2016-09-20    | 2016-09-19 (-1d) | Implement API match                      |
-|    0.0.5     |   2016-09-27    |     Not Yet      | Implement basic request and response parse. |
+|    0.0.5     |   2016-09-27    | 2016-09-25 (-2d) | Implement basic request and response parse. |
 |    0.0.6     |   2016-10-04    |                  | Implement middleware injection           |
 |    0.0.7     |   2016-10-11    |                  | Stabilize API design                     |
 |    0.0.8     |   2016-10-18    |                  | Enrich Implementation with API design    |
