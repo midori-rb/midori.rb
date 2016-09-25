@@ -172,10 +172,11 @@ class Midori::API
           # puts "route matched: #{route.method} #{route.path}"
           clean_room = CleanRoom.new
           begin
-            result = clean_room.instance_exec(*matched, &route.function)
+            result = lambda {clean_room.instance_exec(*matched, &route.function)}.call
             clean_room.body = result if result.class == String
             return clean_room.response
-          rescue
+          rescue => e
+            puts e
             return Midori::Response.new(500, {}, 'Internal Server Error')
           end
         end

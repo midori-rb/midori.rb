@@ -5,7 +5,7 @@ require 'net/http'
 include Midori
 class Example < API
   get '/' do
-    'Hello World'
+    next 'Hello World'
   end
 
   get '/error' do
