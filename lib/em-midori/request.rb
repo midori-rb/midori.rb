@@ -1,6 +1,8 @@
-class Midori::Request
+require 'stringio'
 
-  attr_accessor :protocol, :method, :path, :query_string,
+class Midori::Request
+  attr_accessor :ip, :port,
+                :protocol, :method, :path, :query_string,
                 :header, :body
 
   # Init an request with StringIO data
@@ -9,6 +11,7 @@ class Midori::Request
   def initialize(data)
     @raw_data = data
     @stage = 0
+    @header = Hash.new
   end
 
   def parse(stage)
@@ -27,7 +30,15 @@ class Midori::Request
         @path = line[1].gsub(/\?(.*?)$/, '')
         @stage += 1
       when 1
-        #TODO: parse header
+        loop do
+          line = @raw_data.gets
+          if line == "\r\n"
+            break
+          end
+          line = line.split
+          @header[line[0][0..-2]] = line[1..-1].join(' ')
+        end
+        @body = @raw_data.read
         @stage += 1
       else
         raise RuntimeError

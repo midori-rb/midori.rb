@@ -1,4 +1,5 @@
 require 'em-midori'
+require 'json'
 
 class Example < Midori::API
   get '/' do
@@ -6,7 +7,10 @@ class Example < Midori::API
   end
 
   get '/user/:id' do |id|
-    id
+    JSON.generate({
+        header: @request.header,
+        body: @request.body
+                  })
   end
 end
 

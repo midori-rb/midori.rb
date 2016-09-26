@@ -34,4 +34,13 @@ RSpec.describe Midori::Request do
       expect(request.query_string).to eq('test=1')
     end
   end
+
+  it 'parse request with header and body' do
+    data = StringIO.new("GET / HTTP/1.1\r\nTest: Hello\r\n\r\nBody")
+    request = Midori::Request.new(data)
+    request.parse(0)
+    request.parse(1)
+    expect(request.header['Test']).to eq('Hello')
+    expect(request.body).to eq('Body')
+  end
 end

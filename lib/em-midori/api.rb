@@ -165,26 +165,33 @@ class Midori::API
       nil
     end
 
-    def receive(request)
-      request = Midori::Request.new(request)
-      request.parse(0)
-      @route.each do |route|
-        matched = match(route.method, route.path, request.method, request.path)
-        if matched
-          # puts "route matched: #{route.method} #{route.path}"
-          clean_room = CleanRoom.new
-          begin
+    def receive(request, ip, port)
+      begin
+        start_time = Time.now
+        request = Midori::Request.new(request)
+        request.ip = ip
+        request.port = port
+        request.parse(0)
+        @route.each do |route|
+          matched = match(route.method, route.path, request.method, request.path)
+          if matched
+            # puts "route matched: #{route.method} #{route.path}"
+            request.parse(1)
+            clean_room = CleanRoom.new(request)
             result = lambda {clean_room.instance_exec(*matched, &route.function)}.call
             clean_room.body = result if result.class == String
+            $stdout << "#{ip} - - [#{Time.now.inspect}] \"#{request.method} #{request.path} #{request.protocol}\" #{clean_room.response.status} #{Time.now.to_f - start_time.to_f}\n"
             return clean_room.response
-          rescue => e
-            puts e
-            return Midori::Response.new(500, {}, 'Internal Server Error')
           end
         end
+        # 404
+        $stdout << "#{ip} - - [#{Time.now.inspect}] \"#{request.method} #{request.path} #{request.protocol}\" 404 #{Time.now.to_f - start_time.to_f}\n"
+        Midori::Response.new(404, {}, '404 Not Found')
+      rescue => e
+        puts e
+        $stderr << "#{ip} - - [#{Time.now.inspect}] \"#{request.method} #{request.path} #{request.protocol}\" 500 #{Time.now.to_f - start_time.to_f}\n"
+        Midori::Response.new(500, {}, 'Internal Server Error')
       end
-      # 404
-      Midori::Response.new(404, {}, '404 Not Found')
     end
 
     # Match route with given definition

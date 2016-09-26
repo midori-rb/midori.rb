@@ -3,33 +3,15 @@ require 'em-midori'
 include Midori
 
 class Hello < API
-  get '/' do
-    puts 'Hello World'
-  end
-  post '/' do
-    puts 'Hello World'
-  end
-  put '/' do
-    puts 'Hello World'
-  end
-  delete '/' do
-    puts 'Hello World'
-  end
-  options '/' do
-    puts 'Hello World'
-  end
-  link '/' do
-    puts 'Hello World'
-  end
-  unlink '/' do
-    puts 'Hello World'
-  end
-  websocket '/' do
-    puts 'Hello World'
-  end
-  eventsource '/' do
-    puts 'Hello World'
-  end
+  get '/' do; end
+  post '/' do; end
+  put '/' do; end
+  delete '/' do; end
+  options '/' do; end
+  link '/' do; end
+  unlink '/' do; end
+  websocket '/' do; end
+  eventsource '/' do; end
 end
 
 Hello.new
