@@ -1,5 +1,6 @@
 require 'rspec/core/rake_task'
 require 'rdoc/task'
+require './lib/em-midori/version'
 
 task :default => %i(spec)
 
@@ -14,4 +15,9 @@ end
 
 task :build do
   puts `gem build em-midori.gemspec`
+end
+
+task :install do
+  puts `gem build em-midori.gemspec`
+  puts `gem install ./em-midori-#{Midori::VERSION}.gem`
 end

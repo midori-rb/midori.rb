@@ -166,8 +166,10 @@ class Midori::API
     end
 
     def receive(request)
+      request = Midori::Request.new(request)
+      request.parse(0)
       @route.each do |route|
-        matched = match(route.method, route.path, request)
+        matched = match(route.method, route.path, request.method, request.path)
         if matched
           # puts "route matched: #{route.method} #{route.path}"
           clean_room = CleanRoom.new
@@ -196,10 +198,9 @@ class Midori::API
     # else returns an array of parameter string matched
     # === Examples
     #   match('GET', /^\/user\/(.*?)\/order\/(.*?)$/, '/user/foo/order/bar') # => ['foo', 'bar']
-    def match(method, path, request)
-      request = request.lines.first.split
-      if request[0] == method
-        result = request[1].match(path)
+    def match(method, path, request_method, request_path)
+      if request_method == method
+        result = request_path.match(path)
         return result.to_a[1..-1] if result
         false
       else
