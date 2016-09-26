@@ -7,7 +7,7 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, which pro
 
 [![Build Status](https://travis-ci.org/heckpsi-lab/em-midori.svg?branch=master)](https://travis-ci.org/heckpsi-lab/em-midori) [![Code Climate](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori) [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori/coverage) [![Issue Count](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/issue_count.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori)
 
-[![Gem Version](https://img.shields.io/gem/v/em-midori.svg?maxAge=2592000)](https://rubygems.org/gems/em-midori) [![Gem](https://img.shields.io/gem/dt/em-midori.svg?maxAge=2592000)](https://rubygems.org/gems/em-midori) [![license](https://img.shields.io/github/license/heckpsi-lab/em-midori.svg?maxAge=2592000)]()
+[![Gem Version](https://img.shields.io/gem/v/em-midori.svg?maxAge=43200)](https://rubygems.org/gems/em-midori) [![Gem](https://img.shields.io/gem/dt/em-midori.svg?maxAge=43200)](https://rubygems.org/gems/em-midori) [![license](https://img.shields.io/github/license/heckpsi-lab/em-midori.svg?maxAge=2592000)]()
 
 ## Requirements
 
@@ -114,8 +114,8 @@ Version code includes four codes
 |    0.0.6     |   2016-10-04    |                  | Implement WebSocket and EventSource      |
 |    0.0.7     |   2016-10-11    |                  | Implement middleware injection           |
 |    0.0.8     |   2016-10-18    |                  | Enrich Implementation with API design    |
-|    0.0.9     |   2016-10-25    |                  | Issue killing in a week                  |
-|  **0.1.0**   |   2016-11-01    |                  | First development-ready release          |
+|    0.0.9     |   2016-10-25    |                  | Stablize API design                      |
+|  **0.1.0**   |   2016-11-01    |                  | Bug killing and documenting (dev ready)  |
 |    0.1.1     |   2016-11-15    |                  | Implement Midori::Database IO            |
 |     ...      |       ...       |                  | ...                                      |
 |  **1.0.0**   |     2017-03     |                  | First production-ready release           |
