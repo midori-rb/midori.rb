@@ -171,12 +171,9 @@ class Midori::API
         request = Midori::Request.new(request)
         request.ip = ip
         request.port = port
-        request.parse(0)
         @route.each do |route|
           matched = match(route.method, route.path, request.method, request.path)
           if matched
-            # puts "route matched: #{route.method} #{route.path}"
-            request.parse(1)
             clean_room = CleanRoom.new(request)
             result = lambda {clean_room.instance_exec(*matched, &route.function)}.call
             clean_room.body = result if result.class == String
