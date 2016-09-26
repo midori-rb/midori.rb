@@ -21,3 +21,7 @@ task :install do
   puts `gem build em-midori.gemspec`
   puts `gem install ./em-midori-#{Midori::VERSION}.gem`
 end
+
+task :count do
+  puts 'Line count: ' + `find . -name "*.rb"|xargs cat|wc -l`
+end
