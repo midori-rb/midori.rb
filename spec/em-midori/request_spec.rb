@@ -9,6 +9,9 @@ RSpec.describe Midori::Request do
       data = "GET / HTTP/1.1\r\n\r\n"
       data = StringIO.new(data)
       request = Midori::Request.new(data)
+      expect do
+        request.parse(1)
+      end.to raise_error(RuntimeError)
       request.parse(0)
       expect(request.protocol).to eq('HTTP/1.1')
       expect(request.method).to eq('GET')

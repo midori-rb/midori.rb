@@ -1,4 +1,5 @@
 require 'em-midori/version'
+require 'em-midori/const'
 require 'em-midori/define_class'
 require 'em-midori/clean_room'
 require 'em-midori/em_midori'
