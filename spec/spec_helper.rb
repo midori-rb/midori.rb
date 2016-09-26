@@ -1,8 +1,11 @@
 require 'simplecov'
-SimpleCov.start
 require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
 require 'bundler/setup'
+
+SimpleCov.start do
+  add_filter '/spec/'
+end
+CodeClimate::TestReporter.start
 Bundler.require
 
 RSpec.configure do |config|
