@@ -11,6 +11,7 @@ class Midori::Request
   def initialize(data)
     @header = Hash.new
 
+    # Parse request
     line = data.gets.split
     @protocol = line[2]
     @method = line[0]
@@ -20,19 +21,18 @@ class Midori::Request
     end
     @path = line[1].gsub(/\?(.*?)$/, '')
 
-    loop do
-      line = data.gets
-      if line == "\r\n"
-        break
-      end
+    # Parse header
+    while (line = data.gets) != "\r\n"
       line = line.split
       @header[line[0][0..-2]] = line[1..-1].join(' ')
     end
 
+    # Deal with WebSocket
     if @header['Upgrade'] == 'websocket' && @header['Connection'] == 'Upgrade'
       @method = 'WEBSOCKET'
     end
 
+    # Parse body
     @body = data.read
   end
 end

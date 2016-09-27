@@ -9,7 +9,8 @@ class Example < Midori::API
   get '/user/:id' do |id|
     JSON.generate({
         header: @request.header,
-        body: @request.body
+        body: @request.body,
+        id: id
                   })
   end
 end
