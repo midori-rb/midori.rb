@@ -38,4 +38,10 @@ RSpec.describe Midori::Request do
     request = Midori::Request.new(data)
     expect(request.method).to eq('WEBSOCKET')
   end
+
+  it 'parse eventsource upgrade' do
+    data = StringIO.new("GET / HTTP/1.1\r\nAccept: text/event-stream\r\n\r\n")
+    request = Midori::Request.new(data)
+    expect(request.method).to eq('EVENTSOURCE')
+  end
 end
