@@ -8,17 +8,17 @@ rvm:
   - rbx-3.20
 
 jdk:
-  - openjdk7
-  - oraclejdk7
+  - openjdk8
+  - oraclejdk8
 
 matrix:
   exclude:
     - rvm: 2.2.5
-      jdk: oraclejdk7
+      jdk: oraclejdk8
     - rvm: 2.3.1
-      jdk: oraclejdk7
+      jdk: oraclejdk8
     - rvm: rbx-3.20
-      jdk: oraclejdk7
+      jdk: oraclejdk8
   allow_failures:
     - rvm: jruby-head
     - rvm: rbx-3.20
