@@ -32,6 +32,11 @@ class Midori::Request
       @method = 'WEBSOCKET'
     end
 
+    # Deal with EventSource
+    if @header['Accept'] == 'text/event-stream'
+      @method = 'EVENTSOURCE'
+    end
+
     # Parse body
     @body = data.read
   end
