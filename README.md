@@ -1,7 +1,11 @@
 # EM Midori
 ## Description
 
+
+
 EM Midori is an EventMachine-based Web Framework written in pure Ruby, which provides high performance and proper abstraction.
+
+![Logo and Slogan](https://raw.githubusercontent.com/heckpsi-lab/em-midori/master/.resources/slogan.png)
 
 [![Join the chat at https://gitter.im/em-midori/Lobby](https://badges.gitter.im/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -11,7 +15,7 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, which pro
 
 ## Requirements
 
-- **Ruby** >= 2.0.0 or **JRuby** >= 9.0.4.0 (With Oracle JDK 7 or Open JDK 7) or **Rubinius** >= 3.20
+- **Ruby** >= 2.0.0 or **JRuby** >= 9.0.4.0 (Oracle JDK 7/8 or Open JDK 7/8) or **Rubinius** >= 3.20
 
 ## Installation
 
