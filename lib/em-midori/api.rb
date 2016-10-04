@@ -155,6 +155,13 @@ class Midori::API
     #   end
     def eventsource(path, &block) end
 
+    # Implementation of route DSL
+    # === Attributes
+    # * +method+ [+String+] - HTTP method
+    # * +path+ [+String+, +Regexp+] - path definition
+    # * +block+ [+Proc+] - process to run when route matched
+    # === Returns
+    # nil
     def add_route(method, path, block)
       @route = Array.new if @route.nil?
       if path.class == String
@@ -165,6 +172,11 @@ class Midori::API
       nil
     end
 
+    # Process after receive data from client
+    # === Attributes
+    # * +request+ [+StringIO+] - Http Raw Request
+    # === Returns
+    # [+Midori::Response+] - Http response
     def receive(request)
         @route.each do |route|
           matched = match(route.method, route.path, request.method, request.path)
