@@ -1,5 +1,6 @@
 require 'digest/sha1'
 require 'em-midori/version'
+require 'em-midori/debug'
 require 'em-midori/const'
 require 'em-midori/error'
 require 'em-midori/define_class'

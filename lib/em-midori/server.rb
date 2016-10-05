@@ -1,15 +1,11 @@
 require 'stringio'
 
 module Midori::Server
-  attr_accessor :request, :api, :on_open, :on_message, :on_close, :on_error
+  attr_accessor :request, :api, :on_open, :on_message, :on_close
 
   def initialize(api)
     @api = api
     @request = Midori::Request.new
-  end
-
-  def post_init
-    
   end
 
   def receive_data(data)
@@ -17,7 +13,7 @@ module Midori::Server
     @request.ip = ip
     @request.port = port
     if @request.parsed?
-      #TODO: Implement method calling
+      # It must be a websocket connection
     else
      receive_new_request(data)
     end
@@ -33,12 +29,16 @@ module Midori::Server
       @response = Midori::Response.new(404, {}, '404 Not Found')
     rescue => e
       @response = Midori::Response.new(500, {}, 'Internal Server Error')
-      puts e.inspect
+      puts e.inspect.yellow
     end
-    $stdout << "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{Time.now.to_f - start_time.to_f}\n"
+    $stdout << "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{Time.now.to_f - start_time.to_f}\n".green
     unless (@request.websocket? || @request.eventsource?)
       send_data @response
       close_connection_after_writing
     end
+  end
+
+  def connection_completed
+
   end
 end
