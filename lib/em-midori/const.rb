@@ -41,4 +41,8 @@ module Midori::Const
   }
   STATUS_CODE.default= '500 Internal Server Error'
   STATUS_CODE.freeze
+
+  DEFAULT_HEADER = {
+    "Server" => "Midori/#{Midori::VERSION}"
+  }
 end

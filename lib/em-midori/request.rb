@@ -47,7 +47,6 @@ class Midori::Request
 
     # Parse body
     @body = data.read
-    
     @parsed = true
   end
 
