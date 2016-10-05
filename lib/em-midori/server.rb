@@ -31,7 +31,7 @@ module Midori::Server
       @response = Midori::Response.new(500, {}, 'Internal Server Error')
       puts e.inspect.yellow
     end
-    $stdout << "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{Time.now.to_f - start_time.to_f}\n".green
+    $stdout << "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(Time.now.to_f - start_time.to_f).round(5)}\n".green
     unless (@request.websocket? || @request.eventsource?)
       send_data @response
       close_connection_after_writing
