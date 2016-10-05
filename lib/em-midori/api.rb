@@ -184,13 +184,11 @@ class Midori::API
             clean_room = CleanRoom.new(request)
             if request.websocket?
               # Send 101 Switching Protocol
-              response = Midori::Response.new(101, {
+              connection.send_data Midori::Response.new(101, {
                 'Upgrade' => 'websocket',
                 'Connection' => 'Upgrade',
                 'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(request.header['Sec-WebSocket-Key'] +'258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
               }, '')
-              puts response
-              connection.send_data response
               # Give control of connection
 
               # Set on message into instance
