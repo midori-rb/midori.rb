@@ -14,8 +14,13 @@ class Example < Midori::API
                   })
   end
 
-  websocket '/websocket' do
-
+  websocket '/websocket' do |ws|
+    ws.on :open do
+      puts 'Connected'
+    end
+    ws.on :message do |msg|
+      ws.send(msg)
+    end
   end
 
   # get '/user/login' do

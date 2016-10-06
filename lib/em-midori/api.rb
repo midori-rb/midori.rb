@@ -189,10 +189,7 @@ class Midori::API
                 'Connection' => 'Upgrade',
                 'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(request.header['Sec-WebSocket-Key'] +'258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
               }, '')
-              # Give control of connection
-
-              # Set on message into instance
-              result = lambda {clean_room.instance_exec(connection, *matched, &route.function)}.call
+              result = lambda {clean_room.instance_exec(connection.websocket, *matched, &route.function)}.call
               return Midori::Response.new
             else
               result = lambda {clean_room.instance_exec(*matched, &route.function)}.call
