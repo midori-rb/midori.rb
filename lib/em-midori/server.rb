@@ -31,7 +31,8 @@ module Midori::Server
       @response = Midori::Response.new(404, {}, '404 Not Found')
     rescue => e
       @response = Midori::Response.new(500, {}, 'Internal Server Error')
-      puts e.inspect.yellow
+      puts e.inspect.red
+      puts e.backtrace.join("\n").yellow
     end
     unless (@request.websocket? || @request.eventsource?)
       send_data @response
@@ -64,7 +65,8 @@ module Midori::Server
       send_data "\b" # Opcode 0x8
       close_connection_after_writing
     rescue => e
-      puts e.inspect.yellow
+      puts e.inspect.red
+      puts e.backtrace.join("\n").yellow
       @response = Midori::Response.new(400, {}, 'Bad Request')
       send_data @response
       close_connection_after_writing

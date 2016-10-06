@@ -107,21 +107,21 @@ Version code includes four codes
 
 **Note: Detailed release note for published version could be seen at [here](https://github.com/heckpsi-lab/em-midori/releases).**
 
-| Version Code | Determined Date |   Release Date   | Description                              |
-| :----------: | :-------------: | :--------------: | ---------------------------------------- |
-|    0.0.1     |   2016-09-09    |    2016-09-09    | Init the gem project                     |
-|    0.0.2     |   2016-09-09    |    2016-09-09    | Init basic EventMachine server           |
-|    0.0.3     |   2016-09-13    |    2016-09-13    | Init Midori::API design                  |
-|    0.0.4     |   2016-09-20    | 2016-09-19 (-1d) | Implement API match                      |
-|    0.0.5     |   2016-09-27    | 2016-09-25 (-2d) | Implement basic request and response parse. |
-|    0.0.6     |   2016-10-04    | 2016-10-06 (+2d) | Implement WebSocket                      |
-|    0.0.7     |   2016-10-11    |                  | Implement EventSource                    |
-|    0.0.8     |   2016-10-18    |                  | Get Test Coverage to 100%                |
-|    0.0.9     |   2016-10-25    |                  | Stablize API design                      |
-|  **0.1.0**   |   2016-11-01    |                  | Bug killing and documenting (dev ready)  |
-|    0.1.1     |   2016-11-15    |                  | Implement Midori::Database IO            |
-|     ...      |       ...       |                  | ...                                      |
-|  **1.0.0**   |     2017-03     |                  | First production-ready release           |
-|    1.1.0     |     2017-06     |                  | TBD.                                     |
-|    1.2.0     |     2017-09     |                  | TBD.                                     |
+| Version Code | Determined Date |   Release Date   | Description                             |
+| :----------: | :-------------: | :--------------: | --------------------------------------- |
+|    0.0.1     |   2016-09-09    | 2016-09-09 (+0d) | Init the gem project                    |
+|    0.0.2     |   2016-09-09    | 2016-09-09 (+0d) | Init basic EventMachine server          |
+|    0.0.3     |   2016-09-13    | 2016-09-13 (+0d) | Init Midori::API design                 |
+|    0.0.4     |   2016-09-20    | 2016-09-19 (-1d) | Implement API match                     |
+|    0.0.5     |   2016-09-27    | 2016-09-25 (-2d) | Implement request and response.         |
+|    0.0.6     |   2016-10-04    | 2016-10-06 (+2d) | Implement WebSocket                     |
+|    0.0.7     |   2016-10-11    |                  | Implement EventSource                   |
+|    0.0.8     |   2016-10-18    |                  | Get Test Coverage to 100%               |
+|    0.0.9     |   2016-10-25    |                  | Stablize API design                     |
+|  **0.1.0**   |   2016-11-01    |                  | Bug killing and documenting (dev ready) |
+|    0.1.1     |   2016-11-15    |                  | Implement Midori::Database IO           |
+|     ...      |       ...       |                  | ...                                     |
+|  **1.0.0**   |     2017-03     |                  | First production-ready release          |
+|    1.1.0     |     2017-06     |                  | TBD.                                    |
+|    1.2.0     |     2017-09     |                  | TBD.                                    |
 
