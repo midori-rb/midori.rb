@@ -38,7 +38,7 @@ module Midori::Server
       close_connection_after_writing
     end
     if @request.websocket? && !@websocket.events[:open].nil?
-      lambda {@websocket.instance_exec(&@websocket.events[:open])}.call
+      call_event(:open)
     end
   end
 
@@ -70,7 +70,7 @@ module Midori::Server
       close_connection_after_writing
     end
   end
-  
+
   def call_event(event, args=[])
     lambda {@websocket.instance_exec(*args, &@websocket.events[event])}.call unless @websocket.events[event].nil?
   end
