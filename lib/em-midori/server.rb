@@ -6,22 +6,25 @@ module Midori::Server
   def initialize(api)
     @api = api
     @request = Midori::Request.new
+    @websocket = Midori::WebSocket.new
   end
 
   def receive_data(data)
+    start_time = Time.now
+    data = StringIO.new(data)
     port, ip = Socket.unpack_sockaddr_in(get_peername)
     @request.ip = ip
     @request.port = port
     if @request.parsed?
-      # It must be a websocket connection
+      @websocket.decode_mask(data)
+      puts @websocket.msg
     else
      receive_new_request(data)
     end
+    $stdout << "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(Time.now.to_f - start_time.to_f).round(5)}\n".green
   end
 
   def receive_new_request(data)
-    start_time = Time.now
-    data = StringIO.new(data)
     begin
       @request.parse(data)
       @response = @api.receive(request, self)
@@ -31,7 +34,6 @@ module Midori::Server
       @response = Midori::Response.new(500, {}, 'Internal Server Error')
       puts e.inspect.yellow
     end
-    $stdout << "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(Time.now.to_f - start_time.to_f).round(5)}\n".green
     unless (@request.websocket? || @request.eventsource?)
       send_data @response
       close_connection_after_writing
