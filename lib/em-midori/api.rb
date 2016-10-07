@@ -163,7 +163,7 @@ class Midori::API
     # === Returns
     # nil
     def add_route(method, path, block)
-      @route = Array.new if @route.nil?
+      @route = [] if @route.nil?
       if path.class == String
         # Convert String to Regexp to provide performance boost (Precompiled Regexp)
         path = convert_route path
@@ -177,28 +177,27 @@ class Midori::API
     # * +request+ [+StringIO+] - Http Raw Request
     # === Returns
     # [+Midori::Response+] - Http response
-    def receive(request, connection=nil)
-        @route.each do |route|
-          matched = match(route.method, route.path, request.method, request.path)
-          if matched
-            clean_room = CleanRoom.new(request)
-            if request.websocket?
-              # Send 101 Switching Protocol
-              connection.send_data Midori::Response.new(101, {
-                'Upgrade' => 'websocket',
-                'Connection' => 'Upgrade',
-                'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(request.header['Sec-WebSocket-Key'] +'258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
-              }, '')
-              result = lambda {clean_room.instance_exec(connection.websocket, *matched, &route.function)}.call
-              return Midori::Response.new
-            else
-              result = lambda {clean_room.instance_exec(*matched, &route.function)}.call
-            end
-            clean_room.body = result if result.class == String
-            return clean_room.response
-          end
+    def receive(request, connection = nil)
+      @route.each do |route|
+        matched = match(route.method, route.path, request.method, request.path)
+        next unless matched
+        clean_room = CleanRoom.new(request)
+        if request.websocket?
+          # Send 101 Switching Protocol
+          connection.send_data Midori::Response.new(101, {
+                                                      'Upgrade' => 'websocket',
+                                                      'Connection' => 'Upgrade',
+                                                      'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(request.header['Sec-WebSocket-Key'] + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
+                                                    }, '')
+          result = -> { clean_room.instance_exec(connection.websocket, *matched, &route.function) }.call
+          return Midori::Response.new
+        else
+          result = -> { clean_room.instance_exec(*matched, &route.function) }.call
         end
-        raise Midori::Error::NotFound
+        clean_room.body = result if result.class == String
+        return clean_room.response
+      end
+      raise Midori::Error::NotFound
     end
 
     # Match route with given definition
@@ -231,8 +230,8 @@ class Midori::API
     #   convert_route('/user/:id/order/:order_id') # => Regexp
     def convert_route(path)
       path = '^' + path
-                       .gsub(/\/(:[_a-z][_a-z0-9]+?)\//, '/([^/]+?)/')
-                       .gsub(/\/(:[_a-z][_a-z0-9]+?)$/, '/([^/]+?)$')
+             .gsub(/\/(:[_a-z][_a-z0-9]+?)\//, '/([^/]+?)/')
+             .gsub(/\/(:[_a-z][_a-z0-9]+?)$/, '/([^/]+?)$')
       path += '$' if path[-1] != '$'
       Regexp.new path
     end
@@ -240,12 +239,12 @@ class Midori::API
 
   private_class_method :add_route
 
-  METHODS = %w'get post put delete options link unlink websocket eventsource' # :nodoc:
+  METHODS = %w(get post put delete options link unlink websocket eventsource).freeze # :nodoc:
 
   # Magics to fill DSL methods through dynamically class method definition
   METHODS.each do |method|
     define_singleton_method(method) do |*args, &block|
-      add_route(method.upcase, args[0], block) #args[0]: path
+      add_route(method.upcase, args[0], block) # args[0]: path
     end
   end
 end

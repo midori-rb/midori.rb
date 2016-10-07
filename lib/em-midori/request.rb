@@ -15,16 +15,14 @@ class Midori::Request
   # === Attributes
   # * +data+ [+StringIO+] - Request data
   def parse(data)
-    @header = Hash.new
+    @header = {}
 
     # Parse request
     line = data.gets.split
     @protocol = line[2]
     @method = line[0]
     @query_string = line[1].match(/\?(.*?)$/)
-    unless @query_string.nil?
-      @query_string = @query_string[1]
-    end
+    @query_string = @query_string[1] unless @query_string.nil?
     @path = line[1].gsub(/\?(.*?)$/, '')
 
     # Parse header

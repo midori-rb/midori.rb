@@ -1,7 +1,7 @@
 class Midori::Response
   attr_accessor :status, :header, :body
 
-  def initialize(code=200, header= Midori::Const::DEFAULT_HEADER, body='')
+  def initialize(code = 200, header = Midori::Const::DEFAULT_HEADER, body = '')
     @status = Midori::Const::STATUS_CODE[code]
     @header = header
     @body = body

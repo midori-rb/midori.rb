@@ -34,47 +34,40 @@ module Midori::Server
       puts e.inspect.red
       puts e.backtrace.join("\n").yellow
     end
-    unless (@request.websocket? || @request.eventsource?)
+    unless @request.websocket? || @request.eventsource?
       send_data @response
       close_connection_after_writing
     end
-    if @request.websocket? && !@websocket.events[:open].nil?
-      call_event(:open)
-    end
+    call_event(:open) if @request.websocket? && !@websocket.events[:open].nil?
   end
 
   def websocket_request(data)
-    begin
-      @websocket.decode(data)
-      case @websocket.opcode
-        when 0x1, 0x2
-          call_event(:message, @websocket.msg)
-        when 0x9
-          call_event(:ping)
-          @websocket.pong
-        when 0xA
-          call_event(:pong)
-        else
-          # Unknown Control Frame
-          raise Midori::Error::FrameEnd
-      end
-    rescue Midori::Error::FrameEnd => _e
-      unless @websocket.events[:close].nil?
-        call_event(:close)
-      end
-      send_data "\b" # Opcode 0x8
-      close_connection_after_writing
-    rescue => e
-      puts e.inspect.red
-      puts e.backtrace.join("\n").yellow
-      @response = Midori::Response.new(400, {}, 'Bad Request')
-      send_data @response
-      close_connection_after_writing
+    @websocket.decode(data)
+    case @websocket.opcode
+    when 0x1, 0x2
+      call_event(:message, @websocket.msg)
+    when 0x9
+      call_event(:ping)
+      @websocket.pong
+    when 0xA
+      call_event(:pong)
+    else
+      # Unknown Control Frame
+      raise Midori::Error::FrameEnd
     end
+  rescue Midori::Error::FrameEnd => _e
+    call_event(:close) unless @websocket.events[:close].nil?
+    send_data "\b" # Opcode 0x8
+    close_connection_after_writing
+  rescue => e
+    puts e.inspect.red
+    puts e.backtrace.join("\n").yellow
+    @response = Midori::Response.new(400, {}, 'Bad Request')
+    send_data @response
+    close_connection_after_writing
   end
 
-  def call_event(event, args=[])
-    lambda {@websocket.instance_exec(*args, &@websocket.events[event])}.call unless @websocket.events[event].nil?
+  def call_event(event, args = [])
+    -> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call unless @websocket.events[event].nil?
   end
-
 end
