@@ -83,6 +83,8 @@ Version code includes four codes
 
 ### Contribution
 
+Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leave any comment.
+
 #### Found a bug or any suggestion
 
 1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
@@ -90,22 +92,23 @@ Version code includes four codes
 3. Raise a ticket if no open ticket meets your idea.
 4. If you are not sure whether you should raise a ticket or not, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
-#### Code Improvement
+#### Contribute feature
 
-1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
-2. Check Roadmap.
-3. Pick a ticket and leaves a comment saying you are working on it.
-4. If it's on roadmap but not ticket raised, raise a ticket.
-5. Fork it.
-6. Code it.
-7. Pass the tests.
-8. Document it.
-9. Raise pull requests.
-10. If any problem, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
+1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues) and [Development board](https://github.com/heckpsi-lab/em-midori/projects/1).
+2. Pick a feature still not in progress.
+3. Raise a ticket if your feature is still not on plan.
+4. Fork it.
+5. Code it.
+6. Pass the tests.
+7. Document it.
+8. Raise pull requests.
+9. If any problem, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
 ## Roadmap
 
-**Note: Detailed release note for published version could be seen at [here](https://github.com/heckpsi-lab/em-midori/releases).**
+**Detailed release note for published version could be seen at [here](https://github.com/heckpsi-lab/em-midori/releases).**
+
+**Detailed progress could be seen at [here](https://github.com/heckpsi-lab/em-midori/projects/1)**
 
 | Version Code | Determined Date |   Release Date   | Description                             |
 | :----------: | :-------------: | :--------------: | --------------------------------------- |
