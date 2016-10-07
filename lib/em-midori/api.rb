@@ -181,7 +181,7 @@ class Midori::API
       @route.each do |route|
         matched = match(route.method, route.path, request.method, request.path)
         next unless matched
-        clean_room = CleanRoom.new(request)
+        clean_room = Midori::CleanRoom.new(request)
         if request.websocket?
           # Send 101 Switching Protocol
           connection.send_data Midori::Response.new(101, {

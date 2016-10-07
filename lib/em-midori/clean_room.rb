@@ -1,4 +1,4 @@
-class CleanRoom
+class Midori::CleanRoom
   attr_accessor :code, :header, :body, :request
   def initialize(request)
     @status = 200
