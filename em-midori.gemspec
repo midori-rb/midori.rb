@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version    = '>=2.0.0'
   s.date                     = Time.now.strftime('%Y-%m-%d')
   s.summary                  = 'An EventMachine Based Web Framework on Ruby'
-  s.description              = 'An EventMachine Based Web Framework on Ruby'
+  s.description              = 'EM Midori is an EventMachine-based Web Framework written in pure Ruby, providing high performance and proper abstraction.'
   s.authors                  = ['HeckPsi Lab']
   s.email                    = 'business@heckpsi.com'
   s.require_paths            = ['lib']
@@ -15,8 +15,4 @@ Gem::Specification.new do |s|
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
   s.license                  = 'MIT'
   s.add_runtime_dependency     'eventmachine', '~> 1.2', '> 1.2.0.0'
-  s.add_development_dependency 'bundler', '~> 1.0'
-  s.add_development_dependency 'rake', '~> 11.2'
-  s.add_development_dependency 'rspec', '~> 3.0'
-  s.add_development_dependency 'faye-websocket', '~>0.10'
 end
