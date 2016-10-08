@@ -4,4 +4,5 @@ module Midori::Error
   class OpCodeError < StandardError; end
   class NotMasked < StandardError; end
   class FrameEnd < StandardError; end
+  class PingPongSizeTooLarge < StandardError; end
 end

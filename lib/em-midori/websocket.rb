@@ -15,7 +15,7 @@ class Midori::WebSocket
     raise Midori::Error::ContinuousFrame unless fin
     raise Midori::Error::OpCodeError unless [0x1, 0x2, 0x8, 0x9, 0xA].include?opcode
     raise Midori::Error::FrameEnd if @opcode == 0x8 # Close Frame
-    return if @opcode == 0x9 || @opcode == 0xA # Ping Pong
+    # return if @opcode == 0x9 || @opcode == 0xA # Ping Pong
     decode_mask(data)
   end
 
@@ -50,12 +50,14 @@ class Midori::WebSocket
     @connection.send_data(output.pack("CCA#{msg.size}"))
   end
 
-  def ping
-    @connection.send_data "\t"
+  def ping(str)
+    raise Midori::Error::PingPongSizeTooLarge if str > 125
+    @connection.send_data [0b10001001, str.size, str].pack("CCA#{str.size}") # Opcode: 0x9
   end
 
-  def pong
-    @connection.send_data "\n"
+  def pong(str)
+    raise Midori::Error::PingPongSizeTooLarge if str > 125
+    @connection.send_data [0b10001010, str.size, str].pack("CCA#{str.size}") # Opcode: 0xA
   end
 
   def close

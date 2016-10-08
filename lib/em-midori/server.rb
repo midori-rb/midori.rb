@@ -38,7 +38,7 @@ module Midori::Server
       send_data @response
       close_connection_after_writing
     end
-    call_event(:open) if @request.websocket? && !@websocket.events[:open].nil?
+    call_event(:open) if @request.websocket?
   end
 
   def websocket_request(data)
@@ -47,23 +47,24 @@ module Midori::Server
     when 0x1, 0x2
       call_event(:message, @websocket.msg)
     when 0x9
+      @websocket.pong(@websocket.msg)
       call_event(:ping)
-      @websocket.pong
     when 0xA
       call_event(:pong)
     else
-      # Unknown Control Frame
       raise Midori::Error::FrameEnd
     end
   rescue Midori::Error::FrameEnd => _e
-    call_event(:close) unless @websocket.events[:close].nil?
+    call_event(:close)
     send_data "\b" # Opcode 0x8
     close_connection_after_writing
+  rescue Midori::Error::PingPingSizeTooLarge => _e
+    call_event(:error)
+    close_connection
   rescue => e
+    call_event(:error)
     puts e.inspect.red
     puts e.backtrace.join("\n").yellow
-    @response = Midori::Response.new(400, {}, 'Bad Request')
-    send_data @response
     close_connection_after_writing
   end
 
