@@ -51,13 +51,16 @@ class Midori::WebSocket
   end
 
   def ping(str)
-    raise Midori::Error::PingPongSizeTooLarge if str > 125
-    @connection.send_data [0b10001001, str.size, str].pack("CCA#{str.size}") # Opcode: 0x9
+    heartbeat(0b10001001, str)
   end
 
   def pong(str)
-    raise Midori::Error::PingPongSizeTooLarge if str > 125
-    @connection.send_data [0b10001010, str.size, str].pack("CCA#{str.size}") # Opcode: 0xA
+    heartbeat(0b10001010, str)
+  end
+
+  def heartbeat(method, str)
+      raise Midori::Error::PingPongSizeTooLarge if str > 125
+      @connection.send_data [method, str.size, str].pack("CCA#{str.size}")
   end
 
   def close
