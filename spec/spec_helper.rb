@@ -9,8 +9,6 @@ CodeClimate::TestReporter.start
 Bundler.require
 
 RSpec.configure do |config|
-  config.wait_timeout = 3
-
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
     expectations.on_potential_false_positives = :nothing

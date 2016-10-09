@@ -16,7 +16,7 @@ class Midori::WebSocket
     # NOT Support Multiple Fragments
     raise Midori::Error::ContinuousFrame unless fin
     raise Midori::Error::OpCodeError unless [0x1, 0x2, 0x8, 0x9, 0xA].include?opcode
-    raise Midori::Error::FrameEnd if @opcode == 0x8 # Close Frame
+    close if @opcode == 0x8 # Close Frame
     # return if @opcode == 0x9 || @opcode == 0xA # Ping Pong
     decode_mask(data)
   end
@@ -32,7 +32,7 @@ class Midori::WebSocket
     # Message
     masked_msg = Array.new(payload) { data.getbyte }
     @msg = masked_msg.each_with_index.map { |byte, i| byte ^ mask[i % 4] }
-    @msg = @msg.pack('C*').force_encoding('utf-8') if @opcode == 0x1
+    @msg = @msg.pack('C*').force_encoding('utf-8') if [0x1, 0x9, 0xA].include?opcode
   end
 
   def on(event, &block) # open, message, close, ping, pong
@@ -62,7 +62,7 @@ class Midori::WebSocket
   end
 
   def heartbeat(method, str)
-      raise Midori::Error::PingPongSizeTooLarge if str > 125
+      raise Midori::Error::PingPongSizeTooLarge if str.size > 125
       @connection.send_data [method, str.size, str].pack("CCA#{str.size}")
   end
 
