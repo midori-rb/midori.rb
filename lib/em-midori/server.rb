@@ -27,6 +27,7 @@ module Midori::Server
     begin
       @request.parse(data)
       @response = @api.receive(request, self)
+      call_event(:open) if @request.websocket?
     rescue Midori::Error::NotFound => _e
       @response = Midori::Response.new(404, {}, '404 Not Found')
     rescue => e
@@ -38,7 +39,6 @@ module Midori::Server
       send_data @response
       close_connection_after_writing
     end
-    call_event(:open) if @request.websocket?
   end
 
   def websocket_request(data)

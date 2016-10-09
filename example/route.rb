@@ -14,12 +14,19 @@ class Example < Midori::API
                   })
   end
 
-  websocket '/websocket' do |ws|
+  websocket '/websocket/:id' do |ws, id|
     ws.on :open do
-      puts 'Connected'
+      puts 'on Open'.green
+      ws.send id
     end
+
     ws.on :message do |msg|
-      ws.send(msg)
+      puts 'on Message'.green
+      ws.send msg
+    end
+
+    ws.on :close do
+      puts 'on Close'.green
     end
   end
 
