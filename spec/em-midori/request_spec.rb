@@ -1,8 +1,6 @@
 require 'em-midori'
 require './spec/spec_helper'
 
-puts File.dirname(__FILE__)
-
 RSpec.describe Midori::Request do
   describe 'Request' do
     it 'parse request without query_string' do
