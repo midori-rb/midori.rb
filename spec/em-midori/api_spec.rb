@@ -14,8 +14,6 @@ class Hello < API
   eventsource '/' do; end
 end
 
-Hello.new
-
 RSpec.describe API do
   describe 'match' do
     it 'should match GET /test with GET string /test' do
