@@ -45,7 +45,7 @@ module Midori::Server
     @websocket.decode(data)
     case @websocket.opcode
     when 0x1, 0x2
-      call_event(:message, @websocket.msg)
+      call_event(:message, [@websocket.msg])
     when 0x9
       @websocket.pong(@websocket.msg)
       call_event(:ping)

@@ -72,24 +72,28 @@ RSpec.describe Midori do
   end
 
   describe 'WebSocket' do
-    it 'pass websocket connection' do
+    it 'pass example websocket communication' do
       socket = TCPSocket.new '127.0.0.1', 8080
       socket.print "GET /websocket HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
       # Upgrade
       result = Array.new(5) {socket.gets}
       expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
       expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
-      # Received 'Hello' on Open
+      # Receive 'Hello' on Open
       result = Array.new(7) {socket.getbyte}
       expect(result).to eq([0x81, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f])
-      # Received 'Hello' after sending 'Hello'
+      # Receive 'Hello' after sending 'Hello'
       socket.print [0x81, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
       result = Array.new(7) {socket.getbyte}
       expect(result).to eq([0x81, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f])
-      # Received 'Hello' pong after sending 'Hello' ping
+      # Receive 'Hello' pong after sending 'Hello' ping
       socket.print [0x89, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
       result = Array.new(7) {socket.getbyte}
       expect(result).to eq([0x8a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f])
+      # Receive [1, 2, 3] after sending [1, 2, 3]
+      socket.print [0x82, 0x83, 0xac, 0xfe, 0x1a, 0x97, 0xad, 0xfc, 0x19].pack('C*')
+      result = Array.new(5) {socket.getbyte}
+      expect(result).to eq([0x82, 0x3, 0x1, 0x2, 0x3])
       # Expect WebSocket close
       socket.print [0x48].pack('C*')
       result = socket.getbyte

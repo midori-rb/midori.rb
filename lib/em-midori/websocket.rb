@@ -33,6 +33,9 @@ class Midori::WebSocket
     masked_msg = Array.new(payload) { data.getbyte }
     @msg = masked_msg.each_with_index.map { |byte, i| byte ^ mask[i % 4] }
     @msg = @msg.pack('C*').force_encoding('utf-8') if [0x1, 0x9, 0xA].include?opcode
+    # For debug
+    #  data.rewind
+    #  data.bytes {|byte| puts byte.to_s(16)}
   end
 
   def on(event, &block) # open, message, close, ping, pong
