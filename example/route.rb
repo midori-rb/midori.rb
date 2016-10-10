@@ -7,11 +7,9 @@ class Example < Midori::API
   end
 
   get '/user/:id/dump' do |id|
-    JSON.generate({
-        header: @request.header,
-        body: @request.body,
-        id: id
-                  })
+    { header: @request.header,
+      body: @request.body,
+      id: id }.to_json
   end
 
   websocket '/websocket/:id' do |ws, id|
@@ -33,7 +31,7 @@ class Example < Midori::API
   get '/user/login' do
     define_error :forbidden_request, :unauthorized_error
     begin
-      request = JSON.parse(@body)
+      request = JSON.parse(@request.body)
       UserController.login(request['username'], request['password'])
       # => {code: 0, token: String}
     rescue ForbiddenRequest => _e
