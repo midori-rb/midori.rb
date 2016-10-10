@@ -1,4 +1,4 @@
-require '../lib/em-midori'
+require 'em-midori'
 require 'json'
 
 class Example < Midori::API
