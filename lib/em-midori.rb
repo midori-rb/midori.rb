@@ -1,4 +1,5 @@
 require 'digest/sha1'
+
 require 'em-midori/version'
 require 'em-midori/string'
 require 'em-midori/const'
