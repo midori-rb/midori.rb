@@ -90,6 +90,10 @@ RSpec.describe Midori do
       socket.print [0x89, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
       result = Array.new(7) {socket.getbyte}
       expect(result).to eq([0x8a, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f])
+      # Expect WebSocket close
+      socket.print [0x48].pack('C*')
+      result = socket.getbyte
+      expect(result).to eq(0x8)
       socket.close
     end
   end
