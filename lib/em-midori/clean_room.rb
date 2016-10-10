@@ -2,7 +2,7 @@ class Midori::CleanRoom
   attr_accessor :code, :header, :body, :request
   def initialize(request)
     @status = 200
-    @header = {}
+    @header = Midori::Const::DEFAULT_HEADER.clone
     @body = ''
     @request = request
   end
