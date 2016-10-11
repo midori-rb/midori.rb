@@ -1,5 +1,3 @@
-require 'em-midori'
-require 'stringio'
 require './spec/spec_helper'
 
 RSpec.describe Midori::WebSocket do

@@ -1,4 +1,3 @@
-require 'em-midori'
 require './spec/spec_helper'
 require 'net/http'
 require 'socket'
