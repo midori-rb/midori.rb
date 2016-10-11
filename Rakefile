@@ -23,5 +23,8 @@ task :install do
 end
 
 task :count do
-  puts 'Line count: ' + `find . -name "*.rb"|xargs cat|wc -l`
+  puts 'Library line count: ' + `find ./lib -name "*.rb"|xargs cat|wc -l`
+  puts 'Spec line count:    ' + `find ./spec -name "*.rb"|xargs cat|wc -l`
+  puts 'Example line count: ' + `find ./example -name "*.rb"|xargs cat|wc -l`
+  puts 'Total line count:   ' + `find . -name "*.rb"|xargs cat|wc -l`
 end
