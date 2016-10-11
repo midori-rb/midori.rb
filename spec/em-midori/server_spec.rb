@@ -33,10 +33,44 @@ class Example < API
       ws.send msg
     end
 
+    ws.on :pong do
+      ws.send ''
+      puts 'on Pong'.green
+    end
+
     ws.on :close do
       puts 'on Close'.green
     end
   end
+
+  websocket '/websocket/opcode' do |ws|
+    ws.on :open do
+      ws.send Object.new
+    end
+  end
+
+  websocket '/websocket/ping' do |ws|
+    ws.on :open do
+      ws.ping ''
+    end
+  end
+
+  websocket '/websocket/too_large_ping' do |ws|
+    ws.on :message do
+      ws.ping '01234567890123456789012345678901
+      23456789012345678901234567890123456789012
+      34567890123456789012345678901234567890123
+      45678901234567890123456789012345678901234
+      56789012345678901234567890123456789012345
+      67890123456789012345678901234567890123456
+      78901234567890123456789012345678901234567
+      89012345678901234567890123456789012345678
+      90123456789012345678901234567890123456789
+      012345678901234567890123456789'
+    end
+  end
+
+  websocket '/websocket/wrong_opcode' do |ws|;end
 end
 
 RSpec.describe Midori do
@@ -94,10 +128,59 @@ RSpec.describe Midori do
       socket.print [0x82, 0x83, 0xac, 0xfe, 0x1a, 0x97, 0xad, 0xfc, 0x19].pack('C*')
       result = Array.new(5) {socket.getbyte}
       expect(result).to eq([0x82, 0x3, 0x1, 0x2, 0x3])
+      # Try send pong 'Hello'
+      socket.print [0x8a, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
+      result = Array.new(2) {socket.getbyte}
+      expect(result).to eq([0x81, 0x0])
       # Expect WebSocket close
       socket.print [0x48].pack('C*')
       result = socket.getbyte
       expect(result).to eq(0x8)
+      socket.close
+    end
+
+    it 'raise error when sending unsupported OpCode' do
+      socket = TCPSocket.new '127.0.0.1', 8080
+      socket.print "GET /websocket/opcode HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
+      # Upgrade
+      result = Array.new(5) {socket.gets}
+      expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
+      expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
+      # Connection lost
+      socket.close
+    end
+
+    it 'pings' do
+      socket = TCPSocket.new '127.0.0.1', 8080
+      socket.print "GET /websocket/ping HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
+      # Upgrade
+      result = Array.new(5) {socket.gets}
+      expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
+      expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
+      result = Array.new(2) {socket.getbyte}
+      expect(result).to eq([0x89, 0x0])
+      socket.close
+    end
+
+    it 'send too large ping' do
+      socket = TCPSocket.new '127.0.0.1', 8080
+      socket.print "GET /websocket/too_large_ping HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
+      # Upgrade
+      result = Array.new(5) {socket.gets}
+      expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
+      expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
+      socket.print [0x81, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
+      socket.close
+    end
+
+    it 'wrong opcode' do
+      socket = TCPSocket.new '127.0.0.1', 8080
+      socket.print "GET /websocket/wrong_opcode HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
+      # Upgrade
+      result = Array.new(5) {socket.gets}
+      expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
+      expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
+      socket.print [0x83, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
       socket.close
     end
   end

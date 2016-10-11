@@ -42,15 +42,13 @@ module Midori::Server
   def websocket_request(data)
     @websocket.decode(data)
     case @websocket.opcode
-    when 0x1, 0x2
-      call_event(:message, [@websocket.msg])
-    when 0x9
-      @websocket.pong(@websocket.msg)
-      call_event(:ping)
-    when 0xA
-      call_event(:pong)
-    else
-      raise Midori::Error::FrameEnd
+      when 0x1, 0x2
+        call_event(:message, [@websocket.msg])
+      when 0x9
+        @websocket.pong(@websocket.msg)
+        call_event(:ping)
+      when 0xA
+        call_event(:pong)
     end
   rescue Midori::Error::FrameEnd => _e
     call_event(:close)
@@ -67,6 +65,6 @@ module Midori::Server
   end
 
   def call_event(event, args = [])
-    -> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call unless @websocket.events[event].nil?
+    (-> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call) unless @websocket.events[event].nil?
   end
 end
