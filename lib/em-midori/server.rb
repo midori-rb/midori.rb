@@ -1,5 +1,3 @@
-require 'stringio'
-
 module Midori::Server
   attr_accessor :request, :api, :websocket
 

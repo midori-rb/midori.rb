@@ -1,5 +1,3 @@
-require 'stringio'
-
 class Midori::Request
   attr_accessor :ip, :port,
                 :protocol, :method, :path, :query_string,
