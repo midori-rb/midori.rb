@@ -1,9 +1,11 @@
 require 'digest/sha1'
 require 'stringio'
 require 'eventmachine'
+require 'fiber'
 
 require_relative 'em-midori/version'
 require_relative 'em-midori/string'
+require_relative 'em-midori/promise'
 require_relative 'em-midori/const'
 require_relative 'em-midori/define_class'
 require_relative 'em-midori/error'
