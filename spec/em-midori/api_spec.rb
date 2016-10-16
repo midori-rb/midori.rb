@@ -25,6 +25,7 @@ class JSONMiddleware < Middleware
   end
 
   def self.after(_request, response)
+    response.header['Content-Type'] = 'application/json'
     response.body = response.body.to_json
     response
   end
