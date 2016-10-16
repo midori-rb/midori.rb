@@ -5,4 +5,5 @@ module Midori::Error
   class NotMasked < StandardError; end
   class FrameEnd < StandardError; end
   class PingPongSizeTooLarge < StandardError; end
+  class EventSourceTypeError < StandardError; end
 end

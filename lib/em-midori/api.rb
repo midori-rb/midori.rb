@@ -191,6 +191,14 @@ class Midori::API
                                                     }, '')
           result = -> { clean_room.instance_exec(connection.websocket, *matched, &route.function) }.call
           return Midori::Response.new
+        elsif request.eventsource?
+          connection.send_data Midori::Response.new(200, {
+                                                      'Content-Type' => 'text-event-stream',
+                                                      'Cache-Control' => 'no-cache',
+                                                      'Connection' => 'keep-alive'
+          }, '')
+          result = -> { clean_room.instance_exec(connection.eventsource, *matched, &route.function) }.call
+          return Midori::Response.new
         else
           result = -> { clean_room.instance_exec(*matched, &route.function) }.call
         end

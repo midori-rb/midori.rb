@@ -70,6 +70,11 @@ class Example < API
   end
 
   websocket '/websocket/wrong_opcode' do |ws|;end
+
+  eventsource '/eventsource' do |es|
+    es.send("Hello\nWorld")
+  end
+
 end
 
 RSpec.describe Midori do
@@ -181,6 +186,18 @@ RSpec.describe Midori do
       expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
       socket.print [0x83, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
       socket.close
+    end
+  end
+
+  describe 'EventSource' do
+    it 'should pass Hello World test' do
+      uri = URI('http://127.0.0.1:8080/eventsource')
+      req = Net::HTTP::Get.new(uri)
+      req['Accept'] = 'text/event-stream'
+      res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+        http.request(req)
+      end
+      expect(res.body).to eq("data: Hello\ndata: World\n\n")
     end
   end
 

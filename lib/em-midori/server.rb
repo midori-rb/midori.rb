@@ -1,10 +1,11 @@
 module Midori::Server
-  attr_accessor :request, :api, :websocket
+  attr_accessor :request, :api, :websocket, :eventsource
 
   def initialize(api)
     @api = api
     @request = Midori::Request.new
     @websocket = Midori::WebSocket.new(self)
+    @eventsource = Midori::EventSource.new(self)
   end
 
   def receive_data(data)
