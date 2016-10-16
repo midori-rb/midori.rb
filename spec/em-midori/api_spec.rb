@@ -80,7 +80,7 @@ RSpec.describe API do
   end
 
   describe 'RawHello' do
-    it 'should response {code: 0} as json string with middleware' do
+    it 'should response Hello raw string with middleware' do
       request = Midori::Request.new
       request.parsed = true
       request.method = 'GET'
