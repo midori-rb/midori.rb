@@ -28,12 +28,16 @@ class JSONMiddleware < Middleware
     response.body = response.body.to_json
     response
   end
+
+  def self.accept
+    [Hash, Array]
+  end
 end
 
 class JSONHello < Midori::API
   use JSONMiddleware
   get '/' do
-    @body = {code: 0}
+    {code: 0}
   end
 end
 

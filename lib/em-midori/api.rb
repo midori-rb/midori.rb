@@ -181,7 +181,10 @@ class Midori::API
       @route.each do |route|
         matched = match(route.method, route.path, request.method, request.path)
         next unless matched
-        @middleware = [] if @middleware.nil?
+        if @middleware.nil?
+          @middleware = []
+          @body_accept = [String]
+        end
         @middleware.each { |middleware| request = middleware.before(request) }
         clean_room = Midori::CleanRoom.new(request)
         if request.websocket?
@@ -195,7 +198,7 @@ class Midori::API
           return Midori::Response.new
         else
           result = -> { clean_room.instance_exec(*matched, &route.function) }.call
-          clean_room.body = result if result.class == String
+          clean_room.body = result if @body_accept.include?(result.class)
           response = clean_room.response
           @middleware.each { |middleware| response = middleware.after(request, response) }
           return response
@@ -242,7 +245,10 @@ class Midori::API
 
     def use(middleware)
       raise Midori::Error::MiddlewareError unless middleware.new.is_a?Midori::Middleware
-      @middleware = [] if @middleware.nil?
+      if @middleware.nil?
+        @middleware = []
+        @body_accept = middleware.accept
+      end
       @middleware << middleware
     end
 
