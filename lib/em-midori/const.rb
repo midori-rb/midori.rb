@@ -45,4 +45,10 @@ module Midori::Const
   DEFAULT_HEADER = {
     'Server' => "Midori/#{Midori::VERSION}"
   }
+
+  EVENTSOURCE_HEADER = {
+    'Content-Type' => 'text-event-stream',
+    'Cache-Control' => 'no-cache',
+    'Connection' => 'keep-alive'
+  }
 end

@@ -1,7 +1,7 @@
 class Midori::Request
   attr_accessor :ip, :port,
                 :protocol, :method, :path, :query_string,
-                :header, :body
+                :header, :body, :parsed
 
   def initialize
     @parsed = false

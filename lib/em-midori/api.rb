@@ -163,47 +163,43 @@ class Midori::API
     # === Returns
     # nil
     def add_route(method, path, block)
-      @route = [] if @route.nil?
       if path.class == String
         # Convert String to Regexp to provide performance boost (Precompiled Regexp)
         path = convert_route path
       end
+      @route = [] if @route.nil?
       @route << Midori::Route.new(method, path, block)
       nil
     end
 
     # Process after receive data from client
     # === Attributes
-    # * +request+ [+StringIO+] - Http Raw Request
+    # * +request+ [+Midori::Request+] - Http Raw Request
     # === Returns
     # [+Midori::Response+] - Http response
     def receive(request, connection = nil)
       @route.each do |route|
         matched = match(route.method, route.path, request.method, request.path)
         next unless matched
+        @middleware = [] if @middleware.nil?
+        @middleware.each { |middleware| request = middleware.before(request) }
         clean_room = Midori::CleanRoom.new(request)
         if request.websocket?
           # Send 101 Switching Protocol
-          connection.send_data Midori::Response.new(101, {
-                                                      'Upgrade' => 'websocket',
-                                                      'Connection' => 'Upgrade',
-                                                      'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(request.header['Sec-WebSocket-Key'] + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
-                                                    }, '')
-          result = -> { clean_room.instance_exec(connection.websocket, *matched, &route.function) }.call
+          connection.send_data Midori::Response.new(101, websocket_header(request.header['Sec-WebSocket-Key']), '')
+          -> { clean_room.instance_exec(connection.websocket, *matched, &route.function) }.call
           return Midori::Response.new
         elsif request.eventsource?
-          connection.send_data Midori::Response.new(200, {
-                                                      'Content-Type' => 'text-event-stream',
-                                                      'Cache-Control' => 'no-cache',
-                                                      'Connection' => 'keep-alive'
-          }, '')
-          result = -> { clean_room.instance_exec(connection.eventsource, *matched, &route.function) }.call
+          connection.send_data Midori::Response.new(200, Midori::Const::EVENTSOURCE_HEADER, '')
+          -> { clean_room.instance_exec(connection.eventsource, *matched, &route.function) }.call
           return Midori::Response.new
         else
           result = -> { clean_room.instance_exec(*matched, &route.function) }.call
+          clean_room.body = result if result.class == String
+          response = clean_room.response
+          @middleware.each { |middleware| response = middleware.after(request, response) }
+          return response
         end
-        clean_room.body = result if result.class == String
-        return clean_room.response
       end
       raise Midori::Error::NotFound
     end
@@ -242,6 +238,20 @@ class Midori::API
              .gsub(/\/(:[_a-z][_a-z0-9]+?)$/, '/([^/]+?)$')
       path += '$' if path[-1] != '$'
       Regexp.new path
+    end
+
+    def use(middleware)
+      raise Midori::Error::MiddlewareError unless middleware.new.is_a?Midori::Middleware
+      @middleware = [] if @middleware.nil?
+      @middleware << middleware
+    end
+
+    def websocket_header(key)
+      {
+        'Upgrade' => 'websocket',
+        'Connection' => 'Upgrade',
+        'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
+      }
     end
   end
 

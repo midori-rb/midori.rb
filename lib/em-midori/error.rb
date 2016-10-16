@@ -6,4 +6,5 @@ module Midori::Error
   class FrameEnd < StandardError; end
   class PingPongSizeTooLarge < StandardError; end
   class EventSourceTypeError < StandardError; end
+  class MiddlewareError < StandardError; end
 end

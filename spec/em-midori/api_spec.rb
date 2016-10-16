@@ -1,9 +1,13 @@
 require './spec/spec_helper'
+require 'json'
 
 include Midori
 
-class Hello < API
-  get '/' do; end
+class RawHello < API
+  use Middleware
+  get '/' do
+    'Hello'
+  end
   post '/' do; end
   put '/' do; end
   delete '/' do; end
@@ -12,6 +16,25 @@ class Hello < API
   unlink '/' do; end
   websocket '/' do; end
   eventsource '/' do; end
+end
+
+class JSONMiddleware < Middleware
+  def self.before(request)
+    request.body = JSON.parse(request.body) unless request.body == ''
+    request
+  end
+
+  def self.after(_request, response)
+    response.body = response.body.to_json
+    response
+  end
+end
+
+class JSONHello < Midori::API
+  use JSONMiddleware
+  get '/' do
+    @body = {code: 0}
+  end
 end
 
 RSpec.describe API do
@@ -36,6 +59,30 @@ RSpec.describe API do
     end
     it 'should not match POST /test with GET string /test' do
       expect(API.match('GET', API.convert_route('/test'), 'POST', '/test')).to eq(false)
+    end
+  end
+
+  describe 'JSONHello' do
+    it 'should response {code: 0} as json string with middleware' do
+      request = Midori::Request.new
+      request.parsed = true
+      request.method = 'GET'
+      request.path = '/'
+      request.header = {}
+      request.body = ''
+      expect(JSONHello.receive(request, nil).body).to eq({code: 0}.to_json)
+    end
+  end
+
+  describe 'RawHello' do
+    it 'should response {code: 0} as json string with middleware' do
+      request = Midori::Request.new
+      request.parsed = true
+      request.method = 'GET'
+      request.path = '/'
+      request.header = {}
+      request.body = ''
+      expect(RawHello.receive(request, nil).body).to eq('Hello')
     end
   end
 end
