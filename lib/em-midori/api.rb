@@ -200,7 +200,7 @@ class Midori::API
           result = -> { clean_room.instance_exec(*matched, &route.function) }.call
           clean_room.body = result if @body_accept.include?(result.class)
           response = clean_room.response
-          @middleware.each { |middleware| response = middleware.after(request, response) }
+          @middleware.reverse.each { |middleware| response = middleware.after(request, response) }
           return response
         end
       end
@@ -245,11 +245,9 @@ class Midori::API
 
     def use(middleware)
       raise Midori::Error::MiddlewareError unless middleware.new.is_a?Midori::Middleware
-      if @middleware.nil?
-        @middleware = []
-        @body_accept = middleware.accept
-      end
+      @middleware = [] if @middleware.nil?
       @middleware << middleware
+      @body_accept = middleware.accept
     end
 
     def websocket_header(key)
