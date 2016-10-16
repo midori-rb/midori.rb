@@ -119,7 +119,7 @@ Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leav
 |    0.0.5     |   2016-09-27    | 2016-09-25 (-2d) | Implement request and response.         |
 |    0.0.6     |   2016-10-04    | 2016-10-06 (+2d) | Implement WebSocket                     |
 |    0.0.7     |   2016-10-11    | 2016-10-11 (+0d) | Get WebSocket Code Covered              |
-|    0.0.8     |   2016-10-18    |                  | Implement EventSource                   |
+|    0.0.8     |   2016-10-18    | 2016-10-16 (-2d) | Implement EventSource                   |
 |    0.0.9     |   2016-10-25    |                  | Stablize API design                     |
 |  **0.1.0**   |   2016-11-01    |                  | Bug killing and documenting (dev ready) |
 |    0.1.1     |   2016-11-15    |                  | Implement Midori::Database IO           |
