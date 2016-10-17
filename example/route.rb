@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby -I ../lib -I lib
 require 'em-midori'
 require 'json'
 require_relative 'controllers/user_controller'
