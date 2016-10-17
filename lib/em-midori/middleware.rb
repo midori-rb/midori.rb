@@ -1,13 +1,16 @@
 class Midori::Middleware
-  def self.before(request)
+  def initialize
+  end
+
+  def before(request)
     request
   end
 
-  def self.after(_request, response)
+  def after(_request, response)
     response
   end
-
-  def self.accept
+  
+  def body_accept
     [String]
   end
 end

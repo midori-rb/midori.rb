@@ -182,11 +182,12 @@ class Midori::API
         matched = match(route.method, route.path, request.method, request.path)
         next unless matched
         if @middleware.nil?
-          @middleware = []
-          @body_accept = [String]
+          middlewares, body_accept = [], [String]
+        else
+          middlewares, body_accept = @middleware.clone, @body_accept.clone
         end
-        @middleware.each { |middleware| request = middleware.before(request) }
-        clean_room = Midori::CleanRoom.new(request)
+        middlewares.each { |middleware| request = middleware.before(request) }
+        clean_room = Midori::CleanRoom.new(request, middlewares, body_accept)
         if request.websocket?
           # Send 101 Switching Protocol
           connection.send_data Midori::Response.new(101, websocket_header(request.header['Sec-WebSocket-Key']), '')
@@ -198,9 +199,9 @@ class Midori::API
           return Midori::Response.new
         else
           result = -> { clean_room.instance_exec(*matched, &route.function) }.call
-          clean_room.body = result if @body_accept.include?(result.class)
+          clean_room.body = result if body_accept.include?(result.class)
           response = clean_room.response
-          @middleware.reverse.each { |middleware| response = middleware.after(request, response) }
+          middlewares.reverse.each { |middleware| response = middleware.after(request, response) }
           return response
         end
       end
@@ -243,11 +244,11 @@ class Midori::API
       Regexp.new path
     end
 
-    def use(middleware)
-      raise Midori::Error::MiddlewareError unless middleware.new.is_a?Midori::Middleware
+    def use(middleware, *args)
+      middleware = middleware.new(*args)
       @middleware = [] if @middleware.nil?
       @middleware << middleware
-      @body_accept = middleware.accept
+      @body_accept = middleware.body_accept
     end
 
     def websocket_header(key)

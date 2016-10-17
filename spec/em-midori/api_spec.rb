@@ -19,25 +19,26 @@ class RawHello < API
 end
 
 class JSONMiddleware < Middleware
-  def self.before(request)
+  def before(request)
     request.body = JSON.parse(request.body) unless request.body == ''
     request
   end
 
-  def self.after(_request, response)
+  def after(_request, response)
     response.header['Content-Type'] = 'application/json'
     response.body = response.body.to_json
     response
   end
 
-  def self.accept
+  def body_accept
     [Hash, Array]
   end
 end
 
 class JSONHello < Midori::API
-  use JSONMiddleware
+  use Middleware
   get '/' do
+    use JSONMiddleware
     {code: 0}
   end
 end
