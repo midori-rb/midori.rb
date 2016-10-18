@@ -60,6 +60,18 @@ Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not wor
 
 ## FAQ
 
+### Performance
+
+Following benchmark result use test of [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud instance**.
+
+| framework                    | version | req/s   |
+| :--------------------------- | :------ | :------ |
+| Rails (Thin, Ruby)           | 5.rc1   | 481.78  |
+| Rails (API Mode, Thin, Ruby) | 5.rc1   | 631.15  |
+| Sinatra (Thin, Ruby)         | 1.4.7   | 1941.04 |
+| express.js (Node.js)         | 4.14.0  | 3502.47 |
+| em-midori (Ruby)             | 0.0.9   | 4145.80 |
+
 ### Name
 
 **Midori** is none of the business of this guy
