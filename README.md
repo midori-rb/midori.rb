@@ -1,6 +1,6 @@
 # EM Midori
 
-![Logo and Slogan](https://raw.githubusercontent.com/heckpsi-lab/em-midori/master/.resources/slogan.png)
+![Logo and Slogan](.resources/slogan.png)
 
 ## Description
 
@@ -64,11 +64,11 @@ Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not wor
 
 **Midori** is none of the business of this guy
 
-![Sapphire Kawashima](https://raw.githubusercontent.com/heckpsi-lab/em-midori/master/.resources/sapphire_kawashima.gif)
+![Sapphire Kawashima](.resources/sapphire_kawashima.gif)
 
 and this guy.
 
-![Midori Tokiwa](https://raw.githubusercontent.com/heckpsi-lab/em-midori/master/.resources/midori_tokiwa.gif)
+![Midori Tokiwa](.resources/midori_tokiwa.gif)
 
 Actually the name **Midori** comes from **Midori machi**, which was the place I stay on my first travel to Tokyo.
 
