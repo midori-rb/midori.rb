@@ -66,11 +66,11 @@ Following benchmark result use test of [em-midori-benchmark](https://github.com/
 
 | framework                    | version | req/s   |
 | :--------------------------- | :------ | :------ |
-| Rails (Thin, Ruby)           | 5.rc1   | 481.78  |
-| Rails (API Mode, Thin, Ruby) | 5.rc1   | 631.15  |
-| Sinatra (Thin, Ruby)         | 1.4.7   | 1941.04 |
-| express.js (Node.js)         | 4.14.0  | 3502.47 |
-| em-midori (Ruby)             | 0.0.9   | 4145.80 |
+| Rails (Thin, Ruby)           | 5.0.0.1 | 473.34  |
+| Rails (API Mode, Thin, Ruby) | 5.0.0.1 | 630.47  |
+| Sinatra (Thin, Ruby)         | 1.4.7   | 1757.26 |
+| express.js (Node.js)         | 4.14.0  | 3748.93 |
+| em-midori (Ruby)             | 0.0.9   | 4306.63 |
 
 ### Name
 
