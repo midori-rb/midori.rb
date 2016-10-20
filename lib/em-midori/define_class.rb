@@ -9,7 +9,7 @@ module Kernel #:nodoc:
 
   def define_error(*args)
     args.each do |arg|
-      class_name = arg.to_s.split('_').map { |word| word[0] = word[0].upcase; word }.join
+      class_name = arg.to_s.split('_').collect(&:capitalize).join
       define_class(class_name, StandardError)
     end
   end
