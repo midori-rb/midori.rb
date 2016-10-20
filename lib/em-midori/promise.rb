@@ -13,7 +13,7 @@ def async_internal(fiber)
   chain = ->(result) {
     return if result.class != Promise
     result.then(->(val) {
-        chain.call(fiber.resume(val))
+      chain.call(fiber.resume(val))
     })
   }
   chain.call(fiber.resume)
