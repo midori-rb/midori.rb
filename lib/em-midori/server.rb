@@ -1,8 +1,9 @@
 module Midori::Server
   attr_accessor :request, :api, :websocket, :eventsource
 
-  def initialize(api)
+  def initialize(api, logger)
     @api = api
+    @logger = logger
     @request = Midori::Request.new
     @websocket = Midori::WebSocket.new(self)
     @eventsource = Midori::EventSource.new(self)
@@ -21,7 +22,7 @@ module Midori::Server
         receive_new_request(data)
       end
       now_time = Time.now
-      puts "#{@request.ip} - - [#{now_time.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(5)}".green
+      @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(5)}".green
     end) }.call
   end
 
@@ -34,8 +35,8 @@ module Midori::Server
       @response = Midori::Response.new(404, {}, '404 Not Found')
     rescue => e
       @response = Midori::Response.new(500, {}, 'Internal Server Error')
-      puts e.inspect.red
-      puts e.backtrace.join("\n").yellow
+      @logger.error e.inspect.red
+      @logger.warn e.backtrace.join("\n").yellow
     end
     unless @request.websocket? || @request.eventsource?
       send_data @response
@@ -59,12 +60,12 @@ module Midori::Server
     send_data "\b" # Opcode 0x8
     close_connection_after_writing
   rescue Midori::Error::PingPongSizeTooLarge => e
-    puts e.inspect.yellow
+    @logger.warn e.inspect.yellow
     call_event(:error) # Neglect Too large ping request
   rescue => e
     call_event(:error)
-    puts e.inspect.red
-    puts e.backtrace.join("\n").yellow
+    @logger.error e.inspect.red
+    @logger.warn e.backtrace.join("\n").yellow
     close_connection_after_writing
   end
 

@@ -92,7 +92,7 @@ RSpec.describe Midori do
 
     it 'should start properly' do
       expect do
-        Thread.new { Midori.run(Example, '127.0.0.1', 8080) }
+        Thread.new { Midori.run(Example, '127.0.0.1', 8080, Logger.new(StringIO.new)) }
         sleep(1)
       end.to_not raise_error(RuntimeError)
     end
