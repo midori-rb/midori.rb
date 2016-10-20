@@ -9,7 +9,7 @@ module Midori::Server
   end
 
   def receive_data(data)
-    ->() {async_internal(Fiber.new do
+    ->() { async_internal(Fiber.new do
       start_time = Time.now
       data = StringIO.new(data)
       port, ip = Socket.unpack_sockaddr_in(get_peername)
@@ -22,7 +22,7 @@ module Midori::Server
       end
       now_time = Time.now
       puts "#{@request.ip} - - [#{now_time.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(5)}".green
-    end)}.call
+    end) }.call
   end
 
   def receive_new_request(data)
