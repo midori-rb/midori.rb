@@ -22,7 +22,7 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, providing
 gem install em-midori
 ```
 
-**With Bundle**
+**With Bundler**
 
 ```ruby
 gem 'em-midori'
@@ -36,17 +36,17 @@ bundle install
 
 ### Why EventMachine Based
 
-With the growing popularity of attempts of decoupling the front-end and back-end code has made more and more people turns to high performance API-based framework from full-stack web framework like Rails. Since we've got lots of choices in API-based frameworks like Sinatra or Grape. But most of those are still working with multiple-threading model, which could hardly reach I/O performance like Node.js or Go does.
+With the growing popularity of attempts of decoupling the front-end and back-end code, more and more people turn from full-stack web frameworks like Rails, to high performance API-based frameworks. We've got lots of choices in API-based frameworks, like Sinatra or Grape, but most of those are still working with multiple-threading model, which could hardly reach the I/O performance of Node.js or Go.
 
 ### DSL and MVC
 
-DSL is awesome. With the magics of Ruby meta-programming feature, we could make web development much easier. As lots of people saying, EventMachine is fast but not that easy to use. But what if we build a DSL on it, you could then no longer deal anything with EventMachine directly. Midori is a project that would build DSL on EventMachine. The API would also provide an MVC project structure, for middle or large scale projects.
+DSL is awesome. With the magic of Ruby meta-programming features, we could make web development much easier. As lots of people say, EventMachine is fast but not that easy to use. But what if we build a DSL on top of it? You could then no longer have to deal with EventMachine directly. Midori is a project that builds a DSL on top of EventMachine. The API also provides an MVC project structure, for middle or large scale projects.
 
 ### Why not ... ?
 
 #### Why not [cramp](https://github.com/lifo/cramp) ?
 
-Cramp provides sinatra-like DSL and runs very fast on EventMachine for hello world benchmarks. But still it just packages the Network I/O part with EventMachine. It doesn't correctly deal with other I/O parts like database. So in practice, Cramp does not runs as fast as it could be. What's more, it's no longer maintained.
+Cramp provides sinatra-like DSL and runs very fast on EventMachine for hello world benchmarks. But still it just packages the Network I/O part with EventMachine. It doesn't correctly deal with other I/O parts like database. So in practice, Cramp does not run as fast as it could. What's more, it's no longer maintained.
 
 #### Why not [sinatra-synchrony](https://github.com/kyledrake/sinatra-synchrony) ?
 
@@ -62,7 +62,7 @@ Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not wor
 
 ### Performance
 
-Following benchmark result use test of [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud instance**.
+Following benchmark results are for [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud instance**.
 
 | framework                    | version | req/s   |
 | :--------------------------- | :------ | :------ |
@@ -86,7 +86,7 @@ Actually the name **Midori** comes from **Midori machi**, which was the place I 
 
 ### Version Notes
 
-Version code includes four codes
+Version consists of four numbers:
 
 |                 |           Main Code            |    Milestone Code     |          Feature Code           |           Hotfix            |
 | --------------- | :----------------------------: | :-------------------: | :-----------------------------: | :-------------------------: |
@@ -118,9 +118,9 @@ Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leav
 
 ## Roadmap
 
-**Detailed release note for published version could be seen at [here](https://github.com/heckpsi-lab/em-midori/releases).**
+**Detailed release notes for published versions can be seen [here](https://github.com/heckpsi-lab/em-midori/releases).**
 
-**Detailed progress could be seen at [here](https://github.com/heckpsi-lab/em-midori/projects/1)**
+**Detailed progress can be seen [here](https://github.com/heckpsi-lab/em-midori/projects/1).**
 
 | Version Code | Determined Date |   Release Date   | Description                            |
 | :----------: | :-------------: | :--------------: | -------------------------------------- |
