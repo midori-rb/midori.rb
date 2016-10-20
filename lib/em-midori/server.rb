@@ -20,7 +20,8 @@ module Midori::Server
       else
         receive_new_request(data)
       end
-      puts "#{@request.ip} - - [#{Time.now.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(Time.now.to_f - start_time.to_f).round(5)}".green
+      now_time = Time.now
+      puts "#{@request.ip} - - [#{now_time.inspect}] \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(5)}".green
     end)}.call
   end
 
