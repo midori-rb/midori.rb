@@ -9,7 +9,7 @@ class Midori::CleanRoom
     @body_accept = body_accept
   end
 
-  def response
+  def raw_response
     Midori::Response.new(@status, @header, @body)
   end
 

@@ -34,7 +34,7 @@ class Example < Midori::API
     define_error :forbidden_request, :unauthorized_error
     begin
       request = JSON.parse(@request.body)
-      UserController.login(request['username'], request['password']).to_json
+      Midori::Response.new(200, UserController.login(request['username'], request['password']).to_json)
       # => {code: 0, token: String}
     rescue ForbiddenRequest => _e
       Midori::Response.new(403, {code: 403, message: 'Illegal request'}.to_json)
