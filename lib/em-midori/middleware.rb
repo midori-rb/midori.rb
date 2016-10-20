@@ -9,7 +9,7 @@ class Midori::Middleware
   def after(_request, response)
     response
   end
-  
+
   def body_accept
     [String]
   end
