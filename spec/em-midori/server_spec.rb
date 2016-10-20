@@ -4,7 +4,14 @@ require 'socket'
 
 include Midori
 class Example < API
+  helper do
+    def test_helper
+      puts 'Hello'
+    end
+  end
+
   get '/' do
+    test_helper
     next 'Hello World'
   end
 
