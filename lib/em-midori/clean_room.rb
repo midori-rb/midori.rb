@@ -15,6 +15,7 @@ class Midori::CleanRoom
 
   def use(middleware, *args)
     middleware = middleware.new(*args)
+    middleware.helper
     @middleware = [] if @middleware.nil?
     @middleware << middleware
     @body_accept.replace middleware.body_accept

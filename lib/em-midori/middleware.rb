@@ -10,6 +10,9 @@ class Midori::Middleware
     response
   end
 
+  def helper
+  end
+
   def body_accept
     [String]
   end
