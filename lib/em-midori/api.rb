@@ -246,9 +246,7 @@ class Midori::API
 
     def use(middleware, *args)
       middleware = middleware.new(*args)
-      CleanRoom.class_exec do
-        middleware.helper
-      end
+      CleanRoom.class_exec { middleware.helper }
       @middleware = [] if @middleware.nil?
       @middleware << middleware
       @body_accept = middleware.body_accept
