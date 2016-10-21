@@ -6,13 +6,12 @@ include Midori
 class Example < API
   helper do
     def test_helper
-      puts 'Hello'
+     'Hello World'
     end
   end
 
   get '/' do
     test_helper
-    next 'Hello World'
   end
 
   get '/error' do

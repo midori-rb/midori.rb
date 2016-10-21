@@ -188,8 +188,6 @@ class Midori::API
         end
         middlewares.each { |middleware| request = middleware.before(request) }
         clean_room = Midori::CleanRoom.new(request, middlewares, body_accept)
-        @helpers ||= []
-        @helpers.map { |block| clean_room.instance_exec(&block) }
         if request.websocket?
           # Send 101 Switching Protocol
           connection.send_data Midori::Response.new(101, websocket_header(request.header['Sec-WebSocket-Key']), '')
@@ -262,8 +260,7 @@ class Midori::API
     end
 
     def helper(&block)
-      @helpers = [] if @helpers.nil?
-      @helpers << block
+      Midori::CleanRoom.class_exec(&block)
     end
   end
 
