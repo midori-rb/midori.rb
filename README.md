@@ -1,6 +1,6 @@
 # EM Midori
 
-![Logo and Slogan](.resources/slogan.png)
+![Logo and Slogan](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/slogan.png)
 
 ## Description
 
@@ -76,11 +76,11 @@ Following benchmark results are for [em-midori-benchmark](https://github.com/hec
 
 **Midori** is none of the business of this guy
 
-![Sapphire Kawashima](.resources/sapphire_kawashima.gif)
+![Sapphire Kawashima](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/sapphire_kawashima.gif)
 
 and this guy.
 
-![Midori Tokiwa](.resources/midori_tokiwa.gif)
+![Midori Tokiwa](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/midori_tokiwa.gif)
 
 Actually the name **Midori** comes from **Midori machi**, which was the place I stay on my first travel to Tokyo.
 

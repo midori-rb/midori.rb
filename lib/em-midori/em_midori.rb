@@ -2,7 +2,12 @@ require 'logger'
 
 module Midori
   @logger = ::Logger.new(STDOUT)
-
+  # Start Midori Server instance
+  # === Attributes
+  # * +api+ [+Class+] - Inherit from +Midori::API+
+  # * +ip+ [+String+] - The ip address to bind, default: 127.0.0.1
+  # * +port+ [+Fixnum+] - Port number, default: 8081
+  # * +logger+ [+Logger+] - Ruby logger, default: ::Loger.new(STDOUT) 
   def self.run(api = Midori::API, ip = nil, port = nil, logger = ::Logger.new(STDOUT))
     ip ||= '127.0.0.1'
     port ||= 8081
