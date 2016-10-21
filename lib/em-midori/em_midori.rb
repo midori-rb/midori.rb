@@ -1,7 +1,7 @@
 require 'logger'
 
 module Midori
-  @logger = ::Logger.new(StringIO.new)
+  @logger = ::Logger.new(STDOUT)
 
   def self.run(api = Midori::API, ip = nil, port = nil, logger = ::Logger.new(STDOUT))
     ip ||= '127.0.0.1'
