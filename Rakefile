@@ -8,7 +8,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 YARD::Rake::YardocTask.new do |t|
  t.files         = ['lib/**/*.rb']
- t.stats_options = ['--list-undoc', 'markup-provider=redcarpet']
+ t.stats_options = ['--list-undoc', 'markup-provider=kramdown']
 end
 
 task :build do

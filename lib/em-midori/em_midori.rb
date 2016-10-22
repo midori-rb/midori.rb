@@ -1,3 +1,5 @@
+##
+# The main module of Midori
 module Midori
   @logger = ::Logger.new(STDOUT)
   # Start Midori Server instance

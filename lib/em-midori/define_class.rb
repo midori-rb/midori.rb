@@ -1,4 +1,6 @@
-module Kernel #:nodoc:
+##
+# Meta-programming Kernel for Syntactic Sugars
+module Kernel
   # This method is implemented to dynamically generate class with given name and template.
   # Referenced from {Ruby China}[https://ruby-china.org/topics/17382]
   def define_class(name, ancestor = Object)
