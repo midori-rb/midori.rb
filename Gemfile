@@ -7,6 +7,6 @@ gem 'bundler', '~> 1.0'
 gem 'rake', '~> 11.2'
 gem 'rspec', '~> 3.0'
 gem 'yard'
-gem 'redcarpet'
+gem 'kramdown'
 gem 'simplecov', require: false, :group => :test
 gem 'codeclimate-test-reporter', group: :test, require: nil
