@@ -220,7 +220,7 @@ class Midori::API
     end
 
     # Use a middleware in the all routes
-    # @param middleware [Class] Inherite from +Midori::Middleware+
+    # @param middleware [Class] Inherited from +Midori::Middleware+
     # @return [nil] nil
     def use(middleware, *args)
       middleware = middleware.new(*args)
