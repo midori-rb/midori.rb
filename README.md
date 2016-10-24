@@ -62,7 +62,9 @@ Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not wor
 
 ### Performance
 
-Following benchmark results are for [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud instance**.
+Following benchmark results are for [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
+
+**Note: Performance under Mac OS X needs to be further confirmed. `wrk` gives very bad performance result, but `ab` gives a good one. The given result is tested under Linux.**
 
 | framework                    | version | req/s   |
 | :--------------------------- | :------ | :------ |
