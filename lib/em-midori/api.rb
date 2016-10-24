@@ -180,7 +180,7 @@ class Midori::API
           result = -> { clean_room.instance_exec(*matched, &route.function) }.call
           clean_room.body = result if body_accept.include?(result.class)
           response = clean_room.raw_response
-          middlewares.reverse.each { |middleware| response = middleware.after(request, response) }
+          middlewares.reverse_each { |middleware| response = middleware.after(request, response) }
           return response
         end
       end
