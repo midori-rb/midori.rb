@@ -1,4 +1,7 @@
+##
+# Module for store Midori Consts
 module Midori::Const
+  # Hash table for converting numbers to HTTP/1.1 status code line
   STATUS_CODE = {
     100 => '100 Continue',
     101 => '101 Switching Protocols',
@@ -32,6 +35,7 @@ module Midori::Const
     415 => '415 Unsupported Media Type',
     416 => '416 Requested range not satisfiable',
     417 => '417 Expectation Failed',
+    451 => '451 ',
     500 => '500 Internal Server Error',
     501 => '501 Not Implemented',
     502 => '502 Bad Gateway',
@@ -42,10 +46,12 @@ module Midori::Const
   STATUS_CODE.default = '500 Internal Server Error'
   STATUS_CODE.freeze
 
+  # Default header for Basic HTTP response
   DEFAULT_HEADER = {
     'Server' => "Midori/#{Midori::VERSION}"
   }
 
+  # Default header for Evenrsource response
   EVENTSOURCE_HEADER = {
     'Content-Type' => 'text-event-stream',
     'Cache-Control' => 'no-cache',
