@@ -1,10 +1,18 @@
 # EM Midori
 
+**This project is still under very early development, with NUMEROUS undecided syntax design and trivial implementation.**
+
+**It's FAR from production-ready.**
+
+**Improvement, Questions and Suggestions are highly welcomed.**
+
 ![Logo and Slogan](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/slogan.png)
 
 ## Description
 
 EM Midori is an EventMachine-based Web Framework written in pure Ruby, providing high performance and proper abstraction.
+
+
 
 [![Join the chat at https://gitter.im/em-midori/Lobby](https://badges.gitter.im/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -136,15 +144,16 @@ Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leav
 |    0.0.8     |   2016-10-18    | 2016-10-16 (-2d) | Implement EventSource                  |
 |    0.0.9     |   2016-10-25    | 2016-10-17 (-8d) | Implement Middleware                   |
 |  **0.1.0**   |   2016-11-01    |                  | Enrich API and documenting (dev ready) |
-|    0.1.1     |   2016-11-08    |                  | File I/O                               |
+|    0.1.1     |   2016-11-08    |                  | Improve Parser Performance             |
 |    0.1.2     |   2016-11-22    |                  | Path to Database                       |
 |    0.1.3     |   2016-12-06    |                  | Database Driver for Postgres           |
 |    0.1.4     |   2016-12-13    |                  | Database Driver for MySQL              |
 |    0.1.5     |   2016-12-20    |                  | Database Driver for MongoDB            |
 |    0.1.6     |   2016-01-03    |                  | Path to ORM                            |
-|    0.1.7     |   2016-01-10    |                  | Tutorial                               |
-|    0.1.8     |   2016-01-17    |                  | Official Wiki                          |
-|    0.2.0     |   2016-01-24    |                  | Enrich API and documenting             |
+|    0.1.7     |   2016-01-10    |                  | File I/O                               |
+|    0.1.8     |   2016-01-17    |                  | Tutorial                               |
+|    0.1.9     |   2016-01-24    |                  | Official Wiki                          |
+|    0.2.0     |   2016-01-31    |                  | Enrich API and documenting             |
 |     ...      |       ...       |                  | ...                                    |
 |  **1.0.0**   |     2017-03     |                  | First production-ready release         |
 |    1.1.0     |     2017-06     |                  | TBD.                                   |
