@@ -11,6 +11,7 @@ module Midori
   # @return [nil] nil
   def self.run(api = Midori::API, ip = '127.0.0.1', port = 8081, logger = ::Logger.new(STDOUT))
     @logger = logger
+    EventMachine.set_simultaneous_accept_count(40)
     EventMachine.run do
       @logger.info "Midori #{Midori::VERSION} is now running on #{ip}:#{port}".blue
       @midori_server = EventMachine.start_server ip, port, Midori::Server, api, logger
