@@ -35,7 +35,7 @@ module Midori::Const
     415 => '415 Unsupported Media Type',
     416 => '416 Requested range not satisfiable',
     417 => '417 Expectation Failed',
-    451 => '451 ',
+    451 => '451 Unavailable For Legal Reasons',
     500 => '500 Internal Server Error',
     501 => '501 Not Implemented',
     502 => '502 Bad Gateway',
