@@ -3,11 +3,11 @@
 module Midori
   @logger = ::Logger.new(STDOUT)
   # Start Midori Server instance
-  # @note This is an async method
-  # @param api [Class] Inherit from +Midori::API+
-  # @param ip [String] The ip address to bind
-  # @param port [Fixnum] Port number
-  # @param logger [Logger] Ruby logger
+  # @note This is an async method, but no callback
+  # @param [Class] api Inherit from +Midori::API+
+  # @param [String] ip The ip address to bind
+  # @param [Fixnum] port Port number
+  # @param [Logger] logger Ruby logger
   # @return [nil] nil
   def self.run(api = Midori::API, ip = '127.0.0.1', port = 8081, logger = ::Logger.new(STDOUT))
     @logger = logger
@@ -19,7 +19,7 @@ module Midori
   end
 
   # Stop Midori Server instance
-  # @note This is an async method
+  # @note This is an async method, but no callback
   # @return [Boolean] [true] stop successfully
   # @return [Boolean] [false] nothing to stop
   def self.stop

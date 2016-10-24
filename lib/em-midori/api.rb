@@ -3,7 +3,7 @@
 class Midori::API
   class << self
     # Add GET method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -18,7 +18,7 @@ class Midori::API
     def get(path, &block) end
 
     # Add POST method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -33,7 +33,7 @@ class Midori::API
     def post(path, &block) end
 
     # Add PUT method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -48,7 +48,7 @@ class Midori::API
     def put(path, &block) end
 
     # Add DELETE method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -63,7 +63,7 @@ class Midori::API
     def delete(path, &block) end
 
     # Add OPTIONS method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @return [ nil ] nil
     # @example String as router
     #   options '/' do
@@ -77,7 +77,7 @@ class Midori::API
     def options(path, &block) end
 
     # Add LINK method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -92,7 +92,7 @@ class Midori::API
     def link(path, &block) end
 
     # Add UNLINK method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -107,7 +107,7 @@ class Midori::API
     def unlink(path, &block) end
 
     # Add WEBSOCKET method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
@@ -122,7 +122,7 @@ class Midori::API
     def websocket(path, &block) end
 
     # Add EVENTSOURCE method as a DSL for route definition
-    # @param path [ String, Regexp ] Accepts as part of path in route definition
+    # @param [ String, Regexp ] path Accepts as part of path in route definition
     # @return [ nil ] nil
     # @example String as router
     #   eventsource '/' do
@@ -136,9 +136,9 @@ class Midori::API
     def eventsource(path, &block) end
 
     # Implementation of route DSL
-    # @param method [ String ] HTTP method
-    # @param path [ String, Regexp ] path definition
-    # @param block [ Proc ] process to run when route matched
+    # @param [ String ] method HTTP method
+    # @param [ String, Regexp ] path path definition
+    # @param [ Proc ] block process to run when route matched
     # @return [ nil ] nil
     def add_route(method, path, block)
       if path.class == String
@@ -188,10 +188,10 @@ class Midori::API
     end
 
     # Match route with given definition
-    # @param method [ String ] Accepts an HTTP/1.1 method like GET POST PUT ...
-    # @param path [ Regexp ] Precompiled route definition.
-    # @param request_method [ String ] HTTP Request Method
-    # @param request_path [ String ] HTTP Request Path
+    # @param [ String ] method Accepts an HTTP/1.1 method like GET POST PUT ...
+    # @param [ Regexp ] path Precompiled route definition.
+    # @param [ String ] request_method HTTP Request Method
+    # @param [ String ] request_path HTTP Request Path
     # @return [ Array ] matched parameters
     # @return [ Boolean ] false if not matched
     # @example match a route
@@ -207,7 +207,7 @@ class Midori::API
     end
 
     # Convert String path to its Regexp equivalent
-    # @param path [ String ] String route definition
+    # @param [ String ] path String route definition
     # @return [ Regexp ] Regexp equivalent
     # @example
     #   convert_route('/user/:id/order/:order_id') # => Regexp
@@ -220,7 +220,7 @@ class Midori::API
     end
 
     # Use a middleware in the all routes
-    # @param middleware [Class] Inherited from +Midori::Middleware+
+    # @param [Class] middleware Inherited from +Midori::Middleware+
     # @return [nil] nil
     def use(middleware, *args)
       middleware = middleware.new(*args)
@@ -232,7 +232,7 @@ class Midori::API
     end
 
     # Return websocket header with given key
-    # @param key [String] 'Sec-WebSocket-Key' in request header
+    # @param [String] key 'Sec-WebSocket-Key' in request header
     # @return [Hash] header
     def websocket_header(key)
       {

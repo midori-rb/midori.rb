@@ -1,8 +1,19 @@
+##
+# Request class for midori
+# @attr [String] ip client ip address
+# @attr [Fixnum] port client port
+# @attr [String] protocol protocol version of HTTP request
+# @attr [String] path request path
+# @attr [String] query_string request query string
+# @attr [Hash] header request header
+# @attr [String] body request body
+# @attr [Boolean] parsed whether the request parsed
 class Midori::Request
   attr_accessor :ip, :port,
                 :protocol, :method, :path, :query_string,
                 :header, :body, :parsed
 
+  # Init Request
   def initialize
     @parsed = false
     @is_websocket = false
@@ -10,8 +21,7 @@ class Midori::Request
   end
 
   # Init an request with StringIO data
-  # === Attributes
-  # * +data+ [+StringIO+] - Request data
+  # @param [StringIO+] data Request data
   def parse(data)
     @header = {}
 
@@ -46,14 +56,20 @@ class Midori::Request
     @parsed = true
   end
 
+  # Syntatic sugur for whether a request is parsed
+  # @return [Boolean] parsed or not
   def parsed?
     @parsed
   end
 
+  # Syntatic sugur for whether a request is a websocket request
+  # @return [Boolean] websocket or not
   def websocket?
     @is_websocket
   end
 
+  # Syntatic sugur for whether a request is an eventsource request
+  # @return [Boolean] eventsource or not
   def eventsource?
     @is_eventsource
   end

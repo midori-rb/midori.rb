@@ -1,6 +1,14 @@
+##
+# Logics to EventMachine TCP Server, running inside +EM::Connection+
+# @attr [Midori::Request] request
+# @attr [Class] api inherited from Midori::API
+# @attr [Midori::WebSocket] websocket websocket instance
+# @attr [Midori::EventSource] eventsource eventsource instance
 module Midori::Server
   attr_accessor :request, :api, :websocket, :eventsource
 
+  # @param [Class] api inherited from Midori::API
+  # @param [Logger] logger global logger
   def initialize(api, logger)
     @api = api
     @logger = logger
@@ -9,6 +17,8 @@ module Midori::Server
     @eventsource = Midori::EventSource.new(self)
   end
 
+  # Logics of receiving data
+  # @param [String] data raw data
   def receive_data(data)
     ->() { async_internal(Fiber.new do
       start_time = Time.now
@@ -26,6 +36,8 @@ module Midori::Server
     end) }.call
   end
 
+  # Logics of receiving new request
+  # @param [String] data raw data
   def receive_new_request(data)
     begin
       @request.parse(data)
@@ -44,6 +56,8 @@ module Midori::Server
     end
   end
 
+  # Logics of receiving WebSocket request
+  # @param [String] data raw data
   def websocket_request(data)
     @websocket.decode(data)
     case @websocket.opcode
@@ -69,6 +83,9 @@ module Midori::Server
     close_connection_after_writing
   end
 
+  # To call a websocket event if it exist
+  # @param [Symbol] event event name
+  # @param [Array] args arg list
   def call_event(event, args = [])
     (-> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call) unless @websocket.events[event].nil?
   end
