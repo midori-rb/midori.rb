@@ -235,11 +235,9 @@ class Midori::API
     # @param [String] key 'Sec-WebSocket-Key' in request header
     # @return [Hash] header
     def websocket_header(key)
-      {
-        'Upgrade' => 'websocket',
-        'Connection' => 'Upgrade',
-        'Sec-WebSocket-Accept' => Digest::SHA1.base64digest(key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
-      }
+      header = Midori::Const::WEBSOCKET_HEADER.clone
+      header['Sec-WebSocket-Accept'] = Digest::SHA1.base64digest(key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
+      header
     end
 
     # Helper block for defining methods in APIs

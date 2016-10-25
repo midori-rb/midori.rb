@@ -57,4 +57,9 @@ module Midori::Const
     'Cache-Control' => 'no-cache',
     'Connection' => 'keep-alive'
   }
+
+  WEBSOCKET_HEADER = {
+    'Upgrade' => 'websocket',
+    'Connection' => 'Upgrade'
+  }
 end

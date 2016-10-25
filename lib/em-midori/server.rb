@@ -32,7 +32,7 @@ module Midori::Server
                          receive_new_request(data)
                        end
                        now_time = Time.now
-                       @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
+                       @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
                      end)
     end.call
   end
