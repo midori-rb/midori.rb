@@ -2,99 +2,17 @@ require './spec/spec_helper'
 require 'net/http'
 require 'socket'
 
-include Midori
-class Example < API
-  helper do
-    def test_helper
-     'Hello World'
-    end
+RSpec.describe Midori::Server do
+  runner = Midori::Runner.new(ExampleAPI, ExampleConfigure)
+
+  before(:all) do
+    Thread.new { runner.start }
+    sleep 1
   end
 
-  get '/' do
-    test_helper
-  end
-
-  get '/error' do
-    raise StandardError
-  end
-
-  get '/test_error' do
-    define_error :test_error
-    begin
-      raise TestError
-    rescue TestError => _e
-      next 'Hello Error'
-    end
-  end
-
-  websocket '/websocket' do |ws|
-    ws.on :open do
-      ws.send 'Hello'
-      puts 'on Open '.green
-    end
-
-    ws.on :message do |msg|
-      puts 'on Message'.green
-      ws.send msg
-    end
-
-    ws.on :pong do
-      ws.send ''
-      puts 'on Pong'.green
-    end
-
-    ws.on :close do
-      puts 'on Close'.green
-    end
-  end
-
-  websocket '/websocket/opcode' do |ws|
-    ws.on :open do
-      ws.send Object.new
-    end
-  end
-
-  websocket '/websocket/ping' do |ws|
-    ws.on :open do
-      ws.ping ''
-    end
-  end
-
-  websocket '/websocket/too_large_ping' do |ws|
-    ws.on :message do
-      ws.ping '01234567890123456789012345678901
-      23456789012345678901234567890123456789012
-      34567890123456789012345678901234567890123
-      45678901234567890123456789012345678901234
-      56789012345678901234567890123456789012345
-      67890123456789012345678901234567890123456
-      78901234567890123456789012345678901234567
-      89012345678901234567890123456789012345678
-      90123456789012345678901234567890123456789
-      012345678901234567890123456789'
-    end
-  end
-
-  websocket '/websocket/wrong_opcode' do |ws|;end
-
-  eventsource '/eventsource' do |es|
-    es.send("Hello\nWorld")
-  end
-
-end
-
-RSpec.describe Midori do
-  describe 'Server' do
-    it 'should not stop before started' do
-      expect(Midori.stop).to eq(false)
-    end
-
-    it 'should start properly' do
-      expect do
-        Thread.new { Midori.run(Example, '127.0.0.1', 8080, Logger.new(StringIO.new)) }
-        sleep(1)
-      end.to_not raise_error(RuntimeError)
-    end
+  after(:all) do
+    runner.stop
+    sleep 1
   end
 
   describe 'Basic Requests' do
@@ -204,24 +122,6 @@ RSpec.describe Midori do
         http.request(req)
       end
       expect(res.body).to eq("data: Hello\ndata: World\n\n")
-    end
-  end
-
-  describe 'Server' do
-    it 'should stop properly' do
-      expect(Midori.stop).to eq(true)
-      sleep(1)
-    end
-
-    it 'should not receive anything after stopped' do
-      expect do
-        puts Net::HTTP.get(URI('http://127.0.0.1:8080/'))
-        Net::HTTP.get(URI('http://127.0.0.1:8080/'))
-      end.to raise_error(Errno::ECONNREFUSED)
-    end
-
-    it 'should not stop after stopped' do
-      expect(Midori.stop).to eq(false)
     end
   end
 end

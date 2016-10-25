@@ -60,4 +60,4 @@ class Example < Midori::API
 
 end
 
-Midori.run(Example, '127.0.0.1', 8080)
+Midori.run(Example)
