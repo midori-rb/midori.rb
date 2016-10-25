@@ -3,6 +3,7 @@ require 'stringio'
 require 'eventmachine'
 require 'fiber'
 require 'logger'
+require 'http/parser'
 
 require_relative 'em-midori/version'
 require_relative 'em-midori/string'

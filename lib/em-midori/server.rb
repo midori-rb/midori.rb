@@ -20,20 +20,21 @@ module Midori::Server
   # Logics of receiving data
   # @param [String] data raw data
   def receive_data(data)
-    ->() { async_internal(Fiber.new do
-      start_time = Time.now
-      data = StringIO.new(data)
-      port, ip = Socket.unpack_sockaddr_in(get_peername)
-      @request.ip = ip
-      @request.port = port
-      if @request.parsed?
-        websocket_request(data)
-      else
-        receive_new_request(data)
-      end
-      now_time = Time.now
-      @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} #{@request.protocol}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(5)}".green
-    end) }.call
+    lambda do
+      async_internal(Fiber.new do
+                       start_time = Time.now
+                       port, ip = Socket.unpack_sockaddr_in(get_peername)
+                       @request.ip = ip
+                       @request.port = port
+                       if @request.parsed?
+                         websocket_request(StringIO.new(data))
+                       else
+                         receive_new_request(data)
+                       end
+                       now_time = Time.now
+                       @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
+                     end)
+    end.call
   end
 
   # Logics of receiving new request
@@ -57,17 +58,17 @@ module Midori::Server
   end
 
   # Logics of receiving WebSocket request
-  # @param [String] data raw data
+  # @param [StringIO] data raw data
   def websocket_request(data)
     @websocket.decode(data)
     case @websocket.opcode
-      when 0x1, 0x2
-        call_event(:message, [@websocket.msg])
-      when 0x9
-        @websocket.pong(@websocket.msg)
-        call_event(:ping)
-      when 0xA
-        call_event(:pong)
+    when 0x1, 0x2
+      call_event(:message, [@websocket.msg])
+    when 0x9
+      @websocket.pong(@websocket.msg)
+      call_event(:ping)
+    when 0xA
+      call_event(:pong)
     end
   rescue Midori::Error::FrameEnd => _e
     call_event(:close)
@@ -87,6 +88,6 @@ module Midori::Server
   # @param [Symbol] event event name
   # @param [Array] args arg list
   def call_event(event, args = [])
-    (-> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call) unless @websocket.events[event].nil?
+    -> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call unless @websocket.events[event].nil?
   end
 end

@@ -18,26 +18,24 @@ class Midori::Request
     @parsed = false
     @is_websocket = false
     @is_eventsource = false
+    @parser = Http::Parser.new
+    @parser.on_headers_complete = proc do
+      @protocol = @parser.http_version
+      @method = @parser.http_method
+      @path = @parser.request_url
+      @header = @parser.headers
+      :stop
+    end
   end
 
   # Init an request with StringIO data
-  # @param [StringIO+] data Request data
   def parse(data)
-    @header = {}
 
-    # Parse request
-    line = data.gets.split
-    @protocol = line[2]
-    @method = line[0]
-    @query_string = line[1].match(/\?(.*?)$/)
+    offset = @parser << data
+    @body = data[offset..-1]
+    @query_string = @path.match(/\?(.*?)$/)
     @query_string = @query_string[1] unless @query_string.nil?
-    @path = line[1].gsub(/\?(.*?)$/, '')
-
-    # Parse header
-    while (line = data.gets) != "\r\n"
-      line = line.split
-      @header[line[0][0..-2]] = line[1..-1].join(' ')
-    end
+    @path.gsub!(/\?(.*?)$/, '')
 
     # Deal with WebSocket
     if @header['Upgrade'] == 'websocket' && @header['Connection'] == 'Upgrade'
@@ -51,8 +49,6 @@ class Midori::Request
       @is_eventsource = true
     end
 
-    # Parse body
-    @body = data.read
     @parsed = true
   end
 
