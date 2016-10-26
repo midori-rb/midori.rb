@@ -6,7 +6,6 @@ RSpec.describe Midori::Runner do
 
     after {
       subject.stop
-      sleep 10
     }
 
     it 'should not stop before started' do
@@ -31,13 +30,11 @@ RSpec.describe Midori::Runner do
 
     it 'should stop properly' do
       expect(subject.stop).to eq(true)
-      sleep(1)
     end
 
     it 'should not receive anything after stopped' do
       expect do
         subject.stop
-        sleep 5
         puts Net::HTTP.get(URI('http://127.0.0.1:8080/'))
         Net::HTTP.get(URI('http://127.0.0.1:8080/'))
       end.to raise_error(Errno::ECONNREFUSED)
