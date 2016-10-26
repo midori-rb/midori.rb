@@ -31,6 +31,7 @@ before_install:
 
 script:
   - gem list -l
+  - export JRUBY_OPTS="--debug"
   - rake spec
   - gem build ./em-midori.gemspec
 
