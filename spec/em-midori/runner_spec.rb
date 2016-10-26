@@ -15,7 +15,7 @@ RSpec.describe Midori::Runner do
     it 'should start properly' do
       expect do
         Thread.new { subject.start }
-        sleep 5
+        sleep 1
       end.to_not raise_error(RuntimeError)
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe Midori::Runner do
 
     before do
       Thread.new { subject.start }
-      sleep 5
+      sleep 1
     end
 
     it 'should stop properly' do
