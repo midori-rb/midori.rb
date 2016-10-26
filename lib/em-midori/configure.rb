@@ -1,6 +1,3 @@
-require_relative 'core_ext/configurable'
-require 'logger'
-
 class Midori::Configure
   extend Midori::Configurable
 

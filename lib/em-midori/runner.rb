@@ -26,7 +26,7 @@ class Midori::Runner
       @logger.info "Midori #{Midori::VERSION} is now running on #{bind}:#{port}".blue
       @server_signature = EventMachine.start_server bind, port, Midori::Server, @api, @logger
     end
-    wait_for_server(true)
+
     nil
   end
 
