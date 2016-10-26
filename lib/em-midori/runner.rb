@@ -39,32 +39,11 @@ class Midori::Runner
       @logger.info 'Goodbye Midori'.blue
       EventMachine.stop_server(@server_signature)
       @server_signature = nil
-      wait_for_server(false)
       EM.stop
       true
     else
       @logger.error 'Midori Server has NOT been started'.red
       false
     end
-  end
-
-  def is_port_in_use?(ip, port)
-    begin
-      TCPSocket.new(ip, port)
-    rescue Errno::ECONNREFUSED
-      return false
-    end
-    true
-  end
-
-  def wait_for_server(status)
-    count = 0
-    loop {
-      res = is_port_in_use?(@bind, @port)
-      break unless status^res
-      count += 1
-      raise 'OperationTimeout' if count > 10000
-      sleep 0.1
-    }
   end
 end
