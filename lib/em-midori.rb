@@ -6,6 +6,7 @@ require 'logger'
 require 'http/parser'
 require 'socket'
 
+require_relative 'em-midori/core_ext/configurable'
 require_relative 'em-midori/version'
 require_relative 'em-midori/string'
 require_relative 'em-midori/promise'

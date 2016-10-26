@@ -1,41 +1,16 @@
-require 'logger'
-
 module Midori
   module Configurable
     # Modified from Sinatra
     # Sets an option to the given value.  If the value is a proc,
     # the proc will be called every time the option is accessed.
-    def set(option, value = (not_set = true), ignore_setter = false, &block)
-      raise ArgumentError if block and !not_set
-      value, not_set = block, false if block
+    def set(option, value = (not_set = true), read_only = false)
+      raise ArgumentError if not_set
 
-      if not_set
-        raise ArgumentError unless option.respond_to?(:each)
-        option.each { |k,v| set(k, v) }
-        return self
-      end
+      setter = proc { |val| set option, val }
+      getter = proc { value }
 
-      if respond_to?("#{option}=") and not ignore_setter
-        return __send__("#{option}=", value)
-      end
-
-      setter = proc { |val| set option, val, true }
-      getter = case value
-               when Proc
-                 value
-               when Symbol, Fixnum, FalseClass, TrueClass, NilClass
-                 value.inspect
-               when Hash
-                 setter = proc do |val|
-                   val = value.merge val if Hash === val
-                   set option, val, true
-                 end
-               else
-                 proc { value }
-               end
-
-      define_singleton("#{option}=", setter) if setter
-      define_singleton(option, getter) if getter
+      define_singleton("#{option}=", setter) unless read_only
+      define_singleton(option, getter)
       define_singleton("#{option}?", "!!#{option}") unless method_defined? "#{option}?"
 
       self
