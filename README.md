@@ -143,7 +143,7 @@ Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leav
 |    0.0.7     |   2016-10-11    | 2016-10-11 (+0d) | Get WebSocket Code Covered             |
 |    0.0.8     |   2016-10-18    | 2016-10-16 (-2d) | Implement EventSource                  |
 |    0.0.9     |   2016-10-25    | 2016-10-17 (-8d) | Implement Middleware                   |
-|  **0.1.0**   |   2016-11-01    |                  | Enrich API and documenting (dev ready) |
+|  **0.1.0**   |   2016-11-01    | 2016-10-27 (-5d) | Enrich API and documenting (dev ready) |
 |    0.1.1     |   2016-11-08    |                  | API Mount Syntax                       |
 |    0.1.2     |   2016-11-15    |                  | Better Error Handler                   |
 |    0.1.3     |   2016-11-22    |                  | File I/O                               |
