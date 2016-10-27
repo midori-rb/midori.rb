@@ -58,6 +58,7 @@ module Midori::Const
     'Connection' => 'keep-alive'
   }
 
+  # Default header for Websocket response
   WEBSOCKET_HEADER = {
     'Upgrade' => 'websocket',
     'Connection' => 'Upgrade'

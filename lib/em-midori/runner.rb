@@ -1,3 +1,5 @@
+##
+# Abstract runner class to control instance of Midori Server
 class Midori::Runner
   attr_reader :bind, :port
 

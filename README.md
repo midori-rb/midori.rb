@@ -144,13 +144,13 @@ Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leav
 |    0.0.8     |   2016-10-18    | 2016-10-16 (-2d) | Implement EventSource                  |
 |    0.0.9     |   2016-10-25    | 2016-10-17 (-8d) | Implement Middleware                   |
 |  **0.1.0**   |   2016-11-01    |                  | Enrich API and documenting (dev ready) |
-|    0.1.1     |   2016-11-08    |                  | Improve Parser Performance             |
-|    0.1.2     |   2016-11-22    |                  | Path to Database                       |
-|    0.1.3     |   2016-12-06    |                  | Database Driver for Postgres           |
-|    0.1.4     |   2016-12-13    |                  | Database Driver for MySQL              |
-|    0.1.5     |   2016-12-20    |                  | Database Driver for MongoDB            |
-|    0.1.6     |   2016-01-03    |                  | Path to ORM                            |
-|    0.1.7     |   2016-01-10    |                  | File I/O                               |
+|    0.1.1     |   2016-11-08    |                  | API Mount Syntax                       |
+|    0.1.2     |   2016-11-15    |                  | Better Error Handler                   |
+|    0.1.3     |   2016-11-22    |                  | File I/O                               |
+|    0.1.4     |   2016-12-06    |                  | Implement Database Driver              |
+|    0.1.5     |   2016-12-20    |                  | Implement Database ORM                 |
+|    0.1.6     |   2016-01-03    |                  | Enrich Database                        |
+|    0.1.7     |   2016-01-10    |                  | Enrich ORM                             |
 |    0.1.8     |   2016-01-17    |                  | Tutorial                               |
 |    0.1.9     |   2016-01-24    |                  | Official Wiki                          |
 |    0.2.0     |   2016-01-31    |                  | Enrich API and documenting             |

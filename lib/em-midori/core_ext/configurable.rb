@@ -1,8 +1,11 @@
 module Midori
+  # Provide flexible configuration for Midori Server
   module Configurable
     # Modified from Sinatra
-    # Sets an option to the given value.  If the value is a proc,
-    # the proc will be called every time the option is accessed.
+    # Sets an option to the given value.
+    # @param [Symbol] option the name of config
+    # @param [Object] value value to the name
+    # @param [Boolean] read_only Generate option= method or not
     def set(option, value = (not_set = true), read_only = false)
       raise ArgumentError if not_set
 

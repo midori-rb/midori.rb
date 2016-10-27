@@ -1,3 +1,5 @@
+##
+# Default configuration of Midori, extends +Midori::Configurable+
 class Midori::Configure
   extend Midori::Configurable
 
