@@ -134,6 +134,14 @@ class Midori::API
     #      puts 'Hello World'
     #   end
     def eventsource(path, &block) end
+    
+    # Mount a route prefix with another API defined
+    # @param [String] prefix prefix of the route String
+    # @param [Class] api inherited from Midori::API
+    # @return [nil] nil
+    def mount(prefix, api)
+      nil
+    end
 
     # Implementation of route DSL
     # @param [ String ] method HTTP method
