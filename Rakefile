@@ -15,6 +15,39 @@ task :build do
   puts `gem build em-midori.gemspec`
 end
 
+task :pre_compile do
+  RubyVM::InstructionSequence.compile_option = {
+    inline_const_cache: true,
+    instructions_unification: true,
+    operands_unification: true,
+    peephole_optimization: true,
+    specialized_instruction: true,
+    stack_caching: true,
+    tailcall_optimization: true,
+    trace_instruction: false,
+  }
+
+  Dir.mkdir('bin') unless File.exist?('bin')
+  Dir.glob('lib/**/*.rb') do |location|
+    # Binary file generation
+    f = File.new("bin/#{location}c", 'w+')
+    f.write RubyVM::InstructionSequence.compile_file(location).to_binary
+    f.close
+    
+    # Helper file
+    f = File.new("bin/#{location}", 'w+')
+    f.write <<-RUBY
+f = File.new('#{location}c', 'r')
+RubyVM::InstructionSequence.load_from_binary(f.read).eval
+f.close
+RUBY
+
+    f.close
+  end
+
+  #puts RubyVM::InstructionSequence.compile_file('lib/em-midori.rb').disasm
+end
+
 task :install do
   puts `gem build em-midori.gemspec`
   puts `gem install ./em-midori-#{Midori::VERSION}.gem`
