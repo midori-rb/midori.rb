@@ -28,6 +28,9 @@ task :pre_compile do
   }
 
   Dir.mkdir('bin') unless File.exist?('bin')
+  Dir.mkdir('bin/lib') unless File.exist?('bin/lib')
+  Dir.mkdir('bin/lib/em-midori') unless File.exist?('bin/lib/em-midori')
+  Dir.mkdir('bin/lib/em-midori/core_ext') unless File.exist?('bin/lib/em-midori/core_ext')
   Dir.glob('lib/**/*.rb') do |location|
     # Binary file generation
     f = File.new("bin/#{location}c", 'w+')
