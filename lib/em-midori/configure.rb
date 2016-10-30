@@ -1,7 +1,7 @@
 ##
 # Default configuration of Midori, extends +Midori::Configurable+
 class Midori::Configure
-  extend Midori::Configurable
+  extend Configurable
 
   set :logger, ::Logger.new(STDOUT)
   set :bind, '127.0.0.1'
