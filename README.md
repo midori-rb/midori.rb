@@ -149,11 +149,11 @@ Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leav
 |    0.1.3     |   2016-11-22    |                  | File I/O                               |
 |    0.1.4     |   2016-12-06    |                  | Implement Database Driver              |
 |    0.1.5     |   2016-12-20    |                  | Implement Database ORM                 |
-|    0.1.6     |   2016-01-03    |                  | Enrich Database                        |
-|    0.1.7     |   2016-01-10    |                  | Enrich ORM                             |
-|    0.1.8     |   2016-01-17    |                  | Tutorial                               |
-|    0.1.9     |   2016-01-24    |                  | Official Wiki                          |
-|    0.2.0     |   2016-01-31    |                  | Enrich API and documenting             |
+|    0.1.6     |   2017-01-03    |                  | Enrich Database                        |
+|    0.1.7     |   2017-01-10    |                  | Enrich ORM                             |
+|    0.1.8     |   2017-01-17    |                  | Tutorial                               |
+|    0.1.9     |   2017-01-24    |                  | Official Wiki                          |
+|    0.2.0     |   2017-01-31    |                  | Enrich API and documenting             |
 |     ...      |       ...       |                  | ...                                    |
 |  **1.0.0**   |     2017-03     |                  | First production-ready release         |
 |    1.1.0     |     2017-06     |                  | TBD.                                   |
