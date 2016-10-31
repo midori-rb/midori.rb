@@ -47,8 +47,6 @@ RUBY
 
     f.close
   end
-
-  #puts RubyVM::InstructionSequence.compile_file('lib/em-midori.rb').disasm
 end
 
 task :install do
