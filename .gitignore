@@ -51,3 +51,4 @@ Gemfile.lock
 
 .vscode
 .idea
+bin
