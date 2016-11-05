@@ -4,7 +4,7 @@
 # @attr [Regexp] path regex to match
 # @attr [Proc] function what to do after matched
 class Midori::Route
-  attr_accessor :method, :path, :function
+  attr_accessor :method, :path, :function, :middlewares, :body_accept
 
   # @param [String] method HTTP method
   # @param [Regexp] path regex to match
@@ -13,5 +13,7 @@ class Midori::Route
     @method = method
     @path = path
     @function = function
+    @middlewares = []
+    @body_accept = [String]
   end
 end

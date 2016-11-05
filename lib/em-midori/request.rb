@@ -11,7 +11,7 @@
 class Midori::Request
   attr_accessor :ip, :port,
                 :protocol, :method, :path, :query_string,
-                :header, :body, :parsed
+                :header, :body, :parsed, :params
 
   # Init Request
   def initialize
@@ -19,6 +19,7 @@ class Midori::Request
     @is_websocket = false
     @is_eventsource = false
     @parser = Http::Parser.new
+    @params = {}
     @parser.on_headers_complete = proc do
       @protocol = @parser.http_version
       @method = @parser.http_method
@@ -49,6 +50,7 @@ class Midori::Request
       @is_eventsource = true
     end
 
+    @method = @method.to_sym
     @parsed = true
   end
 
