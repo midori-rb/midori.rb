@@ -4,6 +4,7 @@ require 'eventmachine'
 require 'fiber'
 require 'logger'
 require 'http/parser'
+require 'mustermann'
 require 'socket'
 
 require_relative 'em-midori/core_ext/configurable'

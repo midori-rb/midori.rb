@@ -1,4 +1,4 @@
-class APIEngine
+class Midori::APIEngine
   attr_accessor :routes
   def initialize(root_api, type = :sinatra)
     @routes = {
@@ -15,6 +15,12 @@ class APIEngine
     @root_api = root_api
     @type = type
     @routes = merge('', root_api, [], root_api.routes)
+    @routes.delete :MOUNT
+    @routes.each do |method|
+      method.each do |route|
+        route.path = Mustermann.new(route.path, type: type)
+      end
+    end
   end
 
   def merge(prefix, root_api, middlewares, routes)
