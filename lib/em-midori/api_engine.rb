@@ -10,19 +10,29 @@ class APIEngine
       LINK: [],
       UNLINK: [],
       WEBSOCKET: [],
-      EVENTSOURCE: [],
-      MOUNT: []
+      EVENTSOURCE: []
     }
     @root_api = root_api
     @type = type
-    merge(root_api, type)
+    @routes = merge('', root_api, [], root_api.routes)
   end
 
-  def merge(root_api, type)
+  def merge(prefix, root_api, middlewares, routes)
     # Merge all routes with a Depth-first search
-    @routes.merge(root_api.routes) do |key, old_val, new_val|
-      
+    routes = routes.clone
+    root_api.routes[:MOUNT].each do |mount|
+      routes.merge(merge(mount[0], mount[1], route_api.scope_middlewares)) do |_key, old_val, new_val|
+        old_val + new_val
+      end
     end
+    root_api.routes.delete :MOUNT
+    root_api.routes.each do |method|
+      method[1].each do |route|
+        route.path = prefix + route.path
+        route.middlewares = middlewares + route.middlewares
+      end
+    end
+    routes
   end
 
   # Process after receive data from client
@@ -65,5 +75,4 @@ class APIEngine
     header['Sec-WebSocket-Accept'] = Digest::SHA1.base64digest(key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
     header
   end
-
 end

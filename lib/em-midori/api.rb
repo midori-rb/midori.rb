@@ -164,9 +164,11 @@ class Midori::API
     def helper(&block)
       Midori::CleanRoom.class_exec(&block)
     end
+
+    def inherited(subclass)
+      subclass.class_initialize
+    end
   end
-  
-  class_initialize
 
   private_class_method :add_route
 
