@@ -2,7 +2,7 @@
 # This class provides methods to be inherited as route definition.
 class Midori::API
   class << self
-    attr_accessor :routes, :scope_middlewares, :scope_body_accept
+    attr_accessor :routes, :scope_middlewares
     def class_initialize
       @routes = {
         GET: [],
