@@ -70,7 +70,7 @@ class Midori::WebSocket
     elsif msg.is_a?Array
       output << 0b10000010 << msg.size
       output.concat msg
-      @connection.send_data(output.pack("C*"))
+      @connection.send_data(output.pack('C*'))
     else
       raise Midori::Error::OpCodeError
     end
