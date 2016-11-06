@@ -5,7 +5,7 @@
 # @attr [Hash] events response for different event
 # @attr [EM::Connection] connection raw EventMachine connection
 class Midori::WebSocket
-  attr_accessor :msg, :opcode, :events, :connection
+  attr_accessor :msg, :opcode, :events, :connection, :request
 
   # @param [EM::Connection] connection raw EventMachine connection
   def initialize(connection)

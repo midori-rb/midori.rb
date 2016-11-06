@@ -40,13 +40,13 @@ class Midori::Request
 
     # Deal with WebSocket
     if @header['Upgrade'] == 'websocket' && @header['Connection'] == 'Upgrade'
-      @method = 'WEBSOCKET'
+      @method = :WEBSOCKET
       @is_websocket = true
     end
 
     # Deal with EventSource
     if @header['Accept'] == 'text/event-stream'
-      @method = 'EVENTSOURCE'
+      @method = :EVENTSOURCE
       @is_eventsource = true
     end
 

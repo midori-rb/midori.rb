@@ -14,20 +14,19 @@ class Midori::APIEngine
     }
     @root_api = root_api
     @type = type
-    @routes = merge('', root_api, [], root_api.routes)
+    @routes = merge('', root_api, [])
     @routes.delete :MOUNT
     @routes.each do |method|
-      method.each do |route|
+      method[1].each do |route|
         route.path = Mustermann.new(route.path, type: type)
       end
     end
   end
 
-  def merge(prefix, root_api, middlewares, routes)
+  def merge(prefix, root_api, middlewares)
     # Merge all routes with a Depth-first search
-    routes = routes.clone
     root_api.routes[:MOUNT].each do |mount|
-      routes.merge(merge(mount[0], mount[1], route_api.scope_middlewares)) do |_key, old_val, new_val|
+      root_api.routes.merge(merge(mount[0], mount[1], route_api.scope_middlewares)) do |_key, old_val, new_val|
         old_val + new_val
       end
     end
@@ -38,7 +37,7 @@ class Midori::APIEngine
         route.middlewares = middlewares + route.middlewares
       end
     end
-    routes
+    root_api.routes
   end
 
   # Process after receive data from client
@@ -48,14 +47,15 @@ class Midori::APIEngine
   # @raise [ Midori::Error::NotFound ] If no route matched
   def receive(request, connection = nil)
     @routes[request.method].each do |route|
-      params = route.params(request.path)
+      params = route.path.params(request.path)
       next unless params
       request.params = params
       route.middlewares.each { |middleware| request = middleware.before(request) }
       clean_room = Midori::CleanRoom.new(request, route.body_accept)
       if request.websocket?
         # Send 101 Switching Protocol
-        connection.send_data Midori::Response.new(101, websocket_header(request.header['Sec-WebSocket-Key']), '')
+        connection.send_data Midori::Response.new(101, Midori::APIEngine.websocket_header(request.header['Sec-WebSocket-Key']), '')
+        connection.websocket.request = request
         -> { clean_room.instance_exec(connection.websocket, &route.function) }.call
         return Midori::Response.new
       elsif request.eventsource?
@@ -63,7 +63,7 @@ class Midori::APIEngine
         -> { clean_room.instance_exec(connection.eventsource, &route.function) }.call
         return Midori::Response.new
       else
-        result -> { clean_room.instance_exec(&route.function) }
+        result = -> { clean_room.instance_exec(&route.function) }.call
         clean_room.body = result if route.body_accept.include?(result.class)
         response = clean_room.raw_response
         route.middlewares.reverse_each { |middleware| response = middleware.after(request, response) }

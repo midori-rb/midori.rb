@@ -76,3 +76,5 @@ class ExampleAPI < Midori::API
     es.send("Hello\nWorld")
   end
 end
+
+ExampleAPIEngine = Midori::APIEngine.new(ExampleAPI)

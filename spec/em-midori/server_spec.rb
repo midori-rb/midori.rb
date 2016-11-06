@@ -3,7 +3,7 @@ require 'net/http'
 require 'socket'
 
 RSpec.describe Midori::Server do
-  runner = Midori::Runner.new(ExampleAPI, ExampleConfigure)
+  runner = Midori::Runner.new(ExampleAPIEngine, ExampleConfigure)
 
   before(:all) do
     Thread.new { runner.start }
