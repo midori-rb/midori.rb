@@ -32,7 +32,8 @@ before_install:
 script:
   - gem list -l
   - export JRUBY_OPTS="--debug"
-  - rake spec
+  - bundle exec rake
+  - bundle exec codeclimate-test-reporter
   - gem build ./em-midori.gemspec
 
 bundler_args: --jobs 1 --retry 3
