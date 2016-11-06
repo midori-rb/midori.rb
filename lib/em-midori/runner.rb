@@ -7,12 +7,7 @@ class Midori::Runner
     @logger = configure.logger
     @bind = configure.bind
     @port = configure.port
-
-    if api.is_a?Midori::APIEngine
-      @api = api
-    else
-      @api = Midori::APIEngine.new(api, configure.route_type)
-    end
+    @api = ((api.is_a?Midori::APIEngine) ? api : Midori::APIEngine.new(api, configure.route_type))
   end
 
   # Get Midori server whether running

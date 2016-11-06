@@ -141,14 +141,14 @@ class Midori::API
     # @return [nil] nil
     def use(middleware, *args)
       middleware = middleware.new(*args)
-      CleanRoom.class_exec { middleware.helper }
+      Midori::CleanRoom.class_exec { middleware.helper }
       @scope_middlewares << middleware
       nil
     end
 
     def filter(middleware, *args)
       middleware = middleware.new(*args)
-      CleanRoom.class_exec { middleware.helper }
+      Midori::CleanRoom.class_exec { middleware.helper }
       @temp_middlewares << middleware
       nil
     end

@@ -5,6 +5,9 @@ class ExampleAPI < Midori::API
     end
   end
 
+  use Midori::Middleware
+
+  filter Midori::Middleware
   get '/' do
     test_helper
   end
@@ -77,4 +80,4 @@ class ExampleAPI < Midori::API
   end
 end
 
-ExampleAPIEngine = Midori::APIEngine.new(ExampleAPI)
+EXAMPLE_API_ENGINE = Midori::APIEngine.new(ExampleAPI)
