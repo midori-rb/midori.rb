@@ -175,4 +175,7 @@ class Midori::API
       add_route(method.upcase.to_sym, args[0], block) # args[0]: path
     end
   end
+
+  singleton_class.send :alias_method, :ws, :websocket
+  singleton_class.send :alias_method, :es, :eventsource
 end
