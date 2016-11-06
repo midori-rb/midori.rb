@@ -3,7 +3,14 @@ require 'json'
 
 include Midori
 
+class User < API
+  get '/' do
+    'User'
+  end
+end
+
 class RawHello < API
+  mount '/user', User
   use Middleware
   get '/' do
     'Hello'

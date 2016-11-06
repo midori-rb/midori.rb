@@ -26,7 +26,7 @@ class Midori::APIEngine
   def merge(prefix, root_api, middlewares)
     # Merge all routes with a Depth-first search
     root_api.routes[:MOUNT].each do |mount|
-      root_api.routes.merge(merge(mount[0], mount[1], route_api.scope_middlewares)) do |_key, old_val, new_val|
+      root_api.routes.merge(merge(mount[0], mount[1], root_api.scope_middlewares)) do |_key, old_val, new_val|
         old_val + new_val
       end
     end
