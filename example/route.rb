@@ -61,4 +61,4 @@ class Example < Midori::API
 
 end
 
-Midori::Runner.new(Midori::APIEngine.new(Example)).start
+Midori::Runner.new(Example).start
