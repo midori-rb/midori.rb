@@ -107,7 +107,7 @@ Version consists of four numbers:
 
 ### Contribution
 
-Obey [Contribute Code of Conduct](CONTRIBUTE_CODE_OF_CONDUCT.md) before you leave any comment.
+Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT.md) before you leave any comment.
 
 #### Found a bug or any suggestion
 
