@@ -17,9 +17,7 @@ class Midori::API
         MOUNT: []
       }
       @scope_middlewares = []
-      @scope_body_accept = [String]
       @temp_middlewares = []
-      @temp_body_accept = nil
     end
 
     # Add GET method as a DSL for route definition
@@ -131,12 +129,10 @@ class Midori::API
       # Insert route to routes
       route = Midori::Route.new(method, path, block)
       route.middlewares = @scope_middlewares + @temp_middlewares
-      route.body_accept = @temp_body_accept.nil? ? @scope_body_accept : @temp_body_accept
       @routes[method] << route
 
       # Clean up temp middleware
       @temp_middlewares = []
-      @temp_body_accept = nil
       nil
     end
 
@@ -147,7 +143,6 @@ class Midori::API
       middleware = middleware.new(*args)
       CleanRoom.class_exec { middleware.helper }
       @scope_middlewares << middleware
-      @scope_body_accept = middleware.body_accept
       nil
     end
 
@@ -155,7 +150,6 @@ class Midori::API
       middleware = middleware.new(*args)
       CleanRoom.class_exec { middleware.helper }
       @temp_middlewares << middleware
-      @temp_body_accept = middleware.body_accept
       nil
     end
 

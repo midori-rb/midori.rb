@@ -51,7 +51,7 @@ class Midori::APIEngine
       next unless params
       request.params = params
       route.middlewares.each { |middleware| request = middleware.before(request) }
-      clean_room = Midori::CleanRoom.new(request, route.body_accept)
+      clean_room = Midori::CleanRoom.new(request)
       if request.websocket?
         # Send 101 Switching Protocol
         connection.send_data Midori::Response.new(101, Midori::APIEngine.websocket_header(request.header['Sec-WebSocket-Key']), '')
@@ -64,7 +64,7 @@ class Midori::APIEngine
         return Midori::Response.new
       else
         result = -> { clean_room.instance_exec(&route.function) }.call
-        clean_room.body = result if route.body_accept.include?(result.class)
+        clean_room.body = result if result.is_a?String
         response = clean_room.raw_response
         route.middlewares.reverse_each { |middleware| response = middleware.after(request, response) }
         return response
