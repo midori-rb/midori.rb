@@ -54,19 +54,19 @@ class Midori::Request
     @parsed = true
   end
 
-  # Syntatic sugur for whether a request is parsed
+  # Syntatic sugar for whether a request is parsed
   # @return [Boolean] parsed or not
   def parsed?
     @parsed
   end
 
-  # Syntatic sugur for whether a request is a websocket request
+  # Syntatic sugar for whether a request is a websocket request
   # @return [Boolean] websocket or not
   def websocket?
     @is_websocket
   end
 
-  # Syntatic sugur for whether a request is an eventsource request
+  # Syntatic sugar for whether a request is an eventsource request
   # @return [Boolean] eventsource or not
   def eventsource?
     @is_eventsource
