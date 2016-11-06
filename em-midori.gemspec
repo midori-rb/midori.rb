@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
     - %w(README.md CONTRIBUTE_CODE_OF_CONDUCT.md Gemfile Rakefile em-midori.gemspec .gitignore .rspec .codeclimate.yml .rubocop.yml .travis.yml logo.png Rakefile Gemfile Gemfile.lock)
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
   s.license                  = 'MIT'
-  s.add_runtime_dependency     'eventmachine', '~> 1.2', '> 1.2.0.0'
+  s.add_runtime_dependency     'eventmachine', '~> 1.2'
   s.add_runtime_dependency     'http_parser.rb', '~> 0.6'
-  s.add_runtime_dependency     'mustermann'
+  s.add_runtime_dependency     'mustermann', '~> 0.4'
 end
