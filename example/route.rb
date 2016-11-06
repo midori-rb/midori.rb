@@ -8,16 +8,17 @@ class Example < Midori::API
     'Hello World'
   end
 
-  get '/user/:id/dump' do |id|
+  get '/user/:id/dump' do
     { header: @request.header,
       body: @request.body,
-      id: id }.to_json
+      id: @request.params['id'] }.to_json
   end
 
-  websocket '/websocket/:id' do |ws, id|
+  websocket '/websocket/:id' do |ws|
     ws.on :open do
       puts 'on Open'.green
-      ws.send id
+      puts @request.params['id']
+      ws.send @request.params['id']
     end
 
     ws.on :message do |msg|

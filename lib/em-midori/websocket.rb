@@ -5,7 +5,7 @@
 # @attr [Hash] events response for different event
 # @attr [EM::Connection] connection raw EventMachine connection
 class Midori::WebSocket
-  attr_accessor :msg, :opcode, :events, :connection
+  attr_accessor :msg, :opcode, :events, :connection, :request
 
   # @param [EM::Connection] connection raw EventMachine connection
   def initialize(connection)
@@ -70,7 +70,7 @@ class Midori::WebSocket
     elsif msg.is_a?Array
       output << 0b10000010 << msg.size
       output.concat msg
-      @connection.send_data(output.pack("C*"))
+      @connection.send_data(output.pack('C*'))
     else
       raise Midori::Error::OpCodeError
     end

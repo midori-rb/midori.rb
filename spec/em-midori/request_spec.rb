@@ -7,7 +7,7 @@ RSpec.describe Midori::Request do
       request = Midori::Request.new
       request.parse(data)
       expect(request.protocol).to eq([1, 1])
-      expect(request.method).to eq('GET')
+      expect(request.method).to eq(:GET)
       expect(request.path).to eq('/')
       expect(request.query_string).to eq(nil)
     end
@@ -17,7 +17,7 @@ RSpec.describe Midori::Request do
       request = Midori::Request.new
       request.parse(data)
       expect(request.protocol).to eq([1, 1])
-      expect(request.method).to eq('GET')
+      expect(request.method).to eq(:GET)
       expect(request.path).to eq('/')
       expect(request.query_string).to eq('test=1')
     end
@@ -35,13 +35,13 @@ RSpec.describe Midori::Request do
     data = "GET / HTTP/1.1\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.method).to eq('WEBSOCKET')
+    expect(request.method).to eq(:WEBSOCKET)
   end
 
   it 'parse eventsource upgrade' do
     data ="GET / HTTP/1.1\r\nAccept: text/event-stream\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.method).to eq('EVENTSOURCE')
+    expect(request.method).to eq(:EVENTSOURCE)
   end
 end

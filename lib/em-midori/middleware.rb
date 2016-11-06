@@ -24,10 +24,4 @@ class Midori::Middleware
   # @return [nil] nil
   def helper
   end
-
-  # Acceptable body
-  # @return [Array<Class>] array of acceptable type's class
-  def body_accept
-    [String]
-  end
 end

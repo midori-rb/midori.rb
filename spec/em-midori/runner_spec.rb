@@ -2,7 +2,7 @@ require './spec/spec_helper'
 
 RSpec.describe Midori::Runner do
   describe 'Runner with default configure' do
-    subject { Midori::Runner.new(ExampleAPI, ExampleConfigure) }
+    subject { Midori::Runner.new(EXAMPLE_API_ENGINE, ExampleConfigure) }
 
     after {
       subject.stop
@@ -21,7 +21,7 @@ RSpec.describe Midori::Runner do
   end
 
   describe 'Running runner' do
-    subject { Midori::Runner.new(ExampleAPI, ExampleConfigure) }
+    subject { Midori::Runner.new(EXAMPLE_API_ENGINE, ExampleConfigure) }
 
     before do
       Thread.new { subject.start }

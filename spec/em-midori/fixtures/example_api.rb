@@ -1,3 +1,9 @@
+class User < Midori::API
+  get '/' do
+    'User'
+  end
+end
+
 class ExampleAPI < Midori::API
   helper do
     def test_helper
@@ -5,6 +11,10 @@ class ExampleAPI < Midori::API
     end
   end
 
+  mount '/user', User
+  use Midori::Middleware
+
+  filter Midori::Middleware
   get '/' do
     test_helper
   end
@@ -76,3 +86,5 @@ class ExampleAPI < Midori::API
     es.send("Hello\nWorld")
   end
 end
+
+EXAMPLE_API_ENGINE = Midori::APIEngine.new(ExampleAPI)

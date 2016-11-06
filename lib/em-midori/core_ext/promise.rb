@@ -7,9 +7,9 @@ class Promise
     @callback = callback
   end
 
-  # Define what to do after a method callbacked
-  # @param [Proc] resolve what if callbacked
-  # @param [Proc] reject what if callback failed
+  # Define what to do after a method callbacks
+  # @param [Proc] resolve what on callback
+  # @param [Proc] reject what on callback failed
   # @return [nil] nil
   def then(resolve = ->() {}, reject = ->() {})
     @callback.call(resolve, reject)

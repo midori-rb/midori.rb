@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.license                  = 'MIT'
   s.add_runtime_dependency     'eventmachine', '~> 1.2', '> 1.2.0.0'
   s.add_runtime_dependency     'http_parser.rb', '~> 0.6'
+  s.add_runtime_dependency     'mustermann'
 end
