@@ -1,5 +1,5 @@
 ##
-# Module for store Midori Consts
+# Module for store Midori Const
 module Midori::Const
   # Hash table for converting numbers to HTTP/1.1 status code line
   STATUS_CODE = {
@@ -51,14 +51,14 @@ module Midori::Const
     'Server' => "Midori/#{Midori::VERSION}"
   }
 
-  # Default header for Evenrsource response
+  # Default header for EventSource response
   EVENTSOURCE_HEADER = {
     'Content-Type' => 'text-event-stream',
     'Cache-Control' => 'no-cache',
     'Connection' => 'keep-alive'
   }
 
-  # Default header for Websocket response
+  # Default header for WebSocket response
   WEBSOCKET_HEADER = {
     'Upgrade' => 'websocket',
     'Connection' => 'Upgrade'

@@ -1,5 +1,5 @@
 ##
-# Logics to EventMachine TCP Server, running inside +EM::Connection+
+# Logic to EventMachine TCP Server, running inside +EM::Connection+
 # @attr [Midori::Request] request
 # @attr [Class] api inherited from Midori::API
 # @attr [Midori::WebSocket] websocket websocket instance
@@ -17,7 +17,7 @@ module Midori::Server
     @eventsource = Midori::EventSource.new(self)
   end
 
-  # Logics of receiving data
+  # Logic of receiving data
   # @param [String] data raw data
   def receive_data(data)
     lambda do
@@ -37,7 +37,7 @@ module Midori::Server
     end.call
   end
 
-  # Logics of receiving new request
+  # Logic of receiving new request
   # @param [String] data raw data
   def receive_new_request(data)
     begin
@@ -57,7 +57,7 @@ module Midori::Server
     end
   end
 
-  # Logics of receiving WebSocket request
+  # Logic of receiving WebSocket request
   # @param [StringIO] data raw data
   def websocket_request(data)
     @websocket.decode(data)

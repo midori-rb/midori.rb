@@ -2,7 +2,7 @@
 # This class is used to be sandbox of requests processing.
 # @attr [Fixnum] code HTTP response code
 # @attr [Hash] header HTTP response header
-# @attr [Object] body HTTP response body. String could is accepted by default, but could leave for further process with +Midori::Midlleware+
+# @attr [Object] body HTTP response body. String could is accepted by default, but could leave for further process with +Midori::Middleware+
 # @attr [Midori::Request] request HTTP request
 class Midori::CleanRoom
   attr_accessor :code, :header, :body, :request
