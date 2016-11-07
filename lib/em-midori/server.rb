@@ -76,7 +76,9 @@ module Midori::Server
     close_connection_after_writing
   rescue Midori::Error::PingPongSizeTooLarge => e
     @logger.warn e.inspect.yellow
-    call_event(:error) # Neglect Too large ping request
+    call_event(:error) # Too large ping request
+    send_data "\b" # Opcode 0x8
+    close_connection_after_writing
   rescue => e
     call_event(:error)
     @logger.error e.inspect.red

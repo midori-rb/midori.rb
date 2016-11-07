@@ -16,7 +16,7 @@ class ExampleAPI < Midori::API
 
   filter Midori::Middleware
   get '/' do
-    test_helper
+    return test_helper
   end
 
   get '/error' do

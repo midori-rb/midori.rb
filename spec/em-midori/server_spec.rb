@@ -98,6 +98,8 @@ RSpec.describe Midori::Server do
       expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
       expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
       socket.print [0x81, 0x85, 0x37, 0xfa, 0x21, 0x3d, 0x7f, 0x9f, 0x4d, 0x51, 0x58].pack('C*')
+      result = socket.getbyte
+      expect(result).to eq(0x8)
       socket.close
     end
 
