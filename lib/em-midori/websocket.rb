@@ -14,7 +14,7 @@ class Midori::WebSocket
   end
 
   # Decode raw data send from client
-  # @param [String] data raw data
+  # @param [StringIO] data raw data
   def decode(data)
     # Fin and Opcode
     byte_tmp = data.getbyte
@@ -29,7 +29,7 @@ class Midori::WebSocket
   end
 
   # Decode masked message send from client
-  # @param [String] data raw data
+  # @param [StringIO] data raw data
   def decode_mask(data)
     # Mask
     byte_tmp = data.getbyte
