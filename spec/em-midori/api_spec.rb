@@ -40,9 +40,8 @@ end
 
 class JSONHello < Midori::API
   use Middleware
+  filter JSONMiddleware
   get '/' do
-    use JSONMiddleware
     @body = {code: 0}
   end
 end
-
