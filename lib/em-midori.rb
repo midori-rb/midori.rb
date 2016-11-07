@@ -11,6 +11,7 @@ require_relative 'em-midori/core_ext/configurable'
 require_relative 'em-midori/core_ext/string'
 require_relative 'em-midori/core_ext/promise'
 require_relative 'em-midori/core_ext/define_class'
+require_relative 'em-midori/core_ext/proc'
 
 require_relative 'em-midori/version'
 require_relative 'em-midori/const'
