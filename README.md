@@ -146,7 +146,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.0.8     |   2016-10-18    | 2016-10-16 (-2d) | Implement EventSource                  |
 |    0.0.9     |   2016-10-25    | 2016-10-17 (-8d) | Implement Middleware                   |
 |  **0.1.0**   |   2016-11-01    | 2016-10-27 (-5d) | Enrich API and documenting (dev ready) |
-|    0.1.1     |   2016-11-08    |                  | API Mount Syntax                       |
+|    0.1.1     |   2016-11-08    | 2016-11-07 (-1d) | API Mount Syntax                       |
 |    0.1.2     |   2016-11-15    |                  | Better Error Handler                   |
 |    0.1.3     |   2016-11-22    |                  | File I/O                               |
 |    0.1.4     |   2016-12-06    |                  | Implement Database Driver              |
