@@ -9,16 +9,16 @@ class Example < Midori::API
   end
 
   get '/user/:id/dump' do
-    { header: @request.header,
-      body: @request.body,
-      id: @request.params['id'] }.to_json
+    { header: request.header,
+      body: request.body,
+      id: request.params['id'] }.to_json
   end
 
   websocket '/websocket/:id' do |ws|
     ws.on :open do
       puts 'on Open'.green
-      puts @request.params['id']
-      ws.send @request.params['id']
+      puts request.params['id']
+      ws.send request.params['id']
     end
 
     ws.on :message do |msg|
@@ -33,7 +33,7 @@ class Example < Midori::API
 
   get '/user/login' do
     begin
-      request = JSON.parse(@request.body)
+      request = JSON.parse(request.body)
       Midori::Response.new(200, UserController.login(request['username'], request['password']).to_json)
       # => {code: 0, token: String}
     rescue 'ForbiddenRequest' => _e
