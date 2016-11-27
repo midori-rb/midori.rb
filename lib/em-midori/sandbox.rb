@@ -11,7 +11,6 @@ class Midori::Sandbox
     end
 
     def capture(error)
-      puts error
       if @handlers[error.class].nil?
         @handlers[Midori::Error::InternalError].call(error)
       else
