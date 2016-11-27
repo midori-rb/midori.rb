@@ -25,5 +25,18 @@ RSpec.describe Midori::File do
         test_file_read
       } }.to raise_error(Errno::ENOENT)
     end
+
+    it 'should write file in correct order' do
+      answer = []
+      async :test_file_write do
+        answer << Midori::File.write('/tmp/SometimesNaive', 'hello')
+        EM.stop
+      end
+      EM.run {
+        test_file_write
+        answer << 0
+      }
+      expect(answer).to eq([0, 5])
+    end
   end
 end
