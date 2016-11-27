@@ -13,7 +13,7 @@ class Midori::Sandbox
       @handlers[error.class].call(clean_room) unless @handlers[error.class].nil?
     end
 
-    def sandbox(clean_room, function, *args)
+    def run(clean_room, function, *args)
       begin
         function.to_lambda(clean_room).call(*args)
       rescue MidoriError => e

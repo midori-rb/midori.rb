@@ -6,7 +6,7 @@ end
 
 class ExampleAPI < Midori::API
   helper do
-    def test_helper
+    define_method :test_helper do
       'Hello World'
     end
   end
