@@ -1,9 +1,7 @@
 class Midori::File
   class << self
     def read_promise(*args)
-      DeferPromise.new(proc {
-        File.read(*args)
-      })
+      defer { File.read(*args) }
     end
 
     def read(*args)
@@ -11,9 +9,7 @@ class Midori::File
     end
 
     def write_promise(*args)
-      DeferPromise.new(proc {
-        File.write(*args)
-      })
+      defer { File.write(*args) }
     end
 
     def write(*args)

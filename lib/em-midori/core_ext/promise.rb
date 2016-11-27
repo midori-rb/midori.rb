@@ -55,6 +55,10 @@ module Kernel
     }
   end
 
+  def defer(&block)
+    DeferPromise.new(block)
+  end
+
   # Block the I/O to wait for async method response
   # @param [Promise] promise promise method
   # @example
