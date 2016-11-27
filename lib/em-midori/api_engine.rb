@@ -65,7 +65,7 @@ class Midori::APIEngine
       else
         result = Midori::Sandbox.run(clean_room, route.function)
         clean_room.body = result unless result.nil?
-        response = clean_room.raw_response
+        response = (result.is_a?Midori::Response) ? result : clean_room.raw_response
         route.middlewares.reverse_each { |middleware| response = middleware.after(request, response) }
         return response
       end

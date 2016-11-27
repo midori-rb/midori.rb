@@ -44,10 +44,10 @@ module Midori::Server
       @request.parse(data)
       @response = @api.receive(request, self)
       call_event(:open) if @request.websocket?
-    rescue Midori::Error::NotFound => _e
-      @response = Midori::Response.new(404, {}, '404 Not Found')
+    rescue Midori::Error::NotFound => e
+      @response = Midori::Sandbox.capture(e)
     rescue => e
-      @response = Midori::Response.new(500, {}, 'Internal Server Error')
+      @response = Midori::Sandbox.capture(e)
       @logger.error e.inspect.red
       @logger.warn e.backtrace.join("\n").yellow
     end

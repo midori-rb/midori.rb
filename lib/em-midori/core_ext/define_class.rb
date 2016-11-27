@@ -12,6 +12,18 @@ module Kernel
     Object.const_get(name).class_eval(&Proc.new) if block_given?
     Object.const_get(name)
   end
-end
 
-define_class 'MidoriError', StandardError
+  # Define a batch of error handler with given name
+  # @param [Array<Symbol>] args names to be defined
+  # @return [nil] nil
+  # @example
+  #   define_error(:foo_error, :bar_error) 
+  #   => nil, FooError < StandardError and BarError < StandardError would be defined
+  def define_error(*args)
+    args.each do |arg|
+      class_name = arg.to_s.split('_').collect(&:capitalize).join
+      define_class(class_name, StandardError)
+    end
+    nil
+  end
+end
