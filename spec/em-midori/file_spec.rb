@@ -38,5 +38,15 @@ RSpec.describe Midori::File do
       }
       expect(answer).to eq([0, 5])
     end
+
+    it 'raise error when write failed' do
+      async :test_file_write do
+        Midori::File.write('/tmp/SometimesNaive', 'hello', {mode: 'r'})
+        EM.stop
+      end
+      expect { EM.run {
+        test_file_write
+      } }.to raise_error(IOError)
+    end
   end
 end
