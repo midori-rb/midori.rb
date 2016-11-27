@@ -1,19 +1,19 @@
-require 'file'
-
 class Midori::File
   class << self
     def read_promise(path)
-      Promise.new(->(resolve, reject) {
+      Promise.new(->(resolve, _reject) {
         EventMachine.defer(proc {
-          File.open(path, 'r') do |file|
-            resolve.call(file.read)
-          end
-        }, resolve, reject)
+          File.read(path)
+        }, proc {|result|
+          resolve.call(result)
+        }, proc {|error| 
+          raise error
+        })
       })
     end
 
     def read(path)
-        await(read_promise(path))
+        await read_promise(path)
     end
   end
 end

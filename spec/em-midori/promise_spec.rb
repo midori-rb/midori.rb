@@ -6,13 +6,13 @@ RSpec.describe Promise do
       def asleep(sec)
         Promise.new(->(resolve, _reject) {
           EM.add_timer(sec) do
-            resolve.call('you sleep ' + sec.to_s)
+            resolve.call('you sleep ' + sec.to_s + 's')
           end
         })
       end
       answer = []
       async :async_sleep do
-        await asleep(1)
+        puts await asleep(1)
         answer << 1
         EM.stop
       end
