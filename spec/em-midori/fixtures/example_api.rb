@@ -23,15 +23,6 @@ class ExampleAPI < Midori::API
     raise StandardError
   end
 
-  get '/test_error' do
-    define_error :test_error
-    begin
-      raise TestError
-    rescue TestError => _e
-      next 'Hello Error'
-    end
-  end
-
   websocket '/websocket' do |ws|
     ws.on :open do
       ws.send 'Hello'
