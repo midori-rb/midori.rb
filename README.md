@@ -132,30 +132,30 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 
 **Detailed progress can be seen [here](https://github.com/heckpsi-lab/em-midori/projects/1).**
 
-| Version Code | Determined Date |   Release Date   | Description                            |
-| :----------: | :-------------: | :--------------: | -------------------------------------- |
-|    0.0.1     |   2016-09-09    | 2016-09-09 (+0d) | Init the gem project                   |
-|    0.0.2     |   2016-09-09    | 2016-09-09 (+0d) | Init basic EventMachine server         |
-|    0.0.3     |   2016-09-13    | 2016-09-13 (+0d) | Init Midori::API design                |
-|    0.0.4     |   2016-09-20    | 2016-09-19 (-1d) | Implement API match                    |
-|    0.0.5     |   2016-09-27    | 2016-09-25 (-2d) | Implement request and response.        |
-|    0.0.6     |   2016-10-04    | 2016-10-06 (+2d) | Implement WebSocket                    |
-|    0.0.7     |   2016-10-11    | 2016-10-11 (+0d) | Get WebSocket Code Covered             |
-|    0.0.8     |   2016-10-18    | 2016-10-16 (-2d) | Implement EventSource                  |
-|    0.0.9     |   2016-10-25    | 2016-10-17 (-8d) | Implement Middleware                   |
-|  **0.1.0**   |   2016-11-01    | 2016-10-27 (-5d) | Enrich API and documenting (dev ready) |
-|    0.1.1     |   2016-11-08    | 2016-11-07 (-1d) | API Mount Syntax                       |
-|    0.1.2     |   2016-11-15    |                  | Better Error Handler                   |
-|    0.1.3     |   2016-11-22    |                  | File I/O                               |
-|    0.1.4     |   2016-12-06    |                  | Implement Database Driver              |
-|    0.1.5     |   2016-12-20    |                  | Implement Database ORM                 |
-|    0.1.6     |   2017-01-03    |                  | Enrich Database                        |
-|    0.1.7     |   2017-01-10    |                  | Enrich ORM                             |
-|    0.1.8     |   2017-01-17    |                  | Tutorial                               |
-|    0.1.9     |   2017-01-24    |                  | Official Wiki                          |
-|    0.2.0     |   2017-01-31    |                  | Enrich API and documenting             |
-|     ...      |       ...       |                  | ...                                    |
-|  **1.0.0**   |     2017-03     |                  | First production-ready release         |
-|    1.1.0     |     2017-06     |                  | TBD.                                   |
-|    1.2.0     |     2017-09     |                  | TBD.                                   |
+| Version Code | Determined Date |   Release Date    | Description                            |
+| :----------: | :-------------: | :---------------: | -------------------------------------- |
+|    0.0.1     |   2016-09-09    | 2016-09-09 (+0d)  | Init the gem project                   |
+|    0.0.2     |   2016-09-09    | 2016-09-09 (+0d)  | Init basic EventMachine server         |
+|    0.0.3     |   2016-09-13    | 2016-09-13 (+0d)  | Init Midori::API design                |
+|    0.0.4     |   2016-09-20    | 2016-09-19 (-1d)  | Implement API match                    |
+|    0.0.5     |   2016-09-27    | 2016-09-25 (-2d)  | Implement request and response.        |
+|    0.0.6     |   2016-10-04    | 2016-10-06 (+2d)  | Implement WebSocket                    |
+|    0.0.7     |   2016-10-11    | 2016-10-11 (+0d)  | Get WebSocket Code Covered             |
+|    0.0.8     |   2016-10-18    | 2016-10-16 (-2d)  | Implement EventSource                  |
+|    0.0.9     |   2016-10-25    | 2016-10-17 (-8d)  | Implement Middleware                   |
+|  **0.1.0**   |   2016-11-01    | 2016-10-27 (-5d)  | Enrich API and documenting (dev ready) |
+|    0.1.1     |   2016-11-08    | 2016-11-07 (-1d)  | API Mount Syntax                       |
+|    0.1.2     |   2016-11-15    | 2016-11-27 (+12d) | Better Error Handler                   |
+|    0.1.3     |   2016-11-22    |                   | File I/O                               |
+|    0.1.4     |   2016-12-06    |                   | Implement Database Driver              |
+|    0.1.5     |   2016-12-20    |                   | Implement Database ORM                 |
+|    0.1.6     |   2017-01-03    |                   | Enrich Database                        |
+|    0.1.7     |   2017-01-10    |                   | Enrich ORM                             |
+|    0.1.8     |   2017-01-17    |                   | Tutorial                               |
+|    0.1.9     |   2017-01-24    |                   | Official Wiki                          |
+|    0.2.0     |   2017-01-31    |                   | Enrich API and documenting             |
+|     ...      |       ...       |                   | ...                                    |
+|  **1.0.0**   |     2017-03     |                   | First production-ready release         |
+|    1.1.0     |     2017-06     |                   | TBD.                                   |
+|    1.2.0     |     2017-09     |                   | TBD.                                   |
 
