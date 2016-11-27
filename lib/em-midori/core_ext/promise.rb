@@ -16,12 +16,25 @@ class Promise
   end
 end
 
+class DeferPromise < Promise
+  def initialize(deffered)
+    super(->(resolve, _reject){
+      EventMachine.defer(deffered, 
+        proc { |result|
+          resolve.call(result)
+        }, proc { |error| 
+          raise error
+        })
+    })
+  end
+end
+
 module Kernel
   # Logic dealing of async method
   # @param [Fiber] fiber a fiber to call
   def async_internal(fiber)
     chain = lambda do |result|
-      return if result.class != Promise
+      return unless result.is_a?Promise
       result.then(lambda do |val|
         chain.call(fiber.resume(val))
       end)
