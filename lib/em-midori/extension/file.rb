@@ -1,19 +1,11 @@
 class Midori::File
   class << self
-    def read_promise(*args)
-      defer { File.read(*args) }
-    end
-
     def read(*args)
-      await read_promise(*args)
-    end
-
-    def write_promise(*args)
-      defer { File.write(*args) }
+      await(defer{File.read(*args)})
     end
 
     def write(*args)
-      await write_promise(*args)
+      await(defer{File.write(*args)})
     end
   end
 end
