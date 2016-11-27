@@ -3,6 +3,7 @@ require 'em-midori'
 require 'json'
 require_relative 'controllers/user_controller'
 
+define_error :forbidden_request, :unauthorized_error
 class Example < Midori::API
   get '/' do
     'Hello World'
@@ -31,18 +32,18 @@ class Example < Midori::API
     end
   end
 
+  capture ForbiddenRequest do |_e|
+    Midori::Response.new(403, {code: 403, message: 'Illegal request'}.to_json)
+  end
+
+  capture UnauthorizedError do |_e|
+    Midori::Response.new(401, {code: 401, message: 'Incorrect username or password'}.to_json)
+  end
+
   get '/user/login' do
-    begin
-      request = JSON.parse(request.body)
-      Midori::Response.new(200, UserController.login(request['username'], request['password']).to_json)
-      # => {code: 0, token: String}
-    rescue 'ForbiddenRequest' => _e
-      Midori::Response.new(403, {code: 403, message: 'Illegal request'}.to_json)
-    rescue 'UnauthorizedError' => _e
-      Midori::Response.new(401, {code: 401, message: 'Incorrect username or password'}.to_json)
-    rescue => _e
-      Midori::Response.new(400, {code: 400, message: 'Bad Request'}.to_json)
-    end
+    request = JSON.parse(request.body)
+    Midori::Response.new(200, UserController.login(request['username'], request['password']).to_json)
+    # => {code: 0, token: String}
   end
 
   get '/user/:id/profile' do |id|

@@ -1,8 +1,10 @@
 ##
-# This module store errors to be handled in Midori
+# This module store errors to be handled inside Midori
 module Midori::Error
   # No route matched
   class NotFound < StandardError; end
+  # Internal Error
+  class InternalError < StandardError; end
   # Midori doesn't support continuous frame of WebSockets yet
   class ContinuousFrame < StandardError; end
   # WebSocket OpCode not defined in RFC standards

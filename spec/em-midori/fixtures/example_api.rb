@@ -6,7 +6,7 @@ end
 
 class ExampleAPI < Midori::API
   helper do
-    def test_helper
+    define_method :test_helper do
       'Hello World'
     end
   end
@@ -23,13 +23,13 @@ class ExampleAPI < Midori::API
     raise StandardError
   end
 
+  define_error :test_error
+  capture TestError do |_e|
+    'Hello Error'
+  end
+
   get '/test_error' do
-    define_error :test_error
-    begin
-      raise TestError
-    rescue TestError => _e
-      next 'Hello Error'
-    end
+    raise TestError
   end
 
   websocket '/websocket' do |ws|

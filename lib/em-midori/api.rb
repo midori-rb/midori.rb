@@ -107,7 +107,7 @@ class Midori::API
     #      puts 'Hello World'
     #   end
     def eventsource(path, &block) end
-    
+
     # Mount a route prefix with another API defined
     # @param [String] prefix prefix of the route String
     # @param [Class] api inherited from Midori::API
@@ -115,6 +115,10 @@ class Midori::API
     def mount(prefix, api)
       raise ArgumentError if prefix == '/' # Cannot mount route API
       @routes[:MOUNT] << [prefix, api]
+    end
+
+    def capture(error, &block)
+      Midori::Sandbox.add_rule(error, block)
     end
 
     # Implementation of route DSL

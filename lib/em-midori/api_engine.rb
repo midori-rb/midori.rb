@@ -56,16 +56,16 @@ class Midori::APIEngine
         # Send 101 Switching Protocol
         connection.send_data Midori::Response.new(101, Midori::APIEngine.websocket_header(request.header['Sec-WebSocket-Key']), '')
         connection.websocket.request = request
-        route.function.to_lambda(clean_room).call(connection.websocket)
+        Midori::Sandbox.run(clean_room, route.function, connection.websocket)
         return Midori::Response.new
       elsif request.eventsource?
         connection.send_data Midori::Response.new(200, Midori::Const::EVENTSOURCE_HEADER, '')
-        route.function.to_lambda(clean_room).call(connection.eventsource)
+        Midori::Sandbox.run(clean_room, route.function, connection.eventsource)
         return Midori::Response.new
       else
-        result = route.function.to_lambda(clean_room).call
+        result = Midori::Sandbox.run(clean_room, route.function)
         clean_room.body = result unless result.nil?
-        response = clean_room.raw_response
+        response = (result.is_a?Midori::Response) ? result : clean_room.raw_response
         route.middlewares.reverse_each { |middleware| response = middleware.after(request, response) }
         return response
       end
