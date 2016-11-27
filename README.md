@@ -146,7 +146,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |  **0.1.0**   |   2016-11-01    | 2016-10-27 (-5d)  | Enrich API and documenting (dev ready) |
 |    0.1.1     |   2016-11-08    | 2016-11-07 (-1d)  | API Mount Syntax                       |
 |    0.1.2     |   2016-11-15    | 2016-11-27 (+12d) | Better Error Handler                   |
-|    0.1.3     |   2016-11-22    |                   | File I/O                               |
+|    0.1.3     |   2016-11-22    | 2016-11-27 (+5d)  | File I/O                               |
 |    0.1.4     |   2016-12-06    |                   | Implement Database Driver              |
 |    0.1.5     |   2016-12-20    |                   | Implement Database ORM                 |
 |    0.1.6     |   2017-01-03    |                   | Enrich Database                        |
