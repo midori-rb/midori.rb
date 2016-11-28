@@ -13,7 +13,7 @@ RSpec.describe Midori::Postgres do
             bar varchar(45)
           )
         SQL
-        ).cmd_tag
+        ).result.cmd_tag
         EM.stop
       end
       EM.run {

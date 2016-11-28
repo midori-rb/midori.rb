@@ -16,14 +16,6 @@ class Promise
   end
 end
 
-class PromiseException < StandardError
-  attr_reader :raw_exception
-  def initialize(raw_exception)
-    super(nil)
-    @raw_exception = raw_exception
-  end
-end
-
 class DeferPromise < Promise
   def initialize(deffered)
     super(->(resolve, reject){

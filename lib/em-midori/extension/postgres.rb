@@ -1,12 +1,3 @@
-class Midori::Postgres::Result
-  attr_reader :status, :result, :errors
-  def initialize(status, result, errors)
-    @status = status
-    @result = result
-    @errors = errors
-  end
-end
-
 class Midori::Postgres
   def initialize(*args)
     @db = EM.connect(*args, EM::P::Postgres3)
@@ -30,5 +21,14 @@ class Midori::Postgres
         resolve.call(PromiseException.new(e))
       end
     }))
+  end
+end
+
+class Midori::Postgres::Result
+  attr_reader :status, :result, :errors
+  def initialize(status, result, errors)
+    @status = status
+    @result = result
+    @errors = errors
   end
 end
