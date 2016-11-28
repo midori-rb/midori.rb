@@ -18,11 +18,11 @@ end
 
 class DeferPromise < Promise
   def initialize(deffered)
-    super(->(resolve, reject){
+    super(->(resolve, _reject){
       EventMachine.defer(proc {
         begin
           deffered.call
-        rescue Exception => e
+        rescue StandardError => e
           PromiseException.new(e)
         end
       }, proc { |result| resolve.call(result) })
