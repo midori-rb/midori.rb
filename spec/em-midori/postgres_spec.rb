@@ -13,15 +13,12 @@ RSpec.describe Midori::Postgres do
             bar varchar(45)
           )
         SQL
-        ).cmd_tag
+        ).result.cmd_tag
 
-        begin
-          @db.query <<-SQL
+        answer << true unless (@db.query <<-SQL
             SYNTAX ERROR TEST
-          SQL
-        rescue => _e
-          answer << true
-        end
+        SQL
+        ).errors.empty?
 
         EM.stop
       end
