@@ -47,19 +47,10 @@ class Example < Midori::API
   end
 
   get '/user/:id/profile' do |id|
-    begin
-      protected!(id)
-      UserController.get_profile(id)
-      # => {username: String, avatar: String}
-    rescue 'ForbiddenRequest' => _e
-      Midori::Response.new(403, {code: 403, message: 'Illegal request'}.to_json)
-    rescue 'UnauthorizedError' => _e
-      Midori::Response.new(401, {code: 401, message: 'Token incorrect'}.to_json)
-    rescue => _e
-      Midori::Response.new(400, {code: 400, message: 'Bad Request'}.to_json)
-    end
+    protected!(id)
+    UserController.get_profile(id)
+    # => {username: String, avatar: String}
   end
-
 end
 
 Midori::Runner.new(Example).start
