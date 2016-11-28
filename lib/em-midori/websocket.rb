@@ -21,8 +21,8 @@ class Midori::WebSocket
     fin = byte_tmp & 0b10000000
     @opcode = byte_tmp & 0b00001111
     # NOT Support Multiple Fragments
-    raise Midori::Error::ContinuousFrame unless fin
-    raise Midori::Error::OpCodeError unless [0x1, 0x2, 0x8, 0x9, 0xA].include?opcode
+    raise Midori::Exception::ContinuousFrame unless fin
+    raise Midori::Exception::OpCodeError unless [0x1, 0x2, 0x8, 0x9, 0xA].include? opcode
     close if @opcode == 0x8 # Close Frame
     # return if @opcode == 0x9 || @opcode == 0xA # Ping Pong
     decode_mask(data)
@@ -34,7 +34,7 @@ class Midori::WebSocket
     # Mask
     byte_tmp = data.getbyte
     is_masked = byte_tmp & 0b10000000
-    raise Midori::Error::NotMasked unless is_masked == 128
+    raise Midori::Exception::NotMasked unless is_masked == 128
     # Payload
     payload = byte_tmp & 0b01111111
     mask = Array.new(4) { data.getbyte }
@@ -72,7 +72,7 @@ class Midori::WebSocket
       output.concat msg
       @connection.send_data(output.pack('C*'))
     else
-      raise Midori::Error::OpCodeError
+      raise Midori::Exception::OpCodeError
     end
   end
 
@@ -92,12 +92,12 @@ class Midori::WebSocket
   # @param [Fixnum] method opcode
   # @param [String] str string to send
   def heartbeat(method, str)
-      raise Midori::Error::PingPongSizeTooLarge if str.size > 125
+      raise Midori::Exception::PingPongSizeTooLarge if str.size > 125
       @connection.send_data [method, str.size, str].pack("CCA#{str.size}")
   end
 
   # Close a websocket connection
   def close
-    raise Midori::Error::FrameEnd
+    raise Midori::Exception::FrameEnd
   end
 end

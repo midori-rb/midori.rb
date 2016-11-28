@@ -2,8 +2,8 @@ class Midori::Sandbox
   class << self
     def class_initialize
       @handlers = Hash.new
-      @handlers[Midori::Error::InternalError] = proc {|_e| Midori::Response.new(500, {}, 'Internal Server Error')}
-      @handlers[Midori::Error::NotFound] = proc {|_e| Midori::Response.new(404, {}, '404 Not Found')}
+      @handlers[Midori::Exception::InternalError] = proc {|_e| Midori::Response.new(500, {}, 'Internal Server Error')}
+      @handlers[Midori::Exception::NotFound] = proc {|_e| Midori::Response.new(404, {}, '404 Not Found')}
     end
 
     def add_rule(class_name, block)
@@ -12,7 +12,7 @@ class Midori::Sandbox
 
     def capture(error)
       if @handlers[error.class].nil?
-        @handlers[Midori::Error::InternalError].call(error)
+        @handlers[Midori::Exception::InternalError].call(error)
       else
         @handlers[error.class].call(error) 
       end

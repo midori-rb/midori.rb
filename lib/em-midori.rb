@@ -15,7 +15,7 @@ require_relative 'em-midori/core_ext/proc'
 
 require_relative 'em-midori/version'
 require_relative 'em-midori/const'
-require_relative 'em-midori/error'
+require_relative 'em-midori/exception'
 require_relative 'em-midori/clean_room'
 require_relative 'em-midori/request'
 require_relative 'em-midori/response'
