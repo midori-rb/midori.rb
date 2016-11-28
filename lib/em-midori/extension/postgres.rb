@@ -14,21 +14,10 @@ class Midori::Postgres
   def query(sql)
     await(Promise.new(->(resolve, _reject) {
       begin
-        @db.query(sql).callback do |status, result, errors|
-          resolve.call(Midori::Postgres::Result.new(status, result, errors))
+        @db.query(sql).callback do |_status, result, errors|
+          errors.empty? ? resolve.call(result) : resolve.call(PromiseException.new(errors))
         end
-      rescue Exception => e
-        resolve.call(PromiseException.new(e))
       end
     }))
-  end
-end
-
-class Midori::Postgres::Result
-  attr_reader :status, :result, :errors
-  def initialize(status, result, errors)
-    @status = status
-    @result = result
-    @errors = errors
   end
 end

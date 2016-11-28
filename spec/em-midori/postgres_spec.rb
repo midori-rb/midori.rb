@@ -13,14 +13,23 @@ RSpec.describe Midori::Postgres do
             bar varchar(45)
           )
         SQL
-        ).result.cmd_tag
+        ).cmd_tag
+
+        begin
+          @db.query <<-SQL
+            SYNTAX ERROR TEST
+          SQL
+        rescue => _e
+          answer << true
+        end
+
         EM.stop
       end
       EM.run {
         test_postgres
         answer << 0
       }
-      expect(answer).to eq([0, true, 'CREATE TABLE'])
+      expect(answer).to eq([0, true, 'CREATE TABLE', true])
     end
   end
 end
