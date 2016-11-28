@@ -6,7 +6,7 @@ RSpec.describe Midori::Postgres do
     it 'should query in correct order' do
       answer = []
       async :test_postgres do
-        @db = Midori::Postgres.new('/tmp/.s.PGSQL.5432')
+        @db = Midori::Postgres.new('/private/tmp/.s.PGSQL.5432')
         EM.stop
       end
       EM.run {
