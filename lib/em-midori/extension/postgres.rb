@@ -1,6 +1,7 @@
 class Midori::Postgres
-  def initialize(socket)
-    @db = EM.connect_unix_domain(socket)
+  def initialize(socket, port = nil)
+    @db = port.nil? ? EM.connect_unix_domain(socket) : EM.connect(socket, port)
+    
   end
 
   def connect(dbname, username, password)
