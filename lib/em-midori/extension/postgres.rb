@@ -1,3 +1,5 @@
+safe_require 'postgres-pr/message', 'gem install postgres-pr'
+
 class Midori::Postgres
   def initialize(*args)
     @db = EM.connect(*args, EM::P::Postgres3)
