@@ -16,6 +16,14 @@ class Promise
   end
 end
 
+class PromiseException < StandardError
+  attr_reader :raw_exception
+  def initialize(raw_exception)
+    super(nil)
+    @raw_exception = raw_exception
+  end
+end
+
 class DeferPromise < Promise
   def initialize(deffered)
     super(->(resolve, reject){
@@ -23,10 +31,9 @@ class DeferPromise < Promise
         begin
           deffered.call
         rescue Exception => e
-          e
+          PromiseException.new(e)
         end
-      },
-                         proc { |result| resolve.call(result) })
+      }, proc { |result| resolve.call(result) })
     })
   end
 end
@@ -67,7 +74,7 @@ module Kernel
   #   result = await SQL.query('SELECT * FROM hello')
   def await(promise)
     result = Fiber.yield promise
-    raise result if result.is_a?Exception
+    raise result.raw_exception if result.is_a?PromiseException
     result
   end
 end

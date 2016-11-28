@@ -27,7 +27,7 @@ class Midori::Postgres
           resolve.call(Midori::Postgres::Result.new(status, result, errors))
         end
       rescue Exception => e
-        resolve.call(e)
+        resolve.call(PromiseException.new(e))
       end
     }))
   end
