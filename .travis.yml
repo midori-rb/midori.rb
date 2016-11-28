@@ -26,8 +26,12 @@ matrix:
 os:
   - linux
 
+services:
+  - postgresql
+
 before_install:
   - gem install bundler
+  - psql -c 'create database travis_ci_test;' -U postgres
 
 script:
   - gem list -l

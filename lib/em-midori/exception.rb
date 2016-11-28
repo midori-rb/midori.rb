@@ -1,6 +1,6 @@
 ##
 # This module store errors to be handled inside Midori
-module Midori::Error
+module Midori::Exception
   # No route matched
   class NotFound < StandardError; end
   # Internal Error

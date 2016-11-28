@@ -11,7 +11,7 @@ RSpec.describe Midori::WebSocket do
     it 'should not decode unmasked Hello String' do
       expect do
         websocket.decode(StringIO.new([0x81, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f].pack('C*')))
-      end.to raise_error(Midori::Error::NotMasked)
+      end.to raise_error(Midori::Exception::NotMasked)
     end
   end
 end

@@ -35,21 +35,17 @@ class ExampleAPI < Midori::API
   websocket '/websocket' do |ws|
     ws.on :open do
       ws.send 'Hello'
-      puts 'on Open '.green
     end
 
     ws.on :message do |msg|
-      puts 'on Message'.green
       ws.send msg
     end
 
     ws.on :pong do
       ws.send ''
-      puts 'on Pong'.green
     end
 
     ws.on :close do
-      puts 'on Close'.green
     end
   end
 

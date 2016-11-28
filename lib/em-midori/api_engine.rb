@@ -70,7 +70,7 @@ class Midori::APIEngine
         return response
       end
     end
-    raise Midori::Error::NotFound
+    raise Midori::Exception::NotFound
   end
 
   # Return websocket header with given key

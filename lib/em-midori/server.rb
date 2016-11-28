@@ -44,7 +44,7 @@ module Midori::Server
       @request.parse(data)
       @response = @api.receive(request, self)
       call_event(:open) if @request.websocket?
-    rescue Midori::Error::NotFound => e
+    rescue Midori::Exception::NotFound => e
       @response = Midori::Sandbox.capture(e)
     rescue => e
       @response = Midori::Sandbox.capture(e)
@@ -70,11 +70,11 @@ module Midori::Server
     when 0xA
       call_event(:pong)
     end
-  rescue Midori::Error::FrameEnd => _e
+  rescue Midori::Exception::FrameEnd => _e
     call_event(:close)
     send_data "\b" # Opcode 0x8
     close_connection_after_writing
-  rescue Midori::Error::PingPongSizeTooLarge => e
+  rescue Midori::Exception::PingPongSizeTooLarge => e
     @logger.warn e.inspect.yellow
     call_event(:error) # Too large ping request
     send_data "\b" # Opcode 0x8
