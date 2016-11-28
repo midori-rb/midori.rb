@@ -13,6 +13,7 @@ require_relative 'em-midori/core_ext/promise'
 require_relative 'em-midori/core_ext/promise_exception'
 require_relative 'em-midori/core_ext/define_class'
 require_relative 'em-midori/core_ext/proc'
+require_relative 'em-midori/core_ext/safe_require'
 
 require_relative 'em-midori/version'
 require_relative 'em-midori/const'
