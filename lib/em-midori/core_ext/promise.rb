@@ -18,13 +18,15 @@ end
 
 class DeferPromise < Promise
   def initialize(deffered)
-    super(->(resolve, _reject){
-      EventMachine.defer(deffered, 
-        proc { |result|
-          resolve.call(result)
-        }, proc { |error| 
-          raise error
-        })
+    super(->(resolve, reject){
+      EventMachine.defer(proc {
+        begin
+          deffered.call
+        rescue Exception => e
+          e
+        end
+      },
+                         proc { |result| resolve.call(result) })
     })
   end
 end
@@ -64,6 +66,8 @@ module Kernel
   # @example
   #   result = await SQL.query('SELECT * FROM hello')
   def await(promise)
-    Fiber.yield promise
+    result = Fiber.yield promise
+    raise result if result.is_a?Exception
+    result
   end
 end

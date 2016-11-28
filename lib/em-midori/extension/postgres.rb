@@ -1,3 +1,12 @@
+class Midori::Postgres::Result
+  attr_reader :status, :result, :errors
+  def initialize(status, result, errors)
+    @status = status
+    @result = result
+    @errors = errors
+  end
+end
+
 class Midori::Postgres
   def initialize(*args)
     @db = EM.connect(*args, EM::P::Postgres3)
@@ -13,8 +22,12 @@ class Midori::Postgres
 
   def query(sql)
     await(Promise.new(->(resolve, _reject) {
-      @db.query(sql).callback do |status, result, errors|
-        status ? resolve.call(result) : (puts errors; raise RuntimeError)
+      begin
+        @db.query(sql).callback do |status, result, errors|
+          resolve.call(Midori::Postgres::Result.new(status, result, errors))
+        end
+      rescue Exception => e
+        resolve.call(e)
       end
     }))
   end
