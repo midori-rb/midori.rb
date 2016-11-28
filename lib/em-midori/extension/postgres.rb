@@ -11,10 +11,10 @@ class Midori::Postgres
     }))
   end
 
-  def query(str)
+  def query(sql)
     await(Promise.new(->(resolve, _reject) {
-      @db.query(str).callback do |status, result, errors|
-        resolve.call([status, result, errors])
+      @db.query(sql).callback do |status, result, errors|
+        status ? resolve.call(result) : raise(errors[-1])
       end
     }))
   end
