@@ -7,4 +7,5 @@ class Midori::Configure
   set :bind, '127.0.0.1'
   set :port, 8080
   set :route_type, :sinatra
+  set :before, proc {}
 end

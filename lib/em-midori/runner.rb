@@ -7,6 +7,7 @@ class Midori::Runner
     @logger = configure.logger
     @bind = configure.bind
     @port = configure.port
+    @before = configure.before
     @api = ((api.is_a?Midori::APIEngine) ? api : Midori::APIEngine.new(api, configure.route_type))
   end
 
@@ -24,6 +25,7 @@ class Midori::Runner
 
     EventMachine.set_simultaneous_accept_count(40) unless RUBY_PLATFORM == 'java'
     EventMachine.run do
+      @before.call
       @logger.info "Midori #{Midori::VERSION} is now running on #{bind}:#{port}".blue
       @server_signature = EventMachine.start_server bind, port, Midori::Server, @api, @logger
     end
