@@ -12,3 +12,6 @@ gem 'simplecov', require: false, :group => :test
 gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'postgres-pr', '~> 0.7'
+gem 'sequel', '~> 4.40'
+gem 'pg', '~> 0.17', :platform => :ruby
+gem 'pg_jruby', :platform => :jruby
