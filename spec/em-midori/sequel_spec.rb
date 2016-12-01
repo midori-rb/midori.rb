@@ -1,4 +1,4 @@
-require 'sequel'
+require 'em-midori/extension/sequel'
 
 RSpec.describe 'Sequel' do
   describe 'Postgres' do
