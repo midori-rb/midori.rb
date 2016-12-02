@@ -145,22 +145,23 @@ class Midori::API
     # @return [nil] nil
     def use(middleware, *args)
       middleware = middleware.new(*args)
-      Midori::CleanRoom.class_exec { middleware.helper }
       @scope_middlewares << middleware
       nil
     end
 
     def filter(middleware, *args)
       middleware = middleware.new(*args)
-      Midori::CleanRoom.class_exec { middleware.helper }
       @temp_middlewares << middleware
       nil
     end
 
     # Helper block for defining methods in APIs
+    # @param [Symbol] name name of the method
     # @yield define what to run in CleanRoom
-    def helper(&block)
-      Midori::CleanRoom.class_exec(&block)
+    def helper(name, &block)
+      Midori::CleanRoom.class_exec do
+        define_method(name, &block)
+      end
     end
 
     def inherited(subclass)

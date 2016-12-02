@@ -20,6 +20,10 @@ RSpec.describe Midori::Server do
       expect(Net::HTTP.get(URI('http://127.0.0.1:8080/'))).to eq('Hello World')
     end
 
+    it 'should return \'Hello World\' on GET /2 request' do
+      expect(Net::HTTP.get(URI('http://127.0.0.1:8080/2'))).to eq('Hello World')
+    end
+
     it 'should return 404 Not Found on GET /not_found_error' do
       expect(Net::HTTP.get(URI('http://127.0.0.1:8080/not_found_error'))).to eq('404 Not Found')
     end

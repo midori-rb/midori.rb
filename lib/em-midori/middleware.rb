@@ -20,8 +20,9 @@ class Midori::Middleware
     response
   end
 
-  # code to be inserted inside CleanRoom
-  # @return [nil] nil
-  def helper
+  def self.helper(name, &block)
+    Midori::CleanRoom.class_exec do
+      define_method(name, &block)
+    end
   end
 end

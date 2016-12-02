@@ -4,19 +4,27 @@ class User < Midori::API
   end
 end
 
+class ExampleMiddleware < Midori::Middleware
+  helper :test_helper_inside_middleware do
+    'Hello World'
+  end
+end
+
 class ExampleAPI < Midori::API
-  helper do
-    define_method :test_helper do
-      'Hello World'
-    end
+  helper :test_helper do
+    'Hello World'
   end
 
   mount '/user', User
-  use Midori::Middleware
+  use ExampleMiddleware
 
-  filter Midori::Middleware
+  filter ExampleMiddleware
   get '/' do
     return test_helper
+  end
+
+  get '/2' do
+    test_helper_inside_middleware
   end
 
   get '/error' do
