@@ -2,7 +2,7 @@ class Midori::Sandbox
   class << self
     def class_initialize
       @handlers = Hash.new
-      @handlers[Midori::Exception::InternalError] = proc {|_e| Midori::Response.new(500, {}, 'Internal Server Error')}
+      @handlers[Midori::Exception::InternalError] = proc {|e| Midori::Response.new(500, {}, "#{e.inspect} #{e.backtrace}")}
       @handlers[Midori::Exception::NotFound] = proc {|_e| Midori::Response.new(404, {}, '404 Not Found')}
     end
 
