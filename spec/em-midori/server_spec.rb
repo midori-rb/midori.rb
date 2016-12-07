@@ -29,7 +29,7 @@ RSpec.describe Midori::Server do
     end
 
     it 'should return 500 Internal Server Error on GET /error' do
-      expect(Net::HTTP.get(URI('http://127.0.0.1:8080/error'))).to eq('Internal Server Error')
+      expect(Net::HTTP.get_response(URI('http://127.0.0.1:8080/error')).code).to eq('500')
     end
 
     it 'should pass test error definition' do
