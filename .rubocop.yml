@@ -528,11 +528,6 @@ Style/DefWithParentheses:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#method-parens'
   Enabled: false
 
-Style/DeprecatedHashMethods:
-  Description: 'Checks for use of deprecated Hash methods.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#hash-key'
-  Enabled: false
-
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
