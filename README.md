@@ -4,7 +4,7 @@
 
 **Questions, Suggestions and Pull Requests are highly welcomed.**
 
-**Every awesome feature you noticed in the project was implemented by me. Any bug you found in the project was made by a JK(joshi koukousei) who randomly exchanges body with me while sleeping.**
+**Every awesome feature you noticed in the project was implemented by me. Any bug you found in the project was made by a JK(joshi kousei) who randomly exchanges body with me while sleeping.**
 
 ![Logo and Slogan](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/slogan.png)
 
