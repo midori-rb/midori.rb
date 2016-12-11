@@ -1,10 +1,10 @@
-# EM Midori
+# em-midori
 
-**This project is still under very early development, with NUMEROUS undecided syntax design and trivial implementation.**
+**This project is still not production-ready.**
 
-**It's FAR from production-ready.**
+**Questions, Suggestions and Pull Requests are highly welcomed.**
 
-**Improvement, Questions and Suggestions are highly welcomed.**
+**Every awesome feature you noticed in the project was implemented by me. Any bug you found in the project was made by an JK(joshi koukousei) who randomly exchanges body with me while sleeping.**
 
 ![Logo and Slogan](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/slogan.png)
 
@@ -39,32 +39,6 @@ gem 'em-midori'
 ```bash
 bundle install
 ```
-
-## Inspiration
-
-### Why EventMachine Based
-
-With the growing popularity of attempts of decoupling the front-end and back-end code, more and more people turn from full-stack web frameworks like Rails, to high performance API-based frameworks. We've got lots of choices in API-based frameworks, like Sinatra or Grape, but most of those are still working with multiple-threading model, which could hardly reach the I/O performance of Node.js or Go.
-
-### DSL and MVC
-
-DSL is awesome. With the magic of Ruby meta-programming features, we could make web development much easier. As lots of people say, EventMachine is fast but not that easy to use. But what if we build a DSL on top of it? You could then no longer have to deal with EventMachine directly. Midori is a project that builds a DSL on top of EventMachine. The API also provides an MVC project structure, for middle or large scale projects.
-
-### Why not ... ?
-
-#### Why not [cramp](https://github.com/lifo/cramp) ?
-
-Cramp provides sinatra-like DSL and runs very fast on EventMachine for hello world benchmarks. But still it just packages the Network I/O part with EventMachine. It doesn't correctly deal with other I/O parts like database. So in practice, Cramp does not run as fast as it could. What's more, it's no longer maintained.
-
-#### Why not [sinatra-synchrony](https://github.com/kyledrake/sinatra-synchrony) ?
-
-Sinatra-synchrony perfectly combined Sinatra and EventMachine, but unfortunately, it also doesn't correctly deal with other I/O parts. With too many stacks combined, sinatra-synchrony has only about one-third performance of other EventMachine web servers. Not a good choice for production. What's more, it's also no longer maintained.
-
-#### Why not [angelo](https://github.com/kenichi/angelo) ?
-
-Angelo is awesome, providing Sinatra-like DSL for Reel. Actually Reel is not working with EventMachine, but [Celluloid::IO](https://github.com/celluloid/celluloid-io), which works similar to EventMachine. Angelo is not production ready, nor Reel or Celluloid::IO. There's also no clear roadmap showing when would they be ready, though none of them has declared out of maintaining.
-
-### When Nothing Meet The Needs, Create One of Your Own.
 
 ## FAQ
 
@@ -114,17 +88,14 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 3. Raise a ticket if no open ticket meets your idea.
 4. If you are not sure whether you should raise a ticket or not, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
-#### Contribute feature
+#### Contribute
 
-1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues) and [Development board](https://github.com/heckpsi-lab/em-midori/projects/1).
+1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
 2. Pick a feature still not in progress.
-3. Raise a ticket if your feature is still not on plan.
-4. Fork it.
-5. Code it.
-6. Pass the tests.
-7. Document it.
-8. Raise pull requests.
-9. If any problem, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
+3. Raise a ticket saying you're working on.
+4. Fork, Code, Test and Document it.
+5. Raise pull requests.
+6. If any problem, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
 ## Roadmap
 
