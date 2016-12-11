@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'bundler', '~> 1.0'
-gem 'rake', '~> 11.2'
+gem 'rake', '~> 12.0'
 gem 'rspec', '~> 3.0'
 gem 'yard'
 gem 'kramdown'
