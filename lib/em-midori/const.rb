@@ -22,7 +22,6 @@ module Midori::Const
     303 => '303 See Other',
     304 => '304 Not Modified', # RFC 7232
     305 => '305 Use Proxy',
-    305 => '306 Switch Proxy', # No longer used.
     307 => '307 Temporary Redirect',
     308 => '308 Permanent Redirect', # RFC 7538
     400 => '400 Bad Request',
