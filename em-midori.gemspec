@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.files                    = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec|.resources)/}) } \
     - %w(README.md CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT.md Gemfile Rakefile em-midori.gemspec .gitignore .rspec .codeclimate.yml .rubocop.yml .travis.yml logo.png Rakefile Gemfile)
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
+  s.metadata                 = { 'issue_tracker' => 'https://github.com/heckpsi-lab/em-midori/issues' }
   s.license                  = 'MIT'
   s.add_runtime_dependency     'eventmachine', '~> 1.2'
   s.add_runtime_dependency     'http_parser.rb', '~> 0.6'
