@@ -20,4 +20,4 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
-Dir['spec/em-midori/fixtures/*.rb'].each { |f| puts f; require_relative "../#{f}" }
+Dir['spec/em-midori/fixtures/*.rb'].each { |f| require_relative "../#{f}" }
