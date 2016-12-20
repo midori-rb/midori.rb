@@ -7,8 +7,12 @@ class Midori::Test
 
   end
 
-  def websocket(path)
-    Midori::Test::Websocket.new(api, path)
+  def websocket(path, header = {})
+    Midori::Test::Websocket.new(api, path, header)
+  end
+
+  def evetsource(path, header = {}, body)
+    Midori::Test::EventSource.new(api, path, header, body)
   end
 end
 
