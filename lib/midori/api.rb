@@ -3,6 +3,9 @@
 class Midori::API
   class << self
     attr_accessor :routes, :scope_middlewares
+
+    # Init private variables of class
+    # @return [ nil ] nil
     def class_initialize
       @routes = {
         GET: [],
@@ -18,6 +21,7 @@ class Midori::API
       }
       @scope_middlewares = []
       @temp_middlewares = []
+      nil
     end
 
     # Add GET method as a DSL for route definition
@@ -109,16 +113,26 @@ class Midori::API
     def eventsource(path, &block) end
 
     # Mount a route prefix with another API defined
-    # @param [String] prefix prefix of the route String
-    # @param [Class] api inherited from Midori::API
-    # @return [nil] nil
+    # @param [ String ] prefix prefix of the route String
+    # @param [ Class ] api inherited from Midori::API
+    # @return [ nil ] nil
     def mount(prefix, api)
       raise ArgumentError if prefix == '/' # Cannot mount route API
       @routes[:MOUNT] << [prefix, api]
+      nil
     end
 
+    # Definitions for global error handler
+    # @param [ Class ] error Error class, must be inherited form StandardError
+    # @yield what to do to deal with error
+    # @yieldparam [ StandardError ] e the detailed error
+    # @example Basic Usage
+    #   capture Midori::InternalError do |e|
+    #     Midori::Response(500, {}, e.backtrace)
+    #   end
     def capture(error, &block)
       Midori::Sandbox.add_rule(error, block)
+      nil
     end
 
     # Implementation of route DSL
@@ -149,6 +163,9 @@ class Midori::API
       nil
     end
 
+    # Use a middleware in the next route
+    # @param [Class] middleware Inherited from +Midori::Middleware+
+    # @return [nil] nil
     def filter(middleware, *args)
       middleware = middleware.new(*args)
       @temp_middlewares << middleware
@@ -169,7 +186,7 @@ class Midori::API
     end
   end
 
-  private_class_method :add_route
+  private_class_method :add_route, :inherited
 
   # Constants of supported methods in route definition
   METHODS = %w(get post put delete options link unlink websocket eventsource).freeze
