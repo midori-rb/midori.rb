@@ -28,6 +28,7 @@ os:
 
 services:
   - postgresql
+  - redis-server
 
 before_install:
   - gem install bundler
