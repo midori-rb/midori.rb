@@ -1,4 +1,4 @@
-require './lib/em-midori/version'
+require './lib/midori/version'
 
 Gem::Specification.new do |s|
   s.name                     = 'em-midori'
