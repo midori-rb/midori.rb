@@ -1,1 +1,1 @@
-./midori.rb
+require 'midori'
