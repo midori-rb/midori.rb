@@ -1,6 +1,6 @@
 require 'rspec/core/rake_task'
 require 'yard'
-require './lib/em-midori/version'
+require './lib/midori/version'
 
 task :default => %i(spec)
 

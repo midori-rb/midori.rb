@@ -1,5 +1,5 @@
 require './spec/spec_helper'
-require 'em-midori/extension/file'
+require 'midori/extension/file'
 
 RSpec.describe Midori::File do
   describe 'read file' do
