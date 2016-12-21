@@ -1,10 +1,19 @@
 safe_require 'em-hiredis', 'gem install em-hiredis'
-module EventMachine::Hiredis
-  class BaseClient
-    def method_missing(sys, *args)
-      if @connected
-        @connection.send_command(sys, args)
+class Midori::Redis
+  def initialize(*args)
+    @connection = EM::Hiredis.connect(*args)
+    @connection
+  end
+
+  def method_missing(sys, *args)
+    await(Promise.new(->(resolve, _reject) {
+      @connection.send(sys, *args).callback do |*ret_args|
+        resolve.call(*ret_args)
       end
-    end
+    }))
+  end
+
+  def pubsub
+    @connection.pubsub
   end
 end
