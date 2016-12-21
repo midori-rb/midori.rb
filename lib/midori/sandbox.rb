@@ -26,5 +26,7 @@ class Midori::Sandbox
       end
     end
   end
+
+  private_class_method :class_initialize
   class_initialize
 end
