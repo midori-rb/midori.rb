@@ -120,13 +120,22 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.3     |   2016-11-22    | 2016-11-27 (+5d)  | File I/O                               |
 |    0.1.4     |   2016-12-06    | 2016-11-28 (-8d)  | Implement Database Driver              |
 |    0.1.5     |   2016-12-20    | 2016-12-01 (-19d) | Implement Database ORM                 |
-|    0.1.6     |   2017-01-03    |                   | Enrich Database                        |
-|    0.1.7     |   2017-01-10    |                   | Enrich ORM                             |
+|    0.1.6     |   2017-01-03    | 2016-12-21 (-13d) | Enrich Database                        |
+|    0.1.7     |   2017-01-10    |                   | Documenting                            |
 |    0.1.8     |   2017-01-17    |                   | Tutorial                               |
 |    0.1.9     |   2017-01-24    |                   | Official Wiki                          |
-|    0.2.0     |   2017-01-31    |                   | Enrich API and documenting             |
-|     ...      |       ...       |                   | ...                                    |
-|  **1.0.0**   |     2017-03     |                   | First production-ready release         |
-|    1.1.0     |     2017-06     |                   | TBD.                                   |
-|    1.2.0     |     2017-09     |                   | TBD.                                   |
+|    0.2.0     |   2017-01-31    |                   | Official Website                       |
+|    0.2.1     |   2017-02-07    |                   | General Web Adapter                    |
+|    0.2.2     |   2017-02-14    |                   | Midori Test for API                    |
+|    0.2.3     |   2017-02-21    |                   | Midori Test for ws&es                  |
+|    0.2.4     |   2017-02-28    |                   | Documenting                            |
+|    0.2.5     |   2017-03-07    |                   | Enrich Tutorial                        |
+|  **1.0.0**   |   2017-03-14    |                   | First production-ready release         |
 
+## Midori 2 Goals
+
+- Complete HTTP/2 Support
+- Midori Clusters
+- More Concurrent Model Attempts (Actor, Guild, ...?)
+- Midori Command Line Tool
+- Midori Scaling Example
