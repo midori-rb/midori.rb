@@ -1,5 +1,5 @@
 require './spec/spec_helper'
-require 'em-midori/extension/postgres'
+require 'midori/extension/postgres'
 
 RSpec.describe Midori::Postgres do
   describe 'postgres' do
