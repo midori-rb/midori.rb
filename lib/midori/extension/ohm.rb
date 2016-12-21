@@ -1,4 +1,4 @@
-safe_require 'redic', 'gem install redic'
+safe_require 'ohm', 'gem install ohm'
 class Redic
   def call(*args)
     await(defer{
@@ -9,4 +9,3 @@ class Redic
     })
   end
 end
-safe_require 'ohm', 'gem install ohm'
