@@ -1,4 +1,5 @@
 safe_require 'em-hiredis', 'gem install em-hiredis'
+
 class Midori::Redis
   def initialize(*args)
     @connection = EM::Hiredis.connect(*args)
