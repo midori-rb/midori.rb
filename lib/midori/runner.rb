@@ -7,7 +7,7 @@ class Midori::Runner
 
   # Define status of a runner
   # @param [ Class ] api inherited from [ Midori::API ]
-  # @param [ Class ] confingure inherited from [ Midori::Configure ]
+  # @param [ Class ] configure inherited from [ Midori::Configure ]
   def initialize(api, configure = Midori::Configure)
     @logger = configure.logger
     @bind = configure.bind

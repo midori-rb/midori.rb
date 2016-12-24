@@ -1,14 +1,14 @@
 ##
 # Logic to EventMachine TCP Server, running inside +EM::Connection+
-# @!attribute request
-#   @return [ Midori::Request ] raw request
-# @!attribute api
-#   @return [ Class ] inherited from Midori::API
-# @!attribute websocket
-#   @return [ Midori::WebSocket ] defined websocket instance
-# @!attribute eventsource
-#   @return [ Midori::EventSource] defined eventsource instance
 module Midori::Server
+  # @!attribute request
+  #   @return [ Midori::Request ] raw request
+  # @!attribute api
+  #   @return [ Class ] inherited from Midori::API
+  # @!attribute websocket
+  #   @return [ Midori::WebSocket ] defined websocket instance
+  # @!attribute eventsource
+  #   @return [ Midori::EventSource] defined eventsource instance
   attr_accessor :request, :api, :websocket, :eventsource
 
   # Define server behaviour

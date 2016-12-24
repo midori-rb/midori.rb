@@ -1,9 +1,11 @@
 ##
 # This class provides methods to be inherited as route definition.
 class Midori::API
-  # @attr [ Hash ] routes merged routes defined in the instance
-  # @attr [ Array ] scope_middlewares global middlewares under the scope
   class << self
+     # @!attribute routes
+     #   @return [Hash] merged routes defined in the instance
+     # @!attribute scope_middlewares
+     #   @return [Array] global middlewares under the scope
     attr_accessor :routes, :scope_middlewares
 
     # Init private variables of class
