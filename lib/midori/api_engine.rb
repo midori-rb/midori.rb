@@ -1,3 +1,6 @@
+##
+# Merge and manage all APIs.
+# @attr [Hash] routes A hash of all routes merged
 class Midori::APIEngine
   attr_accessor :routes
   def initialize(root_api, type = :sinatra)
@@ -23,8 +26,8 @@ class Midori::APIEngine
     end
   end
 
+  # Merge all routes with a Depth-first search
   def merge(prefix, root_api, middlewares)
-    # Merge all routes with a Depth-first search
     root_api.routes[:MOUNT].each do |mount|
       root_api.routes.merge!(merge(mount[0], mount[1], root_api.scope_middlewares)) do |_key, old_val, new_val|
         old_val + new_val
@@ -81,4 +84,6 @@ class Midori::APIEngine
     header['Sec-WebSocket-Accept'] = Digest::SHA1.base64digest(key + '258EAFA5-E914-47DA-95CA-C5AB0DC85B11')
     header
   end
+
+  private :merge
 end

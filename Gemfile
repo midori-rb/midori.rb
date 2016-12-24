@@ -8,7 +8,7 @@ gem 'rake', '~> 12.0'
 gem 'rspec', '~> 3.0'
 gem 'yard'
 gem 'kramdown'
-gem 'simplecov', require: false, :group => :test
+gem 'simplecov', require: false, group: :test
 gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'postgres-pr', '~> 0.7'
