@@ -3,6 +3,9 @@ safe_require 'em-hiredis', 'gem install em-hiredis'
 ##
 # Midori Extension for Redis Driver
 class Midori::Redis
+
+  # Init a Redis Connection
+  # @param [ Array ] args args EM::Hiredis.connect
   def initialize(*args)
     @connection = EM::Hiredis.connect(*args)
     @connection

@@ -6,6 +6,8 @@ safe_require 'postgres-pr/message', 'gem install postgres-pr'
 class Midori::Postgres
   attr_reader :connected
 
+  # Init a Postgres Connection
+  # @param [ Array ] args args of EM.connect
   def initialize(*args)
     @connected = false
     @db = EM.connect(*args, EM::P::Postgres3)
@@ -42,10 +44,14 @@ end
 
 ##
 # Postgres Result for Midori Postgres Driver Extension
-# @param [ Array ] result result if success
-# @param [ Array ] errors exceptions met
+# @attr [ Array ] result result if success
+# @attr [ Array ] errors exceptions met
 class Midori::Postgres::Result
   attr_reader :result, :errors
+
+  # Init a Postgres Result
+  # @param [ Array ] result result if success
+  # @param [ Array ] errors exceptions met
   def initialize(result, errors)
     @result = result
     @errors = errors

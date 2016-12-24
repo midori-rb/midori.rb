@@ -1,8 +1,12 @@
 ##
 # Merge and manage all APIs.
-# @attr [Hash] routes A hash of all routes merged
+# @attr [ Hash ] routes A hash of all routes merged
 class Midori::APIEngine
   attr_accessor :routes
+
+  # Init an API Engine
+  # @param [ Class ] root_api API inherited from [ Midori::API ]
+  # @param [ Symbol ] type type mustermann support
   def initialize(root_api, type = :sinatra)
     @routes = {
       GET: [],
