@@ -3,6 +3,7 @@
 # @attr [String] ip client ip address
 # @attr [Fixnum] port client port
 # @attr [String] protocol protocol version of HTTP request
+# @attr [String] method HTTP method
 # @attr [String] path request path
 # @attr [String] query_string request query string
 # @attr [Hash] header request header
