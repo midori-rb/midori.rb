@@ -3,6 +3,7 @@
 # @attr [String] method HTTP method
 # @attr [Regexp] path regex to match
 # @attr [Proc] function what to do after matched
+# @attr [Array<Class>] middlewares middlewares used in the route
 class Midori::Route
   attr_accessor :method, :path, :function, :middlewares
 
