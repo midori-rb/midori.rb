@@ -1,8 +1,8 @@
 ##
 # Class for midori response
-# @attr [String] HTTP response status
-# @attr [Hash] HTTP response header
-# @attr [String] HTTP response body
+# @attr [String] status HTTP response status
+# @attr [Hash] header HTTP response header
+# @attr [String] body HTTP response body
 class Midori::Response
   attr_accessor :status, :header, :body
 
