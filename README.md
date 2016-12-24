@@ -121,7 +121,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.4     |   2016-12-06    | 2016-11-28 (-8d)  | Implement Database Driver              |
 |    0.1.5     |   2016-12-20    | 2016-12-01 (-19d) | Implement Database ORM                 |
 |    0.1.6     |   2017-01-03    | 2016-12-21 (-13d) | Enrich Database                        |
-|    0.1.7     |   2017-01-10    |                   | Documenting                            |
+|    0.1.7     |   2017-01-10    | 2016-12-25 (-16d) | Documenting                            |
 |    0.1.8     |   2017-01-17    |                   | Tutorial                               |
 |    0.1.9     |   2017-01-24    |                   | Official Wiki                          |
 |    0.2.0     |   2017-01-31    |                   | Official Website                       |
