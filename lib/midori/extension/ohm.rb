@@ -3,7 +3,7 @@ safe_require 'ohm', 'gem install ohm'
 ##
 # Midori Extension of ohm through meta programming Redic
 class Redic
-  # :nodoc:
+  # Call a redis request asynchronously
   def call(*args)
     await(defer{
       @client.connect do
