@@ -9,6 +9,8 @@ class Midori::Redis
   end
 
   # Call a redis request asynchronously
+  # @param [ String ] sys method name
+  # @param [ Array ] args args of the method calling
   def method_missing(sys, *args)
     await(Promise.new(->(resolve, _reject) {
       @connection.send(sys, *args).callback do |*ret_args|
@@ -18,6 +20,7 @@ class Midori::Redis
   end
 
   # Return raw pubsub mode
+  # @return [ EM::Hiredis::Pubsub ] raw pubsub
   def pubsub
     @connection.pubsub
   end
