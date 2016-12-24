@@ -9,6 +9,7 @@ class Midori::Response
   # @param [Fixnum] code HTTP response code
   # @param [Hash] header HTTP response header
   # @param [String] body HTTP response body
+  # Init a Response
   def initialize(code = 200, header = Midori::Const::DEFAULT_HEADER.clone, body = '')
     @status = Midori::Const::STATUS_CODE[code]
     @header = header

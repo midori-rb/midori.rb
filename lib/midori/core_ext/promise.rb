@@ -2,6 +2,7 @@
 # Meta-programming String for Syntactic Sugars
 # Referenced from {Qiita}[http://qiita.com/south37/items/99a60345b22ef395d424]
 class Promise
+  # Init a Promise
   # @param [ Proc ] callback an async method
   def initialize(callback)
     @callback = callback

@@ -29,7 +29,9 @@ class Midori::Request
     end
   end
 
-  # Init an request with StringIO data
+  # Init an request with String data
+  # @param [ String ] data
+  # @return [ nil ] nil
   def parse(data)
 
     offset = @parser << data
