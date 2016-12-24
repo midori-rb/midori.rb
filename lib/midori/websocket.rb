@@ -7,6 +7,7 @@
 class Midori::WebSocket
   attr_accessor :msg, :opcode, :events, :connection, :request
 
+  # Init a WebSocket instance with a connection
   # @param [EM::Connection] connection raw EventMachine connection
   def initialize(connection)
     @events = {}

@@ -4,6 +4,7 @@
 class Midori::EventSource
   attr_accessor :connection
 
+  # Init a EventSource instance with a connection
   # @param [EM::Connection] connection the connection instance of EventMachine
   def initialize(connection)
     @connection = connection

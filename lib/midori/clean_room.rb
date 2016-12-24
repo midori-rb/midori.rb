@@ -6,6 +6,8 @@
 # @attr [Midori::Request] request HTTP request
 class Midori::CleanRoom
   attr_accessor :status, :header, :body, :request
+
+  # Init a Cleanroom for running
   # @param [Midori::Request] request HTTP request
   def initialize(request)
     @status = 200

@@ -7,6 +7,7 @@
 module Midori::Server
   attr_accessor :request, :api, :websocket, :eventsource
 
+  # Define server behaviour
   # @param [Class] api inherited from Midori::API
   # @param [Logger] logger global logger
   def initialize(api, logger)

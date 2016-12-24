@@ -6,6 +6,7 @@
 class Midori::Route
   attr_accessor :method, :path, :function, :middlewares
 
+  # Define a route
   # @param [String] method HTTP method
   # @param [Regexp] path regex to match
   # @param [Proc] function what to do after matched
