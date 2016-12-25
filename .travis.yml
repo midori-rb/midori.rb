@@ -1,24 +1,19 @@
 language: ruby
 sudo: false
-rvm:
-  - 2.2.5
-  - 2.3.1
-  - jruby-head
-  - jruby-9.0.4.0
-  - rbx-3.59
-
-jdk:
-  - openjdk7
-  - oraclejdk8
-
 matrix:
-  exclude:
-    - rvm: 2.2.5
+  include:
+    - rvm: 2.0.0
+    - rvm: 2.2.6
+    - rvm: 2.3.3
+    - rvm: 2.4.0
+    - rvm: jruby-9.0.4.0
       jdk: openjdk7
-    - rvm: 2.3.1
+    - rvm: jruby-9.0.4.0
+      jdk: openjdk8
+    - rvm: jruby-head
       jdk: openjdk7
-    - rvm: rbx-3.59
-      jdk: openjdk7
+    - rvm: jruby-head
+      jdk: openjdk8
   allow_failures:
     - rvm: jruby-head
     - rvm: rbx-3.59
