@@ -22,11 +22,9 @@ matrix:
   allow_failures:
     - rvm: jruby-head
     - rvm: ruby-head
-    - os: osx
 
 os:
   - linux
-  - osx
 
 services:
   - postgresql
