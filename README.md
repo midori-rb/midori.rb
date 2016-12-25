@@ -1,4 +1,4 @@
-# em-midori
+# midori
 
 **This project is still not production-ready.**
 
@@ -10,7 +10,7 @@
 
 ## Description
 
-EM Midori is an EventMachine-based Web Framework written in pure Ruby, providing high performance and proper abstraction.
+Midori is an EventMachine-based Web Framework written in pure Ruby, providing high performance and proper abstraction.
 
 [![Join the chat at https://gitter.im/em-midori/Lobby](https://badges.gitter.im/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -22,7 +22,7 @@ EM Midori is an EventMachine-based Web Framework written in pure Ruby, providing
 
 ## Requirements
 
-- **Ruby** >= 2.0.0 or **JRuby** >= 9.0.4.0 (Oracle JDK 7/8 or Open JDK 7/8) or **Rubinius** >= 3.20
+- **Ruby** >= 2.1.0 or **JRuby** >= 9.0.4.0 (Oracle JDK 7/8 or Open JDK 7/8)
 
 ## Installation
 
@@ -33,7 +33,7 @@ gem install em-midori
 **With Bundler**
 
 ```ruby
-gem 'em-midori'
+gem 'em-midori', require: 'midori'
 ```
 
 ```bash
