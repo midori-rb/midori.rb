@@ -1,12 +1,12 @@
 ##
 # Merge and manage all APIs.
-# @attr [ Hash ] routes A hash of all routes merged
+# @attr [Hash] routes A hash of all routes merged
 class Midori::APIEngine
   attr_accessor :routes
 
   # Init an API Engine
-  # @param [ Class ] root_api API inherited from [ Midori::API ]
-  # @param [ Symbol ] type type mustermann support
+  # @param [Class] root_api API inherited from [Midori::API]
+  # @param [Symbol] type type mustermann support
   def initialize(root_api, type = :sinatra)
     @routes = {
       GET: [],
@@ -48,10 +48,10 @@ class Midori::APIEngine
   end
 
   # Process after receive data from client
-  # @param request [ Midori::Request ] Http Raw Request
-  # @param connection [ EM::Connection ] A connection created by EventMachine
-  # @return [ Midori::Response ] Http Response
-  # @raise [ Midori::Error::NotFound ] If no route matched
+  # @param request [Midori::Request] Http Raw Request
+  # @param connection [EM::Connection] A connection created by EventMachine
+  # @return [Midori::Response] Http Response
+  # @raise [Midori::Error::NotFound] If no route matched
   def receive(request, connection = nil)
     @routes[request.method].each do |route|
       params = route.path.params(request.path)
