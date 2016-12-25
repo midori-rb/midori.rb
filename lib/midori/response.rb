@@ -6,7 +6,7 @@
 class Midori::Response
   attr_accessor :status, :header, :body
 
-  # @param [Fixnum] code HTTP response code
+  # @param [Integer] code HTTP response code
   # @param [Hash] header HTTP response header
   # @param [String] body HTTP response body
   # Init a Response
