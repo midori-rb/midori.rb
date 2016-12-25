@@ -1,7 +1,7 @@
 ##
 # Meta-programming String for Syntactic Sugars
 class String
-  # @param [Fixnum] color_code ANSI color code
+  # @param [Integer] color_code ANSI color code
   # @return [String] colored string
   def colorize(color_code)
     "\e[#{color_code}m#{self}\e[0m"
