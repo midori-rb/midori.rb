@@ -1,7 +1,7 @@
 ##
 # This class provides methods for WebSocket connection instance.
-# @attr [ Array<Fixnum>, String ] msg message send from client
-# @attr [ Fixnum ] opcode operation code of WebSocket
+# @attr [ Array<Integer>, String ] msg message send from client
+# @attr [ Integer ] opcode operation code of WebSocket
 # @attr [ Hash ] events response for different event
 # @attr [ EM::Connection ] connection raw EventMachine connection
 # @attr [ Midori::Request ] request raw request
@@ -63,7 +63,7 @@ class Midori::WebSocket
   end
 
   # Send data
-  # @param [ Array<Fixnum>, String ] msg data to send
+  # @param [ Array<Integer>, String ] msg data to send
   def send(msg)
     output = []
     if msg.is_a?String
@@ -91,7 +91,7 @@ class Midori::WebSocket
   end
 
   # Ancestor of ping pong
-  # @param [ Fixnum ] method opcode
+  # @param [ Integer ] method opcode
   # @param [ String ] str string to send
   def heartbeat(method, str)
       raise Midori::Exception::PingPongSizeTooLarge if str.size > 125

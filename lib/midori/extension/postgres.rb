@@ -2,7 +2,7 @@ safe_require 'postgres-pr/message', 'gem install postgres-pr'
 
 ##
 # Midori Extension for Postgres Driver
-# @attr [ Fixnum ] connected Connection Status
+# @attr [ Integer ] connected Connection Status
 class Midori::Postgres
   attr_reader :connected
 

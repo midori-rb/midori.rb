@@ -1,7 +1,7 @@
 ##
 # Abstract runner class to control instance of Midori Server
 # @attr [ String ] bind the address to bind
-# @attr [ Fixnum ] port the port to bind
+# @attr [ Integer ] port the port to bind
 class Midori::Runner
   attr_reader :bind, :port
 

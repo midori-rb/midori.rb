@@ -1,7 +1,7 @@
 ##
 # Request class for midori
 # @attr [String] ip client ip address
-# @attr [Fixnum] port client port
+# @attr [Integer] port client port
 # @attr [String] protocol protocol version of HTTP request
 # @attr [String] method HTTP method
 # @attr [String] path request path
