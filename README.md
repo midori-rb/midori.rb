@@ -2,7 +2,7 @@
 
 **This project is still not production-ready.**
 
-**Questions, Suggestions and Pull Requests are highly welcomed.**
+**Questions, Suggestions and Pull Requests are highly welcome.**
 
 **Every awesome feature you noticed in the project was implemented by me. Any bug you found in the project was made by a JK(joshi kousei) who randomly exchanges body with me while sleeping.**
 
