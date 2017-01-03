@@ -54,3 +54,45 @@ Midori 0.1.7 is now running on 127.0.0.1:8080
 ```
 
 ## Use Bundler
+
+Example `Gemfile` of basic usage as following:
+
+```ruby
+source 'https://rubygems.org'
+gem 'bundler', '~> 1.0'
+gem 'em-midori', '~> 0.1', require: 'midori'
+```
+
+and then running:
+
+```
+$ bundle install
+```
+
+You could use
+
+```ruby
+require 'bundler'
+Bundler.require
+```
+
+in your entrance ruby file.
+
+To include built-in extensions of midori you could make your `Gemfile` like:
+
+```ruby
+source 'https://rubygems.org'
+gem 'bundler', '~> 1.0'
+gem 'em-midori', '~> 0.1', require: %w'midori midori/extension/sequel'
+```
+
+Using bunlder could make dependency management much easier, which helps a lot in scaling project. To learn more about bundler, you could see docs [here](http://bundler.io/docs.html). 
+
+## For Developers in China
+
+You may probably meet problems with rubygems due to unstable overseas internet connection issues in China. The most popular way to solve it is to use mirror provided by [RubyChina](https://gems.ruby-china.org/) or [TUNA](https://mirror.tuna.tsinghua.edu.cn/help/rubygems/) as your gem source. This may have some side effects in development, because there's a few minutes' delay in receiving gem updates.
+
+Alternatively, you could use proxy to connect the main repository directly to avoid delay problem. But using proxy is a little too complex in production environment.
+
+Choose the solution better fits your requirements. Mixing the solutions like using proxy in development and using mirror in production is also a good choice.
+
