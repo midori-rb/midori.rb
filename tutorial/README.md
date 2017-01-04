@@ -8,4 +8,4 @@ If you want to know how midori compares to other libraries/frameworks, checkout 
 
 ## Note
 
-The official guide assumes intermediate level knowledge of Ruby and backend development. If you are totally new , it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back! Prior experience with other frameworks helps, but is not required.
+The official guide assumes intermediate level knowledge of Ruby and backend development. If you are totally new , it might not be the best idea to jump right into a framework as your first step - grasp the basics then come back! Prior experience with other frameworks like Rails helps, but is not required.
