@@ -92,7 +92,7 @@ Using bunlder could make dependency management much easier, which helps a lot in
 
 You may probably meet problems with rubygems due to unstable overseas internet connection issues in China. The most popular way to solve it is to use mirror provided by [RubyChina](https://gems.ruby-china.org/) or [TUNA](https://mirror.tuna.tsinghua.edu.cn/help/rubygems/) as your gem source. This may have some side effects in development, because there's a few minutes' delay in receiving gem updates.
 
-Alternatively, you could use proxy to connect the main repository directly to avoid delay problem. But using proxy is a little too complex in production environment.
+Alternatively, you could use proxy to connect the main repository directly to avoid the delay problem. But using proxy is a little too complex in production environment.
 
 Choose the solution better fits your requirements. Mixing the solutions like using proxy in development and using mirror in production is also a good choice.
 
