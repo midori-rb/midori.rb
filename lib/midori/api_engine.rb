@@ -55,7 +55,7 @@ class Midori::APIEngine
   def receive(request, connection = nil)
     @routes[request.method].each do |route|
       params = route.path.params(request.path)
-      next unless params
+      next unless params # Skip if not matched
       request.params = params
       route.middlewares.each { |middleware| request = middleware.before(request) }
       clean_room = Midori::CleanRoom.new(request)
