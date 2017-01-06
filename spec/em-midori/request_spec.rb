@@ -44,4 +44,40 @@ RSpec.describe Midori::Request do
     request.parse(data)
     expect(request.method).to eq(:EVENTSOURCE)
   end
+
+  it 'parses all methods' do
+    methods = %w( delete
+                  get
+                  head
+                  post
+                  put
+                  connect
+                  options
+                  trace
+                  copy
+                  lock
+                  mkcol
+                  move
+                  profind
+                  proppatch
+                  unlock
+                  report
+                  mkactivity
+                  checkout
+                  merge
+                  m-search
+                  notify
+                  subscribe
+                  unsubscribe
+                  patch
+                  purge
+                ).freeze
+    
+    methods.each do |method|
+      request = Midori::Request.new
+      data = "#{method.upcase} / HTTP/1.1\r\n\r\n"
+      request.parse(data)
+      expect(request.method).to eq(method.upcase.to_sym)
+    end
+  end
 end
