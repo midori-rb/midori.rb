@@ -40,12 +40,12 @@ class ExampleAPI < Midori::API
   end
   
   get '/case_1' do
-    status = 202
-    'Hello'
-    # HTTP/1.1 202 Accepted
+    status = 418
+    "I\'m a teapot"
+    # HTTP/1.1 418 I'm a teapot
     # Server: Midori/1.0
     #
-    # Hello
+    # I'm a teapot
   end
   
   get '/case_2' do
