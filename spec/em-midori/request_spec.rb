@@ -51,7 +51,6 @@ RSpec.describe Midori::Request do
                   head
                   post
                   put
-                  connect
                   options
                   trace
                   copy
