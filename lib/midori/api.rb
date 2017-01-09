@@ -11,36 +11,9 @@ class Midori::API
     # Init private variables of class
     # @return [ nil ] nil
     def class_initialize
-      @routes = {
-        DELETE: [],
-        GET: [],
-        HEAD: [],
-        POST: [],
-        PUT: [],
-        CONNECT: [],
-        OPTIONS: [],
-        TRACE: [],
-        COPY: [],
-        LOCK: [],
-        MKCOL: [],
-        MOVE: [],
-        PROPFIND: [],
-        PROPPATCH: [],
-        UNLOCK: [],
-        REPORT: [],
-        MKACTIVITY: [],
-        CHECKOUT: [],
-        MERGE: [],
-        :'M-SEARCH' => [],
-        NOTIFY: [],
-        SUBSCRIBE: [],
-        UNSUBSCRIBE: [],
-        PATCH: [],
-        PURGE: [],
-        WEBSOCKET: [],
-        EVENTSOURCE: [],
-        MOUNT: []
-      }
+      @routes = {}
+      Midori::Const::ROUTE_METHODS.map {|method| @routes[method] = []}
+      @routes[:MOUNT] = []
       @scope_middlewares = []
       @temp_middlewares = []
       nil
@@ -174,7 +147,7 @@ class Midori::API
     #   propfind '/' do
     #      puts 'Hello World'
     #   end
-    def proppatch(path, &block) end
+    def propfind(path, &block) end
     
     # Add PROPPATCH method as a DSL for route definition
     # @param [ String ] path Accepts as part of path in route definition
@@ -266,7 +239,7 @@ class Midori::API
     #   subscribe '/' do
     #      puts 'Hello World'
     #   end
-    def merge(path, &block) end
+    def subscribe(path, &block) end
 
     # Add UNSUBSCRIBE method as a DSL for route definition
     # @param [ String ] path Accepts as part of path in route definition
