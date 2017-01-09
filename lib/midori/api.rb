@@ -11,36 +11,9 @@ class Midori::API
     # Init private variables of class
     # @return [ nil ] nil
     def class_initialize
-      @routes = {
-        DELETE: [],
-        GET: [],
-        HEAD: [],
-        POST: [],
-        PUT: [],
-        CONNECT: [],
-        OPTIONS: [],
-        TRACE: [],
-        COPY: [],
-        LOCK: [],
-        MKCOL: [],
-        MOVE: [],
-        PROPFIND: [],
-        PROPPATCH: [],
-        UNLOCK: [],
-        REPORT: [],
-        MKACTIVITY: [],
-        CHECKOUT: [],
-        MERGE: [],
-        :'M-SEARCH' => [],
-        NOTIFY: [],
-        SUBSCRIBE: [],
-        UNSUBSCRIBE: [],
-        PATCH: [],
-        PURGE: [],
-        WEBSOCKET: [],
-        EVENTSOURCE: [],
-        MOUNT: []
-      }
+      @routes = {}
+      Midori::Const::ROUTE_METHODS.map {|method| @routes[method] = []}
+      @routes[:MOUNT] = []
       @scope_middlewares = []
       @temp_middlewares = []
       nil

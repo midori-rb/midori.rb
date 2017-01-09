@@ -8,35 +8,8 @@ class Midori::APIEngine
   # @param [ Class ] root_api API inherited from [ Midori::API ]
   # @param [ Symbol ] type type mustermann support
   def initialize(root_api, type = :sinatra)
-    @routes = {
-      DELETE: [],
-      GET: [],
-      HEAD: [],
-      POST: [],
-      PUT: [],
-      CONNECT: [],
-      OPTIONS: [],
-      TRACE: [],
-      COPY: [],
-      LOCK: [],
-      MKCOL: [],
-      MOVE: [],
-      PROPFIND: [],
-      PROPPATCH: [],
-      UNLOCK: [],
-      REPORT: [],
-      MKACTIVITY: [],
-      CHECKOUT: [],
-      MERGE: [],
-      :'M-SEARCH' => [],
-      NOTIFY: [],
-      SUBSCRIBE: [],
-      UNSUBSCRIBE: [],
-      PATCH: [],
-      PURGE: [],
-      WEBSOCKET: [],
-      EVENTSOURCE: []
-    }
+    @routes = {}
+    Midori::Const::ROUTE_METHODS.map {|method| @routes[method] = []}  
     @root_api = root_api
     @type = type
     @routes = merge('', root_api, [])
