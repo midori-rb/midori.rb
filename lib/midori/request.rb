@@ -35,7 +35,6 @@ class Midori::Request
   # @param [ String ] data
   # @return [ nil ] nil
   def parse(data)
-
     offset = @parser << data
     @body = data[offset..-1]
     @query_string = @path.match(/\?(.*?)$/)
