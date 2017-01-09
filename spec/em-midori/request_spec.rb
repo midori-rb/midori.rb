@@ -58,7 +58,7 @@ RSpec.describe Midori::Request do
                   lock
                   mkcol
                   move
-                  profind
+                  propfind
                   proppatch
                   unlock
                   report
@@ -69,6 +69,8 @@ RSpec.describe Midori::Request do
                   notify
                   subscribe
                   unsubscribe
+                  link
+                  unlink
                   patch
                   purge
                 ).freeze

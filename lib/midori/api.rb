@@ -24,7 +24,7 @@ class Midori::API
         LOCK: [],
         MKCOL: [],
         MOVE: [],
-        PROFIND: [],
+        PROPFIND: [],
         PROPPATCH: [],
         UNLOCK: [],
         REPORT: [],
@@ -165,16 +165,17 @@ class Midori::API
     #   end
     def move(path, &block) end
 
-    # Add PROFIND method as a DSL for route definition
+
+    # Add PROPFIND method as a DSL for route definition
     # @param [ String ] path Accepts as part of path in route definition
     # @yield what to run when route matched
     # @return [ nil ] nil
     # @example String as router
-    #   profind '/' do
+    #   propfind '/' do
     #      puts 'Hello World'
     #   end
-    def profind(path, &block) end
-
+    def proppatch(path, &block) end
+    
     # Add PROPPATCH method as a DSL for route definition
     # @param [ String ] path Accepts as part of path in route definition
     # @yield what to run when route matched
@@ -425,7 +426,7 @@ class Midori::API
                 lock
                 mkcol
                 move
-                profind
+                propfind
                 proppatch
                 unlock
                 report

@@ -21,7 +21,7 @@ class Midori::APIEngine
       LOCK: [],
       MKCOL: [],
       MOVE: [],
-      PROFIND: [],
+      PROPFIND: [],
       PROPPATCH: [],
       UNLOCK: [],
       REPORT: [],
