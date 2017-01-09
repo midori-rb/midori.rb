@@ -174,7 +174,7 @@ class Midori::API
     #   propfind '/' do
     #      puts 'Hello World'
     #   end
-    def proppatch(path, &block) end
+    def propfind(path, &block) end
     
     # Add PROPPATCH method as a DSL for route definition
     # @param [ String ] path Accepts as part of path in route definition
@@ -266,7 +266,7 @@ class Midori::API
     #   subscribe '/' do
     #      puts 'Hello World'
     #   end
-    def merge(path, &block) end
+    def subscribe(path, &block) end
 
     # Add UNSUBSCRIBE method as a DSL for route definition
     # @param [ String ] path Accepts as part of path in route definition
