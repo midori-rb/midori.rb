@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
   s.metadata                 = { 'issue_tracker' => 'https://github.com/heckpsi-lab/em-midori/issues' }
   s.license                  = 'MIT'
+  s.post_install_message     = File.read('.resources/midori_ascii.txt')
   s.add_runtime_dependency     'eventmachine', '~> 1.2'
   s.add_runtime_dependency     'mustermann', '~> 0.4'
   s.add_runtime_dependency     'midori_http_parser', '~> 0.6.1'
