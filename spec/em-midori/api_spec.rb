@@ -21,6 +21,7 @@ class RawHello < API
   options '/' do; end
   link '/' do; end
   unlink '/' do; end
+  msearch '/' do; end
   websocket '/' do; end
   eventsource '/' do; end
 end

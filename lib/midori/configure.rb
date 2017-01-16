@@ -4,6 +4,7 @@ class Midori::Configure
   extend Configurable
 
   set :logger, ::Logger.new(STDOUT)
+  set :protocol, :http
   set :bind, '127.0.0.1'
   set :port, 8080
   set :route_type, :sinatra

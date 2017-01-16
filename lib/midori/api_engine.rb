@@ -8,17 +8,8 @@ class Midori::APIEngine
   # @param [Class] root_api API inherited from [Midori::API]
   # @param [Symbol] type type mustermann support
   def initialize(root_api, type = :sinatra)
-    @routes = {
-      GET: [],
-      POST: [],
-      PUT: [],
-      DELETE: [],
-      OPTIONS: [],
-      LINK: [],
-      UNLINK: [],
-      WEBSOCKET: [],
-      EVENTSOURCE: []
-    }
+    @routes = {}
+    Midori::Const::ROUTE_METHODS.map {|method| @routes[method] = []}  
     @root_api = root_api
     @type = type
     @routes = merge('', root_api, [])
@@ -55,7 +46,7 @@ class Midori::APIEngine
   def receive(request, connection = nil)
     @routes[request.method].each do |route|
       params = route.path.params(request.path)
-      next unless params
+      next unless params # Skip if not matched
       request.params = params
       route.middlewares.each { |middleware| request = middleware.before(request) }
       clean_room = Midori::CleanRoom.new(request)
