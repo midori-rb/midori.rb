@@ -1,13 +1,13 @@
 ##
 # Abstract runner class to control instance of Midori Server
-# @attr [ String ] bind the address to bind
-# @attr [ Integer ] port the port to bind
+# @attr [String] bind the address to bind
+# @attr [Integer] port the port to bind
 class Midori::Runner
   attr_reader :bind, :port
 
   # Define status of a runner
-  # @param [ Class ] api inherited from [ Midori::API ]
-  # @param [ Class ] configure inherited from [ Midori::Configure ]
+  # @param [Class] api inherited from [Midori::API]
+  # @param [Class] configure inherited from [Midori::Configure]
   def initialize(api, configure = Midori::Configure)
     @logger = configure.logger
     @bind = configure.bind

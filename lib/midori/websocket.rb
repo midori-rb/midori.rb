@@ -1,22 +1,22 @@
 ##
 # This class provides methods for WebSocket connection instance.
-# @attr [ Array<Integer>, String ] msg message send from client
-# @attr [ Integer ] opcode operation code of WebSocket
-# @attr [ Hash ] events response for different event
-# @attr [ EM::Connection ] connection raw EventMachine connection
-# @attr [ Midori::Request ] request raw request
+# @attr [Array<Integer>, String] msg message send from client
+# @attr [Integer] opcode operation code of WebSocket
+# @attr [Hash] events response for different event
+# @attr [EM::Connection] connection raw EventMachine connection
+# @attr [Midori::Request] request raw request
 class Midori::WebSocket
   attr_accessor :msg, :opcode, :events, :connection, :request
 
   # Init a WebSocket instance with a connection
-  # @param [ EM::Connection ] connection raw EventMachine connection
+  # @param [EM::Connection] connection raw EventMachine connection
   def initialize(connection)
     @events = {}
     @connection = connection
   end
 
   # Decode raw data send from client
-  # @param [ StringIO ] data raw data
+  # @param [StringIO] data raw data
   def decode(data)
     # Fin and Opcode
     byte_tmp = data.getbyte
@@ -31,7 +31,7 @@ class Midori::WebSocket
   end
 
   # Decode masked message send from client
-  # @param [ StringIO ] data raw data
+  # @param [StringIO] data raw data
   def decode_mask(data)
     # Mask
     byte_tmp = data.getbyte
@@ -50,7 +50,7 @@ class Midori::WebSocket
   end
 
   # API definition for events
-  # @param [ Symbol ] event event name(open, message, close, ping, pong)
+  # @param [Symbol] event event name(open, message, close, ping, pong)
   # @yield what to do after event matched
   # @example
   #   websocket '/websocket' do |ws|
@@ -63,7 +63,7 @@ class Midori::WebSocket
   end
 
   # Send data
-  # @param [ Array<Integer>, String ] msg data to send
+  # @param [Array<Integer>, String] msg data to send
   def send(msg)
     output = []
     if msg.is_a?String
@@ -79,20 +79,20 @@ class Midori::WebSocket
   end
 
   # Send a Ping request
-  # @param [ String ] str string to send
+  # @param [String] str string to send
   def ping(str)
     heartbeat(0b10001001, str)
   end
 
   # Send a Pong request
-  # @param [ String ] str string to send
+  # @param [String] str string to send
   def pong(str)
     heartbeat(0b10001010, str)
   end
 
   # Ancestor of ping pong
-  # @param [ Integer ] method opcode
-  # @param [ String ] str string to send
+  # @param [Integer] method opcode
+  # @param [String] str string to send
   def heartbeat(method, str)
       raise Midori::Exception::PingPongSizeTooLarge if str.size > 125
       @connection.send_data [method, str.size, str].pack("CCA#{str.size}")

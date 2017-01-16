@@ -21,7 +21,7 @@ class Midori::Middleware
   end
 
   # Dynamically generate a method to use inside router
-  # @param [ Symbol ] name name of the method
+  # @param [Symbol] name name of the method
   # @yield the block to run
   def self.helper(name, &block)
     Midori::CleanRoom.class_exec do

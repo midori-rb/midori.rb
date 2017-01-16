@@ -9,7 +9,7 @@ class Midori::API
     attr_accessor :routes, :scope_middlewares
 
     # Init private variables of class
-    # @return [ nil ] nil
+    # @return [nil] nil
     def class_initialize
       @routes = {}
       Midori::Const::ROUTE_METHODS.map {|method| @routes[method] = []}
@@ -30,9 +30,9 @@ class Midori::API
     def delete(path, &block) end
     
     # Add GET method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   get '/' do
     #      puts 'Hello World'
@@ -50,9 +50,9 @@ class Midori::API
     def head(path, &block) end
 
     # Add POST method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   post '/' do
     #      puts 'Hello World'
@@ -60,9 +60,9 @@ class Midori::API
     def post(path, &block) end
 
     # Add PUT method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   put '/' do
     #      puts 'Hello World'
@@ -70,9 +70,9 @@ class Midori::API
     def put(path, &block) end
 
     # Add CONNECT method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   connect '/' do
     #      puts 'Hello World'
@@ -80,8 +80,8 @@ class Midori::API
     def connect(path, &block) end
 
     # Add OPTIONS method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
-    # @return [ nil ] nil
+    # @param [String] path Accepts as part of path in route definition
+    # @return [nil] nil
     # @example String as router
     #   options '/' do
     #      puts 'Hello World'
@@ -272,9 +272,9 @@ class Midori::API
     def purge(path, &block) end
 
     # Add LINK method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   link '/' do
     #      puts 'Hello World'
@@ -282,9 +282,9 @@ class Midori::API
     def link(path, &block) end
 
     # Add UNLINK method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   unlink '/' do
     #      puts 'Hello World'
@@ -292,9 +292,9 @@ class Midori::API
     def unlink(path, &block) end
 
     # Add WEBSOCKET method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
+    # @param [String] path Accepts as part of path in route definition
     # @yield what to run when route matched
-    # @return [ nil ] nil
+    # @return [nil] nil
     # @example String as router
     #   websocket '/' do
     #      puts 'Hello World'
@@ -302,8 +302,8 @@ class Midori::API
     def websocket(path, &block) end
 
     # Add EVENTSOURCE method as a DSL for route definition
-    # @param [ String ] path Accepts as part of path in route definition
-    # @return [ nil ] nil
+    # @param [String] path Accepts as part of path in route definition
+    # @return [nil] nil
     # @example String as router
     #   eventsource '/' do
     #      puts 'Hello World'
@@ -311,9 +311,9 @@ class Midori::API
     def eventsource(path, &block) end
 
     # Mount a route prefix with another API defined
-    # @param [ String ] prefix prefix of the route String
-    # @param [ Class ] api inherited from Midori::API
-    # @return [ nil ] nil
+    # @param [String] prefix prefix of the route String
+    # @param [Class] api inherited from Midori::API
+    # @return [nil] nil
     def mount(prefix, api)
       raise ArgumentError if prefix == '/' # Cannot mount route API
       @routes[:MOUNT] << [prefix, api]
@@ -321,9 +321,9 @@ class Midori::API
     end
 
     # Definitions for global error handler
-    # @param [ Class ] error Error class, must be inherited form StandardError
+    # @param [Class] error Error class, must be inherited form StandardError
     # @yield what to do to deal with error
-    # @yieldparam [ StandardError ] e the detailed error
+    # @yieldparam [StandardError] e the detailed error
     # @example Basic Usage
     #   capture Midori::InternalError do |e|
     #     Midori::Response(500, {}, e.backtrace)
@@ -334,10 +334,10 @@ class Midori::API
     end
 
     # Implementation of route DSL
-    # @param [ String ] method HTTP method
-    # @param [ String, Regexp ] path path definition
-    # @param [ Proc ] block process to run when route matched
-    # @return [ nil ] nil
+    # @param [String] method HTTP method
+    # @param [String, Regexp] path path definition
+    # @param [Proc] block process to run when route matched
+    # @return [nil] nil
     def add_route(method, path, block)
       # Argument check
       raise ArgumentError unless path.is_a?String

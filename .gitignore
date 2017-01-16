@@ -52,3 +52,4 @@ Gemfile.lock
 .vscode
 .idea
 bin
+tutorial/_book
