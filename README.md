@@ -10,7 +10,7 @@
 
 ## Description
 
-Midori is an EventMachine-based Web Framework written in pure Ruby, providing high performance and proper abstraction.
+Midori is a Ruby Web Framework, providing high performance and proper abstraction.
 
 [![Join the chat at https://gitter.im/em-midori/Lobby](https://badges.gitter.im/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -122,12 +122,12 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.5     |   2016-12-20    | 2016-12-01 (-19d) | Implement Database ORM                 |
 |    0.1.6     |   2017-01-03    | 2016-12-21 (-13d) | Enrich Database                        |
 |    0.1.7     |   2017-01-10    | 2016-12-25 (-16d) | Documenting                            |
-|    0.1.8     |   2017-01-17    |                   | Tutorial                               |
-|    0.1.9     |   2017-01-24    |                   | Official Wiki                          |
-|    0.2.0     |   2017-01-31    |                   | Official Website                       |
-|    0.2.1     |   2017-02-07    |                   | General Web Adapter                    |
-|    0.2.2     |   2017-02-14    |                   | Midori Test for API                    |
-|    0.2.3     |   2017-02-21    |                   | Midori Test for ws&es                  |
+|    0.1.8     |   2017-01-17    |                   | Tutorial (Partial)                     |
+|    0.1.9     |   2017-01-24    |                   | Use nio4r instead of EventMachine      |
+|    0.2.0     |   2017-01-31    |                   | Documenting                            |
+|    0.2.1     |   2017-02-07    |                   | Better Extension Support               |
+|    0.2.2     |   2017-02-14    |                   | General Web Adapter                    |
+|    0.2.3     |   2017-02-21    |                   | Enrich Benchmark                       |
 |    0.2.4     |   2017-02-28    |                   | Documenting                            |
 |    0.2.5     |   2017-03-07    |                   | Enrich Tutorial                        |
 |  **1.0.0**   |   2017-03-14    |                   | First production-ready release         |
@@ -139,3 +139,4 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 - More Concurrent Model Attempts (Actor, Guild, ...?)
 - Midori Command Line Tool
 - Midori Scaling Example
+- Crystal Support?
