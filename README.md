@@ -122,7 +122,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.5     |   2016-12-20    | 2016-12-01 (-19d) | Implement Database ORM                 |
 |    0.1.6     |   2017-01-03    | 2016-12-21 (-13d) | Enrich Database                        |
 |    0.1.7     |   2017-01-10    | 2016-12-25 (-16d) | Documenting                            |
-|    0.1.8     |   2017-01-17    |                   | Tutorial (Partial)                     |
+|    0.1.8     |   2017-01-17    | 2017-01-17 (+0d)  | Tutorial (Partial)                     |
 |    0.1.9     |   2017-01-24    |                   | Use nio4r instead of EventMachine      |
 |    0.2.0     |   2017-01-31    |                   | Documenting                            |
 |    0.2.1     |   2017-02-07    |                   | Better Extension Support               |

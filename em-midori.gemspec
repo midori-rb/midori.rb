@@ -5,8 +5,8 @@ Gem::Specification.new do |s|
   s.version                  = Midori::VERSION
   s.required_ruby_version    = '>=2.1.0'
   s.date                     = Time.now.strftime('%Y-%m-%d')
-  s.summary                  = 'An EventMachine Based Web Framework on Ruby'
-  s.description              = 'EM Midori is an EventMachine-based Web Framework written in pure Ruby, providing high performance and proper abstraction.'
+  s.summary                  = 'High performance ruby web framework'
+  s.description              = 'Midori is a Ruby Web Framework, providing high performance and proper abstraction.'
   s.authors                  = ['HeckPsi Lab']
   s.email                    = 'business@heckpsi.com'
   s.require_paths            = ['lib']
