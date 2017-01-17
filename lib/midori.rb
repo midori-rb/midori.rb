@@ -1,6 +1,6 @@
 require 'digest/sha1'
 require 'stringio'
-require 'eventmachine'
+require 'nio'
 require 'fiber'
 require 'logger'
 require 'http/parser'
