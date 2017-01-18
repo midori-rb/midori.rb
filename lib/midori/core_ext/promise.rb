@@ -10,27 +10,9 @@ class Promise
 
   # Define what to do after a method callbacks
   # @param [Proc] resolve what on callback
-  # @param [Proc] reject what on callback failed
   # @return [nil] nil
-  def then(resolve = ->() {}, reject = ->() {})
-    @callback.call(resolve, reject)
-  end
-end
-
-# A Syntactic Sugar for Promise
-class DeferPromise < Promise
-  # A Syntactic Sugar for Promise
-  # @param [Proc] deffered To do what asynchronous
-  def initialize(deffered)
-    super(->(resolve, _reject){
-      EventMachine.defer(proc {
-        begin
-          deffered.call
-        rescue StandardError => e
-          PromiseException.new(e)
-        end
-      }, proc { |result| resolve.call(result) })
-    })
+  def then(&block)
+    @callback.call(block)
   end
 end
 
@@ -58,13 +40,6 @@ module Kernel
     define_singleton_method method_name, ->(*args) {
       async_internal(Fiber.new { yield(*args) })
     }
-  end
-
-  # Shortcut to init [DeferPromise]
-  # @yield To do what asynchronous
-  # @return [DerferPromise] instance
-  def defer(&block)
-    DeferPromise.new(block)
   end
 
   # Block the I/O to wait for async method response
