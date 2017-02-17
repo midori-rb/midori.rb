@@ -16,7 +16,7 @@ class String
   def green
     colorize(32)
   end
-  
+
   # color the string with yellow color
   def yellow
     colorize(33)
