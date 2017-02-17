@@ -8,17 +8,23 @@ module EventLoop
       monitor.value = callback
     end
 
+    def change(monitor, interest=(:rw), &callback)
+      monitor.interests = interest
+      monitor.value = callback
+    end
+
     def unregister(io)
       SELECTOR.deregister(io)
     end
 
     def run_once
-      SELECTOR.select do |monitor|
+      SELECTOR.select(10) do |monitor| # Timeout for 10 secs
         monitor.value.call(monitor)
       end
     end
 
     def start
+      @stop = false
       loop do
         run_once
         break if @stop

@@ -3,23 +3,25 @@ require './spec/spec_helper'
 RSpec.describe Promise do
   describe 'async await' do
     it 'should deal async requests correctly' do
-      def asleep(sec)
-        Promise.new(->(resolve, _reject) {
-          EM.add_timer(sec) do
-            resolve.call('+' + sec.to_s + 's')
+      def read_file(file)
+        Promise.new do |resolve|
+          file = File.open(file, 'r')
+          EventLoop.register(file, :r) do |monitor|
+            data = file.read_nonblock(16384)
+            EventLoop.unregister(monitor)
+            resolve.call(data)
           end
-        })
+        end
       end
       answer = []
-      async :async_sleep do
-        await asleep(1)
+      async :async_read do
+        await read_file('./Rakefile')
         answer << 1
-        EM.stop
+        EventLoop.stop
       end
-      EM.run {
-        async_sleep
-        answer << 0
-      }
+      async_read
+      answer << 0
+      EventLoop.start
       expect(answer).to eq([0, 1])
     end
   end

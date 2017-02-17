@@ -9,6 +9,7 @@ require 'socket'
 
 require_relative 'midori/core_ext/configurable'
 require_relative 'midori/core_ext/string'
+require_relative 'midori/core_ext/event_loop'
 require_relative 'midori/core_ext/promise'
 require_relative 'midori/core_ext/promise_exception'
 require_relative 'midori/core_ext/define_class'
