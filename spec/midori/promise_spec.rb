@@ -15,14 +15,15 @@ RSpec.describe Promise do
       end
       answer = []
       async :async_read do
-        await read_file('./Rakefile')
+        data = await read_file('./Rakefile')
         answer << 1
+        answer << data
         EventLoop.stop
       end
       async_read
       answer << 0
       EventLoop.start
-      expect(answer).to eq([0, 1])
+      expect(answer).to eq([0, 1, File.read('./Rakefile')])
     end
   end
 end
