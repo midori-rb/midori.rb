@@ -17,6 +17,16 @@ class Promise
 end
 
 module Kernel
+  def async_fiber(fiber)
+    chain = proc do |result|
+      next unless result.is_a? Promise
+      result.then do |val|
+        chain.call(fiber.resume(val))
+      end
+    end
+    chain.call(fiber.resume)
+  end
+
   # Define an async method
   # @param [Symbol] method method name
   # @yield async method
@@ -24,16 +34,9 @@ module Kernel
   #   async :hello do 
   #     puts 'Hello'
   #   end
-  def async(method, &block)
+  def async(method)
     define_singleton_method method do |*args|
-      fiber = Fiber.new { block.call(*args) }
-      chain = proc do |result|
-        next unless result.is_a? Promise
-        result.then do |val|
-          chain.call(fiber.resume(val))
-        end
-      end
-      chain.call(fiber.resume)
+      async_fiber(Fiber.new {yield(*args)})
     end
   end
 

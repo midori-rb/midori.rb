@@ -6,9 +6,9 @@ RSpec.describe Promise do
       def read_file(file)
         Promise.new do |resolve|
           file = File.open(file, 'r')
-          EventLoop.register(file, :r) do |monitor|
+          EventLoop.register(file, :r) do
             data = file.read_nonblock(16384)
-            EventLoop.unregister(monitor)
+            EventLoop.unregister(file)
             resolve.call(data)
           end
         end

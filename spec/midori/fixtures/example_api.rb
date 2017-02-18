@@ -1,3 +1,9 @@
+class ExampleConfigure < Midori::Configure
+  set :logger, Logger.new(StringIO.new)
+  set :bind, '127.0.0.1'
+  set :port, 8080
+end
+
 class User < Midori::API
   get '/' do
     'User'
@@ -29,6 +35,10 @@ class ExampleAPI < Midori::API
 
   get '/error' do
     raise StandardError
+  end
+
+  get '/stop' do
+    EXAMPLE_RUNNER.stop
   end
 
   define_error :test_error
@@ -92,3 +102,4 @@ class ExampleAPI < Midori::API
 end
 
 EXAMPLE_API_ENGINE = Midori::APIEngine.new(ExampleAPI)
+EXAMPLE_RUNNER = Midori::Runner.new(EXAMPLE_API_ENGINE, ExampleConfigure)

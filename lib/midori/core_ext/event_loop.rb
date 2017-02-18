@@ -1,15 +1,9 @@
 module EventLoop
   class << self
     SELECTOR = NIO::Selector.new
-    @stop = true
 
     def register(io, interest=(:rw), &callback)
       monitor = SELECTOR.register(io, interest)
-      monitor.value = callback
-    end
-
-    def change(monitor, interest=(:rw), &callback)
-      monitor.interests = interest
       monitor.value = callback
     end
 
@@ -18,17 +12,18 @@ module EventLoop
     end
 
     def run_once
-      SELECTOR.select(10) do |monitor| # Timeout for 10 secs
+      SELECTOR.select(1) do |monitor| # Timeout for 1 secs
         monitor.value.call(monitor)
       end
     end
 
     def start
+      return if running?
       @stop = false
-      loop do
+      until @stop
         run_once
-        break if @stop
       end
+      @stop = nil
     end
 
     def stop
@@ -36,6 +31,7 @@ module EventLoop
     end
 
     def running?
+      @stop = true if @stop.nil?
       !@stop
     end
   end
