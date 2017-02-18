@@ -1,5 +1,5 @@
 ##
-# Logic to EventMachine TCP Server, running inside +EM::Connection+
+# Logic to EventMachine TCP Server, running inside +Midori::Connection+
 module Midori::Server
   # @!attribute request
   #   @return [Midori::Request] raw request
@@ -14,7 +14,7 @@ module Midori::Server
   # Define server behaviour
   # @param [Class] api inherited from Midori::API
   # @param [Logger] logger global logger
-  def initialize(api, logger)
+  def server_initialize(api, logger)
     @api = api
     @logger = logger
     @request = Midori::Request.new
@@ -23,22 +23,29 @@ module Midori::Server
   end
 
   # Logic of receiving data
-  # @param [String] data raw data
-  def receive_data(data)
+  # @param [String] monitor the socket able to read
+  def receive_data(monitor)
     lambda do
-      async_internal(Fiber.new do
-                       start_time = Time.now
-                       port, ip = Socket.unpack_sockaddr_in(get_peername)
-                       @request.ip = ip
-                       @request.port = port
-                       if @request.parsed?
-                         websocket_request(StringIO.new(data))
-                       else
-                         receive_new_request(data)
-                       end
-                       now_time = Time.now
-                       @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
-                     end)
+      async_fiber(Fiber.new do
+        begin
+          start_time = Time.now
+          _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
+          port, ip = remote_port, remote_ip
+          @request.ip = ip
+          @request.port = port
+          data = monitor.io.read_nonblock(16_384)
+          if @request.parsed?
+            websocket_request(StringIO.new(data))
+          else
+            receive_new_request(data)
+          end
+          now_time = Time.now
+          @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
+        rescue
+          close_connection
+          @logger.error "#{@request.ip} - - Reached an EOF Error".red
+        end
+      end)
     end.call
   end
 

@@ -3,7 +3,7 @@ require './lib/midori/version'
 Gem::Specification.new do |s|
   s.name                     = 'em-midori'
   s.version                  = Midori::VERSION
-  s.required_ruby_version    = '>=2.1.0'
+  s.required_ruby_version    = '>=2.2.6'
   s.date                     = Time.now.strftime('%Y-%m-%d')
   s.summary                  = 'High performance ruby web framework'
   s.description              = 'Midori is a Ruby Web Framework, providing high performance and proper abstraction.'
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.metadata                 = { 'issue_tracker' => 'https://github.com/heckpsi-lab/em-midori/issues' }
   s.license                  = 'MIT'
   s.post_install_message     = File.read('.resources/midori_ascii.txt')
-  s.add_runtime_dependency     'eventmachine', '~> 1.2'
+  s.add_runtime_dependency     'nio4r', '~> 2.0'
   s.add_runtime_dependency     'mustermann', '~> 0.4'
   s.add_runtime_dependency     'midori_http_parser', '~> 0.6.1'
 end

@@ -4,67 +4,40 @@
 class Promise
   # Init a Promise
   # @param [Proc] callback an async method
-  def initialize(callback)
+  def initialize(&callback)
     @callback = callback
   end
 
   # Define what to do after a method callbacks
   # @param [Proc] resolve what on callback
-  # @param [Proc] reject what on callback failed
   # @return [nil] nil
-  def then(resolve = ->() {}, reject = ->() {})
-    @callback.call(resolve, reject)
-  end
-end
-
-# A Syntactic Sugar for Promise
-class DeferPromise < Promise
-  # A Syntactic Sugar for Promise
-  # @param [Proc] deffered To do what asynchronous
-  def initialize(deffered)
-    super(->(resolve, _reject){
-      EventMachine.defer(proc {
-        begin
-          deffered.call
-        rescue StandardError => e
-          PromiseException.new(e)
-        end
-      }, proc { |result| resolve.call(result) })
-    })
+  def then(&resolve)
+    @callback.call(resolve)
   end
 end
 
 module Kernel
-  # Logic dealing of async method
-  # @param [Fiber] fiber a fiber to call
-  def async_internal(fiber)
-    chain = lambda do |result|
-      return unless result.is_a?Promise
-      result.then(lambda do |val|
+  def async_fiber(fiber)
+    chain = proc do |result|
+      next unless result.is_a? Promise
+      result.then do |val|
         chain.call(fiber.resume(val))
-      end)
+      end
     end
     chain.call(fiber.resume)
   end
 
   # Define an async method
-  # @param [Symbol] method_name method name
+  # @param [Symbol] method method name
   # @yield async method
   # @example
   #   async :hello do 
   #     puts 'Hello'
   #   end
-  def async(method_name)
-    define_singleton_method method_name, ->(*args) {
-      async_internal(Fiber.new { yield(*args) })
-    }
-  end
-
-  # Shortcut to init [DeferPromise]
-  # @yield To do what asynchronous
-  # @return [DerferPromise] instance
-  def defer(&block)
-    DeferPromise.new(block)
+  def async(method)
+    define_singleton_method method do |*args|
+      async_fiber(Fiber.new {yield(*args)})
+    end
   end
 
   # Block the I/O to wait for async method response

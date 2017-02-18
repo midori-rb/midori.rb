@@ -6,6 +6,8 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 Bundler.require
+require 'timeout'
+require 'midori'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -20,4 +22,4 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
-Dir['spec/em-midori/fixtures/*.rb'].each { |f| require_relative "../#{f}" }
+Dir['spec/midori/fixtures/*.rb'].each { |f| require_relative "../#{f}" }
