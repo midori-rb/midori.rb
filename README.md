@@ -22,7 +22,7 @@ Midori is a Ruby Web Framework, providing high performance and proper abstractio
 
 ## Requirements
 
-- **Ruby** >= 2.1.0 or **JRuby** >= 9.0.4.0 (Oracle JDK 7/8 or Open JDK 7/8)
+- **Ruby** >= 2.2.6
 
 ## Installation
 
@@ -123,7 +123,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.6     |   2017-01-03    | 2016-12-21 (-13d) | Enrich Database                        |
 |    0.1.7     |   2017-01-10    | 2016-12-25 (-16d) | Documenting                            |
 |    0.1.8     |   2017-01-17    | 2017-01-17 (+0d)  | Tutorial (Partial)                     |
-|    0.1.9     |   2017-02-21    |                   | Abstract Evented Actor                 |
+|    0.1.9     |   2017-02-21    | 2017-02-18 (-3d)  | Abstract Evented Actor                 |
 |    0.1.10    |   2017-02-28    |                   | Reconstruct Extensions                 |
 |    0.1.11    |   2017-03-07    |                   | Add MySQL Extension Support            |
 |    0.1.12    |   2017-03-14    |                   | Better File and HTTP Request Extension |
