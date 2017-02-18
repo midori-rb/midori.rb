@@ -3,7 +3,7 @@ require './lib/midori/version'
 Gem::Specification.new do |s|
   s.name                     = 'em-midori'
   s.version                  = Midori::VERSION
-  s.required_ruby_version    = '>=2.1.0'
+  s.required_ruby_version    = '>=2.2.6'
   s.date                     = Time.now.strftime('%Y-%m-%d')
   s.summary                  = 'High performance ruby web framework'
   s.description              = 'Midori is a Ruby Web Framework, providing high performance and proper abstraction.'

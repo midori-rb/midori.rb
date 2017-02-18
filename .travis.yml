@@ -1,9 +1,8 @@
 language: ruby
-rvm: 2.1.0
+rvm: 2.2.6
 sudo: false
 matrix:
   include:
-    - rvm: 2.2.6
     - rvm: 2.3.3
     - rvm: 2.4.0
     - rvm: ruby-head
