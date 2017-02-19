@@ -11,7 +11,7 @@ gem 'kramdown'
 gem 'simplecov', require: false, group: :test
 gem 'codeclimate-test-reporter', group: :test, require: nil
 
-gem 'sequel', '~> 4.40'
-gem 'pg', '~> 0.17'
-gem 'ohm', '~> 3.0'
-gem 'hiredis', '~> 0.6.0'
+gem 'sequel', '~> 4.40', require: false
+gem 'pg', '~> 0.17', require: false
+gem 'ohm', '~> 3.0', require: false
+gem 'hiredis', '~> 0.6.0', require: false
