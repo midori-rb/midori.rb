@@ -21,8 +21,8 @@ class Midori::File
     await(Promise.new do |resolve|
       written = 0
       EventLoop.register(@file, :w) do
-        written += @file.write_nonblock(data)
-        if written == data.length
+        written += @file.write_nonblock(data[written..-1])
+        if written == data.size
           EventLoop.unregister(@file)
           resolve.call(written)
         end
