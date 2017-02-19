@@ -10,7 +10,7 @@ end
 module Hiredis
   module Ruby
     class Connection
-      def _write(sock, data, _timeout)
+      def _write(_sock, data, _timeout)
         await(Promise.new do |resolve|
           data.force_encoding('binary') if data.respond_to?(:force_encoding)
           written = 0
