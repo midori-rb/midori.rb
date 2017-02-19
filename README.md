@@ -124,9 +124,9 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.7     |   2017-01-10    | 2016-12-25 (-16d) | Documenting                            |
 |    0.1.8     |   2017-01-17    | 2017-01-17 (+0d)  | Tutorial (Partial)                     |
 |    0.1.9     |   2017-02-21    | 2017-02-18 (-3d)  | Abstract Evented Actor                 |
-|    0.1.10    |   2017-02-28    |                   | Reconstruct Extensions                 |
+|    0.1.10    |   2017-02-28    | 2017-02-20 (-8d)  | Reconstruct Extensions                 |
 |    0.1.11    |   2017-03-07    |                   | Add MySQL Extension Support            |
-|    0.1.12    |   2017-03-14    |                   | Better File and HTTP Request Extension |
+|    0.1.12    |   2017-03-14    |                   | Better HTTP Request Extension          |
 |    0.2.0     |   2017-03-21    |                   | General Web Adapter                    |
 |    0.2.1     |   2017-03-28    |                   | Enrich Benchmark                       |
 |    0.2.2     |   2017-04-04    |                   | Documenting and API Stable             |
