@@ -7,10 +7,11 @@ class Midori::File
     await(Promise.new do |resolve|
       data = ''
       EventLoop.register(@file, :r) do
-        data << @file.read_nonblock(16384)
         if @file.eof?
           EventLoop.unregister(@file)
           resolve.call(data)
+        else
+          data << @file.read_nonblock(16384)
         end
       end
     end)
@@ -18,9 +19,13 @@ class Midori::File
 
   def write(data)
     await(Promise.new do |resolve|
+      written = 0
       EventLoop.register(@file, :w) do
-        EventLoop.unregister(@file)
-        resolve.call(@file.write_nonblock(data))
+        written += @file.write_nonblock(data)
+        if written == data.length
+          EventLoop.unregister(@file)
+          resolve.call(written)
+        end
       end
     end)
   end
