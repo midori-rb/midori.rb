@@ -1,5 +1,7 @@
 module Hiredis
-  require 'hiredis/ruby/connection'  # Use ruby implementation to hook IO
+  require 'hiredis/connection'
+  # Overwrite with ruby implementation to hook IO
+  require 'hiredis/ruby/connection'
   require 'hiredis/ruby/reader'
   Connection = Ruby::Connection
   Reader = Ruby::Reader
