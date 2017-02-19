@@ -45,8 +45,6 @@ module Kernel
   # @example
   #   result = await SQL.query('SELECT * FROM hello')
   def await(promise)
-    result = Fiber.yield promise
-    raise result.raw_exception if result.is_a?PromiseException
-    result
+    Fiber.yield promise
   end
 end
