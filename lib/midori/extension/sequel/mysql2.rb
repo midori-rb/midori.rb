@@ -7,7 +7,7 @@ module Sequel
       # Execute the given SQL on the given connection.  If the :type
       # option is :select, yield the result of the query, otherwise
       # yield the connection if a block is given.
-      def _execute(conn, sql, opts)
+      def _execute(conn, sql, opts) # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
         begin
           # :nocov:
           stream = opts[:stream]
