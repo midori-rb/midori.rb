@@ -17,6 +17,12 @@ RSpec.describe Midori::Server do
       end
     end
 
+    it 'could deal with very large response' do
+      Timeout::timeout(5) do
+        expect(Net::HTTP.get(URI('http://127.0.0.1:8080/large'))).to eq('w' * 2 * 20)
+      end
+    end
+
     it 'should return \'Hello World\' on GET /2 request' do
       Timeout::timeout(1) do
         expect(Net::HTTP.get(URI('http://127.0.0.1:8080/2'))).to eq('Hello World')

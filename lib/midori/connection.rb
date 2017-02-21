@@ -30,20 +30,12 @@ class Midori::Connection
   end
 
   def send_data(data)
-    if @monitor.writable?
-      @socket.write_nonblock(data)
-    else
-      @data << data
-    end
+    @monitor.writable? ? @socket.write_nonblock(data) : @data << data
   end
 
   def close_connection
-    begin
-      EventLoop.unregister @socket
-      @socket.close
-    rescue => e
-      puts e
-    end
+    EventLoop.unregister @socket
+    @socket.close
   end
 
   def close_connection_after_writing

@@ -37,6 +37,10 @@ class ExampleAPI < Midori::API
     raise StandardError
   end
 
+  get '/large' do
+    'w' * 2 * 20
+  end
+
   get '/stop' do
     EXAMPLE_RUNNER.stop
   end
