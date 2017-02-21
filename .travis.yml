@@ -14,11 +14,13 @@ os:
 
 services:
   - postgresql
+  - mysql
   - redis-server
 
 before_install:
   - gem install bundler
   - psql -c 'create database travis_ci_test;' -U postgres
+  - mysql -e 'create database if not exists travis_ci_test;'
 
 script:
   - gem list -l
