@@ -13,8 +13,8 @@ class Sequel::Postgres::Adapter
         socket_object = IO.for_fd(socket)
         await(Promise.new do |resolve|
           EventLoop.register(socket_object, :w) do
-            EventLoop.unregister(socket_object)
-            until is_busy
+            unless is_busy
+              EventLoop.unregister(socket_object)
               send_query(sql)
               resolve.call
             end
