@@ -38,12 +38,8 @@ class Midori::Connection
   end
 
   def close_connection
-    begin
-      EventLoop.unregister @socket
-      @socket.close
-    rescue => e
-      puts e
-    end
+    EventLoop.unregister @socket
+    @socket.close
   end
 
   def close_connection_after_writing
