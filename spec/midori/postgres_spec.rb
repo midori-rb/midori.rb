@@ -5,21 +5,21 @@ RSpec.describe 'Sequel' do
     it 'do query' do
       answer = []
       async :test_sequel do
-        @db = Sequel.connect('postgres://postgres@localhost:5432/travis_ci_test')
+        @postgres = Sequel.connect('postgres://postgres@localhost:5432/travis_ci_test')
 
-        @db.run <<-SQL
-          DROP TABLE IF EXISTS products
+        @postgres.run <<-SQL
+          DROP TABLE IF EXISTS products;
         SQL
 
-        @db.run <<-SQL
+        @postgres.run <<-SQL
           CREATE TABLE IF NOT EXISTS products (
             id SERIAL,
             title varchar(64),
             PRIMARY KEY(id)
-          )
+          );
         SQL
 
-        class Product < Sequel::Model
+        class Product < Sequel::Model(@postgres[:products])
         end
 
         product = Product.new
