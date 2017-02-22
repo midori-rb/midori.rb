@@ -16,3 +16,4 @@ gem 'pg', '~> 0.17', require: false
 gem 'mysql2', require: false
 gem 'ohm', '~> 3.0', require: false
 gem 'hiredis', '~> 0.6.0', require: false
+gem 'typhoeus'
