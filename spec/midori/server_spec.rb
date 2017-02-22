@@ -1,5 +1,4 @@
 require './spec/spec_helper'
-require 'net/http'
 require 'socket'
 
 RSpec.describe Midori::Server do
