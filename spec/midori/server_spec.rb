@@ -1,5 +1,4 @@
 require './spec/spec_helper'
-require 'net/http'
 require 'socket'
 
 RSpec.describe Midori::Server do
@@ -13,37 +12,37 @@ RSpec.describe Midori::Server do
   describe 'Basic Requests' do
     it 'should return \'Hello World\' on GET / request' do
       Timeout::timeout(1) do
-        expect(Net::HTTP.get(URI('http://127.0.0.1:8080/'))).to eq('Hello World')
+        expect(Typhoeus.get("http://127.0.0.1:8080/").body).to eq('Hello World')
       end
     end
 
     it 'could deal with very large response' do
       Timeout::timeout(5) do
-        expect(Net::HTTP.get(URI('http://127.0.0.1:8080/large'))).to eq('w' * 2 * 20)
+        expect(Typhoeus.get("http://127.0.0.1:8080/large").body).to eq('w' * 2 * 20)
       end
     end
 
     it 'should return \'Hello World\' on GET /2 request' do
       Timeout::timeout(1) do
-        expect(Net::HTTP.get(URI('http://127.0.0.1:8080/2'))).to eq('Hello World')
+        expect(Typhoeus.get("http://127.0.0.1:8080/2").body).to eq('Hello World')
       end
     end
 
     it 'should return 404 Not Found on GET /not_found_error' do
       Timeout::timeout(1) do
-        expect(Net::HTTP.get(URI('http://127.0.0.1:8080/not_found_error'))).to eq('404 Not Found')
+        expect(Typhoeus.get("http://127.0.0.1:8080/not_found_error").code).to eq(404)
       end
     end
 
     it 'should return 500 Internal Server Error on GET /error' do
       Timeout::timeout(1) do
-        expect(Net::HTTP.get_response(URI('http://127.0.0.1:8080/error')).code).to eq('500')
+        expect(Typhoeus.get("http://127.0.0.1:8080/error").code).to eq(500)
       end
     end
 
     it 'should pass test error definition' do
       Timeout::timeout(1) do
-        expect(Net::HTTP.get(URI('http://127.0.0.1:8080/test_error'))).to eq('Hello Error')
+        expect(Typhoeus.get("http://127.0.0.1:8080/test_error").body).to eq('Hello Error')
       end
     end
   end
@@ -143,13 +142,9 @@ RSpec.describe Midori::Server do
   describe 'EventSource' do
     it 'should pass Hello World test' do
       Timeout::timeout(1) do
-        uri = URI('http://127.0.0.1:8080/eventsource')
-        req = Net::HTTP::Get.new(uri)
-        req['Accept'] = 'text/event-stream'
-        res = Net::HTTP.start(uri.hostname, uri.port) do |http|
-          http.request(req)
-        end
-        expect(res.body).to eq("data: Hello\ndata: World\n\n")
+        expect(Typhoeus.get("http://127.0.0.1:8080/eventsource", headers: {
+            'Accept' => 'text/event-stream'
+        }).body).to eq("data: Hello\ndata: World\n\n")
       end
     end
   end

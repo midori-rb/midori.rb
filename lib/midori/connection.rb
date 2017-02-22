@@ -20,8 +20,11 @@ class Midori::Connection
       end
       if monitor.writable?
         if !@data.empty?
+          # :nocov:
+          # Leave for corner cases
           monitor.io.write_nonblock(@data)
           @data = ''
+          # :nocov:
         elsif @close_flag
           close_connection
         end
