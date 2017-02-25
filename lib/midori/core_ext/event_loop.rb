@@ -10,10 +10,6 @@ module EventLoop
       TIMERS << timer
     end
 
-    def remove_timer(timer)
-      TIMERS.delete(timer)
-    end
-
     def register(io, interest=(:rw), &callback)
       monitor = SELECTOR.register(io, interest)
       monitor.value = {
@@ -37,11 +33,9 @@ module EventLoop
     def timer_once
       now_time = Time.now.to_f
       TIMERS.delete_if do |timer|
-        if timer # A serious bug may cause timer to be "false" on ruby 2.3.3
-          if timer.start_time < now_time
-            timer.callback.call
-            true
-          end
+        if timer.start_time < now_time
+          timer.callback.call
+          true
         end
       end
     end

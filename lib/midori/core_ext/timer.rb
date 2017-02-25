@@ -7,8 +7,4 @@ class EventLoop::Timer
     @callback = callback
     @start_time = Float::INFINITY
   end
-
-  def stop
-    EventLoop.remove_timer(self)
-  end
 end
