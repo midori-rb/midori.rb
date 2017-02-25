@@ -64,17 +64,3 @@ module EventLoop
     end
   end
 end
-
-class EventLoop::Timer
-  attr_reader :time, :start_time, :callback
-  attr_accessor :start_time
-
-  def initialize(time, &callback)
-    @time = time
-    @callback = callback
-  end
-
-  def stop
-    EventLoop.remove_timer(self)
-  end
-end
