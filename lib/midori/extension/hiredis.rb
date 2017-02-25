@@ -17,7 +17,7 @@ module Hiredis
           EventLoop.register(@sock, :w) do
             written += @sock.write_nonblock(data[written..-1])
             if written == string_size(data)
-              EventLoop.unregister(@sock)
+              EventLoop.deregister(@sock)
               resolve.call
             end
           end
@@ -31,7 +31,7 @@ module Hiredis
             @reader.feed @sock.read_nonblock(1024)
             reply = @reader.gets
             if reply
-              EventLoop.unregister(@sock)
+              EventLoop.deregister(@sock)
               resolve.call(reply)
             end
           end

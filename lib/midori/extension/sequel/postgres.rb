@@ -14,7 +14,7 @@ class Sequel::Postgres::Adapter
         await(Promise.new do |resolve|
           EventLoop.register(socket_object, :w) do
             unless is_busy
-              EventLoop.unregister(socket_object)
+              EventLoop.deregister(socket_object)
               send_query(sql)
               resolve.call
             end
@@ -24,7 +24,7 @@ class Sequel::Postgres::Adapter
         await(Promise.new do |resolve|
           consume_input
           EventLoop.register(socket_object, :r) do
-            EventLoop.unregister(socket_object)
+            EventLoop.deregister(socket_object)
             resolve.call(get_result)
           end
         end)

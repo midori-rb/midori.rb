@@ -44,7 +44,7 @@ class Midori::Runner
   def stop
     if running?
       @logger.info 'Stopping Midori'.blue
-      EventLoop.unregister @server
+      EventLoop.deregister @server
       @server.close
       @server = nil
       EventLoop.stop

@@ -8,7 +8,7 @@ RSpec.describe Promise do
           file = File.open(file, 'r')
           EventLoop.register(file, :r) do
             data = file.read_nonblock(16384)
-            EventLoop.unregister(file)
+            EventLoop.deregister(file)
             resolve.call(data)
           end
         end

@@ -9,7 +9,7 @@ class Net::BufferedIO
         when :wait_readable
           await(Promise.new do |resolve|
             EventLoop.register(@io.to_io, :r) do
-              EventLoop.unregister(@io.to_io)
+              EventLoop.deregister(@io.to_io)
               resolve.call(self)
             end
           end)
@@ -21,7 +21,7 @@ class Net::BufferedIO
           # :nocov:
           await(Promise.new do |resolve|
             EventLoop.register(@io.to_io, :w) do
-              EventLoop.unregister(@io.to_io)
+              EventLoop.deregister(@io.to_io)
               resolve.call(self)
             end
           end)
