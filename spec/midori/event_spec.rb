@@ -9,7 +9,6 @@ RSpec.describe EventLoop do
         EventLoop.stop
       end
       EventLoop.add_timer(timer)
-
       answer << 0
       EventLoop.start
       expect(answer).to eq([0, 1])

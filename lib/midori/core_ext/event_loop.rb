@@ -37,10 +37,11 @@ module EventLoop
     def timer_once
       now_time = Time.now.to_f
       TIMERS.delete_if do |timer|
-        if timer.start_time < now_time
-          timer.callback.call
-          timer.stop
-          true
+        if timer # A serious bug may cause timer to be "false" on ruby 2.3.3
+          if timer.start_time < now_time
+            timer.callback.call
+            true
+          end
         end
       end
     end
