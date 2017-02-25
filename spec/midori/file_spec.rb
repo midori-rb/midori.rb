@@ -18,9 +18,12 @@ RSpec.describe Midori::File do
     end
 
     it 'should raise error when unable to open' do
-      expect {
-        Midori::File.new('./TooYoungTooSimple', 'r')
-      }.to raise_error(Errno::ENOENT)
+      async :test_file_read do
+        expect {
+          Midori::File.new('./TooYoungTooSimple', 'r')
+        }.to raise_error(Errno::ENOENT)
+      end
+      test_file_read
     end
 
     it 'should write file in correct order' do

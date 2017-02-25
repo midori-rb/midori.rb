@@ -39,7 +39,7 @@ module Sequel
               socket = IO::open(conn.socket)
               await(Promise.new do |resolve|
                 EventLoop.register(socket, :w) do
-                  EventLoop.unregister(socket)
+                  EventLoop.deregister(socket)
                   conn.query(sql,
                              database_timezone: timezone,
                              application_timezone: Sequel.application_timezone,
@@ -50,7 +50,7 @@ module Sequel
               end)
               await(Promise.new do |resolve|
                 EventLoop.register(socket, :r) do
-                  EventLoop.unregister(socket)
+                  EventLoop.deregister(socket)
                   resolve.call(conn.async_result)
                 end
               end)

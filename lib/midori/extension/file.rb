@@ -8,7 +8,7 @@ class Midori::File
       data = ''
       EventLoop.register(@file, :r) do
         if @file.eof?
-          EventLoop.unregister(@file)
+          EventLoop.deregister(@file)
           resolve.call(data)
         else
           data << @file.read_nonblock(16384)
@@ -23,7 +23,7 @@ class Midori::File
       EventLoop.register(@file, :w) do
         written += @file.write_nonblock(data[written..-1])
         if written == data.size
-          EventLoop.unregister(@file)
+          EventLoop.deregister(@file)
           resolve.call(written)
         end
       end

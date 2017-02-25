@@ -37,7 +37,7 @@ class Midori::Connection
   end
 
   def close_connection
-    EventLoop.unregister @socket
+    EventLoop.deregister @socket
     @socket.close
   end
 
