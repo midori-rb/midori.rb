@@ -39,6 +39,7 @@ module EventLoop
       TIMERS.delete_if do |timer|
         if timer.start_time < now_time
           timer.callback.call
+          timer.stop
           true
         end
       end
