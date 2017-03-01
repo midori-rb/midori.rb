@@ -45,6 +45,17 @@ module Kernel
   # @example
   #   result = await SQL.query('SELECT * FROM hello')
   def await(promise)
-    Fiber.yield promise
+    result = Fiber.yield promise
+    if result.is_a? PromiseException
+      raise result.payload
+    end
+    result
+  end
+end
+
+class PromiseException < Exception
+  attr_reader :payload
+  def initialize(payload)
+    @payload = payload
   end
 end

@@ -3,8 +3,9 @@ require 'net/protocol'
 class Net::BufferedIO
   def wait_io(interest)
     await(Promise.new do |resolve|
-      EventLoop.register(@io.to_io, interest) do
-        EventLoop.deregister(@io.to_io)
+      io = @io.to_io
+      EventLoop.register(io, interest) do
+        EventLoop.deregister(io)
         resolve.call(self)
       end
     end)
