@@ -17,6 +17,6 @@ Gem::Specification.new do |s|
   s.license                  = 'MIT'
   s.post_install_message     = File.read('.resources/midori_ascii.txt')
   s.add_runtime_dependency     'nio4r', '~> 2.0'
-  s.add_runtime_dependency     'mustermann', '~> 0.4'
+  s.add_runtime_dependency     'mustermann', '~> 1.0'
   s.add_runtime_dependency     'midori_http_parser', '~> 0.6.1'
 end
