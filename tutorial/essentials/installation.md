@@ -37,7 +37,7 @@ It's hard to say that if it is possible for running on other ruby implementation
 
 ```
 $ gem install em-midori
-Successfully installed em-midori-0.1.7
+Successfully installed em-midori-0.1.12
 1 gem installed
 ```
 
@@ -50,7 +50,7 @@ $ ruby -r "midori" -e "class A < Midori::API;end;Midori::Runner.new(A).start"
 If you see the following message, then everything now works fine.
 
 ```
-Midori 0.1.7 is now running on 127.0.0.1:8080
+Midori 0.1.12 is now running on 127.0.0.1:8080
 ```
 
 ## Use Bundler
