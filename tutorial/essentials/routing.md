@@ -2,7 +2,7 @@
 
 ## Basic Usage
 
-Routes should be defined inside a class inherited from `Midori::API`. Midori doesn't support defining routes  globally like sinatra to avoid scope pollution, which affects a lot in scaling project.
+Routes should be defined inside a class inherited from `Midori::API`. Midori doesn't support defining routes globally like sinatra to avoid scope pollution, which affects a lot in scaling project.
 
 In midori, a route is an HTTP method with a URL-matching pattern. Each route is associated with a block:
 
