@@ -1,6 +1,8 @@
 safe_require 'sequel', 'gem install sequel'
 require 'sequel/adapters/mysql2'
 
+MYSQL_SOCKETS = {}
+
 module Sequel
   module Mysql2
     class Database
@@ -37,7 +39,11 @@ module Sequel
               # :nocov:
             else
               # socket = IO.for_fd(conn.socket)
-              socket = IO::open(conn.socket)
+              if MYSQL_SOCKETS[conn.socket].nil?
+                MYSQL_SOCKETS[conn.socket] = IO::open(conn.socket)
+              end
+              socket = MYSQL_SOCKETS[conn.socket]
+              # socket = IO::open(conn.socket)
               await(Promise.new do |resolve|
                 EventLoop.register(socket, :w, 2, resolve) do
                   EventLoop.deregister(socket)
