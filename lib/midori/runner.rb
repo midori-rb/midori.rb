@@ -13,6 +13,7 @@ class Midori::Runner
     @bind = configure.bind
     @port = configure.port
     @api = ((api.is_a?Midori::APIEngine) ? api : Midori::APIEngine.new(api, configure.route_type))
+    @before = configure.before
   end
 
   # Get Midori server whether running
@@ -33,6 +34,9 @@ class Midori::Runner
       connection = Midori::Connection.new(socket)
       connection.server_initialize(@api, @logger)
     end
+    async_fiber(Fiber.new do
+      @before.call
+    end)
     EventLoop.start
     nil
   end

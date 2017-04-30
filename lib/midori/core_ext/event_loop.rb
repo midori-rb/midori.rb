@@ -4,28 +4,39 @@ module EventLoop
   class << self
     SELECTOR = NIO::Selector.new
     TIMERS = []
+    IOS = Hash.new
 
     def add_timer(timer)
       timer.start_time = Time.now.to_f + timer.time
       TIMERS << timer
     end
 
-    def register(io, interest=(:rw), &callback)
-      monitor = SELECTOR.register(io, interest)
-      monitor.value = {
+    def register(io, interest=(:rw), timeout=nil, resolve=nil, &callback)
+      SELECTOR.register(io, interest)
+      timer = nil
+      unless timeout.nil?
+        timer = EventLoop::Timer.new(timeout) do
+          EventLoop.deregister(io)
+          resolve.call(TimeoutError) unless resolve.nil?
+        end
+        EventLoop.add_timer(timer)
+      end
+
+      IOS[io] = {
+          timer: timer ? timer : nil,
           callback: callback,
       }
-
     end
 
     def deregister(io)
       SELECTOR.deregister(io)
+      IOS.delete(io)
     end
 
     def run_once
       SELECTOR.select(0.2) do |monitor| # Timeout for 1 secs
-        monitor.value[:timer].stop unless monitor.value[:timer].nil?
-        monitor.value[:callback].call(monitor)
+        TIMERS.delete(IOS[monitor.io][:timer]) unless IOS[monitor.io][:timer].nil?
+        IOS[monitor.io][:callback].call(monitor)
       end
       EventLoop.timer_once
     end

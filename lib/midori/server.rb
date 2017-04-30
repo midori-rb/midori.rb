@@ -43,7 +43,7 @@ module Midori::Server
           @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
         rescue
           close_connection
-          @logger.error "#{@request.ip} - - Reached an EOF Error".red
+          @logger.warn "#{@request.ip} - - Reached an EOF Error".yellow
         end
       end)
     end.call

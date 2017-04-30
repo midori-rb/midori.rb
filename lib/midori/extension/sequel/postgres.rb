@@ -11,21 +11,33 @@ class Sequel::Postgres::Adapter
   def execute_query(sql, args)
       @db.log_connection_yield(sql, self, args) do
         socket_object = IO.for_fd(socket)
-        await(Promise.new do |resolve|
+        result = await(Promise.new do |resolve|
           EventLoop.register(socket_object, :w) do
-            unless is_busy
-              EventLoop.deregister(socket_object)
-              send_query(sql)
-              resolve.call
+            begin
+              unless is_busy
+                EventLoop.deregister(socket_object)
+                send_query(sql)
+                resolve.call
+              end
+            rescue
+              resolve.call(PromiseException.new(e))
+              next
             end
           end
         end)
 
+        return result unless result.nil?
+
         await(Promise.new do |resolve|
           consume_input
           EventLoop.register(socket_object, :r) do
-            EventLoop.deregister(socket_object)
-            resolve.call(get_result)
+            begin
+              EventLoop.deregister(socket_object)
+              resolve.call(get_result)
+            rescue
+              resolve.call(PromiseException.new(e))
+              next
+            end
           end
         end)
       end

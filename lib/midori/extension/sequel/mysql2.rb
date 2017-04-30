@@ -36,22 +36,30 @@ module Sequel
               stmt.execute(*args)
               # :nocov:
             else
+              # socket = IO.for_fd(conn.socket)
               socket = IO::open(conn.socket)
               await(Promise.new do |resolve|
-                EventLoop.register(socket, :w) do
+                EventLoop.register(socket, :w, 2, resolve) do
                   EventLoop.deregister(socket)
-                  conn.query(sql,
-                             database_timezone: timezone,
-                             application_timezone: Sequel.application_timezone,
-                             stream: stream,
-                             async: true)
-                  resolve.call
-                end
-              end)
-              await(Promise.new do |resolve|
-                EventLoop.register(socket, :r) do
-                  EventLoop.deregister(socket)
-                  resolve.call(conn.async_result)
+                  begin
+                    conn.query(sql,
+                               database_timezone: timezone,
+                               application_timezone: Sequel.application_timezone,
+                               stream: stream,
+                               async: true)
+                    EventLoop.register(socket, :r, 2, resolve) do
+                      begin
+                        EventLoop.deregister(socket)
+                        resolve.call(conn.async_result)
+                      rescue ::Mysql2::Error => e
+                        resolve.call(PromiseException.new(e))
+                        next
+                      end
+                    end
+                  rescue ::Mysql2::Error => e
+                    resolve.call(PromiseException.new(e))
+                    next
+                  end
                 end
               end)
             end
