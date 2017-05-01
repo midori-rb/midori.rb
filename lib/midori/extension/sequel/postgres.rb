@@ -16,7 +16,7 @@ class Sequel::Postgres::Adapter
           POSTGRES_SOCKETS[self] = IO::open(socket)
         end
         socket_object = POSTGRES_SOCKETS[self]
-        result = await(Promise.new do |resolve|
+        await(Promise.new do |resolve|
           count = 0
           EventLoop.register(socket_object, :rw) do
             begin
