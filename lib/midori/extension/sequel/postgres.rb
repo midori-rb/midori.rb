@@ -1,6 +1,8 @@
 safe_require 'sequel', 'gem install sequel'
 require 'sequel/adapters/postgres'
 
+POSTGRES_SOCKETS = {}
+
 ##
 # Midori Extension of sequel postgres through meta programming
 class Sequel::Postgres::Adapter
@@ -10,33 +12,27 @@ class Sequel::Postgres::Adapter
   # @return [Array] sql query result
   def execute_query(sql, args)
       @db.log_connection_yield(sql, self, args) do
-        socket_object = IO.for_fd(socket)
+        if POSTGRES_SOCKETS[self].nil?
+          POSTGRES_SOCKETS[self] = IO::open(socket)
+        end
+        socket_object = POSTGRES_SOCKETS[self]
         result = await(Promise.new do |resolve|
-          EventLoop.register(socket_object, :w) do
+          count = 0
+          EventLoop.register(socket_object, :rw) do
             begin
-              unless is_busy
+              if (count == 0)
+                # Writable
+                unless is_busy
+                  send_query(sql)
+                  count += 1
+                end
+              else
+                # Readable
                 EventLoop.deregister(socket_object)
-                send_query(sql)
-                resolve.call
+                resolve.call(get_result)
               end
-            rescue
+            rescue => e
               resolve.call(PromiseException.new(e))
-              next
-            end
-          end
-        end)
-
-        return result unless result.nil?
-
-        await(Promise.new do |resolve|
-          consume_input
-          EventLoop.register(socket_object, :r) do
-            begin
-              EventLoop.deregister(socket_object)
-              resolve.call(get_result)
-            rescue
-              resolve.call(PromiseException.new(e))
-              next
             end
           end
         end)
