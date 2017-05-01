@@ -5,6 +5,7 @@ module EventLoop
     SELECTOR = NIO::Selector.new
     TIMERS = []
     IOS = Hash.new
+    QUEUE = Hash.new
 
     def add_timer(timer)
       timer.start_time = Time.now.to_f + timer.time
@@ -12,6 +13,15 @@ module EventLoop
     end
 
     def register(io, interest=(:rw), timeout=nil, resolve=nil, &callback)
+      if QUEUE[io.to_i].nil?
+        QUEUE[io.to_i] = Array.new
+        register_raw(io, interest, timeout, resolve, callback)
+      else
+        QUEUE[io.to_i] << [io, interest, timeout, resolve, callback]
+      end
+    end
+
+    def register_raw(io, interest=(:rw), timeout=nil, resolve=nil, callback)
       SELECTOR.register(io, interest)
       timer = nil
       unless timeout.nil?
@@ -29,12 +39,15 @@ module EventLoop
     end
 
     def deregister(io)
+      fd = io.to_i
       SELECTOR.deregister(io)
       IOS.delete(io)
+      next_register = QUEUE[fd].shift
+      next_register.nil? ? QUEUE.delete(fd) : register_raw(*next_register)
     end
 
     def run_once
-      SELECTOR.select(0.2) do |monitor| # Timeout for 1 secs
+      SELECTOR.select(0.2) do |monitor| # Timeout for 0.2 secs
         TIMERS.delete(IOS[monitor.io][:timer]) unless IOS[monitor.io][:timer].nil?
         IOS[monitor.io][:callback].call(monitor)
       end
