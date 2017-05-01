@@ -39,8 +39,6 @@ class Midori::Connection
   def close_connection
     EventLoop.deregister @socket
     @socket.close
-  rescue Errno::EBADF
-    # Connection finished in advance
   end
 
   def close_connection_after_writing
