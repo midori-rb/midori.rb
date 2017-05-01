@@ -12,10 +12,10 @@ class Sequel::Postgres::Adapter
   # @return [Array] sql query result
   def execute_query(sql, args)
       @db.log_connection_yield(sql, self, args) do
-        if POSTGRES_SOCKETS[socket].nil?
-          POSTGRES_SOCKETS[socket] = IO.for_fd(socket)
+        if POSTGRES_SOCKETS[self].nil?
+          POSTGRES_SOCKETS[self] = IO::open(socket)
         end
-        socket_object = POSTGRES_SOCKETS[socket]
+        socket_object = POSTGRES_SOCKETS[self]
         result = await(Promise.new do |resolve|
           count = 0
           EventLoop.register(socket_object, :rw) do
