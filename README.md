@@ -83,14 +83,14 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 
 #### Found a bug or any suggestion
 
-1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues) and [Trello board](https://trello.com/b/vsS3CZDv).
+1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
 2. Comment with your details if any ticket is common to your idea.
 3. Raise a ticket if no open ticket meets your idea.
 4. If you are not sure whether you should raise a ticket or not, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
 #### Contribute
 
-1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues) and [Trello board](https://trello.com/b/vsS3CZDv).
+1. Check [Issue list](https://github.com/heckpsi-lab/em-midori/issues).
 2. Pick a feature still not in progress.
 3. Raise a ticket saying you're working on.
 4. Fork, Code, Test and Document it.
@@ -127,16 +127,18 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.10    |   2017-02-28    | 2017-02-20 (-8d)  | Reconstruct Extensions                 |
 |    0.1.11    |   2017-03-07    | 2017-02-21 (-14d) | Add MySQL Extension Support            |
 |    0.1.12    |   2017-03-14    | 2017-02-25 (-17d) | Better HTTP Request Extension          |
-|    0.2.0     |   2017-03-21    |                   | General Web Adapter                    |
-|    0.2.1     |   2017-03-28    |                   | Enrich Benchmark                       |
-|    0.2.2     |   2017-04-04    |                   | Documenting and API Stable             |
-|  **1.0.0**   |   2017-04-11    |                   | Enrich Tutorial, Production-ready      |
+|    0.2.0     |   2017-03-21    | 2017-05-01 (+41d) | Fix stable problems                    |
+|    0.2.1     |   2017-05-02    |                   | Modulize project                       |
+|    0.2.2     |   2017-05-09    |                   | Better eventloop abstraction           |
+|    0.2.3     |   2017-05-16    |                   | Better network abstraction             |
+|    0.3.0     |   2017-05-23    |                   | Improve tutorial and documentation     |
+|    0.3.1     |   2017-05-30    |                   | Enrich tests                           |
+|  **1.0.0**   |   2017-05-06    |                   | **Stablize API, production ready**     |
 
 ## Midori 2 Goals
 
-- Complete HTTP/2 Support
-- Midori Clusters
-- More Concurrent Model Attempts (Actor, Guild, ...?)
-- Midori Command Line Tool
-- Midori Scaling Example
-- Crystal Support?
+1. Support HTTP/2
+2. Add MVC abstraction example with scaffold
+3. Improve performance of eventloop
+4. More examples on using midori
+
