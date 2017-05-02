@@ -1,9 +1,9 @@
 language: ruby
-rvm: 2.2.6
+rvm: 2.2.7
 sudo: false
 matrix:
   include:
-    - rvm: 2.3.3
+    - rvm: 2.3.4
     - rvm: 2.4.1
     - rvm: ruby-head
   allow_failures:
