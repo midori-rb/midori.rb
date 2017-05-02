@@ -128,7 +128,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.1.11    |   2017-03-07    | 2017-02-21 (-14d) | Add MySQL Extension Support            |
 |    0.1.12    |   2017-03-14    | 2017-02-25 (-17d) | Better HTTP Request Extension          |
 |    0.2.0     |   2017-03-21    | 2017-05-01 (+41d) | Fix stable problems                    |
-|    0.2.1     |   2017-05-02    |                   | Modulize project                       |
+|    0.2.1     |   2017-05-02    | 2017-05-02 (+0d)  | Improve doc                            |
 |    0.2.2     |   2017-05-09    |                   | Better eventloop abstraction           |
 |    0.2.3     |   2017-05-16    |                   | Better network abstraction             |
 |    0.3.0     |   2017-05-23    |                   | Improve tutorial and documentation     |
