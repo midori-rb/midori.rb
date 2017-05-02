@@ -58,8 +58,11 @@ end
 
 ##
 # Exceptions for Promises
+# @!attribute [r] payload
+#   @return [Exception] raw execption
 class PromiseException < Exception
   attr_reader :payload
+  # Init PromiseException with existed Exception
   # @param [Exception] payload raw execption
   def initialize(payload)
     @payload = payload
