@@ -1,6 +1,10 @@
 require 'net/protocol'
 
+##
+# Meta programming Net class for async HTTP and FTP connection
 class Net::BufferedIO
+  # Wait till io finishes
+  # @param [Symbol] interest
   def wait_io(interest)
     await(Promise.new do |resolve|
       io = @io.to_io
@@ -11,6 +15,7 @@ class Net::BufferedIO
     end)
   end
 
+  # Fill until the operation finishes
   def rbuf_fill
     loop do
       case rv = @io.read_nonblock(BUFSIZE, exception: false)

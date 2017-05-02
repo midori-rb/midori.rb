@@ -1,8 +1,12 @@
+##
+# Midori Extension of File reading and writing
 class Midori::File
   def initialize(*args)
     @file = File.new(*args)
   end
 
+  # read file
+  # @return [String] string readed
   def read
     await(Promise.new do |resolve|
       data = ''
@@ -17,6 +21,8 @@ class Midori::File
     end)
   end
 
+  # write file
+  # @param [String] data string to be written
   def write(data)
     await(Promise.new do |resolve|
       written = 0
@@ -30,10 +36,13 @@ class Midori::File
     end)
   end
 
+  # raw file object
+  # @return [File] file
   def raw
     @file
   end
 
+  # Close the file
   def close
     @file.close
   end
