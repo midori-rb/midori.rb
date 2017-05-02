@@ -133,7 +133,7 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 |    0.2.3     |   2017-05-16    |                   | Better network abstraction             |
 |    0.3.0     |   2017-05-23    |                   | Improve tutorial and documentation     |
 |    0.3.1     |   2017-05-30    |                   | Enrich tests                           |
-|  **1.0.0**   |   2017-05-06    |                   | **Stablize API, production ready**     |
+|  **1.0.0**   |   2017-06-06    |                   | **Stablize API, production ready**     |
 
 ## Midori 2 Goals
 
