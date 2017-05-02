@@ -1,5 +1,7 @@
 require 'timeout'
 
+##
+# EventLoop Module, providing main loop for events
 module EventLoop
   class << self
     SELECTOR = NIO::Selector.new
@@ -12,30 +14,18 @@ module EventLoop
       TIMERS << timer
     end
 
-    def register(io, interest=(:rw), timeout=nil, resolve=nil, &callback)
+    def register(io, interest=(:rw), &callback)
       if QUEUE[io.to_i].nil?
         QUEUE[io.to_i] = Array.new
-        register_raw(io, interest, timeout, resolve, callback)
+        register_raw(io, interest, callback)
       else
-        QUEUE[io.to_i] << [io, interest, timeout, resolve, callback]
+        QUEUE[io.to_i] << [io, interest, callback]
       end
     end
 
-    def register_raw(io, interest=(:rw), timeout=nil, resolve=nil, callback)
+    def register_raw(io, interest=(:rw), callback)
       SELECTOR.register(io, interest)
-      timer = nil
-      unless timeout.nil?
-        timer = EventLoop::Timer.new(timeout) do
-          EventLoop.deregister(io)
-          resolve.call(TimeoutError) unless resolve.nil?
-        end
-        EventLoop.add_timer(timer)
-      end
-
-      IOS[io] = {
-          timer: timer ? timer : nil,
-          callback: callback,
-      }
+      IOS[io] = { callback: callback }
     end
 
     def deregister(io)
@@ -48,7 +38,6 @@ module EventLoop
 
     def run_once
       SELECTOR.select(0.2) do |monitor| # Timeout for 0.2 secs
-        TIMERS.delete(IOS[monitor.io][:timer]) unless IOS[monitor.io][:timer].nil?
         IOS[monitor.io][:callback].call(monitor)
       end
       EventLoop.timer_once
