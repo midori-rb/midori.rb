@@ -6,6 +6,7 @@ module Configurable
   # @param [Symbol] option the name of config
   # @param [Object] value value to the name
   # @param [Boolean] read_only Generate option= method or not
+  # @return [nil] nil
   def set(option, value = (not_set = true), read_only = false)
     raise ArgumentError if not_set
 
@@ -22,6 +23,9 @@ module Configurable
   private
 
   # Dynamically defines a method on settings.
+  # @param [String] name method name
+  # @param [Proc] content method content
+  # @return [nil] nil
   def define_singleton(name, content = Proc.new)
     singleton_class.class_eval do
       undef_method(name) if method_defined? name

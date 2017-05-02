@@ -17,6 +17,8 @@ class Promise
 end
 
 module Kernel
+  # Make fiber as async chain
+  # @param [Fiber] fiber root of async chain
   def async_fiber(fiber)
     chain = proc do |result|
       next unless result.is_a? Promise

@@ -4,6 +4,8 @@ require 'sequel/adapters/mysql2'
 # Management of MySQL Sockets
 MYSQL_SOCKETS = {}
 
+##
+# Meta-programming Sequel for async extensions
 module Sequel
   # Midori Extension of sequel MySQL through meta programming
   module Mysql2
