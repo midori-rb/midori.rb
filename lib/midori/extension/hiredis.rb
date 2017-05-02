@@ -1,15 +1,25 @@
+##
+# Meta-programming hiredis for redis async extension
 module Hiredis
   require 'hiredis/connection'
   # Overwrite with ruby implementation to hook IO
   require 'hiredis/ruby/connection'
   require 'hiredis/ruby/reader'
+  # Redis Connection
   Connection = Ruby::Connection
+  # Redis Result Reader
   Reader = Ruby::Reader
-end
 
-module Hiredis
+  ##
+  # Meta-programming hiredis for redis async extension
   module Ruby
+    ##
+    # Meta-programming hiredis for redis async extension
     class Connection
+      # write message directly
+      # @param [IO] _sock raw socket
+      # @param [String] data generated string data
+      # @param [Float] _timeout operation timeout
       def _write(_sock, data, _timeout)
         await(Promise.new do |resolve|
           data.force_encoding('binary') if data.respond_to?(:force_encoding)
@@ -24,6 +34,8 @@ module Hiredis
         end)
       end
 
+      # read from redis socket
+      # @return [String] reply
       def read
         raise 'not connected' unless connected?
         await(Promise.new do |resolve|

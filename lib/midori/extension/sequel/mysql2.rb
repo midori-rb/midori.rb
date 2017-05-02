@@ -1,14 +1,23 @@
 safe_require 'sequel', 'gem install sequel'
 require 'sequel/adapters/mysql2'
 
+# Management of MySQL Sockets
 MYSQL_SOCKETS = {}
 
+##
+# Meta-programming Sequel for async extensions
 module Sequel
+  # Midori Extension of sequel MySQL through meta programming
   module Mysql2
+    # Midori Extension of sequel MySQL through meta programming
     class Database
       # Execute the given SQL on the given connection.  If the :type
       # option is :select, yield the result of the query, otherwise
       # yield the connection if a block is given.
+      # @param [Mysql2::Client] conn connection to database
+      # @param [String] sql sql query
+      # @param [Hash] opts optional options
+      # @return [Mysql2::Result] MySQL results
       def _execute(conn, sql, opts) # rubocop:disable Metrics/MethodLength, Metrics/CyclomaticComplexity
         begin
           # :nocov:
@@ -44,15 +53,15 @@ module Sequel
               socket = MYSQL_SOCKETS[conn.socket]
               await(Promise.new do |resolve|
                 count = 0
-                EventLoop.register(socket, :rw, 2, resolve) do
+                EventLoop.register(socket, :rw) do
                   if (count == 0)
                     # Writable
                     count += 1
                     conn.query(sql,
-                               database_timezone: timezone,
-                               application_timezone: Sequel.application_timezone,
-                               stream: stream,
-                               async: true)
+                              database_timezone: timezone,
+                              application_timezone: Sequel.application_timezone,
+                              stream: stream,
+                              async: true)
                   else
                     # Readable
                     begin

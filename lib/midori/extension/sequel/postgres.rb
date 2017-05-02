@@ -1,6 +1,7 @@
 safe_require 'sequel', 'gem install sequel'
 require 'sequel/adapters/postgres'
 
+# Management of Postgres Sockets
 POSTGRES_SOCKETS = {}
 
 ##
@@ -11,31 +12,31 @@ class Sequel::Postgres::Adapter
   # @param [Array] args args to send
   # @return [Array] sql query result
   def execute_query(sql, args)
-      @db.log_connection_yield(sql, self, args) do
-        if POSTGRES_SOCKETS[self].nil?
-          POSTGRES_SOCKETS[self] = IO::open(socket)
-        end
-        socket_object = POSTGRES_SOCKETS[self]
-        await(Promise.new do |resolve|
-          count = 0
-          EventLoop.register(socket_object, :rw) do
-            begin
-              if (count == 0)
-                # Writable
-                unless is_busy
-                  send_query(sql)
-                  count += 1
-                end
-              else
-                # Readable
-                EventLoop.deregister(socket_object)
-                resolve.call(get_result)
-              end
-            rescue => e
-              resolve.call(PromiseException.new(e))
-            end
-          end
-        end)
+    @db.log_connection_yield(sql, self, args) do
+      if POSTGRES_SOCKETS[self].nil?
+        POSTGRES_SOCKETS[self] = IO::open(socket)
       end
+      socket_object = POSTGRES_SOCKETS[self]
+      await(Promise.new do |resolve|
+        count = 0
+        EventLoop.register(socket_object, :rw) do
+          begin
+            if (count == 0)
+              # Writable
+              unless is_busy
+                send_query(sql)
+                count += 1
+              end
+            else
+              # Readable
+              EventLoop.deregister(socket_object)
+              resolve.call(get_result)
+            end
+          rescue => e
+            resolve.call(PromiseException.new(e))
+          end
+        end
+      end)
+    end
   end
 end

@@ -17,6 +17,8 @@ class Promise
 end
 
 module Kernel
+  # Make fiber as async chain
+  # @param [Fiber] fiber root of async chain
   def async_fiber(fiber)
     chain = proc do |result|
       next unless result.is_a? Promise
@@ -53,8 +55,12 @@ module Kernel
   end
 end
 
+
+##
+# Exceptions for Promises
 class PromiseException < Exception
   attr_reader :payload
+  # @param [Exception] payload raw execption
   def initialize(payload)
     @payload = payload
   end
