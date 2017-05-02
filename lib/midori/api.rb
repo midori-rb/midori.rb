@@ -303,6 +303,7 @@ class Midori::API
 
     # Add EVENTSOURCE method as a DSL for route definition
     # @param [String] path Accepts as part of path in route definition
+    # @yield what to run when route matched
     # @return [nil] nil
     # @example String as router
     #   eventsource '/' do

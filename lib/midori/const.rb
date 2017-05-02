@@ -85,6 +85,7 @@ module Midori::Const
     'Connection' => 'Upgrade'
   }
 
+  # Array of Route Methods
   ROUTE_METHODS = %i(
     DELETE
     GET
