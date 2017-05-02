@@ -5,9 +5,7 @@ module Hiredis
   require 'hiredis/ruby/reader'
   Connection = Ruby::Connection
   Reader = Ruby::Reader
-end
 
-module Hiredis
   module Ruby
     class Connection
       def _write(_sock, data, _timeout)
