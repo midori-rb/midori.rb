@@ -53,8 +53,12 @@ module Kernel
   end
 end
 
+
+##
+# Exceptions for Promises
 class PromiseException < Exception
   attr_reader :payload
+  # @param [Exception] payload raw execption
   def initialize(payload)
     @payload = payload
   end
