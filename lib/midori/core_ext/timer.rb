@@ -1,13 +1,13 @@
 ##
 # Timer Object in EventLoop
 class EventLoop::Timer
-  # @!attribute time
+  # @!attribute [r] time
   #   @return [Float] timeout length
-  # @!attribute callback
+  # @!attribute [r] callback
   #   @return [Proc] proc to call when callbacks
+  attr_reader :time, :callback
   # @!attribute start_time
   #   @return [Float] when timer should callbacks
-  attr_reader :time, :callback
   attr_accessor :start_time
 
   # @param [Float] time timeout length

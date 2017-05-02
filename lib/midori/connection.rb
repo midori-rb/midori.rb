@@ -7,6 +7,7 @@ class Midori::Connection
   #   @return [String] string buffer of data to send
   attr_accessor :data
 
+  # Init Connection with socket
   # @param [IO] socket raw socket
   def initialize(socket)
     @registered = false
