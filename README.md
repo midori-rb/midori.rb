@@ -97,6 +97,12 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 5. Raise pull requests.
 6. If any problem, use [gitter](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) to contact other developers.
 
+### Tutorial & Example
+
+There is a unfinished tutorial available [here](https://github.com/heckpsi-lab/em-midori/tree/master/tutorial).
+
+There is an example showing how to use midori with a todo-list web app available [here](https://github.com/heckpsi-lab/em-midori/tree/master/tutorial).
+
 ## Roadmap
 
 **Detailed release notes for published versions can be seen [here](https://github.com/heckpsi-lab/em-midori/releases).**
