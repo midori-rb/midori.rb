@@ -13,6 +13,7 @@ jobs:
     working_directory: ~/midori
     steps:
       - checkout
+      - run: apt-get update
       - run: apt-get -y install mysql-client postgresql-client-9.6
       - run: gem install bundler
       - run: psql -c 'create database travis_ci_test;' -U postgres
