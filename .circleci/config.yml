@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  default: &DEFAULT
+  build: &DEFAULT
     docker:
       - image: ruby:2.4.1
       - image: postgres:9.6.2
