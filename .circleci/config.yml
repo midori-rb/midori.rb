@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  default: &DEFAULT
+    docker:
+      - image: ruby:2.4.1
+      - image: postgres:9.4.1
+        environment:
+          POSTGRES_USER: postgres
+      - image: mysql:5.7.18
+        environment:
+          MYSQL_USER: travis
+    working_directory: ~/midori
+    steps:
+      - checkout
+      - run: gem install bundler
+      - run: psql -c 'create database travis_ci_test;' -U postgres
+      - run: mysql -e 'create database if not exists travis_ci_test;' -u travis
+      - run: gem list -l
+      - run: bundle exec rake
+      - run: bundle exec codeclimate-test-reporter
+      - run: gem build ./em-midori.gemspec
