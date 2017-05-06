@@ -3,7 +3,7 @@ jobs:
   build: &DEFAULT
     docker:
       - image: ruby:2.4.1
-      - image: postgres:9.6.2
+      - image: postgres:9.4.11
         environment:
           POSTGRES_USER: postgres
       - image: mysql:5.7.18
@@ -14,7 +14,7 @@ jobs:
     steps:
       - checkout
       - run: apt-get update
-      - run: apt-get -y install mysql-client postgresql-client-9.6
+      - run: apt-get -y install mysql-client postgresql-client-9.4
       - run: gem install bundler
       - run: psql -c 'create database travis_ci_test;' -U postgres
       - run: mysql -e 'create database if not exists travis_ci_test;' -u travis
