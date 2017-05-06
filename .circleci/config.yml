@@ -9,9 +9,11 @@ jobs:
       - image: mysql:5.7.18
         environment:
           MYSQL_USER: travis
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
     working_directory: ~/midori
     steps:
       - checkout
+      - run: apt-get -y install mysql-client postgresql-client-9.6
       - run: gem install bundler
       - run: psql -c 'create database travis_ci_test;' -U postgres
       - run: mysql -e 'create database if not exists travis_ci_test;' -u travis
