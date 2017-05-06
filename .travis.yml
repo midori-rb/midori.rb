@@ -8,6 +8,7 @@ matrix:
     - rvm: ruby-head
   allow_failures:
     - rvm: ruby-head
+  fast_finish: true
 
 os:
   - linux
