@@ -12,7 +12,7 @@
 
 Midori is a Ruby Web Framework, providing high performance and proper abstraction.
 
-[![Join the chat at https://gitter.im/em-midori/Lobby](https://badges.gitter.im/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Join the chat at https://gitter.im/em-midori/Lobby](https://img.shields.io/gitter/room/em-midori/Lobby.svg)](https://gitter.im/em-midori/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](https://travis-ci.org/heckpsi-lab/em-midori.svg?branch=master)](https://travis-ci.org/heckpsi-lab/em-midori) [![Code Climate](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori) [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori/coverage) [![Issue Count](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/issue_count.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori)
 
@@ -135,7 +135,7 @@ There is also an example showing how to use midori with a todo-list web app avai
 |    0.1.12    |   2017-03-14    | 2017-02-25 (-17d) | Better HTTP Request Extension          |
 |    0.2.0     |   2017-03-21    | 2017-05-01 (+41d) | Fix stable problems                    |
 |    0.2.1     |   2017-05-02    | 2017-05-02 (+0d)  | Improve doc                            |
-|    0.2.2     |   2017-05-09    |                   | Better eventloop abstraction           |
+|    0.2.2     |   2017-05-09    | 2017-05-12 (+3d)  | Better eventloop abstraction           |
 |    0.2.3     |   2017-05-16    |                   | Better network abstraction             |
 |    0.3.0     |   2017-05-23    |                   | Improve tutorial and documentation     |
 |    0.3.1     |   2017-05-30    |                   | Enrich tests                           |
