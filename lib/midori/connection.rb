@@ -27,7 +27,7 @@ class Midori::Connection
         receive_data(monitor)
       end
       if monitor.writable?
-        if !@data.empty?
+        if !@data == ''
           # :nocov:
           # Leave for corner cases
           monitor.io.write_nonblock(@data)
