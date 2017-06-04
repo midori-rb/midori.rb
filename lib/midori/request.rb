@@ -52,8 +52,11 @@ class Midori::Request
       @body_parsed = true
       pre_proceed
     end
+    nil
   end
 
+  # Preproceed the request after parsed
+  # @return [nil] nil
   def pre_proceed
     # Deal with WebSocket
     if @header['Upgrade'] == 'websocket' && @header['Connection'] == 'Upgrade'
@@ -68,14 +71,17 @@ class Midori::Request
     end
 
     @method = @method.to_sym
+    nil
   end
 
-  # Syntactic sugar for whether a request is parsed
+  # Syntactic sugar for whether a request header is parsed
   # @return [Boolean] parsed or not
   def parsed?
     @parsed
   end
 
+  # Syntactic sugar for whether a request body is parsed
+  # @return [Boolean] parsed or not
   def body_parsed?
     @body_parsed?
   end
