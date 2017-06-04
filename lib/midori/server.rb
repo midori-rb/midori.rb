@@ -38,13 +38,13 @@ module Midori::Server
             websocket_request(StringIO.new(data))
           else
             @request.parse(data)
-            receive_new_request(data) if @request.parsed && @request.body_parsed?
+            receive_new_request if @request.parsed && @request.body_parsed?
           end
           now_time = Time.now
           @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
-        rescue
+        rescue => e
           close_connection
-          @logger.warn "#{@request.ip} - - Reached an Uncaught TCP Error".yellow
+          @logger.warn "#{@request.ip} - - #{e.backtrace.join("\n")}".yellow
         end
       end)
     end.call
