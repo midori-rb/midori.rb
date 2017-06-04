@@ -83,7 +83,7 @@ class Midori::Request
   # Syntactic sugar for whether a request body is parsed
   # @return [Boolean] parsed or not
   def body_parsed?
-    @body_parsed?
+    @body_parsed
   end
 
   # Syntactic sugar for whether a request is a websocket request
