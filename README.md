@@ -54,7 +54,7 @@ Following benchmark results are for [em-midori-benchmark](https://github.com/hec
 | Rails (API Mode, Thin, Ruby) | 5.0.0.1 | 615.30  |
 | Sinatra (Thin, Ruby)         | 1.4.7   | 1847.14 |
 | express.js (Node.js)         | 4.14.0  | 3338.32 |
-| em-midori (Ruby)             | 0.1.9   | 3692.65 |
+| midori (Ruby)                | 0.1.9   | 3692.65 |
 
 ### Name
 
@@ -136,10 +136,10 @@ There is also an example showing how to use midori with a todo-list web app avai
 |    0.2.0     |   2017-03-21    | 2017-05-01 (+41d) | Fix stable problems                    |
 |    0.2.1     |   2017-05-02    | 2017-05-02 (+0d)  | Improve doc                            |
 |    0.2.2     |   2017-05-09    | 2017-05-12 (+3d)  | Better eventloop abstraction           |
-|    0.2.3     |   2017-05-16    |                   | Better network abstraction             |
-|    0.3.0     |   2017-05-23    |                   | Improve tutorial and documentation     |
-|    0.3.1     |   2017-05-30    |                   | Enrich tests                           |
-|  **1.0.0**   |   2017-06-06    |                   | **Stablize API, production ready**     |
+|    0.2.3     |   2017-05-16    | 2017-06-04 (+19d) | Better network abstraction             |
+|    0.3.0     |   2017-06-20    |                   | Improve tutorial and documentation     |
+|    0.3.1     |   2017-06-27    |                   | Enrich tests                           |
+|  **1.0.0**   |   2017-07-04    |                   | **Stablize API, production ready**     |
 
 ## Midori 2 Goals
 
