@@ -1,10 +1,8 @@
 # midori
 
-**This project is still not production-ready.**
+**This project is still not production-ready. Questions, suggestions and pull requests are highly welcome.**
 
-**Questions, Suggestions and Pull Requests are highly welcome.**
-
-**Every awesome feature you noticed in the project was implemented by me. Any bug you found in the project was made by a JK(joshi kousei) who randomly exchanges body with me while sleeping.**
+**🎉 Celebrate 10K downloads to midori.**
 
 ![Logo and Slogan](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/slogan.png)
 
