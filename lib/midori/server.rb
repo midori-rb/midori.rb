@@ -34,7 +34,7 @@ module Midori::Server
           @request.ip = ip
           @request.port = port
           data = monitor.io.read_nonblock(16_384)
-          if @request.parsed?
+          if @request.parsed? && @requst.body_parsed?
             websocket_request(StringIO.new(data))
           else
             receive_new_request(data)
@@ -54,6 +54,7 @@ module Midori::Server
   def receive_new_request(data)
     begin
       @request.parse(data)
+      return unless @request.parsed && @request.body_parsed?
       @response = @api.receive(request, self)
       call_event(:open) if @request.websocket?
     rescue Midori::Exception::NotFound => e
