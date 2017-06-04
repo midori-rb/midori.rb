@@ -31,6 +31,7 @@ module EventLoop
     # @yield what to run when io callbacks
     # @return [nil] nil
     def register(io, interest=(:rw), &callback)
+      config if @selector.nil?
       if @queue[io.to_i].nil?
         @queue[io.to_i] = Array.new
         register_raw(io, interest, callback)

@@ -34,26 +34,25 @@ module Midori::Server
           @request.ip = ip
           @request.port = port
           data = monitor.io.read_nonblock(16_384)
-          if @request.parsed?
+          if @request.parsed? && @request.body_parsed?
             websocket_request(StringIO.new(data))
           else
-            receive_new_request(data)
+            @request.parse(data)
+            receive_new_request if @request.parsed && @request.body_parsed?
           end
           now_time = Time.now
           @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
-        rescue
+        rescue => e
           close_connection
-          @logger.warn "#{@request.ip} - - Reached an EOF Error".yellow
+          @logger.warn "#{@request.ip} - - #{e.backtrace.join("\n")}".yellow
         end
       end)
     end.call
   end
 
   # Logic of receiving new request
-  # @param [String] data raw data
-  def receive_new_request(data)
+  def receive_new_request
     begin
-      @request.parse(data)
       @response = @api.receive(request, self)
       call_event(:open) if @request.websocket?
     rescue Midori::Exception::NotFound => e

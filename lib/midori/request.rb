@@ -13,20 +13,28 @@
 class Midori::Request
   attr_accessor :ip, :port,
                 :protocol, :method, :path, :query_string,
-                :header, :body, :parsed, :params
+                :header, :body, :parsed, :body_parsed, :params
 
   # Init Request
   def initialize
     @parsed = false
+    @body_parsed = false
     @is_websocket = false
     @is_eventsource = false
     @parser = Http::Parser.new
     @params = {}
+    @body = ''
     @parser.on_headers_complete = proc do
       @protocol = @parser.http_version
       @method = @parser.http_method
       @path = @parser.request_url
       @header = @parser.headers
+
+      @query_string = @path.match(/\?(.*?)$/)
+      @query_string = @query_string[1] unless @query_string.nil?
+      @path.gsub!(/\?(.*?)$/, '')
+      @method = @method.to_sym
+      @parsed = true
       :stop
     end
   end
@@ -35,12 +43,25 @@ class Midori::Request
   # @param [String] data
   # @return [nil] nil
   def parse(data)
-    offset = @parser << data
-    @body = data[offset..-1]
-    @query_string = @path.match(/\?(.*?)$/)
-    @query_string = @query_string[1] unless @query_string.nil?
-    @path.gsub!(/\?(.*?)$/, '')
+    # Call parser if header not parsed
+    if @parsed
+      @body += data
+    else
+      offset = @parser << data
+      @body += data[offset..-1] if @parsed
+    end
 
+    # Set body parsed if body reaches content length
+    if (@header['Content-Length'].to_i || 0) <= @body.bytesize
+      @body_parsed = true
+      pre_proceed
+    end
+    nil
+  end
+
+  # Preproceed the request after parsed
+  # @return [nil] nil
+  def pre_proceed
     # Deal with WebSocket
     if @header['Upgrade'] == 'websocket' && @header['Connection'] == 'Upgrade'
       @method = :WEBSOCKET
@@ -54,13 +75,19 @@ class Midori::Request
     end
 
     @method = @method.to_sym
-    @parsed = true
+    nil
   end
 
-  # Syntactic sugar for whether a request is parsed
+  # Syntactic sugar for whether a request header is parsed
   # @return [Boolean] parsed or not
   def parsed?
     @parsed
+  end
+
+  # Syntactic sugar for whether a request body is parsed
+  # @return [Boolean] parsed or not
+  def body_parsed?
+    @body_parsed
   end
 
   # Syntactic sugar for whether a request is a websocket request
