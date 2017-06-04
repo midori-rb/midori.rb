@@ -34,7 +34,6 @@ class Midori::Request
       @query_string = @query_string[1] unless @query_string.nil?
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
-      @body += data[offset..-1]
       @parsed = true
       :stop
     end
@@ -45,7 +44,12 @@ class Midori::Request
   # @return [nil] nil
   def parse(data)
     # Call parser if header not parsed
-    @parsed ? @body += data : offset = @parser << data
+    if @parsed
+      @body += data
+    else
+      offset = @parser << data
+      @body += data[offset..-1] if @parsed
+    end
 
     # Set body parsed if body reaches content length
     if (@header['Content-Length'].to_i || 0) == @body.bytesize
