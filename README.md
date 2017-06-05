@@ -99,13 +99,11 @@ Obey [Contributor Covenant Code of Conduct](CONTRIBUTOR_COVENANT_CODE_OF_CONDUCT
 
 There is an unfinished tutorial available [here](https://github.com/heckpsi-lab/em-midori/tree/master/tutorial).
 
-There is also an example showing how to use midori with a todo-list web app available [here](https://github.com/heckpsi-lab/em-midori/tree/master/tutorial).
+There is also an example showing how to use midori with a todo-list web app available [here](https://github.com/heckpsi-lab/midori-todo-example).
 
 ## Roadmap
 
 **Detailed release notes for published versions can be seen [here](https://github.com/heckpsi-lab/em-midori/releases).**
-
-**Detailed progress can be seen [here](https://github.com/heckpsi-lab/em-midori/projects/1).**
 
 | Version Code | Determined Date |   Release Date    | Description                            |
 | :----------: | :-------------: | :---------------: | -------------------------------------- |
