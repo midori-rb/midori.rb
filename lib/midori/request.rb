@@ -8,7 +8,8 @@
 # @attr [String] query_string request query string
 # @attr [Hash] header request header
 # @attr [String] body request body
-# @attr [Boolean] parsed whether the request parsed
+# @attr [Boolean] parsed whether the request header parsed
+# @attr [Boolean] body_parsed whether the request body parsed
 # @attr [Hash] params params in the url
 class Midori::Request
   attr_accessor :ip, :port,
