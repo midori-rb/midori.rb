@@ -2,8 +2,9 @@
 # Abstract runner class to control instance of Midori Server
 # @attr [String] bind the address to bind
 # @attr [Integer] port the port to bind
+# @attr [Logger] logger midori logger
 class Midori::Runner
-  attr_reader :bind, :port
+  attr_reader :bind, :port, :logger
 
   # Define status of a runner
   # @param [Class] api inherited from [Midori::API]
