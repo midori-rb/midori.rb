@@ -28,7 +28,6 @@ module Midori::Server
     lambda do
       async_fiber(Fiber.new do
         begin
-          start_time = Time.now
           _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
           port, ip = remote_port, remote_ip
           @request.ip = ip
@@ -40,8 +39,6 @@ module Midori::Server
             @request.parse(data)
             receive_new_request if @request.parsed && @request.body_parsed?
           end
-          now_time = Time.now
-          @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{(now_time.to_f - start_time.to_f).round(6)}".green
         rescue => e
           close_connection
           @logger.warn "#{@request.ip} - - #{e.backtrace.join("\n")}".yellow
@@ -53,7 +50,10 @@ module Midori::Server
   # Logic of receiving new request
   def receive_new_request
     begin
+      start_time = Time.now
       @response = @api.receive(request, self)
+      now_time = Time.now
+      @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{sprintf("%.6f", now_time.to_f - start_time.to_f)}".green
       call_event(:open) if @request.websocket?
     rescue Midori::Exception::NotFound => e
       @response = Midori::Sandbox.capture(e)
