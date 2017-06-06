@@ -26,7 +26,7 @@ module Hiredis
           EventLoop.register(@sock, :rw) do |monitor|
             if read_flag && monitor.readable?
               # Reading
-              _read(resolve, reply, @sock)
+              _read(resolve, @sock)
             end
             if !read_flag && monitor.writable?
               # Writing
@@ -51,7 +51,7 @@ module Hiredis
           data
         end
 
-        def _read(resolve, reply, sock)
+        def _read(resolve, sock)
           @reader.feed @sock.read_nonblock(1024)
           reply = @reader.gets
           if reply
