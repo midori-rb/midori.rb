@@ -16,11 +16,29 @@ module Hiredis
     ##
     # Meta-programming hiredis for redis async extension
     class Connection
-      # do redis query
+      # Do redis query
       # @param [String] data generated string data
       def query(args)
         await(Promise.new do |resolve|
-          write_finished = false
+          read_flag = false
+          data = pre_write(args)
+          written = 0
+          EventLoop.register(@sock, :rw) do |monitor|
+            if read_flag && monitor.readable?
+              # Reading
+              _read(resolve, reply, @sock)
+            end
+            if !read_flag && monitor.writable?
+              # Writing
+              written += @sock.write_nonblock(data[written..-1])
+              read_flag = true if written == string_size(data)
+            end
+          end
+        end)
+      end
+
+      private
+        def pre_write(args)
           command = []
           command << "*#{args.size}"
           args.each do |arg|
@@ -28,29 +46,19 @@ module Hiredis
             command << "$#{string_size arg}"
             command << arg
           end
-
           data = command.join(COMMAND_DELIMITER) + COMMAND_DELIMITER
-
           data.force_encoding('binary') if data.respond_to?(:force_encoding)
-          written = 0
-          EventLoop.register(@sock, :rw) do |monitor|
-            if write_finished && monitor.readable?
-              # Reading
-              @reader.feed @sock.read_nonblock(1024)
-              reply = @reader.gets
-              if reply
-                EventLoop.deregister(@sock)
-                resolve.call(reply)
-              end
-            elsif !write_finished && monitor.writable?
-              # Writing
-              written += @sock.write_nonblock(data[written..-1])
-              write_finished = true if written == string_size(data)
-            end
-          end
-        end)
+          data
+        end
 
-      end
+        def _read(resolve, reply, sock)
+          @reader.feed @sock.read_nonblock(1024)
+          reply = @reader.gets
+          if reply
+            EventLoop.deregister(sock)
+            resolve.call(reply)
+          end
+        end
     end
   end
 end
