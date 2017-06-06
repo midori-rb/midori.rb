@@ -41,7 +41,7 @@ module Midori::Server
           end
         rescue => e
           close_connection
-          @logger.warn "#{@request.ip} - - #{e.backtrace.join("\n")}".yellow
+          @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
         end
       end)
     end.call

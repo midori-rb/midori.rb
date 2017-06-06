@@ -19,6 +19,6 @@ class Midori::CleanRoom
   # Generate response from variables inside +Midori::CleanRoom+
   # @return [Midori::Response] midori response
   def raw_response
-    Midori::Response.new(@status, @header, @body)
+    Midori::Response.new(status: @status, header: @header, body: @body)
   end
 end

@@ -10,10 +10,11 @@ class Midori::Response
   # @param [Hash] header HTTP response header
   # @param [String] body HTTP response body
   # Init a Response
-  def initialize(code = 200, header = Midori::Const::DEFAULT_HEADER.clone, body = '')
+  def initialize(options = {})
+    code = options[:status] || 200
     @status = Midori::Const::STATUS_CODE[code]
-    @header = header
-    @body = body
+    @header = options[:header] || Midori::Const::DEFAULT_HEADER.clone
+    @body = options[:body] || ''
   end
 
   # Generate header string from hash
