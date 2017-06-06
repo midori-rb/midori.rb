@@ -61,7 +61,7 @@ class ExampleAPI < Midori::API
   get '/case_3' do
     @status = 202
     header['Example-Header'] = 'Example-Value'
-    Midori::Response.new(200, {}, 'Hello') # Overrides everything else
+    Midori::Response.new(status: 200, header: {}, body: 'Hello') # Overrides everything else
     # HTTP/1.1 200 OK
     # Server: Midori/1.0
     # Example-Header: Example-Value

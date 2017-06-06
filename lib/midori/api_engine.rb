@@ -52,12 +52,17 @@ class Midori::APIEngine
       clean_room = Midori::CleanRoom.new(request)
       if request.websocket?
         # Send 101 Switching Protocol
-        connection.send_data Midori::Response.new(101, Midori::APIEngine.websocket_header(request.header['Sec-WebSocket-Key']), '')
+        connection.send_data Midori::Response.new(
+          status: 101,
+          header: Midori::APIEngine.websocket_header(request.header['Sec-WebSocket-Key']),
+          body: '')
         connection.websocket.request = request
         Midori::Sandbox.run(clean_room, route.function, connection.websocket)
         return Midori::Response.new
       elsif request.eventsource?
-        connection.send_data Midori::Response.new(200, Midori::Const::EVENTSOURCE_HEADER, '')
+        connection.send_data Midori::Response.new(
+          status: 200,
+          header: Midori::Const::EVENTSOURCE_HEADER)
         Midori::Sandbox.run(clean_room, route.function, connection.eventsource)
         return Midori::Response.new
       else

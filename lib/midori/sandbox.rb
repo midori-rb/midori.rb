@@ -4,8 +4,8 @@ class Midori::Sandbox
   class << self
     def class_initialize
       @handlers = Hash.new
-      @handlers[Midori::Exception::InternalError] = proc {|e| Midori::Response.new(500, {}, "#{e.inspect} #{e.backtrace}")}
-      @handlers[Midori::Exception::NotFound] = proc {|_e| Midori::Response.new(404, {}, '404 Not Found')}
+      @handlers[Midori::Exception::InternalError] = proc {|e| Midori::Response.new(status: 500, body: "#{e.inspect} #{e.backtrace}")}
+      @handlers[Midori::Exception::NotFound] = proc {|_e| Midori::Response.new(status: 404, body: '404 Not Found')}
     end
 
     # Add a rule to Sandbox
