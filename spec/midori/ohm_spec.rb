@@ -1,5 +1,5 @@
 require './spec/spec_helper'
-require 'midori/extension/hiredis'
+require 'midori/extension/redic'
 require 'ohm'
 
 RSpec.describe Ohm do
