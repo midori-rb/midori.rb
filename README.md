@@ -48,11 +48,11 @@ Following benchmark results are for [em-midori-benchmark](https://github.com/hec
 
 | framework                    | version | req/s   |
 | :--------------------------- | :------ | :------ |
-| Rails (Thin, Ruby)           | 5.0.0.1 | 444.12  |
-| Rails (API Mode, Thin, Ruby) | 5.0.0.1 | 615.30  |
-| Sinatra (Thin, Ruby)         | 1.4.7   | 1847.14 |
-| express.js (Node.js)         | 4.14.0  | 3338.32 |
-| midori (Ruby)                | 0.1.9   | 3692.65 |
+| Rails (Thin, Ruby)           | 5.0.0.1 | 521.58  |
+| Rails (API Mode, Thin, Ruby) | 5.0.0.1 | 760.03  |
+| Sinatra (Thin, Ruby)         | 2.0.0   | 1912.23 |
+| express.js (Node.js)         | 4.15.3  | 4944.58 |
+| midori (Ruby)                | 0.2.4   | 3937.08 |
 
 ### Name
 
