@@ -53,5 +53,21 @@ RSpec.describe 'Sequel' do
       test_mysql
       EventLoop.start
     end
+
+    it 'query acync' do
+      expect do
+        @answer = []
+        @mysql = Sequel.connect('mysql2://travis@localhost:5432/travis_ci_test')
+        async :test_mysql do
+          @answer << (@mysql.run <<-SQL
+            SELECT COUNT(*) FROM tests;
+          SQL
+          )
+          EventLoop.stop if @answer.length == 10
+        end
+        10.times { test_mysql }
+        EventLoop.start
+      end.to_not raise_error(RuntimeError)
+    end
   end
 end
