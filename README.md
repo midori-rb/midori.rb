@@ -42,9 +42,9 @@ bundle install
 
 ### Performance
 
-Following benchmark results are for [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
+Following benchmark results uses [em-midori-benchmark](https://github.com/heckpsi-lab/em-midori-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
 
-**Note: Performance under Mac OS X needs to be further confirmed. `wrk` gives very bad performance result, but `ab` gives a good one. The given result is tested under Linux.**
+**Note: Performance under Mac OS X needs to be further improved. `wrk` gives very bad performance result, but `ab` gives a good one. The following result is tested under Linux.**
 
 | framework                    | version | req/s   |
 | :--------------------------- | :------ | :------ |
@@ -56,24 +56,18 @@ Following benchmark results are for [em-midori-benchmark](https://github.com/hec
 
 ### Name
 
-**Midori** is none of the business of this guy
+The name **midori** comes from **midori machi**, which was the place I stay on my first travel to Tokyo.
 
-![Sapphire Kawashima](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/sapphire_kawashima.gif)
-
-and this guy.
-
-![Midori Tokiwa](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/midori_tokiwa.gif)
-
-Actually the name **Midori** comes from **Midori machi**, which was the place I stay on my first travel to Tokyo.
-
-### Version Notes
+### Semantic Versioning
 
 Version consists of four numbers:
 
-|                 |           Main Code            |    Milestone Code     |          Feature Code           |           Hotfix            |
-| --------------- | :----------------------------: | :-------------------: | :-----------------------------: | :-------------------------: |
-| **Example**     |               1.               |          2.           |               1.                |              5              |
-| **Explanation** | First Production Ready Version | Two Milestones Passed | One New Feature has been Staged | Five Releases for Bug Fixes |
+|                 |     Milestone     |          Major           |    Minor    |  Patch   |
+| --------------- | :---------------: | :----------------------: | :---------: | :------: |
+| **Example**     |        1.         |            2.            |     1.      |    5     |
+| **Explanation** | Milestone version | Incompatible API changes | Add feature | Fix bugs |
+
+**Note: Before version v1.0, there's no minor version API compatible ensuring.**
 
 ### Contribution
 
