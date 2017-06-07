@@ -39,5 +39,19 @@ RSpec.describe 'Sequel' do
 
       expect(answer).to eq([0, 'test'])
     end
+
+    it 'query something illegal' do
+      async :test_mysql do
+        expect {
+          @mysql = Sequel.connect('mysql2://travis@localhost:5432/travis_ci_test')
+          @mysql.run <<-SQL
+            SELECT * FROM NOWHERE;
+          SQL
+        }.to raise_error(Sequel::DatabaseError)
+        EventLoop.stop
+      end
+      test_mysql
+      EventLoop.start
+    end
   end
 end
