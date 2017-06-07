@@ -31,6 +31,14 @@ RSpec.describe Midori::Request do
     expect(request.body).to eq('Body')
   end
 
+  it 'parse request with separated body' do
+    data = "GET / HTTP/1.1\r\nContent-Length: 4\r\n\r\n"
+    request = Midori::Request.new
+    request.parse(data)
+    request.parse('Body')
+    expect(request.body).to eq('Body')
+  end
+
   it 'parse websocket upgrade' do
     data = "GET / HTTP/1.1\r\nUpgrade: websocket\r\nConnection: Upgrade\r\n\r\n"
     request = Midori::Request.new
