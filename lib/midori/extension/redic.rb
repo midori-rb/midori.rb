@@ -17,7 +17,7 @@ module Hiredis
     # Meta-programming hiredis for redis async extension
     class Connection
       # Do redis query
-      # @param [String] data generated string data
+      # @param [Array] args equal to Hiredis write args
       def query(args)
         await(Promise.new do |resolve|
           read_flag = false
@@ -65,22 +65,33 @@ end
 
 require 'redic'
 
+##
+# Meta-programming Redic for redis async extension
 class Redic
+  # Meta-programming Redic for redis async extension
   class Client
+    # Connect redis, yield optional
     def connect
       establish_connection unless connected?
       if block_given?
+        # Redic default yield
+        # :nocov:
         @semaphore.synchronize do
           yield
         end
+        # :nocov:
       end
     end
-
+    
+    # Call without thread lock
+    # @param [Array] args same params as Redic
     def call(*args)
       @connection.query(*args)
     end
   end
 
+  # Call without thread lock
+  # @param [Array] args same params as Redic
   def call(*args)
     @client.connect
     @client.call(args)

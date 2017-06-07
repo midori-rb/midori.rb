@@ -6,9 +6,10 @@
 class Midori::Response
   attr_accessor :status, :header, :body
 
-  # @param [Integer] code HTTP response code
-  # @param [Hash] header HTTP response header
-  # @param [String] body HTTP response body
+  # @param [Hash] options HTTP response
+  # @option options [Integer] code HTTP response code
+  # @option options [Hash] header HTTP response header
+  # @option options [String] body HTTP response body
   # Init a Response
   def initialize(options = {})
     code = options[:status] || 200
