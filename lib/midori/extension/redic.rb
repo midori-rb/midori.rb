@@ -65,14 +65,20 @@ end
 
 require 'redic'
 
+##
+# Meta-programming Redic for redis async extension
 class Redic
+  # Meta-programming Redic for redis async extension
   class Client
     def connect
       establish_connection unless connected?
       if block_given?
+        # Redic default yield
+        # :nocov:
         @semaphore.synchronize do
           yield
         end
+        # :nocov:
       end
     end
 
