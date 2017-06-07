@@ -70,6 +70,7 @@ require 'redic'
 class Redic
   # Meta-programming Redic for redis async extension
   class Client
+    # Connect redis, yield optional
     def connect
       establish_connection unless connected?
       if block_given?
@@ -81,12 +82,16 @@ class Redic
         # :nocov:
       end
     end
-
+    
+    # Call without thread lock
+    # @param [Array] args same params as Redic
     def call(*args)
       @connection.query(*args)
     end
   end
 
+  # Call without thread lock
+  # @param [Array] args same params as Redic
   def call(*args)
     @client.connect
     @client.call(args)
