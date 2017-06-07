@@ -32,8 +32,11 @@ class Sequel::Postgres::Adapter
               EventLoop.deregister(socket_object)
               resolve.call(get_result)
             end
+          # For extra errors
+          # :nocov:
           rescue => e
             resolve.call(PromiseException.new(e))
+          # :nocov:
           end
         end
       end)
