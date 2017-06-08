@@ -111,7 +111,7 @@ class ExampleAPI < Midori::API
 end
 ```
 
-midori also supports `EventSource ` connection as part of your route.
+midori also supports `EventSource` connection as part of your route.
 
 Here's a chatroom example using eventsource in midori:
 
