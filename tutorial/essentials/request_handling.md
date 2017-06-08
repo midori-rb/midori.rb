@@ -49,7 +49,7 @@ class ExampleAPI < Midori::API
   end
   
   get '/case_2' do
-    header['Example-Header'] = 'Example-Value'
+    @header['Example-Header'] = 'Example-Value'
     'Hello'
     # HTTP/1.1 200 OK
     # Server: Midori/1.0
@@ -60,7 +60,7 @@ class ExampleAPI < Midori::API
   
   get '/case_3' do
     @status = 202
-    header['Example-Header'] = 'Example-Value'
+    @header['Example-Header'] = 'Example-Value'
     Midori::Response.new(status: 200, header: {}, body: 'Hello') # Overrides everything else
     # HTTP/1.1 200 OK
     # Server: Midori/1.0
