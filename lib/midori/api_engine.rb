@@ -48,7 +48,6 @@ class Midori::APIEngine
       params = route.path.params(request.path)
       next unless params # Skip if not matched
       request.params = params
-      route.middlewares.each { |middleware| request = middleware.before(request) }
       clean_room = Midori::CleanRoom.new(request)
       if request.websocket?
         # Send 101 Switching Protocol
@@ -66,10 +65,12 @@ class Midori::APIEngine
         Midori::Sandbox.run(clean_room, route.function, connection.eventsource)
         return Midori::Response.new
       else
+        request = middleware_exec(route.middlewares, clean_room, request)
+        return request if request.is_a? Midori::Response # Early stop
         result = Midori::Sandbox.run(clean_room, route.function)
-        clean_room.body = result unless result.nil?
-        response = (result.is_a?Midori::Response) ? result : clean_room.raw_response
-        route.middlewares.reverse_each { |middleware| response = middleware.after(request, response) }
+        clean_room.body = result
+        response = result.is_a?(Midori::Response) ? result : clean_room.raw_response
+        response = middleware_exec(route.middlewares, clean_room, request, response)
         return response
       end
     end
@@ -85,5 +86,26 @@ class Midori::APIEngine
     header
   end
 
-  private :merge
+  # Exec middlewares
+  def middleware_exec(middlewares, clean_room, request, response=nil)
+    result = response.nil? ? request : response
+    middlewares.each do |middleware|
+      if response.nil?
+        result = Midori::Sandbox.run(
+          clean_room,
+          proc { |req| middleware.before(req) },
+          result)
+      else
+        result = Midori::Sandbox.run(
+          clean_room,
+          proc { |req, resp| middleware.after(req, resp) },
+          request,
+          result)
+      end
+      return result if response.nil? && result.is_a?(Midori::Response) # Early stop
+    end
+    result
+  end
+
+  private :merge, :middleware_exec
 end
