@@ -128,8 +128,8 @@ There is also an example showing how to use midori with a todo-list web app avai
 |    0.2.2     |   2017-05-09    | 2017-05-12 (+3d)  | Better eventloop abstraction           |
 |    0.2.3     |   2017-05-16    | 2017-06-04 (+19d) | Better network abstraction             |
 |    0.2.4     |   2017-06-13    | 2017-06-06 (-7d)  | Improve Redis driver                   |
-|    0.3.0     |   2017-06-20    |                   | Improve tutorial and documentation     |
-|    0.3.1     |   2017-06-27    |                   | Enrich tests                           |
+|    0.3.0     |   2017-06-20    | 2017-06-08 (-12d) | Improve tests and documentation        |
+|    0.3.1     |   2017-06-27    |                   | Enrich tutorial                        |
 |  **1.0.0**   |   2017-07-04    |                   | **Stablize API, production ready**     |
 
 ## Midori 2 Goals
