@@ -1,0 +1,24 @@
+version: 2
+jobs:
+  build: &DEFAULT
+    docker:
+      - image: ruby:2.4.1
+      - image: postgres:9.4.11
+        environment:
+          POSTGRES_USER: postgres
+      - image: mysql:5.7.18
+        environment:
+          MYSQL_USER: travis
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+    working_directory: ~/midori
+    steps:
+      - checkout
+      - run: apt-get update
+      - run: apt-get -y install mysql-client postgresql-client-9.4
+      - run: gem install bundler
+      - run: psql -c 'create database travis_ci_test;' -U postgres -h 127.0.0.1
+      - run: mysql -e 'create database if not exists travis_ci_test;' -u travis -h 127.0.0.1
+      - run: gem list -l
+      - run: bundle exec rake
+      - run: bundle exec codeclimate-test-reporter
+      - run: gem build ./em-midori.gemspec
