@@ -34,3 +34,5 @@ require_relative 'midori/eventsource'
 require_relative 'midori/middleware'
 require_relative 'midori/configure'
 require_relative 'midori/runner'
+require_relative 'midori/logger'
+
