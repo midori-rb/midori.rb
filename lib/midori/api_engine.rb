@@ -48,7 +48,6 @@ class Midori::APIEngine
       params = route.path.params(request.path)
       next unless params # Skip if not matched
       request.params = params
-      route.middlewares.each { |middleware| request = middleware.before(request) }
       clean_room = Midori::CleanRoom.new(request)
       if request.websocket?
         # Send 101 Switching Protocol
@@ -66,6 +65,7 @@ class Midori::APIEngine
         Midori::Sandbox.run(clean_room, route.function, connection.eventsource)
         return Midori::Response.new
       else
+        route.middlewares.each { |middleware| request = middleware.before(request) }
         result = Midori::Sandbox.run(clean_room, route.function)
         clean_room.body = result unless result.nil?
         response = (result.is_a?Midori::Response) ? result : clean_room.raw_response
