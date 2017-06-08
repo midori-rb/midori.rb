@@ -11,6 +11,7 @@ class Midori::Runner
   # @param [Class] configure inherited from [Midori::Configure]
   def initialize(api, configure = Midori::Configure)
     @logger = configure.logger
+    Midori.logger = configure.logger
     @bind = configure.bind
     @port = configure.port
     @api = ((api.is_a?Midori::APIEngine) ? api : Midori::APIEngine.new(api, configure.route_type))
