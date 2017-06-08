@@ -64,7 +64,6 @@ class ExampleAPI < Midori::API
     Midori::Response.new(status: 200, header: {}, body: 'Hello') # Overrides everything else
     # HTTP/1.1 200 OK
     # Server: Midori/1.0
-    # Example-Header: Example-Value
     #
     # Hello
   end
