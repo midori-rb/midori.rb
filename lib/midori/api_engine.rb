@@ -65,11 +65,20 @@ class Midori::APIEngine
         Midori::Sandbox.run(clean_room, route.function, connection.eventsource)
         return Midori::Response.new
       else
-        route.middlewares.each { |middleware| request = middleware.before(request) }
+        route.middlewares.each do |middleware|
+          request = Midori::Sandbox.run(clean_room, proc do
+            middleware.before(request)
+          end)
+          return request if request.is_a? Midori::Response # Early stopped
+        end
         result = Midori::Sandbox.run(clean_room, route.function)
         clean_room.body = result unless result.nil?
         response = (result.is_a?Midori::Response) ? result : clean_room.raw_response
-        route.middlewares.reverse_each { |middleware| response = middleware.after(request, response) }
+        route.middlewares.reverse_each do |middleware| 
+          response = Midori::Sandbox.run(clean_room, proc do
+            middleware.after(request, response)
+          end)
+        end
         return response
       end
     end
