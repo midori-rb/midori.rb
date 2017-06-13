@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.metadata                 = { 'issue_tracker' => 'https://github.com/heckpsi-lab/em-midori/issues' }
   s.license                  = 'MIT'
   s.post_install_message     = File.read('.resources/midori_ascii.txt')
-  s.add_runtime_dependency     'nio4r', '~> 2.0'
+  s.add_runtime_dependency     'murasaki', '~> 0.1'
   s.add_runtime_dependency     'mustermann', '~> 1.0'
   s.add_runtime_dependency     'midori_http_parser', '~> 0.6.1'
 end
