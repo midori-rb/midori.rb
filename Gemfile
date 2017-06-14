@@ -11,7 +11,6 @@ gem 'kramdown', '~> 1.13'
 gem 'simplecov', '~> 0.14', require: false, group: :test
 gem 'codeclimate-test-reporter', '~> 1.0', group: :test, require: nil
 
-gem 'murasaki', '~> 0.1'
 gem 'sequel', '~> 4.40', require: false
 gem 'pg', '~> 0.17', require: false
 gem 'mysql2', '~> 0.4', require: false
