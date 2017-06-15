@@ -10,10 +10,10 @@
 
 Midori is a Ruby Web Framework, providing high performance and proper abstraction.
 
-| midori                                   | [midori-contrib](https://github.com/heckpsi-lab/midori-contrib) | [murasaki](https://github.com/heckpsi-lab/murasaki) |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
+|                  midori                  | [midori-contrib](https://github.com/heckpsi-lab/midori-contrib) | [murasaki](https://github.com/heckpsi-lab/murasaki) |
+| :--------------------------------------: | :--------------------------------------: | :--------------------------------------: |
 | ![midori logo](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/midori_logo.png) | ![midori logo](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/contrib_logo.png) | ![midori logo](https://github.com/heckpsi-lab/em-midori/raw/master/.resources/murasaki_logo.png) |
-| web framework                            | official extensions                      | event loop abstraction                   |
+|              Web Framework               |           Official Extensions            |         Modularized Event Engine         |
 | [![Build Status](https://travis-ci.org/heckpsi-lab/em-midori.svg?branch=master)](https://travis-ci.org/heckpsi-lab/em-midori) | [![Build Status](https://travis-ci.org/heckpsi-lab/midori-contrib.svg?branch=master)](https://travis-ci.org/heckpsi-lab/midori-contrib) | [![Build Status](https://travis-ci.org/heckpsi-lab/murasaki.svg?branch=master)](https://travis-ci.org/heckpsi-lab/murasaki) |
 | [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori/coverage) | [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/midori-contrib/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/midori-contrib/coverage) | [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/murasaki/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/murasaki/coverage) |
 | [![Code Climate](https://codeclimate.com/github/heckpsi-lab/em-midori/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/em-midori) | [![Code Climate](https://codeclimate.com/github/heckpsi-lab/midori-contrib/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/midori-contrib) | [![Code Climate](https://codeclimate.com/github/heckpsi-lab/murasaki/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/murasaki) |
