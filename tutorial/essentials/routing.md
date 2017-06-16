@@ -40,7 +40,7 @@ end
 
 Routes are matched in the order they are defined. The first route that matches the request is invoked.
 
-Midori not only supports the methods above, it supports almostly every method provided in RFC standards. You could look it up in [API doc](http://www.rubydoc.info/gems/em-midori/Midori/API) for more details.
+Midori not only supports the methods above, it supports almost every method provided in RFC standards. You could look it up in [API doc](http://www.rubydoc.info/gems/em-midori/Midori/API) for more details.
 
 ## Params
 
@@ -111,7 +111,7 @@ class ExampleAPI < Midori::API
 end
 ```
 
-midori also supports `EventSource ` connection as part of your route.
+midori also supports `EventSource` connection as part of your route.
 
 Here's a chatroom example using eventsource in midori:
 

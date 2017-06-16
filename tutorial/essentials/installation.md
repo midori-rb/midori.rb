@@ -6,38 +6,32 @@ Open up a command line prompt. Any commands prefaced with a dollar sign `$` sh
 
 ```
  $ ruby -v
- ruby 2.4.0p0
+ ruby 2.4.1p111
 ```
 
 Generally, midori supports the following ruby interpreters:
 
-- Ruby (MRI) **>= 2.1.0**
-- JRuby >= **9.0.4.0**
+- Ruby (MRI) **>= 2.2.6**
 
  For every version released, it would be tested and **officially ensured** in the following environments:
 
-- Ruby
-  - 2.1.0
-  - 2.2.6
-  - 2.3.3
-  - 2.4.0
-- JRuby
-  - 9.0.4.0, OpenJDK 7
-  - 9.0.4.0, OracleJDK 7
-  - 9.0.4.0, OracleJDK 8
+- Ruby (MRI)
+  - 2.2.7
+  - 2.3.4
+  - 2.4.1
 
 **Note: **
 
-- **For JRuby users, you may meet performance problem due to the issues of [Fiber implementation](https://github.com/jruby/jruby/wiki/DifferencesBetweenMriAndJruby#continuations-and-fibers) with JVM, which may [possibly improved](https://github.com/jruby/jruby/wiki/PerformanceTuning#enable-coroutine-based-fibers) in the future JRuby versions with JDK 9.**
-- **For macOS users, you may meet performance problem due to the issues of [EventMachine](https://github.com/heckpsi-lab/em-midori/issues/15). Very few people would use macOS in production, so this issue may not affect much, but we are still working hard on fixing it.**
+- **For JRuby users, due to some C extensions used in midori, it is still unable to run on the current version of JRuby.**
+- **For macOS users, you may meet performance problem due to the issue of [nio4r](https://github.com/socketry/nio4r/issues/125). Very few people would use macOS in production, so this issue may not affect much. We would still be working hard on fixing it, but the issue wouldn't be a high priority one.**
 
-It's hard to say that if it is possible for running on other ruby implementations like Rubinius, if you're in favor of supporting more ruby implementations, you could open a ticket [here](https://github.com/heckpsi-lab/em-midori/issues), and we are glad to discuss it.
+It's hard to say that if it is possible for running on other ruby implementations like Rubinius or RubyMotion, if you're in favor of supporting more ruby implementations, you could open a ticket [here](https://github.com/heckpsi-lab/em-midori/issues), and we are glad to discuss it.
 
 ## Install with RubyGems
 
 ```
 $ gem install em-midori
-Successfully installed em-midori-0.1.12
+Successfully installed em-midori-0.3.0
 1 gem installed
 ```
 
@@ -50,7 +44,7 @@ $ ruby -r "midori" -e "class A < Midori::API;end;Midori::Runner.new(A).start"
 If you see the following message, then everything now works fine.
 
 ```
-Midori 0.1.12 is now running on 127.0.0.1:8080
+Midori 0.3.0 is now running on 127.0.0.1:8080
 ```
 
 ## Use Bundler
@@ -60,7 +54,7 @@ Example `Gemfile` of basic usage as following:
 ```ruby
 source 'https://rubygems.org'
 gem 'bundler', '~> 1.0'
-gem 'em-midori', '~> 0.1', require: 'midori'
+gem 'em-midori', '~> 0.3', require: 'midori'
 ```
 
 and then running:
@@ -83,7 +77,7 @@ To include built-in extensions of midori you could make your `Gemfile` like:
 ```ruby
 source 'https://rubygems.org'
 gem 'bundler', '~> 1.0'
-gem 'em-midori', '~> 0.1', require: %w'midori midori/extension/sequel'
+gem 'em-midori', '~> 0.3', require: %w'midori midori/extension/sequel'
 ```
 
 Using bunlder could make dependency management much easier, which helps a lot in scaling project. To learn more about bundler, you could see docs [here](http://bundler.io/docs.html). 
