@@ -339,7 +339,7 @@ class Midori::API
     # @param [String, Regexp] path path definition
     # @param [Proc] block process to run when route matched
     # @return [nil] nil
-    def add_route(method, path, block)
+    private def add_route(method, path, block)
       # Argument check
       raise ArgumentError unless path.is_a?String
 
@@ -380,12 +380,10 @@ class Midori::API
       end
     end
 
-    def inherited(subclass)
+    private def inherited(subclass)
       subclass.class_initialize
     end
   end
-
-  private_class_method :add_route, :inherited
 
   # Constants of supported methods in route definition
   METHODS = %w( delete

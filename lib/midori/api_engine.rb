@@ -22,7 +22,7 @@ class Midori::APIEngine
   end
 
   # Merge all routes with a Depth-first search
-  def merge(prefix, root_api, middlewares)
+  private def merge(prefix, root_api, middlewares)
     root_api.routes[:MOUNT].each do |mount|
       root_api.routes.merge!(merge(mount[0], mount[1], root_api.scope_middlewares)) do |_key, old_val, new_val|
         old_val + new_val
@@ -87,7 +87,7 @@ class Midori::APIEngine
   end
 
   # Exec middlewares
-  def middleware_exec(middlewares, clean_room, request, response=nil)
+  private def middleware_exec(middlewares, clean_room, request, response=nil)
     result = response.nil? ? request : response
     middlewares.each do |middleware|
       if response.nil?
@@ -106,6 +106,4 @@ class Midori::APIEngine
     end
     result
   end
-
-  private :merge, :middleware_exec
 end
