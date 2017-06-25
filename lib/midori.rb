@@ -12,6 +12,8 @@ require_relative 'midori/core_ext/string'
 require_relative 'midori/core_ext/define_class'
 require_relative 'midori/core_ext/proc'
 
+module Midori; end # Create namespace
+
 require_relative 'midori/const'
 require_relative 'midori/exception'
 require_relative 'midori/env'
