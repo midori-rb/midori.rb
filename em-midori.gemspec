@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email                    = 'business@heckpsi.com'
   s.require_paths            = ['lib']
   s.files                    = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec|.resources)/}) } \
-    - %w(README.md CODE_OF_CONDUCT.md Gemfile Rakefile em-midori.gemspec .gitignore .rspec .codeclimate.yml .rubocop.yml .travis.yml logo.png Rakefile Gemfile)
+    - %w(README.md CODE_OF_CONDUCT.md CONTRIBUTING.md Gemfile Rakefile em-midori.gemspec .gitignore .rspec .codeclimate.yml .rubocop.yml .travis.yml logo.png Rakefile Gemfile)
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
   s.metadata                 = { 'issue_tracker' => 'https://github.com/heckpsi-lab/em-midori/issues' }
   s.license                  = 'MIT'
