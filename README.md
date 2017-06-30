@@ -87,40 +87,10 @@ There is also an example showing how to use midori with a todo-list web app avai
 
 ## Roadmap
 
-**Detailed release notes for published versions can be seen [here](https://github.com/heckpsi-lab/em-midori/releases).**
+**Development roadmap has been moved [here](https://github.com/heckpsi-lab/em-midori/wiki/Roadmap).**
 
-| Version Code | Determined Date |   Release Date    | Description                            |
-| :----------: | :-------------: | :---------------: | -------------------------------------- |
-|    0.0.1     |   2016-09-09    | 2016-09-09 (+0d)  | Init the gem project                   |
-|    0.0.2     |   2016-09-09    | 2016-09-09 (+0d)  | Init basic EventMachine server         |
-|    0.0.3     |   2016-09-13    | 2016-09-13 (+0d)  | Init Midori::API design                |
-|    0.0.4     |   2016-09-20    | 2016-09-19 (-1d)  | Implement API match                    |
-|    0.0.5     |   2016-09-27    | 2016-09-25 (-2d)  | Implement request and response.        |
-|    0.0.6     |   2016-10-04    | 2016-10-06 (+2d)  | Implement WebSocket                    |
-|    0.0.7     |   2016-10-11    | 2016-10-11 (+0d)  | Get WebSocket Code Covered             |
-|    0.0.8     |   2016-10-18    | 2016-10-16 (-2d)  | Implement EventSource                  |
-|    0.0.9     |   2016-10-25    | 2016-10-17 (-8d)  | Implement Middleware                   |
-|  **0.1.0**   |   2016-11-01    | 2016-10-27 (-5d)  | Enrich API and documenting (dev ready) |
-|    0.1.1     |   2016-11-08    | 2016-11-07 (-1d)  | API Mount Syntax                       |
-|    0.1.2     |   2016-11-15    | 2016-11-27 (+12d) | Better Error Handler                   |
-|    0.1.3     |   2016-11-22    | 2016-11-27 (+5d)  | File I/O                               |
-|    0.1.4     |   2016-12-06    | 2016-11-28 (-8d)  | Implement Database Driver              |
-|    0.1.5     |   2016-12-20    | 2016-12-01 (-19d) | Implement Database ORM                 |
-|    0.1.6     |   2017-01-03    | 2016-12-21 (-13d) | Enrich Database                        |
-|    0.1.7     |   2017-01-10    | 2016-12-25 (-16d) | Documenting                            |
-|    0.1.8     |   2017-01-17    | 2017-01-17 (+0d)  | Tutorial (Partial)                     |
-|    0.1.9     |   2017-02-21    | 2017-02-18 (-3d)  | Abstract Evented Actor                 |
-|    0.1.10    |   2017-02-28    | 2017-02-20 (-8d)  | Reconstruct Extensions                 |
-|    0.1.11    |   2017-03-07    | 2017-02-21 (-14d) | Add MySQL Extension Support            |
-|    0.1.12    |   2017-03-14    | 2017-02-25 (-17d) | Better HTTP Request Extension          |
-|    0.2.0     |   2017-03-21    | 2017-05-01 (+41d) | Fix stable problems                    |
-|    0.2.1     |   2017-05-02    | 2017-05-02 (+0d)  | Improve doc                            |
-|    0.2.2     |   2017-05-09    | 2017-05-12 (+3d)  | Better eventloop abstraction           |
-|    0.2.3     |   2017-05-16    | 2017-06-04 (+19d) | Better network abstraction             |
-|    0.2.4     |   2017-06-13    | 2017-06-06 (-7d)  | Improve Redis driver                   |
-|    0.3.0     |   2017-06-20    | 2017-06-08 (-12d) | Improve tests and documentation        |
-|    0.4.0     |   2017-06-27    | 2017-06-25 (-2d)  | Modulize project                       |
-|  **1.0.0**   |   2017-07-04    |                   | **Enrich tutorial, production ready**  |
+
+**Detailed release notes for published versions can be seen [here](https://github.com/heckpsi-lab/em-midori/releases).**
 
 ## Midori 2 Goals
 
