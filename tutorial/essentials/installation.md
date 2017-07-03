@@ -31,7 +31,7 @@ It's hard to say that if it is possible for running on other ruby implementation
 
 ```
 $ gem install em-midori
-Successfully installed em-midori-0.3.0
+Successfully installed em-midori-0.4.1.1
 1 gem installed
 ```
 
@@ -44,7 +44,7 @@ $ ruby -r "midori" -e "class A < Midori::API;end;Midori::Runner.new(A).start"
 If you see the following message, then everything now works fine.
 
 ```
-Midori 0.3.0 is now running on 127.0.0.1:8080
+Midori 0.4.1.1 is now running on 127.0.0.1:8080
 ```
 
 ## Use Bundler
@@ -54,7 +54,7 @@ Example `Gemfile` of basic usage as following:
 ```ruby
 source 'https://rubygems.org'
 gem 'bundler', '~> 1.0'
-gem 'em-midori', '~> 0.3', require: 'midori'
+gem 'em-midori', '~> 0.4', require: 'midori'
 ```
 
 and then running:
@@ -77,7 +77,8 @@ To include built-in extensions of midori you could make your `Gemfile` like:
 ```ruby
 source 'https://rubygems.org'
 gem 'bundler', '~> 1.0'
-gem 'em-midori', '~> 0.3', require: %w'midori midori/extension/sequel'
+gem 'em-midori', '~> 0.4', require: 'midori'
+gem 'midori-contrib', '~> 0.0.1', require: %w'midori-contrib/file midori-contrib/sequel/mysql2'
 ```
 
 Using bunlder could make dependency management much easier, which helps a lot in scaling project. To learn more about bundler, you could see docs [here](http://bundler.io/docs.html). 
