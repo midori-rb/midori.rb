@@ -4,6 +4,25 @@ Middlewares are very exciting features midori supports. As it has been implement
 
 ## Basic Usage
 
+To begin with, inheritate the `Midori::Middleware` class. Here's an example:
+
+```ruby
+class JSONMiddleware < Middleware
+  def before(request)
+    request.body = JSON.parse(request.body) unless request.body == ''
+    request
+  end
+
+  def after(_request, response)
+    response.header['Content-Type'] = 'application/json'
+    response.body = response.body.to_json
+    response
+  end
+end
+```
+
+
+
 ## Stack-less Design
 
 ## Early Exit Feature
