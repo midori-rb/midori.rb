@@ -10,6 +10,7 @@ RSpec.describe Midori::Request do
       expect(request.method).to eq(:GET)
       expect(request.path).to eq('/')
       expect(request.query_string).to eq(nil)
+      expect(request.query_param).to eq(nil)
     end
 
     it 'parse request with query_string' do
@@ -20,6 +21,7 @@ RSpec.describe Midori::Request do
       expect(request.method).to eq(:GET)
       expect(request.path).to eq('/')
       expect(request.query_string).to eq('test=1')
+      expect(request.query_param['test']).to eq(['1'])
     end
   end
 
