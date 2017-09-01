@@ -3,9 +3,10 @@
 # @attr [String] ip client ip address
 # @attr [Integer] port client port
 # @attr [String] protocol protocol version of HTTP request
-# @attr [String] method HTTP method
+# @attr [Symbol] method HTTP method
 # @attr [String] path request path
-# @attr [String] query_string request query string
+# @attr [Hash | nil] query_param parameter parsed from query string
+# @attr [String | nil] query_string request query string
 # @attr [Hash] header request header
 # @attr [String] body request body
 # @attr [Boolean] parsed whether the request header parsed
@@ -13,7 +14,7 @@
 # @attr [Hash] params params in the url
 class Midori::Request
   attr_accessor :ip, :port,
-                :protocol, :method, :path, :query_string,
+                :protocol, :method, :path, :query_param, :query_string,
                 :header, :body, :parsed, :body_parsed, :params
 
   # Init Request
@@ -32,7 +33,10 @@ class Midori::Request
       @header = @parser.headers
 
       @query_string = @path.match(/\?(.*?)$/)
-      @query_string = @query_string[1] unless @query_string.nil?
+      unless @query_string.nil?
+        @query_string = @query_string[1]
+        @query_param = CGI::parse(@query_string)
+      end
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
       @parsed = true
