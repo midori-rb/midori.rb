@@ -1,3 +1,4 @@
+require 'cgi'
 require 'digest/sha1'
 require 'stringio'
 require 'fiber'
