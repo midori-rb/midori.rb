@@ -5,7 +5,7 @@
 # @attr [String] protocol protocol version of HTTP request
 # @attr [Symbol] method HTTP method
 # @attr [String] path request path
-# @attr [Hash | nil] query_param parameter parsed from query string
+# @attr [Hash] query_param parameter parsed from query string
 # @attr [String | nil] query_string request query string
 # @attr [Hash] header request header
 # @attr [String] body request body
@@ -14,7 +14,7 @@
 # @attr [Hash] params params in the url
 class Midori::Request
   attr_accessor :ip, :port,
-                :protocol, :method, :path, :query_param, :query_string,
+                :protocol, :method, :path, :query_params, :query_string,
                 :header, :body, :parsed, :body_parsed, :params
 
   # Init Request
@@ -25,6 +25,7 @@ class Midori::Request
     @is_eventsource = false
     @parser = Http::Parser.new
     @params = {}
+    @query_params = Hash.new(Array.new)
     @body = ''
     @parser.on_headers_complete = proc do
       @protocol = @parser.http_version
@@ -35,7 +36,7 @@ class Midori::Request
       @query_string = @path.match(/\?(.*?)$/)
       unless @query_string.nil?
         @query_string = @query_string[1]
-        @query_param = CGI::parse(@query_string)
+        @query_params = CGI::parse(@query_string)
       end
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
