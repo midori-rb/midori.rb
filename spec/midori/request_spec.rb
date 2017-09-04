@@ -1,28 +1,38 @@
 require './spec/spec_helper'
 
 RSpec.describe Midori::Request do
-  describe 'Request' do
-    it 'parse request without query_string' do
-      data = "GET / HTTP/1.1\r\n\r\n"
-      request = Midori::Request.new
-      request.parse(data)
-      expect(request.protocol).to eq([1, 1])
-      expect(request.method).to eq(:GET)
-      expect(request.path).to eq('/')
-      expect(request.query_string).to eq(nil)
-      expect(request.query_params).to eq({})
-    end
+  it 'parse request without query_string' do
+    data = "GET / HTTP/1.1\r\n\r\n"
+    request = Midori::Request.new
+    request.parse(data)
+    expect(request.protocol).to eq([1, 1])
+    expect(request.method).to eq(:GET)
+    expect(request.path).to eq('/')
+    expect(request.query_string).to eq(nil)
+    expect(request.query_params).to eq({})
+  end
 
-    it 'parse request with query_string' do
-      data = "GET /?test=1 HTTP/1.1\r\n\r\n"
-      request = Midori::Request.new
-      request.parse(data)
-      expect(request.protocol).to eq([1, 1])
-      expect(request.method).to eq(:GET)
-      expect(request.path).to eq('/')
-      expect(request.query_string).to eq('test=1')
-      expect(request.query_params['test']).to eq(['1'])
-    end
+  it 'parse request with query_string' do
+    data = "GET /?test=1 HTTP/1.1\r\n\r\n"
+    request = Midori::Request.new
+    request.parse(data)
+    expect(request.protocol).to eq([1, 1])
+    expect(request.method).to eq(:GET)
+    expect(request.path).to eq('/')
+    expect(request.query_string).to eq('test=1')
+    expect(request.query_params['test']).to eq(['1'])
+  end
+
+  it 'parse request with cookies' do
+    data = "GET /?test=1 HTTP/1.1\r\nCookie: a=1; b=2\r\n\r\n"
+    request = Midori::Request.new
+    request.parse(data)
+    expect(request.protocol).to eq([1, 1])
+    expect(request.method).to eq(:GET)
+    expect(request.path).to eq('/')
+    expect(request.cookie['a'].name).to eq('a')
+    expect(request.cookie['a'].value).to eq(['1'])
+    expect(request.cookie['b'].value).to eq(['2'])
   end
 
   it 'parse request with header and body' do

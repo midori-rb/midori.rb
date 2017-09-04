@@ -9,16 +9,18 @@
 # @attr [String | nil] query_string request query string
 # @attr [Hash] header request header
 # @attr [String] body request body
+# @attr [Hash] cookie cookie hash coming from request
 # @attr [Boolean] parsed whether the request header parsed
 # @attr [Boolean] body_parsed whether the request body parsed
 # @attr [Hash] params params in the url
 class Midori::Request
   attr_accessor :ip, :port,
                 :protocol, :method, :path, :query_params, :query_string,
-                :header, :body, :parsed, :body_parsed, :params
+                :header, :body, :parsed, :body_parsed, :params, :cookie
 
   # Init Request
   def initialize
+    @header = {}
     @parsed = false
     @body_parsed = false
     @is_websocket = false
@@ -26,6 +28,7 @@ class Midori::Request
     @parser = Http::Parser.new
     @params = {}
     @query_params = Hash.new(Array.new)
+    @cookie = {}
     @body = ''
     @parser.on_headers_complete = proc do
       @protocol = @parser.http_version
@@ -38,6 +41,8 @@ class Midori::Request
         @query_string = @query_string[1]
         @query_params = CGI::parse(@query_string)
       end
+
+      @cookie = CGI::Cookie.parse(@header['Cookie']) unless @header['Cookie'].nil?
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
       @parsed = true
