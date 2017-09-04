@@ -25,7 +25,7 @@ class Midori::Request
     @is_eventsource = false
     @parser = Http::Parser.new
     @params = {}
-    @query_params = {}
+    @query_params = Hash.new(Array.new)
     @body = ''
     @parser.on_headers_complete = proc do
       @protocol = @parser.http_version
