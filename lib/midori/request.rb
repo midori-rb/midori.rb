@@ -63,7 +63,7 @@ class Midori::Request
     end
 
     # Set body parsed if body reaches content length
-    if (@header['Content-Length'].to_i || 0) <= @body.bytesize
+    if @parsed && (@header['Content-Length'].to_i || 0) <= @body.bytesize
       @body_parsed = true
       pre_proceed
     end
