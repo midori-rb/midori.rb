@@ -3,8 +3,7 @@ module Midori
     # Return current logger midori is using
     # @return [Logger] the current logger midori is using
     def logger
-      @logger = ::Logger.new(STDOUT) if @logger.nil?
-      @logger
+      @logger ||= ::Logger.new(STDOUT)
     end
 
     # Return midori's logger
