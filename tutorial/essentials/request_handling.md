@@ -12,9 +12,11 @@ class ExampleAPI < Midori::API
     request.method       # 'GET'
     request.path         # '/'
     request.query_string # ''
+    request.query_params # {} query params, parsed from query string
     request.header       # {} request header
     request.body         # request body sent by the client
     request.params       # {} params matched in router
+    request.cookie       # {} cookie parsed from header
   end
 end
 ```
