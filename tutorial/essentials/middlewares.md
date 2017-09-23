@@ -1,6 +1,8 @@
 # Middlewares
 
-Middlewares are very exciting features midori supports. As it has been implemented for lots of web frameworks. Middlewares from midori behaves very different from other frameworks, which greatly helps reducing complexity and improving performance in scaling projects.
+Middlewares are very exciting features midori support.
+As it has been implemented for lots of web frameworks.
+Middlewares from midori behaves very different from other frameworks, which greatly helps reducing complexity and improving performance in scaling projects.
 
 ## Basic Usage
 
@@ -57,7 +59,7 @@ This makes using of middlewares with less side effects.
 ## Early Exit Feature
 
 Early exit feature is also supported in midori without stack.
-To make it happen, just response an `Midori::Response` object in request processing.
+To make it happen, just respond an `Midori::Response` object during request processing.
 Here's an example for CORS middleware using early exit feature.
 
 ```ruby
