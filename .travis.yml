@@ -26,6 +26,7 @@ before_install:
 
 script:
   - gem list -l
+  - bundle exec rake compile
   - bundle exec rake
   - bundle exec codeclimate-test-reporter
   - gem build ./em-midori.gemspec
