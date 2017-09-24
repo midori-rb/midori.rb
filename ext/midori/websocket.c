@@ -3,10 +3,10 @@
 VALUE Midori = Qnil;
 VALUE MidoriWebSocket = Qnil;
 
-void Init_midori();
+void Init_midori_ext();
 VALUE method_midori_websocket_mask(VALUE self, VALUE payload, VALUE mask);
 
-void Init_midori() {
+void Init_midori_ext() {
   Midori = rb_define_module("Midori");
   MidoriWebSocket = rb_define_class_under(Midori, "WebSocket", rb_cObject);
   rb_define_protected_method(MidoriWebSocket, "mask", method_midori_websocket_mask, 2);

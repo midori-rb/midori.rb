@@ -21,4 +21,4 @@ Gemfile.lock
 bin
 tutorial/_book
 tmp/
-midori.bundle
+lib/midori_ext.*
