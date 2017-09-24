@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.require_paths            = ['lib']
   s.files                    = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec|.resources)/}) } \
     - %w(README.md CODE_OF_CONDUCT.md CONTRIBUTING.md Gemfile Rakefile em-midori.gemspec .gitignore .rspec .codeclimate.yml .rubocop.yml .travis.yml logo.png Rakefile Gemfile)
+  s.extensions               << 'ext/midori/extconf.rb'
   s.homepage                 = 'https://github.com/heckpsi-lab/em-midori'
   s.metadata                 = { 'issue_tracker' => 'https://github.com/heckpsi-lab/em-midori/issues' }
   s.license                  = 'MIT'
@@ -19,4 +20,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency     'murasaki', '~> 0.1'
   s.add_runtime_dependency     'mustermann', '~> 1.0'
   s.add_runtime_dependency     'midori_http_parser', '~> 0.6.1'
+  s.add_development_dependency 'rake-compiler', '~> 1.0'
 end

@@ -1,9 +1,11 @@
+require 'rake/extensiontask'
 require 'rspec/core/rake_task'
 require 'yard'
 require './lib/midori/version'
 
 task :default => %i(spec)
 
+Rake::ExtensionTask.new('midori')
 RSpec::Core::RakeTask.new(:spec)
 
 YARD::Rake::YardocTask.new do |t|
