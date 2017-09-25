@@ -1,11 +1,11 @@
 ##
 # This class provides methods for EventSource connection instance.
-# @attr [EM::Connection] connection the connection instance of EventMachine
+# @attr [Midori::Connection] connection the connection instance of EventMachine
 class Midori::EventSource
   attr_accessor :connection
 
   # Init a EventSource instance with a connection
-  # @param [EM::Connection] connection the connection instance of EventMachine
+  # @param [Midori::Connection] connection the connection instance of EventMachine
   def initialize(connection)
     @connection = connection
   end
