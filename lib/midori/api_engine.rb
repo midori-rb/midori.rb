@@ -40,7 +40,7 @@ class Midori::APIEngine
 
   # Process after receive data from client
   # @param request [Midori::Request] Http Raw Request
-  # @param connection [EM::Connection] A connection created by EventMachine
+  # @param connection [Midori::Connection] A connection created by EventMachine
   # @return [Midori::Response] Http Response
   # @raise [Midori::Error::NotFound] If no route matched
   def receive(request, connection = nil)
