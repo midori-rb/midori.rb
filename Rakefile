@@ -1,10 +1,18 @@
+require 'rake/extensiontask'
 require 'rspec/core/rake_task'
 require 'yard'
 require './lib/midori/version'
 
 task :default => %i(spec)
 
-RSpec::Core::RakeTask.new(:spec)
+RSpec::Core::RakeTask.new(:spec) do |t|
+  t.rspec_opts = ["-c", "-f progress"]
+end
+
+spec = Gem::Specification.load('em-midori.gemspec')
+Rake::ExtensionTask.new('midori_ext', spec) do |ext|
+  ext.ext_dir = "ext/midori"
+end
 
 YARD::Rake::YardocTask.new do |t|
  t.files         = ['lib/**/*.rb']

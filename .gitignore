@@ -20,3 +20,5 @@ Gemfile.lock
 .idea
 bin
 tutorial/_book
+tmp/
+lib/midori_ext.*
