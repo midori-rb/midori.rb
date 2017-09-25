@@ -3,13 +3,13 @@
 # @attr [Array<Integer>, String] msg message send from client
 # @attr [Integer] opcode operation code of WebSocket
 # @attr [Hash] events response for different event
-# @attr [EM::Connection] connection raw EventMachine connection
+# @attr [Midori::Connection] connection raw EventMachine connection
 # @attr [Midori::Request] request raw request
 class Midori::WebSocket
   attr_accessor :msg, :opcode, :events, :connection, :request
 
   # Init a WebSocket instance with a connection
-  # @param [EM::Connection] connection raw EventMachine connection
+  # @param [Midori::Connection] connection raw EventMachine connection
   def initialize(connection)
     @events = {}
     @connection = connection
