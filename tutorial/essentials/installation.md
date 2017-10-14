@@ -25,7 +25,7 @@ Generally, midori supports the following ruby interpreters:
 - **For JRuby users, due to some C extensions used in midori, it is still unable to run on the current version of JRuby.**
 - **For macOS users, you may meet performance problem due to the issue of [nio4r](https://github.com/socketry/nio4r/issues/125). Very few people would use macOS in production, so this issue may not affect much. We would still be working hard on fixing it, but the issue wouldn't be a high priority one.**
 
-It's hard to say that if it is possible for running on other ruby implementations like Rubinius or RubyMotion, if you're in favor of supporting more ruby implementations, you could open a ticket [here](https://github.com/heckpsi-lab/em-midori/issues), and we are glad to discuss it.
+It's hard to say that if it is possible for running on other ruby implementations like Rubinius or RubyMotion, if you're in favor of supporting more ruby implementations, you could open a ticket [here](https://github.com/midori-rb/midori.rb/issues), and we are glad to discuss it.
 
 ## Install with RubyGems
 
