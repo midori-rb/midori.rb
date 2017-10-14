@@ -10,18 +10,17 @@
 
 Midori is a Ruby Web Framework, providing high performance and proper abstraction.
 
-|                  midori                  | [midori-contrib](https://github.com/heckpsi-lab/midori-contrib) | [murasaki](https://github.com/heckpsi-lab/murasaki) |
+|                  midori                  | [midori-contrib](https://github.com/midori-rb/midori-contrib) | [murasaki](https://github.com/midori-rb/murasaki) |
 | :--------------------------------------: | :--------------------------------------: | :--------------------------------------: |
 | ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/midori_logo.png) | ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/contrib_logo.png) | ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/murasaki_logo.png) |
 |              Web Framework               |           Official Extensions            |         Modularized Event Engine         |
-| [![Build Status](https://travis-ci.org/midori-rb/midori.rb.svg?branch=master)](https://travis-ci.org/midori-rb/midori.rb) | [![Build Status](https://travis-ci.org/heckpsi-lab/midori-contrib.svg?branch=master)](https://travis-ci.org/heckpsi-lab/midori-contrib) | [![Build Status](https://travis-ci.org/heckpsi-lab/murasaki.svg?branch=master)](https://travis-ci.org/heckpsi-lab/murasaki) |
-| [![Test Coverage](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/test_coverage)](https://codeclimate.com/github/midori-rb/midori.rb/test_coverage) | [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/midori-contrib/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/midori-contrib/coverage) | [![Test Coverage](https://codeclimate.com/github/heckpsi-lab/murasaki/badges/coverage.svg)](https://codeclimate.com/github/heckpsi-lab/murasaki/coverage) |
-| [![Maintainability](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/maintainability)](https://codeclimate.com/github/midori-rb/midori.rb/maintainability) | [![Code Climate](https://codeclimate.com/github/heckpsi-lab/midori-contrib/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/midori-contrib) | [![Code Climate](https://codeclimate.com/github/heckpsi-lab/murasaki/badges/gpa.svg)](https://codeclimate.com/github/heckpsi-lab/murasaki) |
-| [![Issue Count](https://codeclimate.com/github/midori-rb/midori.rb/badges/issue_count.svg)](https://codeclimate.com/github/midori-rb/midori.rb) | [![Issue Count](https://codeclimate.com/github/heckpsi-lab/midori-contrib/badges/issue_count.svg)](https://codeclimate.com/github/heckpsi-lab/midori-contrib) | [![Issue Count](https://codeclimate.com/github/heckpsi-lab/murasaki/badges/issue_count.svg)](https://codeclimate.com/github/heckpsi-lab/murasaki) |
-| [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/midori.rb.svg)](https://gemnasium.com/github.com/midori-rb/midori.rb) | [![Dependency Status](https://gemnasium.com/badges/github.com/heckpsi-lab/midori-contrib.svg)](https://gemnasium.com/github.com/heckpsi-lab/midori-contrib) | [![Dependency Status](https://gemnasium.com/badges/github.com/heckpsi-lab/murasaki.svg)](https://gemnasium.com/github.com/heckpsi-lab/murasaki) |
-| [![doc](http://inch-ci.org/github/midori-rb/midori.rb.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori.rb) | [![doc](http://inch-ci.org/github/heckpsi-lab/midori-contrib.svg?branch=master)](http://inch-ci.org/github/heckpsi-lab/midori-contrib) | [![doc](http://inch-ci.org/github/heckpsi-lab/murasaki.svg?branch=master)](http://inch-ci.org/github/heckpsi-lab/murasaki) |
+| [![Build Status](https://travis-ci.org/midori-rb/midori.rb.svg?branch=master)](https://travis-ci.org/midori-rb/midori.rb) | [![Build Status](https://travis-ci.org/midori-rb/midori-contrib.svg?branch=master)](https://travis-ci.org/midori-rb/midori-contrib) | [![Build Status](https://travis-ci.org/midori-rb/murasaki.svg?branch=master)](https://travis-ci.org/midori-rb/murasaki) |
+| [![Test Coverage](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/test_coverage)](https://codeclimate.com/github/midori-rb/midori.rb/test_coverage) | [![Test Coverage](https://api.codeclimate.com/v1/badges/cfb6d9b359dcb7457eec/test_coverage)](https://codeclimate.com/github/midori-rb/midori-contrib/test_coverage) | [![Test Coverage](https://api.codeclimate.com/v1/badges/d0dc1bc4a3e38bd4f2b9/test_coverage)](https://codeclimate.com/github/midori-rb/murasaki/test_coverage) |
+| [![Maintainability](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/maintainability)](https://codeclimate.com/github/midori-rb/midori.rb/maintainability) | [![Maintainability](https://api.codeclimate.com/v1/badges/cfb6d9b359dcb7457eec/maintainability)](https://codeclimate.com/github/midori-rb/midori-contrib/maintainability) | [![Maintainability](https://api.codeclimate.com/v1/badges/d0dc1bc4a3e38bd4f2b9/maintainability)](https://codeclimate.com/github/midori-rb/murasaki/maintainability) |
+| [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/midori.rb.svg)](https://gemnasium.com/github.com/midori-rb/midori.rb) | [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/midori-contrib.svg)](https://gemnasium.com/github.com/midori-rb/midori-contrib) | [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/murasaki.svg)](https://gemnasium.com/github.com/midori-rb/murasaki) |
+| [![doc](http://inch-ci.org/github/midori-rb/midori.rb.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori.rb) | [![doc](http://inch-ci.org/github/midori-rb/midori-contrib.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori-contrib) | [![doc](http://inch-ci.org/github/midori-rb/murasaki.svg?branch=master)](http://inch-ci.org/github/midori-rb/murasaki) |
 | [![Gem Version](https://img.shields.io/gem/v/midori.rb.svg?maxAge=43200)](https://rubygems.org/gems/midori.rb) | [![Gem Version](https://img.shields.io/gem/v/midori-contrib.svg?maxAge=43200)](https://rubygems.org/gems/midori-contrib) | [![Gem Version](https://img.shields.io/gem/v/murasaki.svg?maxAge=43200)](https://rubygems.org/gems/murasaki) |
-| [![license](https://img.shields.io/github/license/midori-rb/midori.rb.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/heckpsi-lab/midori-contrib.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/heckpsi-lab/murasaki.svg?maxAge=2592000)]() |
+| [![license](https://img.shields.io/github/license/midori-rb/midori.rb.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/midori-contrib.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/murasaki.svg?maxAge=2592000)]() |
 
 ## Requirements
 
@@ -47,7 +46,7 @@ bundle install
 
 ### Performance
 
-Following benchmark results uses [em-midori-benchmark](https://github.com/midori-rb/midori.rb-benchmark), testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
+Following benchmark results testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
 
 **Note: Performance under Mac OS X needs to be further improved. `wrk` gives very bad performance result, but `ab` gives a good one. The following result is tested under Linux.**
 
@@ -82,7 +81,7 @@ See [Contributing Guidelines](CONTRIBUTING.md) before you leave any comment.
 
 There is an unfinished tutorial available [here](https://github.com/midori-rb/midori.rb/tree/master/tutorial).
 
-There is also an example showing how to use midori with a todo-list web app available [here](https://github.com/heckpsi-lab/midori-todo-example).
+There is also an example showing how to use midori with a todo-list web app available [here](https://github.com/midori-rb/midori-todo-example).
 
 ## Roadmap
 
