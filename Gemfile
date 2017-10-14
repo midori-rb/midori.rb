@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in em-midori.gemspec
+# Specify your gem's dependencies in midori.gemspec
 gemspec
 
 gem 'bundler', '~> 1.0'
