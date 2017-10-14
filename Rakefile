@@ -9,7 +9,7 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   t.rspec_opts = ["-c", "-f progress"]
 end
 
-spec = Gem::Specification.load('em-midori.gemspec')
+spec = Gem::Specification.load('midori.gemspec')
 Rake::ExtensionTask.new('midori_ext', spec) do |ext|
   ext.ext_dir = "ext/midori"
 end
@@ -20,12 +20,12 @@ YARD::Rake::YardocTask.new do |t|
 end
 
 task :build do
-  puts `gem build em-midori.gemspec`
+  puts `gem build midori.gemspec`
 end
 
 task :install do
-  puts `gem build em-midori.gemspec`
-  puts `gem install ./em-midori-#{Midori::VERSION}.gem`
+  puts `gem build midori.gemspec`
+  puts `gem install ./midori-#{Midori::VERSION}.gem`
 end
 
 task :count do

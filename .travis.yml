@@ -29,7 +29,7 @@ script:
   - bundle exec rake compile
   - bundle exec rake
   - bundle exec codeclimate-test-reporter
-  - gem build ./em-midori.gemspec
+  - gem build ./midori.gemspec
 
 bundler_args: --jobs 1 --retry 3
 
