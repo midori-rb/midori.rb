@@ -14,7 +14,7 @@ class Midori::Runner
     Midori.logger = configure.logger
     @bind = configure.bind
     @port = configure.port
-    @api = (api.is_a?Midori::APIEngine) ? api : Midori::APIEngine.new(api, configure.route_type)
+    @api = (api.is_a? Midori::APIEngine) ? api : Midori::APIEngine.new(api, configure.route_type)
     @before = configure.before
   end
 
