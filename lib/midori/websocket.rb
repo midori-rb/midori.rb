@@ -43,7 +43,7 @@ class Midori::WebSocket
     # Message
     masked_msg = Array.new(payload) { data.getbyte }
     @msg = self.mask(masked_msg, mask)
-    @msg = @msg.pack('C*').force_encoding('utf-8') if [0x1, 0x9, 0xA].include?opcode
+    @msg = @msg.pack('C*').force_encoding('utf-8') if [0x1, 0x9, 0xA].include? opcode
     # For debug
     #  data.rewind
     #  data.bytes {|byte| puts byte.to_s(16)}
@@ -69,7 +69,7 @@ class Midori::WebSocket
     if msg.is_a?String
       output << 0b10000001 << msg.size << msg
       @connection.send_data(output.pack("CCA#{msg.size}"))
-    elsif msg.is_a?Array
+    elsif msg.is_a? Array
       output << 0b10000010 << msg.size
       output.concat msg
       @connection.send_data(output.pack('C*'))

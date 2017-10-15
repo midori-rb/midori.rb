@@ -341,7 +341,7 @@ class Midori::API
     # @return [nil] nil
     private def add_route(method, path, block)
       # Argument check
-      raise ArgumentError unless path.is_a?String
+      raise ArgumentError unless path.is_a? String
 
       # Insert route to routes
       route = Midori::Route.new(method, path, block)
