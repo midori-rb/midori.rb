@@ -5,7 +5,7 @@
 # @attr [String] protocol protocol version of HTTP request
 # @attr [Symbol] method HTTP method
 # @attr [String] path request path
-# @attr [Hash] query_param parameter parsed from query string
+# @attr [Hash] query_params parameter parsed from query string
 # @attr [String | nil] query_string request query string
 # @attr [Hash] header request header
 # @attr [String] body request body
