@@ -45,6 +45,10 @@ class Midori::Request
       @cookie = CGI::Cookie.parse(@header['Cookie']) unless @header['Cookie'].nil?
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
+
+      # Detect client real IP by RFC 7239
+      @ip = @header['X-Real-IP'] unless @header['X-Real-IP'].nil?
+
       @parsed = true
       :stop
     end
