@@ -1,4 +1,4 @@
-class ExampleConfigure < Midori::Configure
+class Midori::Configure
   set :logger, Logger.new(StringIO.new)
   set :bind, '127.0.0.1'
   set :port, 8080
@@ -106,4 +106,4 @@ class ExampleAPI < Midori::API
 end
 
 EXAMPLE_API_ENGINE = Midori::APIEngine.new(ExampleAPI)
-EXAMPLE_RUNNER = Midori::Runner.new(EXAMPLE_API_ENGINE, ExampleConfigure)
+EXAMPLE_RUNNER = Midori::Runner.new(EXAMPLE_API_ENGINE)
