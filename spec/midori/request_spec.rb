@@ -35,20 +35,31 @@ RSpec.describe Midori::Request do
     expect(request.cookie['b'].value).to eq(['2'])
   end
 
-  it 'parse real ip behind proxy' do
-    data = "GET /?test=1 HTTP/1.1\r\nX-Real-IP: 1.2.3.4\r\nX-Forwarded-For: 1.2.3.4, 2.3.4.5\r\n\r\n"
+  it 'ignore real IP when not available' do
+    Midori::Configure.proxy = false
+    data = "GET /?test=1 HTTP/1.1\r\nX-Real-IP: 1.2.3.4\r\nX-Forwarded-For: 1.2.3.4, 127.0.0.1\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.ip).to eq(nil) # No Real IP
-    expect(request.remote_ip).to eq('1.2.3.4') # No X-Forwarded-For Detected
+    expect(request.ip).to eq(nil)
+    expect(request.remote_ip).to eq(nil)
   end
 
-  it 'ignore X-Real-IP when spoofing' do
-    data = "GET /?test=1 HTTP/1.1\r\nX-Real-IP: 1.2.3.4\r\n\r\n"
+  it 'parse real IP behind proxy' do
+    Midori::Configure.proxy = true
+    data = "GET /?test=1 HTTP/1.1\r\nX-Real-IP: 1.2.3.4\r\nX-Forwarded-For: 1.2.3.4, 127.0.0.1\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.ip).to eq(nil) # No Real IP
-    expect(request.remote_ip).to eq(nil) # No X-Forwarded-For Detected
+    expect(request.ip).to eq(nil)
+    expect(request.remote_ip).to eq('1.2.3.4')
+  end
+
+  it 'ignore real IP when spoofing' do
+    Midori::Configure.proxy = true
+    data = "GET /?test=1 HTTP/1.1\r\nX-Real-IP: 1.2.3.4\r\nX-Forwarded-For: 1.2.3.4, 13.0.0.1\r\n\r\n"
+    request = Midori::Request.new
+    request.parse(data)
+    expect(request.ip).to eq(nil)
+    expect(request.remote_ip).to eq('13.0.0.1')
   end
 
   it 'parse request with header and body' do
