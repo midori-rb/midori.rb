@@ -1,16 +1,16 @@
 require './spec/spec_helper'
 
-RSpec.describe CIHash do
-  describe 'CIHash' do
+RSpec.describe HTTPHeader do
+  describe 'HTTPHeader' do
     it 'should turn strings and symbols downcase' do
-      hash = CIHash.new
+      hash = HTTPHeader.new
       hash['A'] = 1
       hash[:A] = 2
       expect(hash.keys).to eq(['a', :a])
     end
 
     it 'should respond hash key in any case' do
-      hash = CIHash.new
+      hash = HTTPHeader.new
       hash['A'] = 1
       hash[:A] = 2
       expect(hash.key?('a')).to eq(true)
@@ -23,10 +23,9 @@ RSpec.describe CIHash do
       expect(hash[:a]).to eq(2)
     end
 
-    it 'should key other things as it is' do
-      hash = CIHash.new
-      hash[true] = 1
-      expect(hash[true]).to eq(1)
+    it 'should not use keys other than string or symbol' do
+      hash = HTTPHeader.new
+      expect { hash[true] = 1 }.to raise_error(NoMethodError)
     end
   end
 end

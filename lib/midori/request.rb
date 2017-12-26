@@ -8,7 +8,7 @@
 # @attr [String] path request path
 # @attr [Hash] query_params parameter parsed from query string
 # @attr [String | nil] query_string request query string
-# @attr [CIHash] header request header
+# @attr [HTTPHeader] header request header
 # @attr [String] body request body
 # @attr [Hash] cookie cookie hash coming from request
 # @attr [Boolean] parsed whether the request header parsed
@@ -21,7 +21,7 @@ class Midori::Request
 
   # Init Request
   def initialize
-    @header = CIHash.new
+    @header = HTTPHeader.new
     @parsed = false
     @body_parsed = false
     @is_websocket = false
