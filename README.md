@@ -46,15 +46,15 @@ bundle install
 
 Following benchmark results testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
 
-**Note: Performance under Mac OS X needs to be further improved. `wrk` gives very bad performance result, but `ab` gives a good one. The following result is tested under Linux.**
+**Note: Performance under Mac OS X needs to be further improved. `wrk` gives very bad performance result. The following result is tested under Linux.**
 
-| framework                    | version | req/s   |
-| :--------------------------- | :------ | :------ |
-| Rails (Thin, Ruby)           | 5.0.0.1 | 521.58  |
-| Rails (API Mode, Thin, Ruby) | 5.0.0.1 | 760.03  |
-| Sinatra (Thin, Ruby)         | 2.0.0   | 1912.23 |
-| express.js (Node.js)         | 4.15.3  | 4944.58 |
-| midori (Ruby)                | 0.2.4   | 3937.08 |
+| framework                          | version | req/s   |
+| :--------------------------------- | :------ | :------ |
+| Rails (Thin, Ruby 2.5.0)           | 5.0.6   | 537.01  |
+| Rails (API Mode, Thin, Ruby 2.5.0) | 5.0.6   | 826.56  |
+| Sinatra (Thin, Ruby 2.5.0)         | 2.0.0   | 1216.17 |
+| express.js (Node.js 9.3.0)         | 4.16.0  | 5463.82 |
+| midori (Ruby 2.5.0)                | 0.5.0   | 4069.87 |
 
 ### Name
 
@@ -91,7 +91,8 @@ There is also an example showing how to use midori with a todo-list web app avai
 ## Midori 2 Goals
 
 1. Support HTTP/2
-2. Add MVC abstraction example with scaffold
-3. Improve performance of eventloop
-4. More examples on using midori
+2. Support RPC Server
+3. Add MVC abstraction example with scaffold
+4. Improve performance of eventloop
+5. More examples on using midori
 
