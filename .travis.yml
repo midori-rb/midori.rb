@@ -6,6 +6,7 @@ matrix:
     - rvm: 2.2.8
     - rvm: 2.3.5
     - rvm: 2.4.2
+    - rvm: 2.5.0
     - rvm: ruby-head
   allow_failures:
     - rvm: ruby-head
@@ -14,15 +15,8 @@ matrix:
 os:
   - linux
 
-services:
-  - postgresql
-  - mysql
-  - redis-server
-
 before_install:
   - gem install bundler
-  - psql -c 'create database travis_ci_test;' -U postgres
-  - mysql -e 'create database if not exists travis_ci_test;'
 
 script:
   - gem list -l
