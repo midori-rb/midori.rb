@@ -14,7 +14,7 @@
 # @attr [Boolean] body_parsed whether the request body parsed
 # @attr [Hash] params params in the url
 class Midori::Request
-  attr_accessor :ip, :port,
+  attr_accessor :ip, :port, :remote_ip,
                 :protocol, :method, :path, :query_params, :query_string,
                 :header, :body, :parsed, :body_parsed, :params, :cookie
 
@@ -35,6 +35,7 @@ class Midori::Request
       @method = @parser.http_method
       @path = @parser.request_url
       @header = @parser.headers
+      @remote_ip = parse_ip || @ip # Detect client real IP with RFC 7239
 
       @query_string = @path.match(/\?(.*?)$/)
       unless @query_string.nil?
@@ -45,10 +46,6 @@ class Midori::Request
       @cookie = CGI::Cookie.parse(@header['Cookie']) unless @header['Cookie'].nil?
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
-
-      # Detect client real IP by RFC 7239
-      @ip = @header['X-Real-IP'] unless @header['X-Real-IP'].nil?
-
       @parsed = true
       :stop
     end
@@ -71,6 +68,16 @@ class Midori::Request
       @body_parsed = true
       pre_proceed
     end
+    nil
+  end
+
+  def parse_ip
+    client_ip = @header['X-Real-IP']
+    return nil if client_ip.nil?
+    forwarded_ips = @header['X-Forwarded-For'].split(', ')
+    # If forwarded_ips doesn't include the client_ip, it might be an
+    # ip spoofing attempt, so we ignore X-Real-IP
+    return client_ip if forwarded_ips.include?(client_ip)
     nil
   end
 
