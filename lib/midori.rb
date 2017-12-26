@@ -9,6 +9,7 @@ require 'murasaki'
 require 'socket'
 
 require_relative 'midori_ext'
+require_relative 'midori/core_ext/ci_hash'
 require_relative 'midori/core_ext/configurable'
 require_relative 'midori/core_ext/string'
 require_relative 'midori/core_ext/define_class'

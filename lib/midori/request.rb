@@ -8,7 +8,7 @@
 # @attr [String] path request path
 # @attr [Hash] query_params parameter parsed from query string
 # @attr [String | nil] query_string request query string
-# @attr [Hash] header request header
+# @attr [CIHash] header request header
 # @attr [String] body request body
 # @attr [Hash] cookie cookie hash coming from request
 # @attr [Boolean] parsed whether the request header parsed
@@ -21,7 +21,7 @@ class Midori::Request
 
   # Init Request
   def initialize
-    @header = {}
+    @header = CIHash.new
     @parsed = false
     @body_parsed = false
     @is_websocket = false
@@ -35,7 +35,9 @@ class Midori::Request
       @protocol = @parser.http_version
       @method = @parser.http_method
       @path = @parser.request_url
-      @header = @parser.headers
+      # Turn header into case-insensitive due to RFC 2.6 Chapter 4.2
+      # https://www.ietf.org/rfc/rfc2616.txt
+      @parser.headers.each { |key, value| @header[key] = value }
       @remote_ip = parse_ip || @ip # Detect client real IP with RFC 7239
 
       @query_string = @path.match(/\?(.*?)$/)
