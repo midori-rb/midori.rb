@@ -78,6 +78,7 @@ class Midori::Request
   def parse_ip
     # Do not parse anything if not behind proxy
     return nil unless Midori::Configure.proxy
+    return @header['X-Real-IP'] if Midori::Configure.trust_real_ip
     # Not enough infomation
     return nil if @header['X-Forwarded-For'].nil?
     forwarded_ips = @header['X-Forwarded-For'].split(', ')

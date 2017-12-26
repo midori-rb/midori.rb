@@ -62,6 +62,16 @@ RSpec.describe Midori::Request do
     expect(request.remote_ip).to eq('13.0.0.1')
   end
 
+  it 'trust real IP' do
+    Midori::Configure.proxy = true
+    Midori::Configure.trust_real_ip = true
+    data = "GET /?test=1 HTTP/1.1\r\nX-Real-IP: 1.2.3.4\r\nX-Forwarded-For: 1.2.3.4, 13.0.0.1\r\n\r\n"
+    request = Midori::Request.new
+    request.parse(data)
+    expect(request.ip).to eq(nil)
+    expect(request.remote_ip).to eq('1.2.3.4')
+  end
+
   it 'parse request with header and body' do
     data = "GET / HTTP/1.1\r\nTest: Hello\r\n\r\nBody"
     request = Midori::Request.new
