@@ -73,8 +73,8 @@ class Midori::Request
 
   def parse_ip
     client_ip = @header['X-Real-IP']
-    return nil if client_ip.nil?
-    forwarded_ips = @header['X-Forwarded-For']&.split(', ') || []
+    return nil if client_ip.nil? || @header['X-Forwarded-For'].nil?
+    forwarded_ips = @header['X-Forwarded-For'].split(', ')
     # If forwarded_ips doesn't include the client_ip, it might be an
     # ip spoofing attempt, so we ignore X-Real-IP
     # Other spoofing check like trust chain should be done by middleware
