@@ -2,6 +2,7 @@
 # Request class for midori
 # @attr [String] ip client ip address
 # @attr [Integer] port client port
+# @attr [String] ip parsed ip address
 # @attr [String] protocol protocol version of HTTP request
 # @attr [Symbol] method HTTP method
 # @attr [String] path request path
@@ -71,15 +72,21 @@ class Midori::Request
     nil
   end
 
+  # Get the real user IP from headers
+  # @return [String | nil] nil when not available, otherwise, return the real IP
+  # Modified from Rack
   def parse_ip
-    client_ip = @header['X-Real-IP']
-    return nil if client_ip.nil? || @header['X-Forwarded-For'].nil?
+    # Do not parse anything if not behind proxy
+    return nil unless Midori::Configure.proxy
+    return @header['X-Real-IP'] if Midori::Configure.trust_real_ip
+    # Not enough infomation
+    return nil if @header['X-Forwarded-For'].nil?
     forwarded_ips = @header['X-Forwarded-For'].split(', ')
-    # If forwarded_ips doesn't include the client_ip, it might be an
-    # ip spoofing attempt, so we ignore X-Real-IP
-    # Other spoofing check like trust chain should be done by middleware
-    return client_ip if forwarded_ips.include?(client_ip)
-    nil
+    # Spoofing check
+    trusted = forwarded_ips.reject do |ip|
+      ip =~ Midori::Configure.trusted_proxies
+    end
+    trusted.last
   end
 
   # Preproceed the request after parsed
