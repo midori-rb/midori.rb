@@ -10,6 +10,7 @@ require 'socket'
 
 require_relative 'midori_ext'
 require_relative 'midori/core_ext/configurable'
+require_relative 'midori/core_ext/http_header'
 require_relative 'midori/core_ext/string'
 require_relative 'midori/core_ext/define_class'
 require_relative 'midori/core_ext/proc'
