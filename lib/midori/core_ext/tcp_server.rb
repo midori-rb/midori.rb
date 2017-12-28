@@ -6,7 +6,6 @@ class TCPServer
     self.setsockopt(6, Socket::TCP_FASTOPEN, opt)
     true
   rescue => _e
-    # @logger.warn 'Failed to use TCP Fast Open feature on your OS'.yellow
     false
   end
 end
