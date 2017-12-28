@@ -31,6 +31,8 @@ class Midori::Runner
     return false if running? || EventLoop.running?
     @logger.info "Midori #{Midori::VERSION} is now running on #{bind}:#{port}".blue
     @server = TCPServer.new(@bind, @port)
+    tfo = @server.tcp_fast_open if Midori::Configure.tcp_fast_open
+    @logger.warn 'Failed to use TCP Fast Open feature on your OS'.yellow unless tfo
     EventLoop.register(@server, :r) do |monitor|
       socket = monitor.io.accept_nonblock
       connection = Midori::Connection.new(socket)
