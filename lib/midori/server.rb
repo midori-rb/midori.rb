@@ -39,6 +39,9 @@ module Midori::Server
             @request.parse(data)
             receive_new_request if @request.parsed && @request.body_parsed?
           end
+        rescue EOFError, Errno::ENOTCONN => _e
+          close_connection
+          # Ignore client's disconnection
         rescue => e
           close_connection
           @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
