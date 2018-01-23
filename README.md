@@ -77,7 +77,7 @@ See [Contributing Guidelines](CONTRIBUTING.md) before you leave any comment.
 
 ### Tutorial & Example
 
-There is an unfinished tutorial available [here](https://github.com/midori-rb/midori.rb/tree/master/tutorial).
+There is an unfinished tutorial available [here](https://github.com/midori-rb/midori-tutorial).
 
 There is also an example showing how to use midori with a todo-list web app available [here](https://github.com/midori-rb/midori-todo-example).
 
