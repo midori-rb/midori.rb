@@ -14,7 +14,7 @@ class Midori::Connection
     @socket = socket
     @monitor = nil
     @close_flag = false
-    @data = ''
+    @buffer = ''
     listen(socket)
   end
 
@@ -27,12 +27,8 @@ class Midori::Connection
         receive_data(monitor)
       end
       if monitor.writable?
-        if !@data == ''
-          # :nocov:
-          # Leave for corner cases
-          monitor.io.write_nonblock(@data)
-          @data = ''
-          # :nocov:
+        if !@buffer.empty?
+          send_buffer
         elsif @close_flag
           close_connection
         end
@@ -41,9 +37,20 @@ class Midori::Connection
   end
 
   # Send message to client
-  # @param [String] data data to send
+  # @param [Midori::Response | String] data data to send
   def send_data(data)
-    @monitor.writable? ? @socket.write_nonblock(data) : @data << data
+    @buffer << (data.is_a?(String) ? data : data.to_s)
+    send_buffer if @monitor.writable?
+    nil
+  end
+
+  # Send buffer immediately
+  private def send_buffer
+    written = @socket.write_nonblock(@buffer)
+    @buffer = @buffer.byteslice(written..-1)
+    nil
+  rescue => _e
+    # Ignore connection closed when writing
   end
 
   # Close the connection

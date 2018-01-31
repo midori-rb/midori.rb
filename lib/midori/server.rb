@@ -43,8 +43,11 @@ module Midori::Server
           close_connection
           # Ignore client's disconnection
         rescue => e
+          # :nocov:
+          # Leave for corner cases
           close_connection
           @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
+          # :nocov:
         end
       end)
     end.call

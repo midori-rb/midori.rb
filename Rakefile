@@ -25,7 +25,7 @@ end
 
 task :install do
   puts `gem build midori.gemspec`
-  puts `gem install ./midori-#{Midori::VERSION}.gem`
+  puts `gem install ./midori.rb-#{Midori::VERSION}.gem`
 end
 
 task :count do
