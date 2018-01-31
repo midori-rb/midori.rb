@@ -51,6 +51,7 @@ class Midori::Connection
     nil
   rescue => _e
     # Ignore connection closed when writing
+    close_connection
   end
 
   # Close the connection
