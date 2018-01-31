@@ -40,18 +40,22 @@ class Midori::Connection
   # @param [Midori::Response | String] data data to send
   def send_data(data)
     @buffer << (data.is_a?(String) ? data : data.to_s)
-    send_buffer if @monitor.writable?
+    send_buffer
     nil
   end
 
   # Send buffer immediately
   private def send_buffer
-    written = @socket.write_nonblock(@buffer)
-    @buffer = @buffer.byteslice(written..-1)
+    if @monitor.writable?
+      written = @socket.write_nonblock(@buffer)
+      @buffer = @buffer.byteslice(written..-1)
+    end
     nil
-  rescue => _e
-    # Ignore connection closed when writing
-    close_connection
+  rescue IO::EAGAINWaitWritable => _e
+    # :nocov:
+    # Unknown Reason Resource Conflict
+    nil
+    # :nocov:
   end
 
   # Close the connection
