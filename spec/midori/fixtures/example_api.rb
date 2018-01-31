@@ -38,7 +38,7 @@ class ExampleAPI < Midori::API
   end
 
   get '/large' do
-    'w' * 2 * 20
+    'w' * 2 ** 20
   end
 
   get '/stop' do

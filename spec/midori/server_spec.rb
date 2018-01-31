@@ -17,8 +17,14 @@ RSpec.describe Midori::Server do
     end
 
     it 'could deal with very large response' do
-      Timeout::timeout(5) do
-        expect(Typhoeus.get("http://127.0.0.1:8080/large").body).to eq('w' * 2 * 20)
+      Timeout::timeout(10) do
+        expect(Typhoeus.get("http://127.0.0.1:8080/large").body.bytesize).to eq(('w' * 2 ** 20).bytesize)
+      end
+    end
+
+    it 'could generate body size correctly' do
+      Timeout::timeout(10) do
+        expect(Typhoeus.get("http://127.0.0.1:8080/large").headers['Content-Length'].to_i).to eq(('w' * 2 ** 20).bytesize)
       end
     end
 
