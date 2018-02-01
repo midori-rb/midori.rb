@@ -2,6 +2,8 @@
 
 **This project is still not production-ready. Questions, suggestions and pull requests are highly welcome.**
 
+[![Backers on Open Collective](https://opencollective.com/midorirb/backers/badge.svg)](#backers) [![Sponsors on Open Collective](https://opencollective.com/midorirb/sponsors/badge.svg)](#sponsors)
+
 ![Logo and Slogan](https://github.com/midori-rb/midori.rb/raw/master/.resources/slogan.png)
 
 ## Description
@@ -17,7 +19,7 @@ Midori is a Ruby Web Framework, providing high performance and proper abstractio
 | [![Maintainability](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/maintainability)](https://codeclimate.com/github/midori-rb/midori.rb) | [![Maintainability](https://api.codeclimate.com/v1/badges/cfb6d9b359dcb7457eec/maintainability)](https://codeclimate.com/github/midori-rb/midori-contrib) | [![Maintainability](https://api.codeclimate.com/v1/badges/d0dc1bc4a3e38bd4f2b9/maintainability)](https://codeclimate.com/github/midori-rb/murasaki) | [![Maintainability](https://api.codeclimate.com/v1/badges/0035138294cf3a6fdd07/maintainability)](https://codeclimate.com/github/midori-rb/http_parser.rb/maintainability) |
 | [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/midori.rb.svg)](https://gemnasium.com/github.com/midori-rb/midori.rb) | [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/midori-contrib.svg)](https://gemnasium.com/github.com/midori-rb/midori-contrib) | [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/murasaki.svg)](https://gemnasium.com/github.com/midori-rb/murasaki) | [![Dependency Status](https://gemnasium.com/badges/github.com/midori-rb/http_parser.rb.svg)](https://gemnasium.com/github.com/midori-rb/http_parser.rb) |
 | [![doc](http://inch-ci.org/github/midori-rb/midori.rb.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori.rb) | [![doc](http://inch-ci.org/github/midori-rb/midori-contrib.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori-contrib) | [![doc](http://inch-ci.org/github/midori-rb/murasaki.svg?branch=master)](http://inch-ci.org/github/midori-rb/murasaki) | [![doc](http://inch-ci.org/github/midori-rb/http_parser.svg?branch=master)](http://inch-ci.org/github/midori-rb/http_parser.rb) |
-| [![Gem Version](https://img.shields.io/gem/v/midori.rb.svg?maxAge=43200)](https://rubygems.org/gems/midori.rb) | [![Gem Version](https://img.shields.io/gem/v/midori-contrib.svg?maxAge=43200)](https://rubygems.org/gems/midori-contrib) | [![Gem Version](https://img.shields.io/gem/v/murasaki.svg?maxAge=43200)](https://rubygems.org/gems/murasaki) | [![Gem Version](https://img.shields.io/gem/v/midori_http_parser.svg?maxAge=43200)](https://rubygems.org/gems/midori_http_parser) |
+|  [![Gem Version](https://img.shields.io/gem/v/midori.rb.svg?maxAge=43200)](https://rubygems.org/gems/midori.rb) | [![Gem Version](https://img.shields.io/gem/v/midori-contrib.svg?maxAge=43200)](https://rubygems.org/gems/midori-contrib) | [![Gem Version](https://img.shields.io/gem/v/murasaki.svg?maxAge=43200)](https://rubygems.org/gems/murasaki) | [![Gem Version](https://img.shields.io/gem/v/midori_http_parser.svg?maxAge=43200)](https://rubygems.org/gems/midori_http_parser) |
 | [![license](https://img.shields.io/github/license/midori-rb/midori.rb.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/midori-contrib.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/murasaki.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/http_parser.rb.svg?maxAge=2592000)]() |
 
 ## Requirements
@@ -74,6 +76,8 @@ Version consists of four numbers:
 ### Contributing
 
 See [Contributing Guidelines](CONTRIBUTING.md) before you leave any comment.
+This project exists thanks to all the people who contribute.
+<a href="graphs/contributors"><img src="https://opencollective.com/midorirb/contributors.svg?width=890" /></a>
 
 ### Tutorial & Example
 
@@ -95,4 +99,29 @@ There is also an example showing how to use midori with a todo-list web app avai
 3. Add MVC abstraction example with scaffold
 4. Improve performance of eventloop
 5. More examples on using midori
+
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/midorirb#backer)]
+
+<a href="https://opencollective.com/midorirb#backers" target="_blank"><img src="https://opencollective.com/midorirb/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/midorirb#sponsor)]
+
+<a href="https://opencollective.com/midorirb/sponsor/0/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/1/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/2/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/3/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/4/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/5/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/6/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/7/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/8/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/midorirb/sponsor/9/website" target="_blank"><img src="https://opencollective.com/midorirb/sponsor/9/avatar.svg"></a>
+
 
