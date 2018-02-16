@@ -33,13 +33,15 @@ class Midori::Runner
     @server = TCPServer.new(@bind, @port)
     tfo = @server.tcp_fast_open if Midori::Configure.tcp_fast_open
     @logger.warn 'Failed to use TCP Fast Open feature on your OS'.yellow unless tfo
-    EventLoop.register(@server, :r) do |monitor|
-      socket = monitor.io.accept_nonblock
-      connection = Midori::Connection.new(socket)
-      connection.server_initialize(@api, @logger)
-    end
     async_fiber(Fiber.new do
+      @logger.info 'Midori is booting...'.blue
       @before.call
+      @logger.info 'Midori is serving...'.blue
+      EventLoop.register(@server, :r) do |monitor|
+        socket = monitor.io.accept_nonblock
+        connection = Midori::Connection.new(socket)
+        connection.server_initialize(@api, @logger)
+      end
     end)
     EventLoop.start
     nil
