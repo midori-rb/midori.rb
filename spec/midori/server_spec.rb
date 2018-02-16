@@ -57,7 +57,7 @@ RSpec.describe Midori::Server do
     it 'pass example websocket communication' do
       Timeout::timeout(1) do
         socket = TCPSocket.new '127.0.0.1', 8080
-        socket.print "GET /websocket HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
+        socket.print "GET /websocket?param=Hello HTTP/1.1\r\nHost: localhost:8080\r\nConnection: Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
         # Upgrade
         result = Array.new(5) {socket.gets}
         expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")

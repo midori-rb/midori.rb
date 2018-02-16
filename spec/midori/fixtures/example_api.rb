@@ -56,7 +56,7 @@ class ExampleAPI < Midori::API
 
   websocket '/websocket' do |ws|
     ws.on :open do
-      ws.send 'Hello'
+      ws.send ws.connection.request.query_params['param'][0]
     end
 
     ws.on :message do |msg|
