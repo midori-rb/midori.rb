@@ -89,6 +89,21 @@ RSpec.describe Midori::Server do
       end
     end
 
+    it 'passes keep-alive websocket upgrade' do
+      Timeout::timeout(1) do
+        socket = TCPSocket.new '127.0.0.1', 8080
+        socket.print "GET /websocket?param=Hello HTTP/1.1\r\nHost: localhost:8080\r\nConnection: keep-alive, Upgrade\r\nUpgrade: websocket\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: sGxYzKDBdoC2s8ZImlNgow==\r\n\r\n"
+        # Upgrade
+        result = Array.new(5) {socket.gets}
+        expect(result[0]).to eq("HTTP/1.1 101 Switching Protocols\r\n")
+        expect(result[3]).to eq("Sec-WebSocket-Accept: zRZMou/76VWlXHo5eoxTMg3tQKQ=\r\n")
+        # Receive 'Hello' on Open
+        result = Array.new(7) {socket.getbyte}
+        expect(result).to eq([0x81, 0x05, 0x48, 0x65, 0x6c, 0x6c, 0x6f])
+        socket.close
+      end
+    end
+
     it 'raise error when sending unsupported OpCode' do
       Timeout::timeout(1) do
         socket = TCPSocket.new '127.0.0.1', 8080
