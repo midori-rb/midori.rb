@@ -95,7 +95,8 @@ class Midori::Request
   # @return [nil] nil
   def pre_proceed
     # Deal with WebSocket
-    if @header['Upgrade'] == 'websocket' && @header['Connection'] == 'Upgrade'
+    upgrade = @header['Connection']&.split(', ')&.include?('Upgrade')
+    if upgrade && @header['Upgrade'] == 'websocket'
       @method = :WEBSOCKET
       @is_websocket = true
     end
