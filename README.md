@@ -24,7 +24,7 @@ Midori is a Ruby Web Framework, providing high performance and proper abstractio
 
 ## Requirements
 
-- **Ruby** >= 2.2.6
+- **Ruby** >= 2.3.6
 
 ## Installation
 
