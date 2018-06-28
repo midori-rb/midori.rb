@@ -116,19 +116,19 @@ module Midori::Server
 
   private def proceed_keep_alive
     # Detect if it should close connection
-    if (@keep_alive_count >= Midori::Configure.keep_alive_requests) || !Midori::Configure.keep_alive
+    if !Midori::Configure.keep_alive || (@keep_alive_count >= Midori::Configure.keep_alive_requests)
       close_connection_after_writing
+      return
     end
     # Add timeout for keep-alive
-    if Midori::Configure.keep_alive
-      @keep_alive_count += 1
-      EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
-      @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
-        close_connection
-      end
-      EventLoop.add_timer(@keep_alive_timer)
-      # Reset request
-      @request = Midori::Request.new
+    Midori::Configure.keep_alive
+    @keep_alive_count += 1
+    EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
+    @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
+      close_connection
     end
+    EventLoop.add_timer(@keep_alive_timer)
+    # Reset request
+    @request = Midori::Request.new
   end
 end
