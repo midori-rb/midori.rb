@@ -30,30 +30,28 @@ module Midori::Server
   # Logic of receiving data
   # @param [NIO::Monitor] monitor the socket able to read
   def receive_data(monitor)
-    lambda do
-      async_fiber(Fiber.new do
-        begin
-          _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
-          @request.ip, @request.port = remote_port, remote_ip
-          data = monitor.io.read_nonblock(16_384)
-          if @request.parsed? && @request.body_parsed?
-            websocket_request(StringIO.new(data))
-          else
-            @request.parse(data)
-            receive_new_request if @request.parsed && @request.body_parsed?
-          end
-        rescue EOFError, Errno::ENOTCONN => _e
-          close_connection
-          # Ignore client's disconnection
-        rescue => e
-          # :nocov:
-          # Leave for corner cases
-          close_connection
-          @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
-          # :nocov:
+    async_fiber(Fiber.new do
+      begin
+        _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
+        @request.ip, @request.port = remote_port, remote_ip
+        data = monitor.io.read_nonblock(16_384)
+        if @request.parsed? && @request.body_parsed?
+          websocket_request(StringIO.new(data))
+        else
+          @request.parse(data)
+          receive_new_request if @request.parsed && @request.body_parsed?
         end
-      end)
-    end.call
+      rescue EOFError, Errno::ENOTCONN => _e
+        close_connection
+        # Ignore client's disconnection
+      rescue => e
+        # :nocov:
+        # Leave for corner cases
+        close_connection
+        @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
+        # :nocov:
+      end
+    end)
   end
 
   # Logic of receiving new request
