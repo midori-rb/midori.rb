@@ -12,26 +12,30 @@ module Midori::Server
   attr_accessor :request, :api, :websocket, :eventsource
 
   # Define server behaviour
+  # @param [NIO::Monitor] monitor the socket able to read
   # @param [Class] api inherited from Midori::API
   # @param [Logger] logger global logger
-  def server_initialize(api, logger)
+  def server_initialize(monitor, api, logger)
     @api = api
     @logger = logger
+
     @request = Midori::Request.new
     @websocket = Midori::WebSocket.new(self)
     @eventsource = Midori::EventSource.new(self)
+
+    # Add keep-alive parameters
+    @keep_alive_timer = nil
+    @keep_alive_count = 0
   end
 
   # Logic of receiving data
-  # @param [String] monitor the socket able to read
+  # @param [NIO::Monitor] monitor the socket able to read
   def receive_data(monitor)
     lambda do
       async_fiber(Fiber.new do
         begin
           _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
-          port, ip = remote_port, remote_ip
-          @request.ip = ip
-          @request.port = port
+          @request.ip, @request.port = remote_port, remote_ip
           data = monitor.io.read_nonblock(16_384)
           if @request.parsed? && @request.body_parsed?
             websocket_request(StringIO.new(data))
@@ -68,9 +72,22 @@ module Midori::Server
       @logger.error e.inspect.red
       @logger.warn e.backtrace.join("\n").yellow
     end
+
     unless @request.websocket? || @request.eventsource?
       send_data @response
-      close_connection_after_writing
+      # Detect if it should close connection
+      if (@keep_alive_count >= Midori::Configure.keep_alive_requests) || !Midori::Configure.keep_alive
+        close_connection_after_writing
+      end
+      # Add timeout for keep-alive
+      if Midori::Configure.keep_alive
+        @keep_alive_count += 1
+        EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
+        @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
+          close_connection
+        end
+        EventLoop.add_timer(@keep_alive_timer)
+      end
     end
   end
 

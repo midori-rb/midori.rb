@@ -23,9 +23,7 @@ class Midori::Connection
   def listen(socket)
     EventLoop.register(socket, :rw) do |monitor|
       @monitor = monitor
-      if monitor.readable?
-        receive_data(monitor)
-      end
+      receive_data(monitor) if monitor.readable?
       if monitor.writable?
         if !@buffer.empty?
           send_buffer
@@ -60,6 +58,7 @@ class Midori::Connection
 
   # Close the connection
   def close_connection
+    EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil? # Be sure to remove timer for memory safety
     EventLoop.deregister @socket
     @socket.close
   end
