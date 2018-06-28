@@ -40,7 +40,7 @@ class Midori::Runner
       EventLoop.register(@server, :r) do |monitor|
         socket = monitor.io.accept_nonblock
         connection = Midori::Connection.new(socket)
-        connection.server_initialize(monitor, @api, @logger)
+        connection.server_initialize(@api, @logger)
       end
     end)
     EventLoop.start

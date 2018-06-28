@@ -12,10 +12,9 @@ module Midori::Server
   attr_accessor :request, :api, :websocket, :eventsource
 
   # Define server behaviour
-  # @param [NIO::Monitor] monitor the socket able to read
   # @param [Class] api inherited from Midori::API
   # @param [Logger] logger global logger
-  def server_initialize(monitor, api, logger)
+  def server_initialize(api, logger)
     @api = api
     @logger = logger
 
@@ -75,19 +74,7 @@ module Midori::Server
 
     unless @request.websocket? || @request.eventsource?
       send_data @response
-      # Detect if it should close connection
-      if (@keep_alive_count >= Midori::Configure.keep_alive_requests) || !Midori::Configure.keep_alive
-        close_connection_after_writing
-      end
-      # Add timeout for keep-alive
-      if Midori::Configure.keep_alive
-        @keep_alive_count += 1
-        EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
-        @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
-          close_connection
-        end
-        EventLoop.add_timer(@keep_alive_timer)
-      end
+      proceed_keep_alive
     end
   end
 
@@ -125,5 +112,23 @@ module Midori::Server
   # @param [Array] args arg list
   def call_event(event, args = [])
     -> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call unless @websocket.events[event].nil?
+  end
+
+  private def proceed_keep_alive
+    # Detect if it should close connection
+    if (@keep_alive_count >= Midori::Configure.keep_alive_requests) || !Midori::Configure.keep_alive
+      close_connection_after_writing
+    end
+    # Add timeout for keep-alive
+    if Midori::Configure.keep_alive
+      @keep_alive_count += 1
+      EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
+      @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
+        close_connection
+      end
+      EventLoop.add_timer(@keep_alive_timer)
+      # Reset request
+      @request = Midori::Request.new
+    end
   end
 end
