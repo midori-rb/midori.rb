@@ -121,7 +121,6 @@ module Midori::Server
       return
     end
     # Add timeout for keep-alive
-    Midori::Configure.keep_alive
     @keep_alive_count += 1
     EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
     @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
