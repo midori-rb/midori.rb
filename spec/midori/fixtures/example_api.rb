@@ -2,6 +2,8 @@ class Midori::Configure
   set :logger, Logger.new(StringIO.new)
   set :bind, '127.0.0.1'
   set :port, 8080
+  set :keep_alive_timeout, 3
+  set :keep_alive_requests, 3
 end
 
 class User < Midori::API
@@ -31,6 +33,10 @@ class ExampleAPI < Midori::API
 
   get '/2' do
     test_helper_inside_middleware
+  end
+
+  get '/hello' do
+    "Hello\n"
   end
 
   get '/error' do

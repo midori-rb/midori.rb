@@ -17,40 +17,41 @@ module Midori::Server
   def server_initialize(api, logger)
     @api = api
     @logger = logger
+
     @request = Midori::Request.new
     @websocket = Midori::WebSocket.new(self)
     @eventsource = Midori::EventSource.new(self)
+
+    # Add keep-alive parameters
+    @keep_alive_timer = nil
+    @keep_alive_count = 1
   end
 
   # Logic of receiving data
-  # @param [String] monitor the socket able to read
+  # @param [NIO::Monitor] monitor the socket able to read
   def receive_data(monitor)
-    lambda do
-      async_fiber(Fiber.new do
-        begin
-          _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
-          port, ip = remote_port, remote_ip
-          @request.ip = ip
-          @request.port = port
-          data = monitor.io.read_nonblock(16_384)
-          if @request.parsed? && @request.body_parsed?
-            websocket_request(StringIO.new(data))
-          else
-            @request.parse(data)
-            receive_new_request if @request.parsed && @request.body_parsed?
-          end
-        rescue EOFError, Errno::ENOTCONN => _e
-          close_connection
-          # Ignore client's disconnection
-        rescue => e
-          # :nocov:
-          # Leave for corner cases
-          close_connection
-          @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
-          # :nocov:
+    async_fiber(Fiber.new do
+      begin
+        _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
+        @request.ip, @request.port = remote_port, remote_ip
+        data = monitor.io.read_nonblock(16_384)
+        if @request.parsed? && @request.body_parsed?
+          websocket_request(StringIO.new(data))
+        else
+          @request.parse(data)
+          receive_new_request if @request.parsed && @request.body_parsed?
         end
-      end)
-    end.call
+      rescue EOFError, Errno::ENOTCONN => _e
+        close_connection
+        # Ignore client's disconnection
+      rescue => e
+        # :nocov:
+        # Leave for corner cases
+        close_connection
+        @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
+        # :nocov:
+      end
+    end)
   end
 
   # Logic of receiving new request
@@ -68,9 +69,10 @@ module Midori::Server
       @logger.error e.inspect.red
       @logger.warn e.backtrace.join("\n").yellow
     end
+
     unless @request.websocket? || @request.eventsource?
       send_data @response
-      close_connection_after_writing
+      proceed_keep_alive
     end
   end
 
@@ -108,5 +110,22 @@ module Midori::Server
   # @param [Array] args arg list
   def call_event(event, args = [])
     -> { @websocket.instance_exec(*args, &@websocket.events[event]) }.call unless @websocket.events[event].nil?
+  end
+
+  private def proceed_keep_alive
+    # Detect if it should close connection
+    if !Midori::Configure.keep_alive || (@keep_alive_count >= Midori::Configure.keep_alive_requests)
+      close_connection_after_writing
+      return
+    end
+    # Add timeout for keep-alive
+    @keep_alive_count += 1
+    EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
+    @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
+      close_connection
+    end
+    EventLoop.add_timer(@keep_alive_timer)
+    # Reset request
+    @request = Midori::Request.new
   end
 end
