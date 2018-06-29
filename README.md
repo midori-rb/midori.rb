@@ -23,7 +23,7 @@ Midori is a Ruby Web Framework, providing high performance and proper abstractio
 
 ## Requirements
 
-- **Ruby** >= 2.3.6
+- **Ruby** >= 2.3.7
 
 ## Installation
 
@@ -45,17 +45,15 @@ bundle install
 
 ### Performance
 
-Following benchmark results testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 4GB memory, UCloud Linux instance**.
-
-**Note: Performance under Mac OS X needs to be further improved. `wrk` gives very bad performance result. The following result is tested under Linux.**
+Following benchmark results testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 1GB memory, Amazon Web Service Linux instance**.
 
 | framework                          | version | req/s   |
 | :--------------------------------- | :------ | :------ |
-| Rails (Thin, Ruby 2.5.0)           | 5.0.6   | 537.01  |
-| Rails (API Mode, Thin, Ruby 2.5.0) | 5.0.6   | 826.56  |
-| Sinatra (Thin, Ruby 2.5.0)         | 2.0.0   | 1216.17 |
-| express.js (Node.js 9.3.0)         | 4.16.0  | 5463.82 |
-| midori (Ruby 2.5.0)                | 0.5.0   | 4069.87 |
+| Rails (Thin, Ruby 2.5.1)           | 5.0.6   | 490.23  |
+| Rails (API Mode, Thin, Ruby 2.5.1) | 5.0.6   | 785.61  |
+| Sinatra (Thin, Ruby 2.5.1)         | 2.0.0   | 1196.23 |
+| express.js (Node.js 9.3.0)         | 4.16.0  | 5435.98 |
+| midori (Ruby 2.5.1)                | 0.6.0   | 5517.66 |
 
 ### Name
 
@@ -94,9 +92,9 @@ There is also an example showing how to use midori with a todo-list web app avai
 ## Midori 2 Goals
 
 1. Support HTTP/2
-2. Support RPC Server
+2. Support RPC/ZeroMQ Based Server
 3. Add MVC abstraction example with scaffold
-4. Improve performance of eventloop
+4. Improve structure for fitting [AutoFiber](https://bugs.ruby-lang.org/issues/13618)
 5. More examples on using midori
 
 ## Backers
