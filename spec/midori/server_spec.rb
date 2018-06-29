@@ -53,6 +53,47 @@ RSpec.describe Midori::Server do
     end
   end
 
+  describe 'keep-alive' do
+    it 'should not close the socket with first request' do
+      Timeout::timeout(1) do
+        socket = TCPSocket.new '127.0.0.1', 8080
+        socket.print "GET /hello HTTP/1.1\r\n\r\n"
+        Array.new(5) { socket.gets }
+        socket.print "GET /hello HTTP/1.1\r\n\r\n"
+        expect(socket.closed?).to eq(false)
+        socket.close
+      end
+    end
+
+    it 'should close the socket after the third request' do
+      Timeout::timeout(1) do
+        socket = TCPSocket.new '127.0.0.1', 8080
+        3.times do
+          socket.print "GET /hello HTTP/1.1\r\n\r\n"
+          Array.new(5) { socket.gets }
+        end
+        expect do
+          socket.print "GET /hello HTTP/1.1\r\n\r\n"
+          Array.new(5) { socket.gets }
+        end.to raise_error(Errno::ECONNRESET)
+        socket.close
+      end
+    end
+
+    it 'should close the socket after 3 seconds' do
+      Timeout::timeout(7) do
+        socket = TCPSocket.new '127.0.0.1', 8080
+        socket.print "GET /hello HTTP/1.1\r\n\r\n"
+        Array.new(5) { socket.gets }
+        sleep 4
+        expect do
+          socket.print "GET /hello HTTP/1.1\r\n\r\n"
+          Array.new(5) { socket.gets }
+        end.to raise_error(Errno::ECONNRESET)
+      end
+    end
+  end
+
   describe 'WebSocket' do
     it 'pass example websocket communication' do
       Timeout::timeout(1) do

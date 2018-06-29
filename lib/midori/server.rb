@@ -24,7 +24,7 @@ module Midori::Server
 
     # Add keep-alive parameters
     @keep_alive_timer = nil
-    @keep_alive_count = 0
+    @keep_alive_count = 1
   end
 
   # Logic of receiving data

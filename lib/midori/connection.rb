@@ -43,6 +43,7 @@ class Midori::Connection
   end
 
   # Send buffer immediately
+  # @return [nil] nil
   private def send_buffer
     if @monitor.writable?
       written = @socket.write_nonblock(@buffer)
@@ -57,14 +58,18 @@ class Midori::Connection
   end
 
   # Close the connection
+  # @return [nil] nil
   def close_connection
     EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil? # Be sure to remove timer for memory safety
     EventLoop.deregister @socket
     @socket.close
+    nil
   end
 
   # Close the connection after writing
+  # @return [nil] nil
   def close_connection_after_writing
     @close_flag = true
+    nil
   end
 end
