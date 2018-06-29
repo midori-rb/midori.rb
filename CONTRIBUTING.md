@@ -31,7 +31,7 @@ Anyone can file an expense. If the expense makes sense for the development of th
 ### Contributors
 
 Thank you to all the people who have already contributed to midorirb!
-<a href="graphs/contributors"><img src="https://opencollective.com/midorirb/contributors.svg?width=890" /></a>
+[![Contributors](https://opencollective.com/midorirb/contributors.svg?width=890)](https://github.com/midori-rb/midori.rb/graphs/contributors)
 
 
 ### Backers
