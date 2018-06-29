@@ -88,9 +88,14 @@ RSpec.describe Midori::Server do
         sleep 5
         expect do
           socket.print "GET /hello HTTP/1.1\r\n\r\n"
-          res = socket.read(16_364)
-          puts res
-          raise Errno::ECONNRESET if res.nil?
+          begin
+            Timeout::timeout(3) do
+              res = socket.read(16_364)
+              raise Errno::ECONNRESET if res.nil?
+            end
+          rescue Timeout::Error => _e
+            raise Errno::ECONNRESET
+          end
         end.to raise_error(Errno::ECONNRESET)
       end
     end
