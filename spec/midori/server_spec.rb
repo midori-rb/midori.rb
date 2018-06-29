@@ -74,21 +74,23 @@ RSpec.describe Midori::Server do
         end
         expect do
           socket.print "GET /hello HTTP/1.1\r\n\r\n"
-          Array.new(5) { socket.gets }
+          raise Errno::ECONNRESET if socket.read(16_364).nil?
         end.to raise_error(Errno::ECONNRESET)
         socket.close
       end
     end
 
     it 'should close the socket after 3 seconds' do
-      Timeout::timeout(7) do
+      Timeout::timeout(10) do
         socket = TCPSocket.new '127.0.0.1', 8080
         socket.print "GET /hello HTTP/1.1\r\n\r\n"
         Array.new(5) { socket.gets }
-        sleep 4
+        sleep 5
         expect do
           socket.print "GET /hello HTTP/1.1\r\n\r\n"
-          Array.new(5) { socket.gets }
+          res = socket.read(16_364)
+          puts res
+          raise Errno::ECONNRESET if res.nil?
         end.to raise_error(Errno::ECONNRESET)
       end
     end
