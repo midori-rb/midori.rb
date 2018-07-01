@@ -32,7 +32,6 @@ class Midori::Runner
     @logger.info "Midori #{Midori::VERSION} is now running on #{bind}:#{port}".blue
     @server = Socket.new Socket::AF_INET, Socket::SOCK_STREAM
     @server.reuse_port if Midori::Configure.socket_reuse_port
-    # @server = TCPServer.new(@bind, @port)
     @server.bind Addrinfo.tcp @bind, @port
     @server.listen Socket::SOMAXCONN
     if Midori::Configure.tcp_fast_open
