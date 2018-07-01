@@ -30,9 +30,15 @@ class Midori::Runner
   def start
     return false if running? || EventLoop.running?
     @logger.info "Midori #{Midori::VERSION} is now running on #{bind}:#{port}".blue
-    @server = TCPServer.new(@bind, @port)
-    tfo = @server.tcp_fast_open if Midori::Configure.tcp_fast_open
-    @logger.warn 'Failed to use TCP Fast Open feature on your OS'.yellow unless tfo
+    @server = Socket.new Socket::AF_INET, Socket::SOCK_STREAM
+    @server.reuse_port if Midori::Configure.socket_reuse_port
+    # @server = TCPServer.new(@bind, @port)
+    @server.bind Addrinfo.tcp @bind, @port
+    @server.listen Socket::SOMAXCONN
+    if Midori::Configure.tcp_fast_open
+      tfo = @server.tcp_fast_open
+      @logger.warn 'Failed to use TCP Fast Open feature on your OS'.yellow unless tfo
+    end
     async_fiber(Fiber.new do
       @logger.info 'Midori is booting...'.blue
       @before.call

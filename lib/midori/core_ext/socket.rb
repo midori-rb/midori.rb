@@ -1,4 +1,4 @@
-class TCPServer
+class Socket
   def tcp_fast_open
     # macOS devices option is DIFFERENT from Linux and FreeBSD
     opt = (/darwin/ =~ RUBY_PLATFORM) ? 1 : 5
@@ -7,5 +7,10 @@ class TCPServer
     true
   rescue => _e
     false
+  end
+
+  def reuse_port
+    result = self.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEPORT, 1)
+    true
   end
 end
