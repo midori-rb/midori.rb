@@ -10,7 +10,9 @@ class Socket
   end
 
   def reuse_port
-    result = self.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEPORT, 1)
+    self.setsockopt(Socket::SOL_SOCKET, Socket::SO_REUSEPORT, 1)
     true
+  rescue => _e
+    false
   end
 end
