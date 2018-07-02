@@ -42,7 +42,7 @@ class Midori::WebSocket
     mask = Array.new(4) { data.getbyte }
     # Message
     masked_msg = Array.new(payload) { data.getbyte }
-    @msg = self.mask(masked_msg, mask)
+    @msg = mask(masked_msg, mask)
     @msg = @msg.pack('C*').force_encoding('utf-8') if [0x1, 0x9, 0xA].include? opcode
     # For debug
     #  data.rewind

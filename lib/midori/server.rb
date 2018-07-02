@@ -32,8 +32,7 @@ module Midori::Server
   def receive_data(monitor)
     async_fiber(Fiber.new do
       begin
-        _sock_domain, remote_port, _remote_hostname, remote_ip = monitor.io.peeraddr
-        @request.ip, @request.port = remote_port, remote_ip
+        @request.ip, @request.port = @peer_addr
         data = monitor.io.read_nonblock(16_384)
         if @request.parsed? && @request.body_parsed?
           websocket_request(StringIO.new(data))

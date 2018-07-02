@@ -4,6 +4,7 @@ class Midori::Configure
   set :port, 8080
   set :keep_alive_timeout, 3
   set :keep_alive_requests, 3
+  set :socket_reuse_port, true
 end
 
 class User < Midori::API

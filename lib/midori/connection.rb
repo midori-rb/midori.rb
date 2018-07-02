@@ -11,15 +11,16 @@ class Midori::Connection
   # @param [IO] socket raw socket
   def initialize(socket)
     @registered = false
-    @socket = socket
+    @socket = socket[0]
+    @peer_addr = socket[1].ip_unpack
     @monitor = nil
     @close_flag = false
     @buffer = ''
-    listen(socket)
+    listen(@socket)
   end
 
   # Register events of connection
-  # @param [IO] socket raw socket
+  # @param [Array] socket raw socket
   def listen(socket)
     EventLoop.register(socket, :rw) do |monitor|
       @monitor = monitor
