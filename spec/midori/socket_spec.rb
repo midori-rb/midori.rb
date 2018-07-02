@@ -20,6 +20,7 @@ RSpec.describe Socket do
       socket.listen Socket::SOMAXCONN
       expect(socket.reuse_port).to eq(true)
       socket.close
+      expect(socket.reuse_port).to eq(false)
     end
   end
 end
