@@ -15,7 +15,7 @@ class Midori::Connection
     @peer_addr = socket[1].ip_unpack
     @monitor = nil
     @close_flag = false
-    @buffer = ''
+    @buffer = (+'')
     listen(@socket)
   end
 
