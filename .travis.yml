@@ -14,17 +14,13 @@ matrix:
 os:
   - linux
 
-env:
-  - RUBYOPT="--enable-frozen-string-literal"
-  - RUBYOPT=""
-
 before_install:
   - gem install bundler
 
 script:
   - gem list -l
   - bundle exec rake compile
-  - bundle exec rake
+  - RUBYOPT="--enable-frozen-string-literal" bundle exec rake
   - bundle exec codeclimate-test-reporter
   - gem build ./midori.gemspec
 
