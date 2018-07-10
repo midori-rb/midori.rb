@@ -31,10 +31,11 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 
   byte = NUM2INT(rb_funcall(data, getbyte, 0));
   fin = byte & 0x80;
-  if ((byte & 0x80) != 0x80)
-    rb_raise(ContinousFrameException, "");
+  opcode = byte & 0x0f;
 
-  opcode = byte & 0xf;
+  if (fin != 0x80)
+    rb_raise(ContinousFrameException, "");
+  
   rb_iv_set(self, "@opcode", INT2NUM(opcode));
   if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode && 0xA)
     rb_raise(OpCodeException, "");
@@ -71,7 +72,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   VALUE result_arr = rb_ary_new2(n);
   for (i = 0; i < n; i++)
   {
-    rb_ary_store(result_arr, n, INT2NUM(result[i]));
+    rb_ary_store(result_arr, i, INT2NUM(result[i]));
   }
   return result_arr;
 }
