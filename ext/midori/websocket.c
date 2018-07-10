@@ -37,7 +37,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     rb_raise(ContinousFrameException, "");
   
   rb_iv_set(self, "@opcode", INT2NUM(opcode));
-  if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode && 0xA)
+  if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode != 0xA)
     rb_raise(OpCodeException, "");
 
   if (opcode == 0x8)
