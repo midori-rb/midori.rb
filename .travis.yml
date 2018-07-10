@@ -20,7 +20,7 @@ before_install:
 script:
   - gem list -l
   - bundle exec rake compile
-  - bundle exec rake
+  - RUBYOPT="--enable-frozen-string-literal" bundle exec rake
   - bundle exec codeclimate-test-reporter
   - gem build ./midori.gemspec
 

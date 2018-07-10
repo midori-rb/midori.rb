@@ -30,7 +30,7 @@ class Midori::Request
     @params = {}
     @query_params = Hash.new(Array.new)
     @cookie = {}
-    @body = ''
+    @body = (+'')
     @parser.on_headers_complete = proc do
       @protocol = @parser.http_version
       @method = @parser.http_method
