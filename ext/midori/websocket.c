@@ -17,9 +17,9 @@ void Init_midori_ext()
   Midori = rb_define_module("Midori");
   MidoriWebSocket = rb_define_class_under(Midori, "WebSocket", rb_cObject);
   MidoriException = rb_define_module("Exception");
-  ContinousFrameException = rb_const_get(MidoriException, "ContinuousFrame");
-  OpCodeException = rb_const_get(MidoriException, "OpCodeError");
-  NotMaskedException = rb_const_get(MidoriException， "NotMasked");
+  ContinousFrameException = rb_const_get(MidoriException, rb_intern("ContinuousFrame"));
+  OpCodeException = rb_const_get(MidoriException, rb_intern("OpCodeError"));
+  NotMaskedException = rb_const_get(MidoriException, rb_intern("NotMasked"));
   rb_define_method(MidoriWebSocket, "decode", method_midori_websocket_decode, 1);
 }
 
@@ -69,7 +69,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     return rb_enc_str_new(result, n, rb_utf8_encoding());
 
   VALUE result_arr = rb_ary_new2(n);
-  for (int i = 0; i < n; i++)
+  for (i = 0; i < n; i++)
   {
     rb_ary_store(result_arr, n, INT2NUM(result[i]));
   }
