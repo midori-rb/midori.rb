@@ -15,43 +15,6 @@ class Midori::WebSocket
     @connection = connection
   end
 
-  # Decode raw data send from client
-  # @param [StringIO] data raw data
-  def decode(data)
-    # Fin and Opcode
-    byte_tmp = data.getbyte
-    fin = byte_tmp & 0b10000000
-    @opcode = byte_tmp & 0b00001111
-    # NOT Support Multiple Fragments
-    raise Midori::Exception::ContinuousFrame unless fin
-    raise Midori::Exception::OpCodeError unless [0x1, 0x2, 0x8, 0x9, 0xA].include? @opcode
-    close if @opcode == 0x8 # Close Frame
-    # return if @opcode == 0x9 || @opcode == 0xA # Ping Pong
-    decode_mask(data)
-  end
-
-  # Decode masked message send from client
-  # @param [StringIO] data raw data
-  def decode_mask(data)
-    # Mask
-    byte_tmp = data.getbyte
-    is_masked = byte_tmp & 0b10000000
-    raise Midori::Exception::NotMasked unless is_masked == 128
-    # Payload
-    payload = byte_tmp & 0b01111111
-    mask = Array.new(4) { data.getbyte }
-    # Message
-    masked_msg = Array.new(payload) { data.getbyte }
-    if [0x1, 0x9, 0xA].include? opcode
-      @msg = mask_str(masked_msg, mask)
-    else # [0x2]
-      @msg = mask(masked_msg, mask)
-    end
-    # For debug
-    #  data.rewind
-    #  data.bytes {|byte| puts byte.to_s(16)}
-  end
-
   # API definition for events
   # @param [Symbol] event event name(open, message, close, ping, pong)
   # @yield what to do after event matched
