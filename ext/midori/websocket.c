@@ -66,13 +66,15 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     result[i] = NUM2INT(rb_funcall(data, getbyte, 0)) ^ mask_array[i % 4];
   }
 
-  if (opcode == 0x1 || opcode == 0x9 || opcode == 0xA)
-    return rb_enc_str_new(result, n, rb_utf8_encoding());
-
-  VALUE result_arr = rb_ary_new2(n);
-  for (i = 0; i < n; i++)
-  {
-    rb_ary_store(result_arr, i, INT2NUM(result[i]));
+  if (opcode == 0x1 || opcode == 0x9 || opcode == 0xA) {
+    rb_iv_set(self, "@msg", rb_enc_str_new(result, n, rb_utf8_encoding()));
+  } else {
+    VALUE result_arr = rb_ary_new2(n);
+    for (i = 0; i < n; i++)
+    {
+      rb_ary_store(result_arr, i, INT2NUM(result[i]));
+    }
+    rb_iv_set(self, "@msg", result_arr);
   }
-  return result_arr;
+  return Qnil;
 }
