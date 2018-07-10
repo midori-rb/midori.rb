@@ -120,7 +120,7 @@ RSpec.describe Midori::Server do
         result = Array.new(2) {socket.getbyte}
         expect(result).to eq([0x81, 0x0])
         # Expect WebSocket close
-        socket.print [0x48].pack('C*')
+        socket.print [0x88].pack('C*')
         result = socket.getbyte
         expect(result).to eq(0x8)
         socket.close

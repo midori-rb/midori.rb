@@ -43,7 +43,6 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   if (opcode == 0x8)
   {
     rb_funcall(self, close, 0);
-    return Qnil;
   }
 
   byte = NUM2INT(rb_funcall(data, getbyte, 0));
