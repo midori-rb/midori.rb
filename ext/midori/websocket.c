@@ -16,7 +16,7 @@ void Init_midori_ext()
 {
   Midori = rb_define_module("Midori");
   MidoriWebSocket = rb_define_class_under(Midori, "WebSocket", rb_cObject);
-  MidoriException = rb_define_module("Exception");
+  MidoriException = rb_define_module_under(Midori, "Exception");
   ContinousFrameException = rb_const_get(MidoriException, rb_intern("ContinuousFrame"));
   OpCodeException = rb_const_get(MidoriException, rb_intern("OpCodeError"));
   NotMaskedException = rb_const_get(MidoriException, rb_intern("NotMasked"));
