@@ -2,57 +2,76 @@
 #include <ruby/encoding.h>
 
 VALUE Midori = Qnil;
+VALUE MidoriException = Qnil;
 VALUE MidoriWebSocket = Qnil;
 
+VALUE ContinousFrameException = Qnil;
+VALUE OpCodeException = Qnil;
+VALUE NotMaskedException = Qnil;
+
 void Init_midori_ext();
-VALUE method_midori_websocket_mask(VALUE self, VALUE payload, VALUE mask);
-VALUE method_midori_websocket_mask_str(VALUE self, VALUE payload, VALUE mask);
+VALUE method_midori_websocket_decode(VALUE self, VALUE data);
 
 void Init_midori_ext()
 {
   Midori = rb_define_module("Midori");
   MidoriWebSocket = rb_define_class_under(Midori, "WebSocket", rb_cObject);
-  rb_define_protected_method(MidoriWebSocket, "mask", method_midori_websocket_mask, 2);
-  rb_define_protected_method(MidoriWebSocket, "mask_str", method_midori_websocket_mask_str, 2);
+  MidoriException = rb_define_module("Exception");
+  ContinousFrameException = rb_const_get(MidoriException, "ContinuousFrame");
+  OpCodeException = rb_const_get(MidoriException, "OpCodeError");
+  NotMaskedException = rb_const_get(MidoriException， "NotMasked");
+  rb_define_method(MidoriWebSocket, "decode", method_midori_websocket_decode, 1);
 }
 
-VALUE method_midori_websocket_mask(VALUE self, VALUE payload, VALUE mask)
+VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 {
-  long n = RARRAY_LEN(payload), i, p, m;
-  VALUE unmasked = rb_ary_new2(n);
+  int byte, opcode, i, fin;
+  ID getbyte = rb_intern("getbyte");
+  ID close = rb_intern("close");
 
-  int mask_array[] = {
-      NUM2INT(rb_ary_entry(mask, 0)),
-      NUM2INT(rb_ary_entry(mask, 1)),
-      NUM2INT(rb_ary_entry(mask, 2)),
-      NUM2INT(rb_ary_entry(mask, 3))};
+  byte = NUM2INT(rb_funcall(data, getbyte, 0));
+  fin = byte & 0x80;
+  if ((byte & 0x80) != 0x80)
+    rb_raise(ContinousFrameException, "");
 
-  for (i = 0; i < n; i++)
+  opcode = byte & 0xf;
+  rb_iv_set(self, "@opcode", INT2NUM(opcode));
+  if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode && 0xA)
+    rb_raise(OpCodeException, "");
+
+  if (opcode == 0x8)
   {
-    p = NUM2INT(rb_ary_entry(payload, i));
-    m = mask_array[i % 4];
-    rb_ary_store(unmasked, i, INT2NUM(p ^ m));
+    rb_funcall(self, close, 0);
+    return Qnil;
   }
-  return unmasked;
-}
 
-VALUE method_midori_websocket_mask_str(VALUE self, VALUE payload, VALUE mask)
-{
-  long n = RARRAY_LEN(payload), i, p, m;
+  byte = NUM2INT(rb_funcall(data, getbyte, 0));
+  if ((byte & 0x80) != 0x80)
+  {
+    rb_raise(NotMaskedException, "");
+  }
+
+  int n = byte & 0x7f;
   char result[n];
 
   int mask_array[] = {
-      NUM2INT(rb_ary_entry(mask, 0)),
-      NUM2INT(rb_ary_entry(mask, 1)),
-      NUM2INT(rb_ary_entry(mask, 2)),
-      NUM2INT(rb_ary_entry(mask, 3))};
+      NUM2INT(rb_funcall(data, getbyte, 0)),
+      NUM2INT(rb_funcall(data, getbyte, 0)),
+      NUM2INT(rb_funcall(data, getbyte, 0)),
+      NUM2INT(rb_funcall(data, getbyte, 0))};
 
   for (i = 0; i < n; i++)
   {
-    p = NUM2INT(rb_ary_entry(payload, i));
-    m = mask_array[i % 4];
-    result[i] = p ^ m;
+    result[i] = NUM2INT(rb_funcall(data, getbyte, 0)) ^ mask_array[i % 4];
   }
 
-  return rb_enc_str_new(result, n, rb_utf8_encoding());
+  if (opcode == 0x1 || opcode == 0x9 || opcode == 0xA)
+    return rb_enc_str_new(result, n, rb_utf8_encoding());
+
+  VALUE result_arr = rb_ary_new2(n);
+  for (int i = 0; i < n; i++)
+  {
+    rb_ary_store(result_arr, n, INT2NUM(result[i]));
+  }
+  return result_arr;
 }
