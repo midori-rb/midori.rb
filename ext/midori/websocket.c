@@ -25,7 +25,7 @@ void Init_midori_ext()
 
 VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 {
-  int byte, opcode, i, fin;
+  int byte, opcode, i, n, fin;
   ID getbyte = rb_intern("getbyte");
   ID close = rb_intern("close");
 
@@ -34,11 +34,11 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   opcode = byte & 0x0f;
 
   if (fin != 0x80)
-    rb_raise(ContinousFrameException, "");
+    rb_raise(ContinousFrameException, "Continous Frame hasn't been implemented yet");
   
   rb_iv_set(self, "@opcode", INT2NUM(opcode));
   if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode != 0xA)
-    rb_raise(OpCodeException, "");
+    rb_raise(OpCodeException, "OpCode %d not supported", opcode);
 
   if (opcode == 0x8)
   {
@@ -49,10 +49,10 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   byte = NUM2INT(rb_funcall(data, getbyte, 0));
   if ((byte & 0x80) != 0x80)
   {
-    rb_raise(NotMaskedException, "");
+    rb_raise(NotMaskedException, "Messages from client MUST be masked");
   }
 
-  int n = byte & 0x7f;
+  n = byte & 0x7f;
   char result[n];
 
   int mask_array[] = {
