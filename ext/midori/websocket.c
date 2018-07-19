@@ -26,6 +26,7 @@ void Init_midori_ext()
 VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 {
   int byte, opcode, i, n, fin;
+  char *result;
   ID getbyte = rb_intern("getbyte");
   ID close = rb_intern("close");
 
@@ -35,7 +36,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 
   if (fin != 0x80)
     rb_raise(ContinousFrameException, "Continous Frame hasn't been implemented yet");
-  
+
   rb_iv_set(self, "@opcode", INT2NUM(opcode));
   if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode != 0xA)
     rb_raise(OpCodeException, "OpCode %d not supported", opcode);
@@ -52,7 +53,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   }
 
   n = byte & 0x7f;
-  char result[n];
+  result = (char *)malloc(n);
 
   int mask_array[] = {
       NUM2INT(rb_funcall(data, getbyte, 0)),
@@ -65,9 +66,12 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     result[i] = NUM2INT(rb_funcall(data, getbyte, 0)) ^ mask_array[i % 4];
   }
 
-  if (opcode == 0x1 || opcode == 0x9 || opcode == 0xA) {
+  if (opcode == 0x1 || opcode == 0x9 || opcode == 0xA)
+  {
     rb_iv_set(self, "@msg", rb_enc_str_new(result, n, rb_utf8_encoding()));
-  } else {
+  }
+  else
+  {
     VALUE result_arr = rb_ary_new2(n);
     for (i = 0; i < n; i++)
     {
@@ -75,5 +79,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     }
     rb_iv_set(self, "@msg", result_arr);
   }
+
+  free(result);
   return Qnil;
 }
