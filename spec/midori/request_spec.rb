@@ -5,7 +5,7 @@ RSpec.describe Midori::Request do
     data = "GET / HTTP/1.1\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.protocol).to eq([1, 1])
+    expect(request.protocol).to eq('1.1')
     expect(request.method).to eq(:GET)
     expect(request.path).to eq('/')
     expect(request.query_string).to eq(nil)
@@ -16,7 +16,7 @@ RSpec.describe Midori::Request do
     data = "GET /?test=1 HTTP/1.1\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.protocol).to eq([1, 1])
+    expect(request.protocol).to eq('1.1')
     expect(request.method).to eq(:GET)
     expect(request.path).to eq('/')
     expect(request.query_string).to eq('test=1')
@@ -27,7 +27,7 @@ RSpec.describe Midori::Request do
     data = "GET /?test=1 HTTP/1.1\r\nCookie: a=1; b=2\r\n\r\n"
     request = Midori::Request.new
     request.parse(data)
-    expect(request.protocol).to eq([1, 1])
+    expect(request.protocol).to eq('1.1')
     expect(request.method).to eq(:GET)
     expect(request.path).to eq('/')
     expect(request.cookie['a'].name).to eq('a')

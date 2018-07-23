@@ -59,7 +59,7 @@ module Midori::Server
       start_time = Time.now
       @response = @api.receive(request, self)
       now_time = Time.now
-      @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol.join('.')}\" #{@response.status} #{sprintf("%.6f", now_time.to_f - start_time.to_f)}".green
+      @logger.info "#{@request.ip} - - \"#{@request.method} #{@request.path} HTTP/#{@request.protocol}\" #{@response.status} #{sprintf("%.6f", now_time.to_f - start_time.to_f)}".green
       call_event(:open) if @request.websocket?
     rescue Midori::Exception::NotFound => e
       @response = Midori::Sandbox.capture(e)
@@ -125,6 +125,6 @@ module Midori::Server
     end
     EventLoop.add_timer(@keep_alive_timer)
     # Reset request
-    @request = Midori::Request.new
+    @request.reset!
   end
 end

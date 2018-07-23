@@ -26,15 +26,15 @@ class Midori::Request
     @body_parsed = false
     @is_websocket = false
     @is_eventsource = false
-    @parser = Http::Parser.new
+    @parser = Mizu::Parser.new
     @params = {}
     @query_params = Hash.new(Array.new)
     @cookie = {}
     @body = ''
-    @parser.on_headers_complete = proc do
-      @protocol = @parser.http_version
-      @method = @parser.http_method
-      @path = @parser.request_url
+    @parser.on_complete do
+      @protocol = @parser.version
+      @method = @parser.method
+      @path = @parser.path
       # Turn header into case-insensitive due to RFC 2.6 Chapter 4.2
       # https://www.ietf.org/rfc/rfc2616.txt
       @parser.headers.each { |key, value| @header[key] = value }
@@ -50,8 +50,20 @@ class Midori::Request
       @path.gsub!(/\?(.*?)$/, '')
       @method = @method.to_sym
       @parsed = true
-      :stop
     end
+  end
+
+  def reset!
+    @header = HTTPHeader.new
+    @parsed = false
+    @body_parsed = false
+    @is_websocket = false
+    @is_eventsource = false
+    @parser.reset!
+    @params = {}
+    @query_params = Hash.new(Array.new)
+    @cookie = {}
+    @body = ''
   end
 
   # Init an request with String data
@@ -62,8 +74,8 @@ class Midori::Request
     if @parsed
       @body += data
     else
-      offset = @parser << data
-      @body += data[offset..-1] if @parsed
+      @parser << data
+      @body += data[@parser.offset..-1] if @parsed
     end
 
     # Set body parsed if body reaches content length
