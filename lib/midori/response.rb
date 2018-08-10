@@ -21,7 +21,7 @@ class Midori::Response
   # Generate header string from hash
   # @return [String] generated string
   def generate_header
-    @header['Content-Length'] = @body.bytesize if @header['Content-Length'].nil? && !@body.empty?
+    @header['Content-Length'] = @body.bytesize if @header['Content-Length'].nil?
     @header.map do |key, value|
       "#{key}: #{value}\r\n"
     end.join
