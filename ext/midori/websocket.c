@@ -27,6 +27,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 {
   int byte, opcode, i, n, fin;
   char *result;
+  int *mask_array;
   ID getbyte = rb_intern("getbyte");
   ID close = rb_intern("close");
 
@@ -54,12 +55,11 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
 
   n = byte & 0x7f;
   result = (char *)xmalloc(n);
+  mask_array = (int *)xmalloc(4);
 
-  int mask_array[] = {
-      NUM2INT(rb_funcall(data, getbyte, 0)),
-      NUM2INT(rb_funcall(data, getbyte, 0)),
-      NUM2INT(rb_funcall(data, getbyte, 0)),
-      NUM2INT(rb_funcall(data, getbyte, 0))};
+  for (i = 0; i < 4; i++) {
+    mask_array[i] = NUM2INT(rb_funcall(data, getbyte, 0));
+  }
 
   for (i = 0; i < n; i++)
   {
@@ -80,6 +80,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     rb_iv_set(self, "@msg", result_arr);
   }
 
+  xfree(mask_array);
   xfree(result);
   return Qnil;
 }
