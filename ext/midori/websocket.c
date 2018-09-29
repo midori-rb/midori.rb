@@ -53,7 +53,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   }
 
   n = byte & 0x7f;
-  result = (char *)malloc(n);
+  result = (char *)xmalloc(n);
 
   int mask_array[] = {
       NUM2INT(rb_funcall(data, getbyte, 0)),
@@ -80,6 +80,6 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
     rb_iv_set(self, "@msg", result_arr);
   }
 
-  free(result);
+  xfree(result);
   return Qnil;
 }
