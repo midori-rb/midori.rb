@@ -21,7 +21,7 @@ class Midori::Response
   # Generate header string from hash
   # @return [String] generated string
   def generate_header
-    @header['Content-Length'] = @body.bytesize if @header['Content-Length'].nil? && @header['Upgrade'] != 'websocket'
+    @header['Content-Length'] = @body.bytesize if @header['Content-Length'].nil? && @header['Upgrade'].nil? && @header['Content-Type'] != 'text/event-stream'
     @header.map do |key, value|
       "#{key}: #{value}\r\n"
     end.join

@@ -14,6 +14,7 @@ class Midori::EventSource
   # @param [String] data data to be sent
   def send(data)
     raise Midori::Exception::EventSourceTypeError unless data.is_a? String
+    # TODO: implement envents by standard
     @connection.send_data(data.split("\n").map {|str| "data: #{str}\n"}.join + "\n")
     @connection.close_connection_after_writing
   end
