@@ -1,22 +1,28 @@
+# frozen_string_literal: true
+
+begin
+  require 'bundler/setup'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+end
+
 require 'rake/extensiontask'
 require 'rspec/core/rake_task'
 require 'yard'
 require './lib/midori/version'
 
-task :default => %i(spec)
-
 RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = ["-c", "-f progress"]
+  t.rspec_opts = ['-c', '-f progress']
 end
 
 spec = Gem::Specification.load('midori.gemspec')
 Rake::ExtensionTask.new('midori_ext', spec) do |ext|
-  ext.ext_dir = "ext/midori"
+  ext.ext_dir = 'ext/midori'
 end
 
 YARD::Rake::YardocTask.new do |t|
- t.files         = ['lib/**/*.rb']
- t.stats_options = ['--list-undoc', 'markup-provider=kramdown']
+  t.files = ['lib/**/*.rb']
+  t.stats_options = ['--list-undoc', 'markup-provider=kramdown']
 end
 
 task :build do
@@ -36,3 +42,7 @@ task :count do
   puts 'Spec line count:       ' + `find ./spec -name "*.rb"|xargs cat|wc -l`
   puts 'Total line count:      ' + `find . -name "*.rb"|xargs cat|wc -l`
 end
+
+task spec: %i[compile]
+
+task default: %i[spec]

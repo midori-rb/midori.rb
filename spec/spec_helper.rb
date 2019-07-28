@@ -1,12 +1,15 @@
+require 'bundler/setup'
+Bundler.require
+
+require 'timeout'
+require 'typhoeus'
 require 'simplecov'
 require 'codeclimate-test-reporter'
-require 'bundler/setup'
 
 SimpleCov.start do
   add_filter '/spec/'
 end
-Bundler.require
-require 'timeout'
+
 require 'midori'
 
 RSpec.configure do |config|

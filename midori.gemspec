@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require './lib/midori/version'
 
 Gem::Specification.new do |s|
   s.name                     = 'midori.rb'
   s.version                  = Midori::VERSION
-  s.required_ruby_version    = '>=2.3.6'
+  s.required_ruby_version    = '>= 2.5'
   s.platform                 = Gem::Platform::RUBY
   s.date                     = Time.now.strftime('%Y-%m-%d')
   s.summary                  = 'High performance ruby web framework'
@@ -18,8 +20,16 @@ Gem::Specification.new do |s|
   s.metadata                 = { 'issue_tracker' => 'https://github.com/midori-rb/midori.rb/issues' }
   s.license                  = 'MIT'
   s.post_install_message     = File.read('.resources/midori_ascii.txt')
+
+  s.add_dependency 'rake-compiler', '~> 1.0'
+
   s.add_runtime_dependency     'murasaki', '~> 0.2.2'
   s.add_runtime_dependency     'mustermann', '~> 1.0'
   s.add_runtime_dependency     'mizu', '~> 0.1.2'
-  s.add_development_dependency 'rake-compiler', '~> 1.0'
+
+  s.add_development_dependency 'rake', '~> 12.0'
+  s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'yard', '~> 0.9'
+  s.add_development_dependency 'kramdown', '~> 1.13'
+  s.add_development_dependency 'typhoeus', '~> 1.1'
 end

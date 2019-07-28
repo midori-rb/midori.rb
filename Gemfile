@@ -1,14 +1,15 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Specify your gem's dependencies in midori.gemspec
 gemspec
 
-gem 'bundler', '~> 2.0'
-gem 'rake', '~> 12.0'
-gem 'rspec', '~> 3.0'
-gem 'yard', '~> 0.9'
-gem 'kramdown', '~> 1.13'
-gem 'simplecov', '~> 0.14', require: false, group: :test
-gem 'codeclimate-test-reporter', '~> 1.0', group: :test, require: nil
+group :test do
+  gem 'simplecov', '~> 0.14', require: false
+  gem 'codeclimate-test-reporter', '~> 1.0', require: nil
+end
 
-gem 'typhoeus', '~>1.1'
+gem 'rubocop', require: false
+gem 'rubocop-performance', require: false
