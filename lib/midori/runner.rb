@@ -28,20 +28,22 @@ class Midori::Runner
   # Start the Midori server
   # @note This is an async method, but no callback
   def start
-    return false if running? || EventLoop.running?
+    return false if running?
     @logger.info "Midori #{Midori::VERSION} is now running on #{bind}:#{port}".blue
     init_socket
-    async_fiber(Fiber.new do
+    Fiber.schedule do
       @logger.info 'Midori is booting...'.blue
       @before.call
       @logger.info 'Midori is serving...'.blue
-      EventLoop.register(@server, :r) do |monitor|
-        socket = monitor.io.accept_nonblock
-        connection = Midori::Connection.new(socket)
-        connection.server_initialize(@api, @logger)
+      Fiber.schedule do
+        loop do
+          socket = @server.accept
+          connection = Midori::Connection.new(socket)
+          connection.server_initialize(@api, @logger)
+          connection.listen
+        end
       end
-    end)
-    EventLoop.start
+    end
     nil
   end
 
@@ -63,10 +65,8 @@ class Midori::Runner
   def stop
     if running?
       @logger.info 'Stopping Midori'.blue
-      EventLoop.deregister @server
       @server.close
       @server = nil
-      EventLoop.stop
       true
     else
       @logger.error 'Midori Server has NOT been started'.red

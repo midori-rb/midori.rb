@@ -1,11 +1,11 @@
 require 'cgi'
+require 'evt'
 require 'digest/sha1'
 require 'stringio'
 require 'fiber'
 require 'logger'
 require 'mizu'
 require 'mustermann'
-require 'murasaki'
 require 'socket'
 
 require_relative 'midori/core_ext/configurable'

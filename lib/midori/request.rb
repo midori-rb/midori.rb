@@ -26,6 +26,8 @@ class Midori::Request
     @body_parsed = false
     @is_websocket = false
     @is_eventsource = false
+    @ip = ''
+    @port = 0
     @parser = Mizu::Parser.new
     @params = {}
     @query_params = Hash.new(Array.new)
@@ -74,6 +76,7 @@ class Midori::Request
     if @parsed
       @body += data
     else
+      return nil if data.nil?
       @parser << data
       @body += data[@parser.offset..-1] if @parsed
     end

@@ -13,19 +13,16 @@ class Midori::Connection
     @registered = false
     @socket = socket[0]
     @peer_addr = socket[1].ip_unpack
-    @monitor = nil
     @close_flag = false
     @buffer = ''
-    listen(@socket)
   end
 
   # Register events of connection
   # @param [Array] socket raw socket
-  def listen(socket)
-    EventLoop.register(socket, :rw) do |monitor|
-      @monitor = monitor
-      receive_data(monitor) if monitor.readable?
-      if monitor.writable?
+  def listen
+    Fiber.schedule do
+      until @socket.closed?
+        receive_data(@socket)
         if !@buffer.empty?
           send_buffer
         elsif @close_flag
@@ -46,23 +43,13 @@ class Midori::Connection
   # Send buffer immediately
   # @return [nil] nil
   private def send_buffer
-    if @monitor.writable?
-      written = @socket.write_nonblock(@buffer)
-      @buffer = @buffer.byteslice(written..-1)
-    end
+    @socket.write(@buffer) unless @socket.closed?
     nil
-  rescue IO::EAGAINWaitWritable => _e
-    # :nocov:
-    # Unknown Reason Resource Conflict
-    nil
-    # :nocov:
   end
 
   # Close the connection
   # @return [nil] nil
   def close_connection
-    EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil? # Be sure to remove timer for memory safety
-    EventLoop.deregister @socket
     @socket.close
     nil
   end

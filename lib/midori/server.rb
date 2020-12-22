@@ -28,29 +28,27 @@ module Midori::Server
   end
 
   # Logic of receiving data
-  # @param [NIO::Monitor] monitor the socket able to read
-  def receive_data(monitor)
-    async_fiber(Fiber.new do
-      begin
-        @request.ip, @request.port = @peer_addr
-        data = monitor.io.read_nonblock(16_384)
-        if @request.parsed? && @request.body_parsed?
-          websocket_request(StringIO.new(data))
-        else
-          @request.parse(data)
-          receive_new_request if @request.parsed && @request.body_parsed?
-        end
-      rescue EOFError, Errno::ENOTCONN => _e
-        close_connection
-        # Ignore client's disconnection
-      rescue => e
-        # :nocov:
-        # Leave for corner cases
-        close_connection
-        @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
-        # :nocov:
+  # @param [Scoket] the socket able to read
+  def receive_data(socket)
+    begin
+      @request.ip, @request.port = @peer_addr
+      data = socket.gets
+      if @request.parsed? && @request.body_parsed?
+        websocket_request(StringIO.new(data))
+      else
+        @request.parse(data)
+        receive_new_request if @request.parsed? && @request.body_parsed?
       end
-    end)
+    rescue EOFError, Errno::ENOTCONN => _e
+      close_connection
+      # Ignore client's disconnection
+    rescue => e
+      # :nocov:
+      # Leave for corner cases
+      close_connection
+      @logger.warn "#{@request.ip} - - #{e.class} #{e.backtrace.join("\n")}".yellow
+      # :nocov:
+    end
   end
 
   # Logic of receiving new request
@@ -119,11 +117,10 @@ module Midori::Server
     end
     # Add timeout for keep-alive
     @keep_alive_count += 1
-    EventLoop.remove_timer(@keep_alive_timer) unless @keep_alive_timer.nil?
-    @keep_alive_timer = EventLoop::Timer.new(Midori::Configure.keep_alive_timeout) do
+    Fiber.schedule do
+      sleep Midori::Configure.keep_alive_timeout
       close_connection
     end
-    EventLoop.add_timer(@keep_alive_timer)
     # Reset request
     @request.reset!
   end
