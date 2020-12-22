@@ -8,22 +8,9 @@
 
 ## Description
 
-Midori is a Ruby Web Framework, providing high performance and proper abstraction.
+Midori is a Ruby Web Framework, providing high performance and proper abstraction.Requirements
 
-|                            midori                            | [midori-contrib](https://github.com/midori-rb/midori-contrib) |      [murasaki](https://github.com/midori-rb/murasaki)       | [midori_http_parser](https://github.com/midori-rb/http_parser.rb) |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/midori_logo.png) | ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/contrib_logo.png) | ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/murasaki_logo.png) | ![midori logo](https://github.com/midori-rb/midori.rb/raw/master/.resources/parser_logo.png) |
-|                        Web Framework                         |                     Official Extensions                      |                   Modularized Event Engine                   |                         HTTP Parser                          |
-| [![Build Status](https://travis-ci.org/midori-rb/midori.rb.svg?branch=master)](https://travis-ci.org/midori-rb/midori.rb) | [![Build Status](https://travis-ci.org/midori-rb/midori-contrib.svg?branch=master)](https://travis-ci.org/midori-rb/midori-contrib) | [![Build Status](https://travis-ci.org/midori-rb/murasaki.svg?branch=master)](https://travis-ci.org/midori-rb/murasaki) | [![Build Status](https://travis-ci.org/midori-rb/murasaki.svg?branch=master)](https://travis-ci.org/midori-rb/murasaki) |
-| [![Test Coverage](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/test_coverage)](https://codeclimate.com/github/midori-rb/midori.rb) | [![Test Coverage](https://api.codeclimate.com/v1/badges/cfb6d9b359dcb7457eec/test_coverage)](https://codeclimate.com/github/midori-rb/midori-contrib) | [![Test Coverage](https://api.codeclimate.com/v1/badges/d0dc1bc4a3e38bd4f2b9/test_coverage)](https://codeclimate.com/github/midori-rb/murasaki) |                             n/a                              |
-| [![Maintainability](https://api.codeclimate.com/v1/badges/f976d625994fa33523b3/maintainability)](https://codeclimate.com/github/midori-rb/midori.rb) | [![Maintainability](https://api.codeclimate.com/v1/badges/cfb6d9b359dcb7457eec/maintainability)](https://codeclimate.com/github/midori-rb/midori-contrib) | [![Maintainability](https://api.codeclimate.com/v1/badges/d0dc1bc4a3e38bd4f2b9/maintainability)](https://codeclimate.com/github/midori-rb/murasaki) | [![Maintainability](https://api.codeclimate.com/v1/badges/0035138294cf3a6fdd07/maintainability)](https://codeclimate.com/github/midori-rb/http_parser.rb/maintainability) |
-| [![doc](http://inch-ci.org/github/midori-rb/midori.rb.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori.rb) | [![doc](http://inch-ci.org/github/midori-rb/midori-contrib.svg?branch=master)](http://inch-ci.org/github/midori-rb/midori-contrib) | [![doc](http://inch-ci.org/github/midori-rb/murasaki.svg?branch=master)](http://inch-ci.org/github/midori-rb/murasaki) |                             n/a                              |
-| [![Gem Version](https://img.shields.io/gem/v/midori.rb.svg?maxAge=43200)](https://rubygems.org/gems/midori.rb) | [![Gem Version](https://img.shields.io/gem/v/midori-contrib.svg?maxAge=43200)](https://rubygems.org/gems/midori-contrib) | [![Gem Version](https://img.shields.io/gem/v/murasaki.svg?maxAge=43200)](https://rubygems.org/gems/murasaki) | [![Gem Version](https://img.shields.io/gem/v/midori_http_parser.svg?maxAge=43200)](https://rubygems.org/gems/midori_http_parser) |
-| [![license](https://img.shields.io/github/license/midori-rb/midori.rb.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/midori-contrib.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/murasaki.svg?maxAge=2592000)]() | [![license](https://img.shields.io/github/license/midori-rb/http_parser.rb.svg?maxAge=2592000)]() |
-
-## Requirements
-
-- **Ruby** >= 2.3.7
+- **Ruby** >= 3.0.0.rc1
 
 ## Installation
 
@@ -42,18 +29,6 @@ bundle install
 ```
 
 ## FAQ
-
-### Performance
-
-Following benchmark results testing `{msg: "Hello"}` JSON response by visiting `GET /` with a **single-core, 1GB memory, Amazon Web Service Linux instance**.
-
-| framework                          | version | req/s   |
-| :--------------------------------- | :------ | :------ |
-| Rails (Thin, Ruby 2.5.1)           | 5.0.6   | 490.23  |
-| Rails (API Mode, Thin, Ruby 2.5.1) | 5.0.6   | 785.61  |
-| Sinatra (Thin, Ruby 2.5.1)         | 2.0.0   | 1196.23 |
-| express.js (Node.js 9.3.0)         | 4.16.0  | 5435.98 |
-| midori (Ruby 2.5.1)                | 0.6.0   | 5517.66 |
 
 ### Name
 
