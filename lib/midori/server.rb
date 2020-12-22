@@ -32,7 +32,12 @@ module Midori::Server
   def receive_data(socket)
     begin
       @request.ip, @request.port = @peer_addr
-      data = socket.gets
+      if @request.parsed? && !(@request.body_parsed?)
+        data = socket.read @request.body.bytesize - @request.header['Content-Length']
+      else
+        data = socket.readline
+      end
+
       if @request.parsed? && @request.body_parsed?
         websocket_request(StringIO.new(data))
       else
