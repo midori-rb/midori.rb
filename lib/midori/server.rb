@@ -38,7 +38,7 @@ module Midori::Server
         data = socket.readline
       end
 
-      if @request.parsed? && @request.body_parsed?
+      if @request.websocket?
         websocket_request(StringIO.new(data))
       else
         @request.parse(data)

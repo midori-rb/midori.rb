@@ -1,12 +1,6 @@
 language: ruby
-rvm: ruby-head
+rvm: ruby-3.0.0-rc1
 sudo: false
-matrix:
-  include:
-    - rvm: ruby-head
-  allow_failures:
-    - rvm: ruby-head
-  fast_finish: true
 
 os:
   - linux
