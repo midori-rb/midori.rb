@@ -1,5 +1,5 @@
 language: ruby
-rvm: ruby-3.0.0-rc1
+rvm: 3.0
 sudo: false
 
 os:
