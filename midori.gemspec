@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.metadata                 = { 'issue_tracker' => 'https://github.com/midori-rb/midori.rb/issues' }
   s.license                  = 'MIT'
   s.post_install_message     = File.read('.resources/midori_ascii.txt')
-  s.add_runtime_dependency     'evt', '~> 0.3.0'
+  s.add_runtime_dependency     'evt', '~> 0.4.0'
   s.add_runtime_dependency     'mustermann', '~> 1.0'
   s.add_runtime_dependency     'mizu', '~> 0.1.2'
   s.add_development_dependency 'rake-compiler', '~> 1.0'
