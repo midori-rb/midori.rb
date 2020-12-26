@@ -8,7 +8,9 @@
 
 ## Description
 
-Midori is a Ruby Web Framework, providing high performance and proper abstraction.Requirements
+Midori is a Ruby Web Framework, providing high performance and proper abstraction.
+
+### Requirements
 
 - **Ruby** >= 3.0.0.rc1
 
