@@ -5,7 +5,7 @@ VALUE Midori = Qnil;
 VALUE MidoriException = Qnil;
 VALUE MidoriWebSocket = Qnil;
 
-VALUE ContinousFrameException = Qnil;
+VALUE ContinuousFrameException = Qnil;
 VALUE OpCodeException = Qnil;
 VALUE NotMaskedException = Qnil;
 
@@ -17,7 +17,7 @@ void Init_midori_ext()
   Midori = rb_define_module("Midori");
   MidoriWebSocket = rb_define_class_under(Midori, "WebSocket", rb_cObject);
   MidoriException = rb_define_module_under(Midori, "Exception");
-  ContinousFrameException = rb_const_get(MidoriException, rb_intern("ContinuousFrame"));
+  ContinuousFrameException = rb_const_get(MidoriException, rb_intern("ContinuousFrame"));
   OpCodeException = rb_const_get(MidoriException, rb_intern("OpCodeError"));
   NotMaskedException = rb_const_get(MidoriException, rb_intern("NotMasked"));
   rb_define_method(MidoriWebSocket, "decode", method_midori_websocket_decode, 1);
@@ -36,7 +36,7 @@ VALUE method_midori_websocket_decode(VALUE self, VALUE data)
   opcode = byte & 0x0f;
 
   if (fin != 0x80)
-    rb_raise(ContinousFrameException, "Continous Frame hasn't been implemented yet");
+    rb_raise(ContinuousFrameException, "Continuous Frame hasn't been implemented yet");
 
   rb_iv_set(self, "@opcode", INT2NUM(opcode));
   if (opcode != 0x1 && opcode != 0x2 && opcode != 0x8 && opcode != 0x9 && opcode != 0xA)
